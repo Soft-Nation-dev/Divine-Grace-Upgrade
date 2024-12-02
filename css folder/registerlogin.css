@@ -1,0 +1,120 @@
+body{
+    background-color: rgb(236, 236, 236);
+}
+
+button{
+    cursor: pointer;
+}
+
+.gen-div{
+    box-shadow: -2px 2px 36px 14px rgba(43,40,40,0.8);
+    -webkit-box-shadow: -2px 2px 36px 14px rgba(43,40,40,0.8);
+    -moz-box-shadow: -2px 2px 36px 14px rgba(43,40,40,0.8);
+    margin: 30px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    height: 400px;
+    width: 750px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.first-div, .second-div {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 3s ease, visibility 3s ease, transform 3s ease;
+}
+
+/* Hidden state for sections */
+.hidden {
+    opacity: 0; /* Fully transparent */
+    visibility: visible; /* Not interactable */
+    transform: translateY(-20px);
+}
+.card-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.first{
+ background-color: white;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ padding: 30px;
+ text-align: center;
+}
+
+.second{
+    background-color: #012970;
+    color: white;
+    text-align: center;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input{
+    margin-bottom: 30px;
+    width: 300px;
+    height: 30px;
+    border: none;
+    background-color: rgb(236, 236, 236);
+    border-radius: 5px;
+}
+ input::placeholder{
+    padding-left: 8px;
+    color: rgb(136, 135, 135);
+ }
+
+.card-section h2{
+    font-family: "Open Sans", sans-serif;
+    text-align: center;
+    margin-bottom: 70px;
+}
+.button-div button{
+    border: none;
+    color: white;
+    background-color: #012970;
+    padding: 15px 12px;
+    border-radius: 15px;
+}
+
+.button-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.button-div a{
+    margin-bottom: 30px;
+}
+
+.second-card-section{
+    border: 2px solid gray;
+    display: flex;
+    background-color: #012970;
+    color: white;
+    justify-content: space-around;
+    align-items: center;
+    width: 900px;
+    height: 450px;
+    text-align: center;
+}
+
+#sign{
+    border: 1px solid white;
+}
+

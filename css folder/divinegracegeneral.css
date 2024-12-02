@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+img{
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+img:hover{
+    transform: scale(1.05);
+}
+button{
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+button:hover{
+    transform: scale(1.05);
+}
+* {
+    box-sizing: border-box;
+}

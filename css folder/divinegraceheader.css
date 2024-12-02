@@ -1,0 +1,89 @@
+
+header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #fafbfd;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgb(246, 246, 248);
+    z-index: 100;
+}
+.header-div{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px; 
+    padding-left: 30px;
+    padding-right: 30px;   
+}
+
+.logo-img, .logo-imgg{
+    height: 40px;
+    position: relative;
+    top: 9px;
+    max-height: 40px;
+    margin-right: 6px;
+}
+.digunec, .digunecc{
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+}
+
+.navigation-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.navigation-div a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #013289;
+    white-space: nowrap;
+    transition-duration: 0.5s;
+}
+
+.navigation-div a:hover{
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+
+.buger-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buger{
+    height: 30px;
+}
+
+@media (min-width:900px){
+    .buger-div{
+        display: none;
+    }
+}
+
+@media (max-width:900px){
+    .navigation-div{
+        display: none;
+    }
+    .header-div{
+        padding-left: 10px;
+        padding-right: 10px;  
+    }
+}
+
+@media (max-width:830px){
+    .header-div{
+        padding-left: 10px;
+        padding-right: 10px;  
+    }
+}

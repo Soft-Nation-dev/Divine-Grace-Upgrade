@@ -1,0 +1,360 @@
+
+.first-body-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 30px;
+    padding-bottom: 50px;
+    padding-top: 60px;
+}
+.first-body-section-first-div{
+    padding-left: 60px;
+    flex-basis: 50%;
+}
+.intro-d{
+    color: rgb(1, 41, 112);
+    font-family: "Nunito", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.intro-l{
+    color: rgb(68, 68, 68);
+    font-family: "Nunito", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+.intro-l1{
+    color: rgb(68, 68, 68);
+    font-family: "Nunito", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 4px;
+}
+.get-started-button{
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.first-body-section-div{
+    width: auto;
+    display: flex;
+    justify-content: center;
+}
+.first-body-section-div img{
+    width: 80%;
+    padding-top: 30px;
+}
+
+.second-section{
+    display: flex;
+    margin-top: 60px;
+    align-items: center;
+    gap: 30px;
+    padding: 10px;
+}
+
+.lst-div{
+    background-color: #f6f9ff;
+    flex-basis: 75%;
+    border-radius: 50px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+}
+
+.second-image-div{
+    flex-basis: 25%;
+}
+
+.lst-div:hover{
+    transform: scale(1);
+    box-shadow: 5px 5px 10px 10px rgba(20, 20, 20, 0.1);
+}
+
+.lst{
+    font-size: 14px;
+    font-weight: 700;
+    color: #4154f1;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.lst-writeup{
+    font-size: 20px;
+    font-weight: 700;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+    margin-top: 30px;
+    padding-left: 10px;
+}
+
+.Register-p{
+    margin: 15px 0 30px 0;
+    line-height: 24px;
+    box-sizing: border-box;
+    color: rgb(68, 68, 68);
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 30px;
+    padding-left: 10px;
+}
+
+.button-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+
+}
+.button-div button{
+    padding: 15px 40px;
+    border-radius: 8px;
+    color: #fff;
+    background: #4154f1;
+    box-shadow: 0px 5px 25px rgba(65, 84, 241, 0.3);
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.second-image{
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+.ourvalue-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    column-gap: 30px;
+
+}
+
+.colour-grid{
+    background-color: #dcdfe9;
+    padding: 30px;
+    border-radius: 50px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.colour-grid:hover{
+    box-shadow: 5px 5px 10px 10px rgba(20, 20, 20, 0.1);
+    transform: scale(1.01);
+}
+.snappic1-div{
+    display: flex;
+    justify-content: center;
+}
+
+.value-p{
+    font-size: 25px;
+    font-family: "Nunito", sans-serif;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: #4154f1;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+.knownfor-p{
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    font-size: 25px;
+    line-height: 42px;
+    font-weight: 700;
+    color: #012970;
+    margin-bottom: 15px;
+}
+
+.snappic1{
+    max-width: 80%;
+    height: auto;
+    
+}
+
+.snappic2{
+    max-width: 80%;
+    height: auto;
+}
+
+.soul-p{
+    font-size: 25px;
+    color: #012970;
+    font-weight: 700;
+    text-align: center;
+}
+
+.vision-p{
+    font-size: 25px;
+    color: #012970;
+    font-weight: 700;
+    text-align: center;
+}
+
+.soulwriteup-p{
+    color: rgb(68, 68, 68);
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.visionwriteup-p{
+    color: rgb(68, 68, 68);
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.last-section-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50px;
+    column-gap: 5px;
+}
+
+.last-section-color{
+    background-color: #f4f4f8;
+    padding: 30px;
+    border-radius: 50px;
+}
+
+.last-section img{
+    height: 80px;
+}
+
+.last-section-intro{
+    font-size: 20px;
+    color: #012970;
+    font-weight: 700;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+}
+
+.last-section-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.last-section-intro-p{
+    line-height: 24px;
+    font-size: 14px;
+    color: #444444;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+}
+
+.contact-us{
+    font-size: 35px;
+    color: #012970;
+    font-weight: 700;
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+}
+
+footer{
+    background-color: #dcdfe9;
+}
+
+.footer-logo{
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 3;
+}
+
+.social-div{
+    text-align: center;
+    margin-top: 8px;
+}
+
+.social-div img{
+    margin-right: 10px;
+}
+
+.copyright-div{
+    text-align: center;
+    margin-top: 30px;
+    color: rgb(68, 68, 68);
+}
+
+.copyright{
+    margin-bottom: 0;
+}
+
+@media (max-width:1000px){
+    .second-section{
+        flex-direction: column;         
+    
+        
+    }
+    .second-image-div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+    .second-image{
+        width: 80%;
+        
+    }
+
+}
+
+@media (max-width:900px){
+    .last-section-div{
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+}
+
+@media (max-width:830px){
+    .first-body-section{
+        flex-direction: column;
+        text-align: center;
+    }
+    .first-body-section-div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .first-body-section-first-div{
+        padding-left: 0px;
+    }
+    .ourvalue-grid{
+        grid-template-columns: 1fr;
+        row-gap: 15px;
+        padding: 20px;
+    }
+
+.last-section-div{
+    grid-template-columns: 1fr;
+}
+.service-section{
+    
+}
+}
