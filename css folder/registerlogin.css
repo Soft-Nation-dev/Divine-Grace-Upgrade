@@ -15,7 +15,7 @@ button{
      border-radius: 20px;
     margin: auto;
     overflow: hidden;
-    height: 600px;
+    height: 700px;
     width: 900px;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -133,6 +133,12 @@ button{
     border: 1px solid white;
 }
 
+footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
 @media(max-width:740px){
     .first-div, .second-div{
         flex-direction: column;
@@ -145,16 +151,16 @@ button{
         width: 100%;
 
     }
-    .first-div{
-        margin-top: 80px;
+    .first-div {
+        margin-top: 90px;
+
         
     }
-    .second{
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
+   footer{
+    position: relative;
+   }
     .gen-div{
-        height: 990px;
+        height: 1100px;
         padding: 30px;
         display: flex;
         justify-content: space-between;
