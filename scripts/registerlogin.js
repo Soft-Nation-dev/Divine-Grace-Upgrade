@@ -42,56 +42,42 @@ function generateloginHtml (){
     </div>`;
 };
 
-
 const registerloginsec = document.querySelector('.js-registerlogin');
-
 const signIn = document.querySelector('.js-signinbut');
 const signUp = document.querySelector('.js-signupbut');
 
-const createAccountSection = document.querySelector('.js-create-account-section');
-const welcomeBackSection = document.querySelector('.js-welcome-back-section');
+const createAccountSection = document.querySelector('.creatacc-div');
+const welcomeBackSection = document.querySelector('.signin-div');
+const hellodiv = document.querySelector('.welcomeback-div');
+const signindiv = document.querySelector('.hello-div');
+createAccountSection.classList.add('visible');
+signindiv.classList.add('visible');
+hellodiv.classList.add('hidden');
+welcomeBackSection.classList.add('hidden');
 
+function toggleVisibility(divsToShow, divsToHide) {
+    divsToShow.forEach(div => {
+        div.classList.add('hidden');
+        div.classList.remove('visible');
+    });
 
-function toggleSections() {
-    // Check if the sections are visible
-    const isVisible = createAccountSection.style.display !== 'none';
-    
-    // Toggle visibility
-    if (isVisible) {
-        createAccountSection.style.display = 'none';
-        welcomeBackSection.style.display = 'flex';
-    } else {
-        createAccountSection.style.display = 'flex';
-        welcomeBackSection.style.display = 'none';
-    }
+    divsToHide.forEach(div => {
+        div.classList.add('visible');
+        div.classList.remove('hidden');
+    });
 }
 
-function toggletrans() {
-        // Check the current visibility state of one section
-        const isHidden = createAccountSection.classList.contains('hidden');
 
-        if (isHidden) {
-            // Show both sections by removing the hidden class
-            createAccountSection.classList.remove('hidden');
-            welcomeBackSection.classList.add('hidden');
-        } else {
-            // Hide both sections by adding the hidden class
-            createAccountSection.classList.add('hidden');
-            welcomeBackSection.classList.remove('hidden');
-        }
+signIn.addEventListener('click', () => {
+    if (createAccountSection.classList.contains('visible')){
+
+        toggleVisibility([createAccountSection, signindiv],[welcomeBackSection,hellodiv])
     }
-    
-
-
-
-signIn.addEventListener('click', ()=>{
-    // toggleSections();
-    toggletrans();
-    console.log('workig')
-
 });
 
-signUp.addEventListener('click', ()=>{
-    // toggleSections();
-    toggletrans();
+signUp.addEventListener('click', () => {
+    if (!createAccountSection.classList.contains('visible')){
+
+        toggleVisibility([welcomeBackSection,hellodiv],[createAccountSection,signindiv])
+    }
 });
