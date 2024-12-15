@@ -111,7 +111,7 @@ input{
     border-radius: 5px;
 }
  input::placeholder{
-    padding-left: 10px;
+    padding-left: 13px;
     color: rgb(136, 135, 135);
  }
 
@@ -126,7 +126,7 @@ input{
 }
 
 .button-div{
-    font-size: 20px;
+    font-size: 14px;
 }
 
 .button-div button{
