@@ -55,29 +55,29 @@ signindiv.classList.add('visible');
 hellodiv.classList.add('hidden');
 welcomeBackSection.classList.add('hidden');
 
-function toggleVisibility(divsToShow, divsToHide) {
-    divsToShow.forEach(div => {
+function toggleVisibility(divsToHide, divsToShow) {
+    // Hide the specified divs
+    divsToHide.forEach(div => {
         div.classList.add('hidden');
         div.classList.remove('visible');
     });
 
-    divsToHide.forEach(div => {
+    // Show the specified divs
+    divsToShow.forEach(div => {
         div.classList.add('visible');
         div.classList.remove('hidden');
     });
 }
 
-
+// Event listeners for Sign In and Sign Up buttons
 signIn.addEventListener('click', () => {
-    if (createAccountSection.classList.contains('visible')){
-
-        toggleVisibility([createAccountSection, signindiv],[welcomeBackSection,hellodiv])
+    if (createAccountSection.classList.contains('visible')) {
+        toggleVisibility([createAccountSection, signindiv], [welcomeBackSection, hellodiv]);
     }
 });
 
 signUp.addEventListener('click', () => {
-    if (!createAccountSection.classList.contains('visible')){
-
-        toggleVisibility([welcomeBackSection,hellodiv],[createAccountSection,signindiv])
+    if (!createAccountSection.classList.contains('visible')) {
+        toggleVisibility([welcomeBackSection, hellodiv], [createAccountSection, signindiv]);
     }
 });

@@ -5,6 +5,16 @@ body{
 button{
     cursor: pointer;
 }
+input{
+    z-index: 10;
+    position: relative;
+    pointer-events: auto;
+}
+
+.signin-div, .creatacc-div {
+    position: relative;
+    overflow: visible;
+}
 
 .gen-div{
     box-shadow: -2px 2px 36px 14px rgba(43,40,40,0.8);
@@ -35,21 +45,28 @@ button{
 .second-div{
     font-size: 15px;
 }
-.visible{
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-    transition: opacity 2s ease, visibility 2s ease, transform 2s ease;
-}
 
-
-/* Hidden state for sections */
 .hidden {
-    opacity: 0; /* Fully transparent */
-    visibility: none; 
+    opacity: 0; 
+    visibility: hidden; 
+    display: none; 
     transform: translateX(-20px);
-    transition: opacity 2s ease, visibility 2s ease, transform 2s ease;
+    z-index: -1; 
+    pointer-events: none;
+    transition: opacity 1.5s ease, visibility 1.5s ease, transform1.5s ease;
 }
+
+.visible {
+    opacity: 1; 
+    visibility: visible; 
+    display: flex; 
+    z-index: 10; 
+    pointer-events: auto; 
+    transform: translateX(0);
+    transition: opacity 1.5s ease, visibility 1.5s ease, transform 1.5s ease;
+}
+
+
 .card-div{
     display: flex;
     justify-content: center;
@@ -71,6 +88,7 @@ button{
  text-align: center;
  margin-bottom: 80px;
 }
+
 
 .second{
     background-color: #012970;
@@ -102,8 +120,13 @@ button{
     text-align: center;
     margin-bottom: 70px;
 }
+
+.second-div p{
+    font-size: 18px;
+}
+
 .button-div{
-    font-size: 10px;
+    font-size: 20px;
 }
 
 .button-div button{
@@ -154,6 +177,16 @@ footer{
         align-items: center;
 
     }
+
+    .signin-h{
+        padding-bottom: 40px;
+        margin-top: 40px;
+    }
+
+    .creatacc-h{
+        /* margin-top: 0; */
+        /* padding-top: 0; */
+    }
     .first, .second{
         height: 100%;
         width: 100%;
@@ -161,6 +194,7 @@ footer{
     }
     .first-div {
         margin-top: 90px;
+        
 
         
     }
@@ -168,7 +202,7 @@ footer{
     position: relative;
    }
     .gen-div{
-        height: 1100px;
+        height: 1185px;
         padding: 30px;
         display: flex;
         justify-content: space-between;
