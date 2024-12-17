@@ -4,7 +4,8 @@ header{
     left: 0;
     right: 0;
     top: 0;
-    background-color: #fafbfd;
+    background-color: #d8dff5;
+    height: 100px;
     padding-bottom: 15px;
     border-bottom: 2px solid rgb(246, 246, 248);
     z-index: 100;
@@ -56,6 +57,12 @@ header{
     transform: scale(1.05);
 }
 
+.login-button{
+    background-color: #012970;
+    color: white;
+    border: none;
+    padding: 3px 30px;
+   }
 .buger-div{
     display: flex;
     justify-content: center;

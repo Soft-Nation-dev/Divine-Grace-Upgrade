@@ -2,17 +2,6 @@ body{
     background-color: #dfdfe0;
 }
 
-#header{
-    background-color: #d8dff5;
-}
-
-
-.login-button{
- background-color: #012970;
- color: white;
- border: none;
- padding: 5px 15px;
-}
 .heading{
     margin-top: 120px;
     text-align: center;
@@ -20,15 +9,16 @@ body{
 
 .heading h1{
     color: #012970;
-    font-size:35px;
+    font-size:50px;
     letter-spacing: 3px;
     margin-bottom: 15px;
+    margin-top: 150px;
 }
 
 .motto{
     color: rgb(136, 135, 135);
     font-family: "Open Sans", sans-serif;
-    font-size: 14px;
+    font-size: 19px;
     font-weight: 600;
     padding-top: 0;
 }
@@ -36,21 +26,22 @@ body{
 .welcomenote{
     color: rgb(68, 68, 68);
     font-family: "Open Sans", sans-serif;
-    font-size: 16px;
+    font-size: 21px;
     font-weight: 600;
     letter-spacing: 1px;
-    padding: 20px;
+    padding: 40px;
     margin-top: 0;
 }
 
 .who{
     text-align: center;
     font-family: "Open Sans", sans-serif;
-    font-size: 18px;
+    font-size: 30px;
     line-height: 42px;
     font-weight: 700;
     color: #012970;
     margin-bottom: 0;
+    margin-top: 80px;
 }
 
 .welcome-flex{
@@ -75,13 +66,90 @@ body{
     flex-basis: 150%;
 }
 
-
-.welcome-flex-image{
+.welcome-page-image{
     height: 100%;
     width: 80%;
-    object-fit: cover;
-    border-radius: 40%;
+    object-fit: fill;
+    border-radius: 50%;
 }
+
+.ourvalue-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 10px;
+    margin-top: 20px;
+    column-gap: 30px;
+
+}
+
+.colour-grid{
+    background-color: #dcdfe9;
+    padding: 30px;
+    border-radius: 50px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+
+.colour-grid:hover{
+    box-shadow: 5px 5px 10px 10px rgba(20, 20, 20, 0.1);
+    transform: scale(1.01);
+}
+.snappic1-div{
+    display: flex;
+    justify-content: center;
+}
+
+.value-p{
+    font-size: 30px;
+    font-family: "Nunito", sans-serif;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: #4154f1;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 0;
+}
+
+.knownfor-p{
+    text-align: center;
+    font-family: "Open Sans", sans-serif;
+    font-size: 25px;
+    line-height: 42px;
+    font-weight: 700;
+    color: #012970;
+    margin-bottom: 15px;
+}
+
+.snappic1{
+    max-width: 80%;
+    height: auto;
+    
+}
+
+.snappic2{
+    max-width: 80%;
+    height: auto;
+}
+
+.soul-p, .vision-p{
+    font-size: 25px;
+    color: #012970;
+    font-weight: 700;
+    text-align: center;
+}
+
+.soulwriteup-p, .visionwriteup-p{
+    color: rgb(68, 68, 68);
+    font-family: "Open Sans", sans-serif;
+    font-size:20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+}
+
+
 .Service{
     font-size: 25px;
     font-family: "Nunito", sans-serif;
@@ -99,12 +167,13 @@ body{
     border-radius: 50px;
 }
 
-.Service-time{
+.Service-time, .Service-time p{
     color: rgb(68, 68, 68);
     font-family: "Open Sans", sans-serif;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
     letter-spacing: 1px;
+    line-height: 30px;
     text-align: center;
     margin: 25px;
 }
@@ -140,7 +209,13 @@ body{
     align-items: center;
 }
 
+.lsts-anchor{
+    text-decoration: none;
+}
 
+.lsts-anchor:hover{
+    text-decoration: underline;
+}
 
 
 @media (max-width:1000px){
