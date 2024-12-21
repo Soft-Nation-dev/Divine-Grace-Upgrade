@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
@@ -8,57 +8,103 @@
     <link rel="stylesheet" href="css folder/homepageheader.css">
     <link rel="stylesheet" href="css folder/homepagebody.css">
     <link rel="stylesheet" href="css folder/divinegracegeneral.css">
+    <link rel="stylesheet" href="css folder/divinegracemain.css">
+    <link rel="stylesheet" href="css folder/divinegraceheader.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
+  <header id="header">
     <div class="right-section">
-        <div><img class="hambuger" src="images/hamburger-menu.svg" alt=""></div>
-      <div>  <img class="logo-img" src="images/logo.png" alt="">
-        <span class="digunec">
+        <div><button class="hambuger-button"><img class="hambuger js-hambuger" src="images/hamburger-menu.svg" alt=""></button></div>
+      <div class="logo-div">  <img id="logo-img" src="images/logo.png" alt="">
+        <span id="digunec-logo">
             Divine Grace Unec
         </span></div>
-        <div class="divider"></div>
-        <div class="dashboard">Dashboard</div>
+        <div id="divider"></div>
+        <div id="dashboard">Dashboard</div>
     </div>
     <div class="left-section">
-        <button> <img class="notification" src="images/notifications.svg" alt=""></button>
-        <img class="profile-image" src="images/1732910927627.jpg" alt="">
+        <button> <img id="notification" src="images/notifications.svg" alt=""></button>
+        <img id="profile-image" src="images/1732910927627.jpg" alt="">
     </div>
   </header>  
-<section>
-    <div class="left-body-section"></div>
-    <div class="right-body-section">
-        <div>
+<section id="main-body-section">
+    <section class="left-body-section">
+        <div class="main-left-div">
+         <div class="profile-imageH-div">
+           <div> <img class="profile-imageH" src="images/first image.jpg" alt=""></div>
+            <p class="profile-name">Onah Emmanuel Ifeanyichukwu</p>
+            <p class="department">Department in the church: <span class="department-span">Technical Department</span></p>
+         </div>
+         <button class="update-profile-button">Update Profile</button>
+         <div class="details-div">
+             <p class="department">
+                MOBILE PHONE <br> <span class="department-span">08141787294</span>
+             </p>
+             <p class="department">EMAIL ADDRESS <br> <span class="department-span">Ifeanyiee8105@gmail.com </span></p>
+             <p class="department">RESIDENTIAL ADDRESS <br> <span class="department-span">Merryland</span></p>
+             <p class="department">DEPARTMENT IN SCHOOL <br> <span class="department-span">Medical Radiography</span></p>
+         </div>
+        </div>
+    </section>
+    <section id="right-body-section">
+        <div id="Welcome-div">
             <h2>
                 Welcome back Emmanuel
             </h2>
         </div>
-
+        <div class="display-profile-button-div">
+            <button class="display-profile-button js-display-profile-button">Show Profile Details</button>
+        </div>
         <div class="card-div">
-            <div>
+            <div class="prayer-request-div">
                 <p>
-                    Do you haave any payer reques?<br>
+                    Do you have any payer request?<br>
                     click the button below to submit a request
                 </p>
-                <button>Submit a prayer reques</button>
+                <button class="prayer-request-button js-prayer-request-button">Submit a prayer request</button>
             </div>
-            <div>
+            <div class="contact-div">
                 <p>
                     Do need someone to talk to? <br>
                     click the button below to connect with the leadership of the church
                 </p>
-                <button>Click to connect</button>
+                <button class="contact-button">Click to connect</button>
             </div>
-            <div>
-                <button></button>
+           
+        </div>
+        <div class="annoucement-div">
+            <p>ANNOUCEMENT</p>
+            <div class="annoucement-image">
+                <img src="images/annocement_image-removebg-preview.png" alt="">
+                <p class="annoucement-p">annoucement and Updates will appear here</p>
             </div>
         </div>
-   </div>
+    </section>
 </section>
 
 
+<footer>
+    <div class="footer-logo">
+        <img class="logo-imgg" src="images/logo.png" alt="">
+        <span class="digunecc">
+            DIGUNEC
+        </span>
+    </div>
+    <div class="social-div">
+        <img src="images/facebook-logo-2428.png" alt="">
+        <img src="images/instagram-logo-8869.png" alt="">
+        <img src="images/twitter-x-blue-logo-round-20859.png" alt="">
+    </div>
+    <div class="copyright-div">
+        <p class="copyright">&copy;copyright <b>DIGUNEC</b>&#46; All right reserved</p>
+        <p class="design"><i>Designed by Soft Nation</i></p>
+    </div>
+</footer>
 
 
     <script type="module" src="scripts/homepage.js"></script>

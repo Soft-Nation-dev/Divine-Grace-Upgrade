@@ -1,20 +1,27 @@
 .left-body-section{
-    position: fixed;
+    position: absolute;
     left: 0;
     width: 550px;
     top: 110px;
     bottom: 0;
+    background-color: rgb(247, 245, 245);
+    padding-right: 20px;
+    transition: width 0.3s ease;
 }
 
-.right-body-section{
+#right-body-section{
     margin-left: 570px;
 }
 
-.right-body-section h2{
+#right-body-section h2{
     text-align: center;
-    margin-top: 100px;
+    margin-top: 200px;
+    margin-bottom: 50px;
     font-size: 50px;
-    color: gray;
+    font-family: "Agu Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .card-div{
@@ -22,4 +29,226 @@
     justify-content: space-evenly;
     align-items: center;
     text-align: center;
+}
+
+
+.prayer-request-div, .contact-div{
+    padding: 70px;
+    font-size: 25px;
+    border-radius: 10px;
+    background-color: #dcdfe9;
+    color: black;
+    margin: 20px;
+}
+
+.prayer-request-button, .contact-button{
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #b8bdfa;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+}
+
+.prayer-request-button:hover, .contact-button:hover {
+    background-color:  #9193d1;;
+}
+
+.fade-out {
+    animation: fadeOut 1.5s backwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.annoucement-div{
+    margin-top: 80px;
+    border: 1px solid grey;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-bottom: 60px;
+}
+.annoucement-image{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.annoucement-div, .annoucement-div p{
+    box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
+    -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
+}
+
+.annoucement-div p{
+    border-bottom: 1px solid grey;
+    padding-bottom: 28px;
+    padding-left: 30px;
+    font-size: 20px;
+    font-family: "Agu Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+   
+}
+.annoucement-p {
+     padding-right: 30px;
+}
+.main-left-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-imageH-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-imageH{
+    height: 130px;
+    margin-top: 50px;
+    border-radius: 50%;
+}
+
+.profile-name{
+    font-size: 35px;
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-family: "Nunito", sans-serif;
+}
+
+.department{
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: gray;
+}
+.department-span{
+    font-weight: 500;
+    color: black;
+}
+
+.update-profile-button, .display-profile-button{
+    margin-top: 40px;
+    font-family:  "Nunito", sans-serif;
+    border: none;
+    padding: 20px 80px;
+    border-radius: 7px;
+    font-size: 18px;
+}
+.update-profile-button:hover, .display-profile-button:hover{
+    background-color: rgb(122, 122, 122);
+    color: white;
+}
+
+.details-div{
+    border-top: 3px solid grey;
+    margin-top: 50px;
+    width: 100%;
+    margin-left: 20px;
+  ;
+}
+
+.details-div p{
+    text-align: center;
+    line-height: 30px;
+}
+footer{
+display: none;
+}
+
+.update-profile-button{
+    margin-top: 100px;
+}
+
+.display-profile-button{
+    display: none;
+    z-index: 100;
+}
+
+@media screen and (max-width:1700px){
+    .card-div{
+        flex-direction: column;
+    }
+}
+@media (max-width:1200px){
+
+}
+@media screen and (max-width: 1200px) {
+    .left-body-section {
+     visibility: hidden;
+     opacity: 0;
+     display: none;
+    }
+    .display-profile-button{
+        display: block;
+        cursor: pointer;;
+
+    }
+    .display-profile-button-div{
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+    #right-body-section{
+        margin-left: 0;
+        width: 100vw;
+    }
+    .main-body-section{
+        width: 100vw
+    }
+    
+    #divider{
+        display: none;
+        visibility: hidden;
+    }
+    #dashboard{
+        display: none;
+        visibility: hidden;
+    }
+
+
+}
+
+@media screen and (max-width: 650px){
+    body{
+        text-align: center;
+    }
+     .hambuger{
+        /* height: 25px; */
+    }
+    .hambuger-button{
+        /* width: 38px; */
+        margin-right: 25px;
+    }
+    .logo-img{
+        height: 10px;
+        margin-left: 0;
+    }
+    .digunec-logo{
+        font-size: 18px;
+    }
+    header{
+        padding: 5px;
+    }
+    .profile-image{
+        height: 60px;
+    }
+    .notification{
+        height: 25px;
+    }
+   
+
 }

@@ -2,15 +2,16 @@ body{
     background-color: rgb(250, 247, 241);
 }
 
-header{
+#header{
     display: flex;
-    background-color: white;
-    justify-content: center;
+    background-color: #d8dff5;
+    z-index: 100;
+    min-width: 0;
     align-items: center;
     justify-content: space-between;
-    height: 105px;
     border-bottom: 1px solid rgb(212, 212, 212);
     padding-right: 35px;
+    padding-top: 10px;
     padding-left: 35px;
     box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
     -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
@@ -28,7 +29,7 @@ header{
     justify-content: center;
     align-items: center;
 }
-.divider {
+#divider {
     width: 2px; 
     background-color: grey; 
     height: 40px; 
@@ -39,33 +40,43 @@ header{
 
 .hambuger{
     height: 40px;
-    margin-right: 80px;
-}
-
-.logo-img{
-    height: 30px;
-    position: relative;
-    top: 2px;
-    margin-right: 6px;
+    /* margin-right: 80px; */
     
 }
-.digunec{
+.hambuger-button{
+    background-color: transparent;
+    cursor: pointer;
+    width: 55px;
+    border: 1px solid rgb(206, 205, 205);
+    margin-right: 50px;
+    /* border: none; */
+}
+
+.logo-div{
     position: relative;
-    top: -3px;
+}
+#logo-img{
+    height: 30px;
+    margin-right: 6px;
+}
+#digunec-logo{
+
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 1px;
+    position: relative;
+    top: -9px;
     color: #012970;
     font-family: "Nunito", sans-serif;
 }
-.dashboard{
+#dashboard{
     font-size: 21px;
     font-weight: 600;
     letter-spacing: 1px;
     color: gray;
     font-family: "Nunito", sans-serif;
 }
-.notification{
+#notification{
     height: 30px;
 }
 
@@ -75,8 +86,57 @@ header{
     padding: 8px;
 }
 
-.profile-image{
+#profile-image{
     height: 70px;
     border-radius: 50%;
     margin-left: 30px;
+}
+
+@media screen and (max-width: 546px){
+    #header{
+        padding: 8px;
+        height: 80px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 470px){
+    .hambuger{
+        height: 27px;
+    }
+    .hambuger-button{
+        width: 45px;
+        margin-right: 0;
+    }
+    #logo-img{
+        height: 20px;
+    }
+    #digunec-logo{
+        font-size: 15px;
+        position: relative;
+        top: -4px;
+    }
+    #notification{
+        height: 15px;
+    }
+    #profile-image{
+        height: 45px;
+    }
+ #right-body-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ #main-body-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ #Welcome-div{
+    width: 100%;
+ }
 }
