@@ -1,18 +1,24 @@
 body{
     background-color: rgb(250, 247, 241);
 }
-
-#header{
-    display: flex;
+header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     background-color: #d8dff5;
+    height: 80px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgb(246, 246, 248);
     z-index: 100;
     min-width: 0;
+    padding: 10px;
+}
+#header{
+    display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid rgb(212, 212, 212);
-    padding-right: 35px;
-    padding-top: 10px;
-    padding-left: 35px;
     box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
     -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
     -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
@@ -87,9 +93,9 @@ body{
 }
 
 #profile-image{
-    height: 70px;
+    height: 60px;
     border-radius: 50%;
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 @media screen and (max-width: 546px){
@@ -121,7 +127,7 @@ body{
         height: 15px;
     }
     #profile-image{
-        height: 45px;
+        height: 40px;
     }
  #right-body-section{
     display: flex;

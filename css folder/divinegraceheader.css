@@ -5,7 +5,7 @@ header{
     right: 0;
     top: 0;
     background-color: #d8dff5;
-    height: 100px;
+    height: 80px;
     padding-bottom: 15px;
     border-bottom: 2px solid rgb(246, 246, 248);
     z-index: 100;
@@ -13,20 +13,17 @@ header{
 .header-div{
     display: flex;
     justify-content: space-between;
-    padding-top: 15px; 
-    padding-left: 30px;
-    padding-right: 30px;   
+    padding: 10px;  
 }
 
 .logo-img, .logo-imgg{
-    height: 40px;
+    height: 30px;
     position: relative;
-    top: 9px;
-    max-height: 40px;
+    top: 6px;
     margin-right: 6px;
 }
 .digunec, .digunecc{
-    font-size: 30px;
+    font-size: 21px;
     font-weight: 600;
     letter-spacing: 1px;
     color: #012970;
@@ -61,7 +58,7 @@ header{
     background-color: #012970;
     color: white;
     border: none;
-    padding: 3px 30px;
+    padding: 2px 20px;
    }
 .buger-div{
     display: flex;

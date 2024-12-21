@@ -9,16 +9,16 @@ body{
 
 .heading h1{
     color: #012970;
-    font-size:50px;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
-    margin-top: 150px;
+    font-size:30px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 100px;
 }
 
 .motto{
     color: rgb(136, 135, 135);
     font-family: "Open Sans", sans-serif;
-    font-size: 19px;
+    font-size: 14px;
     font-weight: 600;
     padding-top: 0;
 }
@@ -26,18 +26,17 @@ body{
 .welcomenote{
     color: rgb(68, 68, 68);
     font-family: "Open Sans", sans-serif;
-    font-size: 21px;
+    font-size: 16px;
     font-weight: 600;
-    letter-spacing: 1px;
-    padding: 40px;
-    margin-top: 0;
+    padding: 10px;
+    margin-top: 6px;
 }
 
 .who{
     text-align: center;
     font-family: "Open Sans", sans-serif;
-    font-size: 30px;
-    line-height: 42px;
+    font-size: 25px;
+    line-height: 35px;
     font-weight: 700;
     color: #012970;
     margin-bottom: 0;
@@ -57,7 +56,6 @@ body{
     cursor: pointer;
     line-height: 25px;
     transition-duration: 0.5s;
-    margin-left: 20px;
 }
 
 .welcome-flex-image-div{
@@ -78,7 +76,7 @@ body{
     grid-template-columns: 1fr 1fr;
     justify-content: center;
     margin-top: 50px;
-    padding: 10px;
+    padding: 5px;
     margin-top: 20px;
     column-gap: 30px;
 
@@ -102,24 +100,22 @@ body{
 }
 
 .value-p{
-    font-size: 30px;
+    font-size: 25px;
     font-family: "Nunito", sans-serif;
-    letter-spacing: 1px;
     font-weight: 700;
     color: #4154f1;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 0;
 }
 
 .knownfor-p{
     text-align: center;
     font-family: "Open Sans", sans-serif;
-    font-size: 25px;
-    line-height: 42px;
+    font-size: 20px;
     font-weight: 700;
     color: #012970;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .snappic1{
@@ -134,7 +130,7 @@ body{
 }
 
 .soul-p, .vision-p{
-    font-size: 25px;
+    font-size: 18px;
     color: #012970;
     font-weight: 700;
     text-align: center;
@@ -143,37 +139,34 @@ body{
 .soulwriteup-p, .visionwriteup-p{
     color: rgb(68, 68, 68);
     font-family: "Open Sans", sans-serif;
-    font-size:20px;
+    font-size:15px;
     font-weight: 400;
-    line-height: 24px;
     text-align: center;
 }
 
 
 .Service{
-    font-size: 25px;
+    font-size: 20px;
     font-family: "Nunito", sans-serif;
-    letter-spacing: 1px;
     font-weight: 700;
     color: #4154f1;
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 8px;
 }
 
 .last-section-color1{
     background-color: #e4e6f0;
-    padding: 30px;
+    padding: 10px;
     border-radius: 50px;
 }
 
 .Service-time, .Service-time p{
     color: rgb(68, 68, 68);
     font-family: "Open Sans", sans-serif;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 600;
-    letter-spacing: 1px;
-    line-height: 30px;
+    line-height: 20px;
     text-align: center;
     margin: 25px;
 }
@@ -187,10 +180,9 @@ body{
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: 600;
-    letter-spacing: 1px;
     text-align: center;
     margin-top: 0;
-    line-height: 30px;
+    line-height: 20px;
 
 }
 
@@ -198,10 +190,8 @@ body{
     margin-bottom: 50px;
     border: 2px solid grey;
     border-radius: 50%;
-    margin-right: 15px;
-    margin-left: 15px;
     background-color: #e4e6f0;
-    width: 80%;
+    width: 95%;
 }
 .service-sections{
     display: flex;
@@ -227,4 +217,9 @@ body{
    .welcome-flex{
     flex-direction: column;
    }
+}
+@media (max-width:600px){
+    .ourvalue-grid{
+        grid-template-columns: 1fr;
+    }
 }

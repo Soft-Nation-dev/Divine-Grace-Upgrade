@@ -33,17 +33,18 @@
 
 
 .prayer-request-div, .contact-div{
-    padding: 70px;
-    font-size: 25px;
+    padding: 30px;
+    font-size: 18px;
     border-radius: 10px;
     background-color: #dcdfe9;
+    flex: 1;
     color: black;
-    margin: 20px;
+    margin: 10px;
 }
 
 .prayer-request-button, .contact-button{
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 13px 25px;
+    font-size: 14px;
     background-color: #b8bdfa;
     color: black;
     border: none;
@@ -72,18 +73,27 @@
     }
 }
 
+.annoucement-img{
+    width: 50%;
+}
 .annoucement-div{
     margin-top: 80px;
     border: 1px solid grey;
     margin-right: 30px;
     margin-left: 30px;
     margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
-.annoucement-image{
+#annoucement-image{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    width: 80%;
 }
 .annoucement-div, .annoucement-div p{
     box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
@@ -91,10 +101,10 @@
     -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
 }
 
-.annoucement-div p{
+.p{
     border-bottom: 1px solid grey;
     padding-bottom: 28px;
-    padding-left: 30px;
+    padding: 10px;
     font-size: 20px;
     font-family: "Agu Display", serif;
     font-optical-sizing: auto;
@@ -102,8 +112,10 @@
     font-style: normal;
    
 }
-.annoucement-p {
-     padding-right: 30px;
+
+.annoucement-p{
+    width: 80%;
+    font-size: 12px;
 }
 .main-left-div{
     display: flex;
@@ -179,14 +191,7 @@ display: none;
     z-index: 100;
 }
 
-@media screen and (max-width:1700px){
-    .card-div{
-        flex-direction: column;
-    }
-}
-@media (max-width:1200px){
 
-}
 @media screen and (max-width: 1200px) {
     .left-body-section {
      visibility: hidden;
@@ -209,7 +214,9 @@ display: none;
     .main-body-section{
         width: 100vw
     }
-    
+
+}
+@media screen and (max-width: 890px){
     #divider{
         display: none;
         visibility: hidden;
@@ -218,37 +225,11 @@ display: none;
         display: none;
         visibility: hidden;
     }
-
-
 }
 
-@media screen and (max-width: 650px){
-    body{
-        text-align: center;
-    }
-     .hambuger{
-        /* height: 25px; */
-    }
-    .hambuger-button{
-        /* width: 38px; */
-        margin-right: 25px;
-    }
-    .logo-img{
-        height: 10px;
-        margin-left: 0;
-    }
-    .digunec-logo{
-        font-size: 18px;
-    }
-    header{
-        padding: 5px;
-    }
-    .profile-image{
-        height: 60px;
-    }
-    .notification{
-        height: 25px;
-    }
-   
+@media screen and (max-width: 550px){
+   .card-div{
+    flex-direction: column;
+   }
 
 }
