@@ -78,9 +78,8 @@
 }
 .annoucement-div{
     margin-top: 80px;
-    border: 1px solid grey;
-    margin-right: 30px;
-    margin-left: 30px;
+    border: 1px solid rgb(202, 202, 202);
+    width: 95%;
     margin-bottom: 60px;
     display: flex;
     flex-direction: column;
@@ -95,17 +94,17 @@
     align-items: center;
     width: 80%;
 }
-.annoucement-div, .annoucement-div p{
-    box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
+.annoucement-div, .p{
+    box-shadow: -3px 7px 12px -3px rgba(14, 14, 14, 0.1);
     -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
     -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
 }
 
 .p{
     border-bottom: 1px solid grey;
-    padding-bottom: 28px;
     padding: 10px;
-    font-size: 20px;
+    margin-top: 3px;
+    font-size: 13px;
     font-family: "Agu Display", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -115,7 +114,8 @@
 
 .annoucement-p{
     width: 80%;
-    font-size: 12px;
+    font-size: 10px;
+    text-align: center;
 }
 .main-left-div{
     display: flex;
@@ -157,7 +157,7 @@
     margin-top: 40px;
     font-family:  "Nunito", sans-serif;
     border: none;
-    padding: 20px 80px;
+    padding: 13px 50px;
     border-radius: 7px;
     font-size: 18px;
 }
@@ -200,7 +200,8 @@ display: none;
     }
     .display-profile-button{
         display: block;
-        cursor: pointer;;
+        cursor: pointer;
+        font-size: 15px;
 
     }
     .display-profile-button-div{

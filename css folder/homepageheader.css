@@ -107,13 +107,16 @@ header{
     }
 }
 
-@media screen and (max-width: 470px){
+@media screen and (max-width: 558px){
     .hambuger{
         height: 27px;
     }
     .hambuger-button{
-        width: 45px;
-        margin-right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 38px;
+        margin-right: 10px;
     }
     #logo-img{
         height: 20px;
