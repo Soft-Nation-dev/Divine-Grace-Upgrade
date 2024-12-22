@@ -136,16 +136,18 @@
 }
 
 .profile-name{
-    font-size: 35px;
+    font-size: 23px;
+    font-weight: bolder;
     margin-top: 15px;
     margin-bottom: 0;
+    text-align: center;
     font-family: "Nunito", sans-serif;
 }
 
 .department{
     font-family: "Nunito", sans-serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 12px;
     color: gray;
 }
 .department-span{
@@ -183,7 +185,7 @@ display: none;
 }
 
 .update-profile-button{
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .display-profile-button{
@@ -191,13 +193,52 @@ display: none;
     z-index: 100;
 }
 
+.exit-button{
+    position: absolute;
+    height: 28px;
+    display: none;
+    top: 20px;
+    right: 20px;
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.exit-button img{
+    height: 100%;
+    width: 100%;
+}
+
+.exit-button:hover {
+    background-color: #b8b8b8;
+    transform: scale(1.05);
+}
+
+
+
 
 @media screen and (max-width: 1200px) {
     .left-body-section {
      visibility: hidden;
      opacity: 0;
      display: none;
+     transition: all 3s ease-in-out;
     }
+    .left-body-section.fullscreen {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(247, 245, 245); /* Adjust if needed */
+        z-index: 1000; /* Ensure it appears on top of other elements */
+        overflow-y: auto; /* For scrolling if content exceeds screen height */
+    }
+    
+
     .display-profile-button{
         display: block;
         cursor: pointer;

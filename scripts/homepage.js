@@ -15,17 +15,28 @@ button.addEventListener('click', ()=>{
   buttonAnimation(button, 'index.html');
 });
 
+const displayProfileButton = document.querySelector('.js-display-profile-button');
+const exitButton = document.querySelector('.js-exit-button');
+const leftBodySection = document.querySelector('.left-body-section');
+const mainBodySection = document.querySelector('.main-body-section');
 
+const originalMainBodyContent = mainBodySection.innerHTML;
 
-document.querySelector('.js-display-profile-button').addEventListener('click', () => {
-    const leftBodySection = document.querySelector('.left-body-section');
-    const newSection = leftBodySection.cloneNode(true); // Clone the left-body-section
+displayProfileButton.addEventListener('click', () => {
 
-    // Clear the body and append the cloned section
-    document.body.innerHTML = '';
-    document.body.appendChild(newSection);
+  leftBodySection.classList.add('fullscreen');
+  mainBodySection.classList.add('hidden'); 
+  document.body.appendChild(leftBodySection);
+  exitButton.style.display = 'block'; 
+});
 
-    // Add any necessary event listeners again if needed
-    console.log("Page content replaced with left-body-section");
+exitButton.addEventListener('click', () => {
+
+  leftBodySection.classList.remove('fullscreen');
+  mainBodySection.classList.remove('hidden');
+  exitButton.style.display = 'none'; 
+
+  const parentSection = document.querySelector('.main-body-section');
+  parentSection.insertBefore(leftBodySection, parentSection.firstChild);
 });
 
