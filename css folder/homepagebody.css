@@ -15,7 +15,7 @@
 
 #right-body-section h2{
     text-align: center;
-    margin-top: 200px;
+    margin-top: 150px;
     margin-bottom: 50px;
     font-size: 50px;
     font-family: "Agu Display", serif;
@@ -45,7 +45,7 @@
 .prayer-request-button, .contact-button{
     padding: 13px 25px;
     font-size: 14px;
-    background-color: #b8bdfa;
+    background-color: #c0cdf8;
     color: black;
     border: none;
     border-radius: 5px;
@@ -180,9 +180,7 @@
     text-align: center;
     line-height: 30px;
 }
-footer{
-display: none;
-}
+
 
 .update-profile-button{
     margin-top: 30px;
@@ -258,7 +256,7 @@ display: none;
     }
 
 }
-@media screen and (max-width: 890px){
+@media screen and (max-width: 600px){
     #divider{
         display: none;
         visibility: hidden;

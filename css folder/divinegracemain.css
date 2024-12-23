@@ -263,7 +263,7 @@
 
 footer{
     background-color: #dcdfe9;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .footer-logo{
@@ -278,11 +278,12 @@ footer{
 }
 
 .social-div img{
-    margin-right: 10px;
+    margin: 2px;
 }
 
 .copyright-div{
     text-align: center;
+    font-size: 12px;
     margin-top: 30px;
     color: rgb(68, 68, 68);
 }

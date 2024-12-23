@@ -1,0 +1,53 @@
+.prayer-h2{
+    margin-top: 110px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-family: "Agu Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.big-textarea {
+    width: 85%; 
+    max-width: 800px; 
+    height: 300px; 
+    padding: 20px;
+    font-size: 18px; 
+    line-height: 1px; 
+    border: 2px solid #ccc; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    outline: none; 
+    resize: none;
+    box-sizing: border-box; 
+    background-color: #fff; 
+    overflow-wrap: break-word; 
+}
+
+.big-textarea:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); 
+}
+
+.submit-button-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.submit-button{
+    background-color: rgb(22, 22, 65);
+    border: none;
+    padding: 9px 18px;
+    font-family: "Agu Display", serif;
+    color: bisque;
+}

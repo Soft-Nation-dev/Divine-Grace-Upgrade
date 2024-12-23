@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head> 
@@ -6,109 +7,151 @@
     <title>Home Page</title>
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="css folder/homepageheader.css">
+    <link rel="stylesheet" href="css folder/prayerrequest.css">
     <link rel="stylesheet" href="css folder/homepagebody.css">
     <link rel="stylesheet" href="css folder/divinegracegeneral.css">
     <link rel="stylesheet" href="css folder/divinegracemain.css">
-    <!-- <link rel="stylesheet" href="css folder/divinegraceheader.css"> -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header id="header">
-    <div class="right-section">
-        <div><button class="hambuger-button"><img class="hambuger js-hambuger" src="images/hamburger-menu.svg" alt=""></button></div>
-      <div class="logo-div">  <img id="logo-img" src="images/logo.png" alt="">
-        <span id="digunec-logo">
-            Divine Grace Unec
-        </span></div>
+    <header class="main-contents" id="header">
+      <div class="right-section">
+        <button class="hambuger-button js-hambuger-button">
+          <img class="hambuger js-hambuger" src="images/hamburger-menu.svg" alt="Hamburger Menu">
+        </button>
+        <div class="logo-div">
+          <img id="logo-img" src="images/logo.png" alt="">
+          <span id="digunec-logo">Divine Grace Unec</span>
+        </div>
         <div id="divider"></div>
         <div id="dashboard">Dashboard</div>
-    </div>
-    <div class="left-section">
-        <button> <img id="notification" src="images/notifications.svg" alt=""></button>
+      </div>
+      <div class="left-section">
+        <button>
+          <img id="notification" src="images/notifications.svg" alt="">
+        </button>
         <img id="profile-image" src="images/downloadimg.jfif" alt="">
-    </div>
-  </header>  
-<section class="main-body-section">
-    <section class="left-body-section">
-        <button class="exit-button js-exit-button"><img src="images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt=""></button>
-        <div class="main-left-div">
-         <div class="profile-imageH-div">
-           <div> <img class="profile-imageH" src="images/downloadimg.jfif" alt=""></div>
-            <p class="profile-name">Onah Emmanuel Ifeanyichukwu</p>
-            <p class="department">Department in the church: <span class="department-span">Technical Department</span></p>
-         </div>
-         <button class="update-profile-button">Update Profile</button>
-         <div class="details-div">
-             <p class="department">
-                MOBILE PHONE <br> <span class="department-span">08141787294</span>
-             </p>
-             <p class="department">EMAIL ADDRESS <br> <span class="department-span">Ifeanyiee8105@gmail.com </span></p>
-             <p class="department">RESIDENTIAL ADDRESS <br> <span class="department-span">Merryland</span></p>
-             <p class="department">DEPARTMENT IN SCHOOL <br> <span class="department-span">Medical Radiography</span></p>
-         </div>
+      </div>
+    </header>
+   <div>
+    <nav class="nav-menu hidden">
+        <div class="logo-nav">
+            <div class="logo-div">
+                <img id="logo-img" src="images/logo.png" alt="">
+                <span id="digunec-logo">Divine Grace Unec</span>
+              </div>
+              <button class="exit-butt js-exit-butt">
+                <img src="images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Exit">
+              </button>
         </div>
-    </section>
-    <section id="right-body-section">
-        <div id="Welcome-div">
-            <h2>
-                Welcome back Emmanuel
-            </h2>
-        </div>
-        <div class="display-profile-button-div">
-            <button class="display-profile-button js-display-profile-button">Show Profile Details</button>
-        </div>
-        <div class="card-div">
-            <div class="prayer-request-div">
-                <p>
-                    Do you have any payer request?<br>
-                    click the button below to submit a request
-                </p>
-                <button class="prayer-request-button js-prayer-request-button">Submit a prayer request</button>
-            </div>
-            <div class="contact-div">
-                <p>
-                    Do need someone to talk to? <br>
-                    click the button below to connect with the leadership of the church
-                </p>
-                <button class="contact-button">Click to connect</button>
-            </div>
-           
-        </div>
-        <div class="annoucement-div">
+        <nav class="nav">
+          <li class="menu-item dash" data-page="dashboard"><button>Dashboard</button></li>
+          <li class="menu-item" data-page="submitprayer"><button>Submit a Prayer Request</button></li>
+          <li class="menu-item"><button id="colorLink">Connect with Us</button></li>
+          <li class="menu-item" data-page="registerlst"><button>Register for LSTS</button></li>
+          <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+        </nav>
+      </nav>
+   </div>
+
+    <div id="content-container" class="main-content">
+        <section id="dashboard-content" class="content-section">
             <div>
-                <p class="p">ANNOUCEMENT</p>
+                <section>
+                  <section class="main-body-section">
+                    <section class="left-body-section">
+                      <button class="exit-button js-exit-button">
+                        <img src="images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="">
+                      </button>
+                      <div class="main-left-div">
+                        <div class="profile-imageH-div">
+                          <div>
+                            <img class="profile-imageH" src="images/downloadimg.jfif" alt="">
+                          </div>
+                          <p class="profile-name">Onah Emmanuel Ifeanyichukwu</p>
+                          <p class="department">Department in the church: <span class="department-span">Technical Department</span></p>
+                        </div>
+                        <button class="update-profile-button">Update Profile</button>
+                        <div class="details-div">
+                          <p class="department">
+                            MOBILE PHONE <br> <span class="department-span">08141787294</span>
+                          </p>
+                          <p class="department">EMAIL ADDRESS <br> <span class="department-span">Ifeanyiee8105@gmail.com</span></p>
+                          <p class="department">RESIDENTIAL ADDRESS <br> <span class="department-span">Merryland</span></p>
+                          <p class="department">DEPARTMENT IN SCHOOL <br> <span class="department-span">Medical Radiography</span></p>
+                        </div>
+                      </div>
+                    </section>
+                    <section id="right-body-section">
+                      <div id="Welcome-div">
+                        <h2>Welcome back Emmanuel</h2>
+                      </div>
+                      <div class="display-profile-button-div">
+                        <button class="display-profile-button js-display-profile-button">Show Profile Details</button>
+                      </div>
+                      <div class="card-div">
+                        <div class="prayer-request-div">
+                          <p>Do you have any prayer request? Click the button below to submit a request</p>
+                          <button class="prayer-request-button js-prayer-request-button">Submit a prayer request</button>
+                        </div>
+                        <div class="contact-div">
+                          <p>Do you need someone to talk to? Click the button below to connect with the leadership of the church</p>
+                          <a href="https://wa.me/8141787294"><button class="contact-button">Click to connect</button></a>
+                        </div>
+                      </div>
+                      <div class="annoucement-div">
+                        <div>
+                          <p class="p">ANNOUNCEMENT</p>
+                        </div>
+                        <div id="annoucement-image">
+                          <img class="annoucement-img" src="images/annocement_image-removebg-preview.png" alt="">
+                          <p class="annoucement-p">Announcements and updates will appear here</p>
+                        </div>
+                      </div>
+                    </section>
+                  </section>
+                  <footer>
+                    <div class="footer-logo">
+                      <img id="logo-img" src="images/logo.png" alt="">
+                      <span id="digunec-logo">DIGUNEC</span>
+                    </div>
+                    <div class="social-div">
+                      <img src="images/facebook-logo-2428.png" alt="">
+                      <img src="images/instagram-logo-8869.png" alt="">
+                      <img src="images/twitter-x-blue-logo-round-20859.png" alt="">
+                    </div>
+                    <div class="copyright-div">
+                      <p class="copyright">&copy;copyright <b>DIGUNEC</b>&#46; All rights reserved</p>
+                      <p class="design"><i>Designed by Soft Nation</i></p>
+                    </div>
+                  </footer>
+                </section>
+              </div>
+        </section>
+
+        <section id="submitprayer-content" class="content-section hidden">
+          <div class="mains-prayer-div">
+            <h2 class=" prayer-h2">Write your prayer request in the field below</h2>
+            <div class="container">
+                <textarea class="big-textarea" placeholder="Start typing here..."></textarea>
             </div>
-            <div id="annoucement-image">
-                <img class="annoucement-img" src="images/annocement_image-removebg-preview.png" alt="">
-                <p class="annoucement-p">annoucement and Updates will appear here</p>
-            </div>
-        </div>
-    </section>
-</section>
+            <div class="submit-button-div"><button class="submit-button">SUBMIT</button></div>
+          </div>
+        </section>
 
+        <section id="connect-content" class="content-section hidden">
+          <h2>Connect with Us</h2>
+          <!-- Contact/Connect form here -->
+        </section>
 
-<footer>
-    <div class="footer-logo">
-        <img class="logo-imgg" src="images/logo.png" alt="">
-        <span class="digunecc">
-            DIGUNEC
-        </span>
+        <section id="registerlst-content" class="content-section hidden">
+          <h2>Register for LSTS</h2>
+          <!-- Registration form here -->
+        </section>
+        
     </div>
-    <div class="social-div">
-        <img src="images/facebook-logo-2428.png" alt="">
-        <img src="images/instagram-logo-8869.png" alt="">
-        <img src="images/twitter-x-blue-logo-round-20859.png" alt="">
-    </div>
-    <div class="copyright-div">
-        <p class="copyright">&copy;copyright <b>DIGUNEC</b>&#46; All right reserved</p>
-        <p class="design"><i>Designed by Soft Nation</i></p>
-    </div>
-</footer>
-
 
     <script type="module" src="scripts/homepage.js"></script>
 </body>

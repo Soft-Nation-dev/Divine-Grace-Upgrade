@@ -9,6 +9,7 @@ input{
     z-index: 10;
     position: relative;
     pointer-events: auto;
+    padding-left: 7px;
 }
 
 .signin-div, .creatacc-div {

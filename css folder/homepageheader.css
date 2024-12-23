@@ -35,6 +35,63 @@ header{
     justify-content: center;
     align-items: center;
 }
+.blurred {
+    filter: blur(20px); 
+    pointer-events: none;
+    user-select: none;
+  }
+  .nav-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px; 
+    height: 100%;
+    background-color: white;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000; 
+  }
+  
+  .nav-menu.visible {
+    display: block; 
+  }
+  .logo-nav{
+    margin-top: 10px;
+    padding: 5px;
+    border-bottom: 1px solid rgb(212, 212, 212);
+    box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
+    -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
+    
+  }
+  .js-exit-butt {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    height: 18px;
+    border: none;
+    cursor: pointer;
+    z-index: 1010; 
+  }
+  .js-exit-butt img{
+    height: 100%;
+  }
+ li button{
+    color: #052b6b;
+    border: none;
+    background-color: transparent;
+  }
+  li{
+    list-style: none;
+    margin-bottom: 25px;
+  }
+  .nav{
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+
+
 #divider {
     width: 2px; 
     background-color: grey; 
@@ -58,6 +115,19 @@ header{
     /* border: none; */
 }
 
+.menu-item.active {
+    background-color: #c4d1df;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+ .connect{
+    background-color: #c4d1df;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+ } 
 .logo-div{
     position: relative;
 }
@@ -97,6 +167,12 @@ header{
     border-radius: 50%;
     margin-left: 20px;
 }
+
+/* Hide sections by default */
+.content-section.hidden {
+    display: none;
+  }
+  
 
 @media screen and (max-width: 546px){
     #header{
