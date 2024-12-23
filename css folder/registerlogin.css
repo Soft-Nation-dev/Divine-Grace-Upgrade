@@ -9,7 +9,7 @@ input{
     z-index: 10;
     position: relative;
     pointer-events: auto;
-    padding-left: 7px;
+    padding: 10px;
 }
 
 .signin-div, .creatacc-div {
@@ -139,6 +139,9 @@ input{
     border-radius: 15px;
 }
 
+.creatacc-h{
+    padding-top: 18px;
+}
 .button-div{
     display: flex;
     flex-direction: column;
@@ -200,7 +203,7 @@ footer{
     position: relative;
    }
     .gen-div{
-        height: 1195px;
+        height: 1200px;
         padding: 30px;
         display: flex;
         justify-content: space-between;
