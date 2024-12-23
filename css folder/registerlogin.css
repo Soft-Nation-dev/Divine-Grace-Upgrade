@@ -86,6 +86,7 @@ input{
  align-items: center;
  justify-content: center;
  padding: 30px;
+ overflow-y: auto;
  text-align: center;
  margin-bottom: 80px;
 }
@@ -183,7 +184,7 @@ footer{
         padding-bottom: 40px;
         margin-top: 40px;
     }
-    
+
     .first, .second{
         height: 100%;
         width: 100%;
