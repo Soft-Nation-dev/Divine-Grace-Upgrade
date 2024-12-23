@@ -1,7 +1,5 @@
 
- document.querySelector('.js-prayer-request-button').addEventListener('click', ()=>{
-  window.location.href = 'index.html'; 
-});
+
 function leftBodySectiondisplay (){
 const displayProfileButton = document.querySelector('.js-display-profile-button');
 const exitButton = document.querySelector('.js-exit-button');
@@ -35,43 +33,6 @@ export function renderHeader() {
   const navMenu = document.querySelector('.nav-menu');
   const mainContent = document.querySelector('.main-content');
   const hamburgerButton = document.querySelector('.js-hambuger-button');
-  const dash = document.querySelector('.dash');
-  dash.classList.add('connect');
-
-  menuItems.forEach(item => {
-    item.addEventListener('click', (event) => {
-      event.preventDefault();
-
-      menuItems.forEach(menuItem => menuItem.classList.remove('active'));
-      menuItems.forEach(menuItem => menuItem.classList.remove('connect'));
-
-      item.classList.add('active');
-      item.classList.add('connect');
-
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => section.classList.add('hidden'));
-
-      const page = item.dataset.page;
-      const sectionToShow = document.querySelector(`#${page}-section`);
-      if (sectionToShow) {
-        sectionToShow.classList.remove('hidden');
-      }
-
-      navMenu.classList.remove('visible');
-      mainContent?.classList.remove('blurred'); 
-    });
-  });
-
-  window.addEventListener('load', () => {
-    const activeMenu = localStorage.getItem('activeMenu');
-    if (activeMenu) {
-      const activeItem = document.querySelector(`.menu-item[data-page="${activeMenu}"]`);
-      if (activeItem) {
-        activeItem.classList.add('active');
-        activeItem.classList.add('connect');
-      }
-    }
-  });
 
   if (hamburgerButton && navMenu) {
     hamburgerButton.addEventListener('click', () => {
@@ -105,7 +66,16 @@ export function renderHeader() {
     });
   }
 
+  document.addEventListener('click', (event) => {
+    if (event.target.matches('.submit-prayer')) {
+        console.log('working');
+        window.location.href = 'prayerequest.html';
+    }
+});
 
+
+
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const menuItems = document.querySelectorAll('.menu-item');
   const contentSections = document.querySelectorAll('.content-section');
@@ -131,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   showPage('dashboard');
 });
 
+*/
 }
 
 

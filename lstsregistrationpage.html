@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSTS REGISTRATION PAGE</title>
+    <link rel="stylesheet" href="css folder/lsts.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="css folder/homepageheader.css">
+    <link rel="stylesheet" href="css folder/prayerrequest.css">
+    <link rel="stylesheet" href="css folder/prayerrequest.css">
+    <link rel="stylesheet" href="css folder/homepagebody.css">
+    <link rel="stylesheet" href="css folder/divinegracegeneral.css">
+    <link rel="stylesheet" href="css folder/divinegracemain.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    
+    <header class="main-contents" id="header">
+        <div class="right-section">
+          <button class="hambuger-button js-hambuger-button">
+            <img class="hambuger js-hambuger" src="images/hamburger-menu.svg" alt="Hamburger Menu">
+          </button>
+          <div class="logo-div">
+            <img id="logo-img" src="images/logo.png" alt="">
+            <span id="digunec-logo">Divine Grace Unec</span>
+          </div>
+          <div id="divider"></div>
+          <div id="dashboard">Prayer Request</div>
+        </div>
+        <div class="left-section">
+          <button>
+            <img id="notification" src="images/notifications.svg" alt="">
+          </button>
+          <img id="profile-image" src="images/downloadimg.jfif" alt="">
+        </div>
+      </header>
+     <div>
+      <nav class="nav-menu hidden">
+          <div class="logo-nav">
+              <div class="logo-div">
+                  <img id="logo-img" src="images/logo.png" alt="">
+                  <span id="digunec-logo">Divine Grace Unec</span>
+                </div>
+                <button class="exit-butt js-exit-butt">
+                  <img src="images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Exit">
+                </button>
+          </div>
+          <nav class="nav">
+            <li><a href="homepage.html">Dashboard</a></li>
+            <li><a href="prayerequest.html">Submit a Prayer Request</a></li>
+            <li><a href="https://wa.me/2348141787294">Connect with Us</a></li>
+            <li class="menu-item2"><a href="lstsregistrationpage.html">Register for LSTS</a><li>
+            <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+          </nav>
+        </nav>
+     </div>
+     <section class="main-content">
+    <div id="lstsh1">
+        <h1>LSTS Registration Form</h1>
+    </div>
+    <form id="membershipForm">
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" name="surname" required>
+
+        <label for="otherNames">Other Names</label>
+        <input type="text" id="otherNames" name="otherNames" required>
+
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]+" title="Enter a valid phone number">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="residentialAddress">Residential Address</label>
+        <textarea id="residentialAddress" name="residentialAddress" rows="3" required></textarea>
+
+        <label for="department">Department in the Church</label>
+        <select id="department" name="department" required>
+            <option value="" disabled selected>Select a department</option>
+            <option value="Technical">Technical</option>
+            <option value="Choir">Choir</option>
+            <option value="Ushering">Ushering</option>
+            <option value="Youth">Youth</option>
+            <option value="Children">Children</option>
+            <option value="Others">Others</option>
+        </select>
+
+        <label for="position">Position in the Church</label>
+        <select id="position" name="position" required>
+            <option value="" disabled selected>Select a position</option>
+            <option value="Pastor">Pastor</option>
+            <option value="Leader">Leader</option>
+            <option value="Worker">Worker</option>
+            <option value="Member">Member</option>
+        </select>
+
+        <button class="submit-button" type="submit">Submit</button>
+    </form>
+</section>
+<script type="module" src="scripts/lsts.js"></script>
+</body>
+</html>

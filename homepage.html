@@ -7,7 +7,6 @@
     <title>Home Page</title>
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="css folder/homepageheader.css">
-    <link rel="stylesheet" href="css folder/prayerrequest.css">
     <link rel="stylesheet" href="css folder/homepagebody.css">
     <link rel="stylesheet" href="css folder/divinegracegeneral.css">
     <link rel="stylesheet" href="css folder/divinegracemain.css">
@@ -47,16 +46,16 @@
               </button>
         </div>
         <nav class="nav">
-          <li class="menu-item dash" data-page="dashboard"><button>Dashboard</button></li>
-          <li class="menu-item" data-page="submitprayer"><button>Submit a Prayer Request</button></li>
-          <li class="menu-item"><button id="colorLink">Connect with Us</button></li>
-          <li class="menu-item" data-page="registerlst"><button>Register for LSTS</button></li>
-          <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
-        </nav>
+            <li class="menu-item1"><a href="homepage.html">Dashboard</a></li>
+            <li><a href="prayerequest.html">Submit a Prayer Request</a></li>
+            <li><a href="https://wa.me/2348141787294">Connect with Us</a></li>
+            <li><a href="lstsregistrationpage.html">Register for LSTS</a><li>
+            <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+          </nav>
       </nav>
    </div>
 
-    <div id="content-container" class="main-content">
+    <div class="main-content">
         <section id="dashboard-content" class="content-section">
             <div>
                 <section>
@@ -94,7 +93,7 @@
                       <div class="card-div">
                         <div class="prayer-request-div">
                           <p>Do you have any prayer request? Click the button below to submit a request</p>
-                          <button class="prayer-request-button js-prayer-request-button">Submit a prayer request</button>
+                         <a href="prayerequest.html"> <button class="prayer-request-button">Submit a prayer request</button></a>
                         </div>
                         <div class="contact-div">
                           <p>Do you need someone to talk to? Click the button below to connect with the leadership of the church</p>
@@ -129,16 +128,6 @@
                   </footer>
                 </section>
               </div>
-        </section>
-
-        <section id="submitprayer-content" class="content-section hidden">
-          <div class="mains-prayer-div">
-            <h2 class=" prayer-h2">Write your prayer request in the field below</h2>
-            <div class="container">
-                <textarea class="big-textarea" placeholder="Start typing here..."></textarea>
-            </div>
-            <div class="submit-button-div"><button class="submit-button">SUBMIT</button></div>
-          </div>
         </section>
 
         <section id="connect-content" class="content-section hidden">

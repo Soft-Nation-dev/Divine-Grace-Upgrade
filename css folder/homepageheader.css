@@ -77,10 +77,11 @@ header{
   .js-exit-butt img{
     height: 100%;
   }
- li button{
+ li button, li a{
     color: #052b6b;
     border: none;
     background-color: transparent;
+    text-decoration: none;
   }
   li{
     list-style: none;
@@ -115,7 +116,7 @@ header{
     /* border: none; */
 }
 
-.menu-item.active {
+.menu-item1 {
     background-color: #c4d1df;
     padding: 10px;
     border-radius: 5px;

@@ -22,7 +22,7 @@
     height: 300px; 
     padding: 20px;
     font-size: 18px; 
-    line-height: 1px; 
+    line-height: 18px; 
     border: 2px solid #ccc; 
     border-radius: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
@@ -51,3 +51,11 @@
     font-family: "Agu Display", serif;
     color: bisque;
 }
+
+.menu-item2 {
+    background-color: #c4d1df;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
