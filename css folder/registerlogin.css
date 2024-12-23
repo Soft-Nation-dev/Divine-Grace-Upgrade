@@ -9,7 +9,7 @@ input{
     z-index: 10;
     position: relative;
     pointer-events: auto;
-    padding: 10px;
+    padding: 13px;
 }
 
 .signin-div, .creatacc-div {
@@ -113,7 +113,7 @@ input{
     border-radius: 5px;
 }
  input::placeholder{
-    padding-left: 13px;
+    padding: 13px;
     color: rgb(136, 135, 135);
  }
 
@@ -140,7 +140,7 @@ input{
 }
 
 .creatacc-h{
-    padding-top: 18px;
+    padding-top: 50px;
 }
 .button-div{
     display: flex;
