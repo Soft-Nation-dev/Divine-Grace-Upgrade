@@ -9,7 +9,7 @@ input{
     z-index: 10;
     position: relative;
     pointer-events: auto;
-    padding: 13px;
+    padding-left: 7px;
 }
 
 .signin-div, .creatacc-div {
@@ -86,7 +86,6 @@ input{
  align-items: center;
  justify-content: center;
  padding: 30px;
- overflow-y: auto;
  text-align: center;
  margin-bottom: 80px;
 }
@@ -113,7 +112,7 @@ input{
     border-radius: 5px;
 }
  input::placeholder{
-    padding: 13px;
+    padding-left: 13px;
     color: rgb(136, 135, 135);
  }
 
@@ -139,9 +138,6 @@ input{
     border-radius: 15px;
 }
 
-.creatacc-h{
-    padding-top: 50px;
-}
 .button-div{
     display: flex;
     flex-direction: column;
@@ -203,7 +199,7 @@ footer{
     position: relative;
    }
     .gen-div{
-        height: 1200px;
+        height: 1260px;
         padding: 30px;
         display: flex;
         justify-content: space-between;
