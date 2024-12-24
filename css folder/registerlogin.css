@@ -25,8 +25,8 @@ input{
      position: relative; 
      border-radius: 20px;
     margin: auto;
-    overflow: auto;
-    height: 90vh;
+    overflow: hidden;
+    height: 100vh;
     width: 90vw;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -129,7 +129,7 @@ input{
 .button-div{
     font-size: 14px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 .button-div button{
