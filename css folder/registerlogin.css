@@ -25,9 +25,9 @@ input{
      position: relative; 
      border-radius: 20px;
     margin: auto;
-    overflow: hidden;
-    height: 700px;
-    width: 1100px;
+    overflow: auto;
+    height: 90vh;
+    width: 90vw;
     margin-top: 30px;
     margin-bottom: 30px;
 }
@@ -128,6 +128,8 @@ input{
 
 .button-div{
     font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .button-div button{
@@ -164,13 +166,6 @@ input{
     border: 1px solid white;
 }
 
-footer{
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 750px;
-}
 @media(max-width:740px){
     .first-div, .second-div{
         flex-direction: column;
@@ -195,11 +190,8 @@ footer{
 
         
     }
-   footer{
-    position: relative;
-   }
     .gen-div{
-        height: 1260px;
+        height: 1650px;
         padding: 30px;
         display: flex;
         justify-content: space-between;
