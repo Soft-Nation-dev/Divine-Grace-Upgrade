@@ -1,8 +1,11 @@
+// -----------------------------------
+// left‐pane fullscreen toggler
+// -----------------------------------
 function leftBodySectionDisplay() {
   const displayProfileButton = document.querySelector('.js-display-profile-button');
-  const exitButton = document.querySelector('.js-exit-button');
-  const leftBodySection = document.querySelector('.left-body-section');
-  const mainBodySection = document.querySelector('.main-body-section');
+  const exitButton           = document.querySelector('.js-exit-button');
+  const leftBodySection      = document.querySelector('.left-body-section');
+  const mainBodySection      = document.querySelector('.main-body-section');
 
   displayProfileButton.addEventListener('click', () => {
     leftBodySection.classList.add('fullscreen');
@@ -15,87 +18,96 @@ function leftBodySectionDisplay() {
     leftBodySection.classList.remove('fullscreen');
     mainBodySection.classList.remove('hidden');
     exitButton.style.display = 'none';
-
-    const parentSection = document.querySelector('.main-body-section');
-    parentSection.insertBefore(leftBodySection, parentSection.firstChild);
+    document.querySelector('.main-body-section')
+            .insertBefore(leftBodySection, document.querySelector('.main-body-section').firstChild);
   });
 }
 
-export function renderHeader() {
+// -----------------------------------
+// nav menu & hamburger toggler
+// -----------------------------------
+function renderHeader() {
   const hamburgerButton = document.querySelector('.js-hambuger-button');
-  const exitButton = document.querySelector('.js-exit-butt');
-  const navMenu = document.querySelector('.nav-menu');
-  const mainContent = document.querySelector('.main-content');
+  const exitNavButton   = document.querySelector('.js-exit-butt');
+  const navMenu         = document.querySelector('.nav-menu');
+  const mainContent     = document.querySelector('.main-content');
 
-  // Toggle nav menu visibility
-  if (hamburgerButton && navMenu) {
-    hamburgerButton.addEventListener('click', () => {
-      navMenu.classList.toggle('visible');
-      mainContent?.classList.toggle('blurred', navMenu.classList.contains('visible'));
-    });
+  if (!hamburgerButton || !navMenu) return;
 
-    if (exitButton) {
-      exitButton.addEventListener('click', () => {
-        navMenu.classList.remove('visible');
-        mainContent?.classList.remove('blurred');
-      });
-    }
-  }
-
-  // Handle navigation actions
-  document.addEventListener('click', (event) => {
-    if (event.target.matches('.submit-prayer')) {
-      window.location.href = 'prayerequest.html';
-    }
+  // open/close via hamburger
+  hamburgerButton.addEventListener('click', () => {
+    navMenu.classList.toggle('visible');
+    mainContent.classList.toggle('blurred', navMenu.classList.contains('visible'));
   });
 
-  // Populate dynamic content
-  const userName = document.getElementById('user-name');
-  const firstName = document.getElementById('user-firstname');
-  const userPhone = document.getElementById('user-phone');
-  const userEmail = document.getElementById('user-email');
-  const userAddress = document.getElementById('user-address');
-  const userSchoolDepartment = document.getElementById('user-school-department');
-  const userDepartment = document.getElementById('user-department');
-  const welcomeMessage = document.getElementById('welcome-message');
-  const signOutButton = document.querySelector('.js-sign-out-button');
-
-  function loadUserData() {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-
-    if (loggedInUser) {
-      const user = users.find(u => u.email === loggedInUser.email);
-
-      if (user) {
-        // Update UI with user data
-        userName.textContent = `${user.firstname} ${user.name}`;
-        firstName.textContent = user.firstname;
-        userPhone.textContent = user.phone;
-        userEmail.textContent = user.email;
-        userAddress.textContent = user.address || 'Not provided';
-        userSchoolDepartment.textContent = user.schoolDepartment || 'Not provided';
-        userDepartment.textContent = user.churchDepartment || 'Not provided';
-        // welcomeMessage.textContent = `Welcome back, ${user.firstname}`;
-      }
-    } else {
-      // Redirect to login if no user is logged in
-      window.location.href = 'index.html';
-    }
-  }
-
-  // Sign-out functionality
-  if (signOutButton) {
-    signOutButton.addEventListener('click', () => {
-      localStorage.removeItem('loggedInUser'); // Remove logged-in user data
-      alert('You have been signed out.');
-      window.location.href = 'index.html'; // Redirect to login page
+  // close via exit icon
+  if (exitNavButton) {
+    exitNavButton.addEventListener('click', () => {
+      navMenu.classList.remove('visible');
+      mainContent.classList.remove('blurred');
     });
   }
-
-  // Load user data when the page loads
-  loadUserData();
 }
 
-renderHeader();
-leftBodySectionDisplay();
+// -----------------------------------
+// load user profile from backend
+// -----------------------------------
+async function loadUserData() {
+  try {
+    const res = await fetch(
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/profile',
+      { credentials: 'include' }
+    );
+    if (!res.ok) {
+      return window.location.href = 'registerlogin.html';
+    }
+    const user = await res.json();
+
+    document.getElementById('user-name').textContent                = `${user.firstname} ${user.name}`;
+    document.getElementById('user-department').textContent          = user.department   || '—';
+    document.getElementById('user-phone').textContent               = user.phone;
+    document.getElementById('user-email').textContent               = user.email;
+    document.getElementById('user-address').textContent             = user.address      || '—';
+    document.getElementById('user-school-department').textContent   = user.schoolDepartment || '—';
+    document.getElementById('user-firstname').textContent           = user.firstname;
+    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.firstname}`;
+  } catch (err) {
+    console.error(err);
+    window.location.href = 'registerlogin.html';
+  }
+}
+
+// -----------------------------------
+// logout action
+// -----------------------------------
+function wireLogout() {
+  const signOutButton = document.querySelector('.js-sign-out-button');
+  if (!signOutButton) return;
+
+  signOutButton.addEventListener('click', async () => {
+    try {
+      const res = await fetch(
+        'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/logout',
+        { method: 'POST', credentials: 'include' }
+      );
+      if (res.ok) {
+        alert('Logged out successfully');
+        window.location.href = 'registerlogin.html';
+      } else {
+        alert('Logout failed');
+      }
+    } catch {
+      alert('Logout error—please try again.');
+    }
+  });
+}
+
+// -----------------------------------
+// initialize everything on page load
+// -----------------------------------
+window.addEventListener('DOMContentLoaded', () => {
+  leftBodySectionDisplay();
+  renderHeader();
+  loadUserData();
+  wireLogout();
+});

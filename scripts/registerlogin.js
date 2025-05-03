@@ -1,96 +1,141 @@
 function reset() {
-    const createAccountInputs = document.querySelectorAll('.creatacc-div input');
-    createAccountInputs.forEach(input => {
-        input.value = '';
-    });
+  document.querySelectorAll('.creatacc-div input').forEach(i => i.value = '');
 }
 
-const signIn = document.querySelector('.js-signinbut');
-const signUp = document.querySelector('.js-signupbut');
+const signIn   = document.querySelector('.js-signinbut');
+const signUp   = document.querySelector('.js-signupbut');
 const createAccountSection = document.querySelector('.creatacc-div');
-const welcomeBackSection = document.querySelector('.signin-div');
-const hellodiv = document.querySelector('.welcomeback-div');
-const signindiv = document.querySelector('.hello-div');
+const welcomeBackSection   = document.querySelector('.signin-div');
+const helloDiv             = document.querySelector('.hello-div');
+const welcomeDiv           = document.querySelector('.welcomeback-div');
+const loginButton          = document.querySelector('.js-login-button');
+const createAccountButton  = document.querySelector('.js-create-account-button');
 
+// Initial visibility setup
 createAccountSection.classList.add('visible');
-signindiv.classList.add('visible');
-hellodiv.classList.add('hidden');
+helloDiv.classList.add('visible');
+welcomeDiv.classList.add('hidden');
 welcomeBackSection.classList.add('hidden');
 
-function toggleVisibility(divsToHide, divsToShow) {
-    divsToHide.forEach(div => {
-        div.classList.add('hidden');
-        div.classList.remove('visible');
-    });
-
-    divsToShow.forEach(div => {
-        div.classList.add('visible');
-        div.classList.remove('hidden');
-    });
+function toggleVisibility(hide, show) {
+  hide.forEach(div => div.classList.replace('visible','hidden'));
+  show.forEach(div => div.classList.replace('hidden','visible'));
 }
 
 signIn.addEventListener('click', () => {
-    if (createAccountSection.classList.contains('visible')) {
-        toggleVisibility([createAccountSection, signindiv], [welcomeBackSection, hellodiv]);
-    }
+  toggleVisibility([createAccountSection, helloDiv], [welcomeBackSection, welcomeDiv]);
 });
-
 signUp.addEventListener('click', () => {
-    if (!createAccountSection.classList.contains('visible')) {
-        toggleVisibility([welcomeBackSection, hellodiv], [createAccountSection, signindiv]);
-    }
+  toggleVisibility([welcomeBackSection, welcomeDiv], [createAccountSection, helloDiv]);
 });
 
-const loginButton = document.querySelector('.js-login-button');
-const createAccountButton = document.querySelector('.js-create-account-button');
+function $(id) {
+  const el = document.getElementById(id);
+  if (!el) console.error(`❌ Missing element with id="${id}"`);
+  return el;
+}
 
-loginButton.addEventListener('click', () => {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+// Input fields
+const firstnameInput       = $('register-firstname');
+const nameInput            = $('register-name');
+const deptChurchInput      = $('department-in-church');
+const deptSchoolInput      = $('department-in-school');
+const addressInput         = $('residential-address');
+const emailInput           = $('register-email');
+const phoneInput           = $('register-phone');
+const passwordInput        = $('register-password');
+const confirmPasswordInput = $('register-confirm-password');
+const loginEmailInput      = $('login-email');
+const loginPasswordInput   = $('login-password');
 
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.email === email && u.password === password);
+// ---- REGISTRATION HANDLER ----
+createAccountButton.addEventListener('click', async () => {
+  const firstname       = firstnameInput.value.trim();
+  const name            = nameInput.value.trim();
+  const department      = deptChurchInput.value.trim();
+  const schoolDepartment= deptSchoolInput.value.trim();
+  const address         = addressInput.value.trim();
+  const email           = emailInput.value.trim();
+  const phone           = phoneInput.value.trim();
+  const password        = passwordInput.value;
+  const confirmPassword = confirmPasswordInput.value;
 
-    if (user) {
-        localStorage.setItem('loggedInUser', JSON.stringify(user));
-        alert(`Welcome back, ${user.name}!`);
-        window.location.href = 'homepage.html';
+  if (![ firstname, name, department, schoolDepartment, address, email, phone, password, confirmPassword ].every(v => v)) {
+    return alert('Please fill in all fields.');
+  }
+  if (password !== confirmPassword) {
+    return alert('Passwords do not match.');
+  }
+
+  try {
+    const res = await fetch(
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/register',
+      {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstname,
+          name,
+          department,
+          schoolDepartment,
+          address,
+          email,
+          phone,
+          password,
+          confirmPassword
+        })
+      }
+    );
+    const data = await res.json();
+    if (res.ok) {
+      alert(data.message);
+      toggleVisibility(
+        [createAccountSection, helloDiv],
+        [welcomeBackSection, welcomeDiv]
+      );
+      reset();
     } else {
-        alert('Invalid email or password.');
+      alert(data.message);
     }
+  } catch (err) {
+    console.error(err);
+    alert('Registration failed—please try again.');
+  }
 });
 
-createAccountButton.addEventListener('click', () => {
-    const name = document.getElementById('register-name').value;
-    const firstname = document.getElementById('register-firstname').value;
-    const churchDepartment = document.getElementById('department-in-church').value;
-    const schoolDepartment = document.getElementById('department-in-school').value;
-    const address = document.getElementById('residential-address').value;
-    const email = document.getElementById('register-email').value;
-    const phone = document.getElementById('register-phone').value;
-    const password = document.getElementById('register-password').value;
-    const confirmPassword = document.getElementById('register-confirm-password').value;
+// ---- LOGIN HANDLER ----
+loginButton.addEventListener('click', async () => {
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
 
-    if (!firstname || !name || !churchDepartment || !schoolDepartment || !address || !email || !phone || !password || !confirmPassword) {
-        alert('Please fill in all fields.');
-        return;
+  if (!email || !password) {
+    return alert('Please enter both email and password.');
+  }
+
+  try {
+    const res = await fetch(
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/login',
+      {
+        method:      'POST',
+        credentials: 'include',
+        headers:     { 'Content-Type': 'application/json' },
+        body:        JSON.stringify({ email, password })
+      }
+    );
+
+    const data = await res.json();
+
+    if (res.ok) {
+      // Simplified success message—no firstname lookup here
+      alert('Login successful! Redirecting you to the dashboard…');
+      window.location.href = 'homepage.html';
+    } else {
+      // Show the server-side error message
+      alert(data.message || 'Login failed');
     }
-
-    if (password !== confirmPassword) {
-        alert('Passwords do not match.');
-        return;
-    }
-
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    if (users.some(user => user.email === email)) {
-        alert('This email is already registered.');
-        return;
-    }
-
-    users.push({ firstname, name, churchDepartment, schoolDepartment, address, email, phone, password });
-    localStorage.setItem('users', JSON.stringify(users));
-
-    alert('Account created successfully!');
-    toggleVisibility([createAccountSection, signindiv], [welcomeBackSection, hellodiv]);
-    reset();
+  } catch (err) {
+    console.error('Login error:', err);
+    alert('Login failed—please try again.');
+  }
 });

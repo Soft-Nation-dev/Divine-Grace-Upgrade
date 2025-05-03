@@ -8,6 +8,17 @@
     padding-right: 20px;
     transition: width 0.3s ease;
 }
+@keyframes popIn {
+    0%   { transform: scale(0.7); opacity: 0; }
+    60%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .left-body-section.fullscreen {
+    animation: popIn 1s ease forwards;
+    transition: none;
+  }
+  
 
 #right-body-section{
     margin-left: 570px;
