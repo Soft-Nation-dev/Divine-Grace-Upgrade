@@ -58,22 +58,23 @@ async function loadUserData() {
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/profile',
       { credentials: 'include' }
     );
-    if (!res.ok) {
+    /*if (!res.ok) {
       return window.location.href = 'registerlogin.html';
-    }
+    }*/
     const user = await res.json();
 
-    document.getElementById('user-name').textContent                = `${user.firstname} ${user.name}`;
-    document.getElementById('user-department').textContent          = user.department   || '—';
-    document.getElementById('user-phone').textContent               = user.phone;
-    document.getElementById('user-email').textContent               = user.email;
-    document.getElementById('user-address').textContent             = user.address      || '—';
-    document.getElementById('user-school-department').textContent   = user.schoolDepartment || '—';
-    document.getElementById('user-firstname').textContent           = user.firstname;
-    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.firstname}`;
+    document.getElementById('user-name').textContent                = `${user.FirstName} ${user.Othername}`;
+    document.getElementById('user-department').textContent          = user.DepartmentInChurch   || '—';
+    document.getElementById('user-phone').textContent               = user.PhoneNumber   || '—';
+    document.getElementById('user-email').textContent               = user.Email;
+    document.getElementById('user-address').textContent             = user.ResidentialAddress      || '—';
+    document.getElementById('user-school-department').textContent   = user.DepartmentInSchool || '—';
+    document.getElementById('user-firstname').textContent           = user.Username || '—';
+    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.FirstName}`;
   } catch (err) {
     console.error(err);
-    window.location.href = 'registerlogin.html';
+    /*window.location.href = 'registerlogin.html';*/
+    alert('Failed to load user data. Please try again later.');
   }
 }
 

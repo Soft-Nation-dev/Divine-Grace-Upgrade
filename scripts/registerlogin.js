@@ -38,6 +38,7 @@ function $(id) {
 // Input fields
 const firstnameInput       = $('register-firstname');
 const nameInput            = $('register-name');
+const userNameInput        = $('register-username');
 const deptChurchInput      = $('department-in-church');
 const deptSchoolInput      = $('department-in-school');
 const addressInput         = $('residential-address');
@@ -50,23 +51,27 @@ const loginPasswordInput   = $('login-password');
 
 // ---- REGISTRATION HANDLER ----
 createAccountButton.addEventListener('click', async () => {
-  const firstname       = firstnameInput.value.trim();
-  const name            = nameInput.value.trim();
-  const department      = deptChurchInput.value.trim();
-  const schoolDepartment= deptSchoolInput.value.trim();
-  const address         = addressInput.value.trim();
-  const email           = emailInput.value.trim();
-  const phone           = phoneInput.value.trim();
-  const password        = passwordInput.value;
-  const confirmPassword = confirmPasswordInput.value;
+  const FirstName       = firstnameInput.value.trim();
+  const Othername            = nameInput.value.trim();
+  const Username            = userNameInput.value.trim();
+  const DepartmentInChurch     = deptChurchInput.value.trim();
+  const DepartmentInSchool= deptSchoolInput.value.trim();
+  const ResidentialAddress         = addressInput.value.trim();
+  const Email           = emailInput.value.trim();
+  const PhoneNumber           = phoneInput.value.trim();
+  const Password        = passwordInput.value;
+  const ConfirmPassword = confirmPasswordInput.value;
 
-  if (![ firstname, name, department, schoolDepartment, address, email, phone, password, confirmPassword ].every(v => v)) {
+  if (![ FirstName, Othername, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword ].every(v => v)) {
     return alert('Please fill in all fields.');
   }
-  if (password !== confirmPassword) {
+  if (Password !== ConfirmPassword) {
     return alert('Passwords do not match.');
   }
-
+  if (Password.length < 8) {
+    return alert('Password must be at least 8 characters long.');
+  }
+  
   try {
     const res = await fetch(
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/register',
@@ -75,15 +80,16 @@ createAccountButton.addEventListener('click', async () => {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstname,
-          name,
-          department,
-          schoolDepartment,
-          address,
-          email,
-          phone,
-          password,
-          confirmPassword
+          FirstName,
+          Othername,
+          Username,
+          DepartmentInChurch,
+          DepartmentInSchool,
+          ResidentialAddress,
+          Email,
+          PhoneNumber,
+          Password,
+          ConfirmPassword
         })
       }
     );
