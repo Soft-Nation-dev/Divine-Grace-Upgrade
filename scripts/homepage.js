@@ -56,12 +56,14 @@ async function loadUserData() {
   try {
     const res = await fetch(
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/profile',
-      { credentials: 'include' }
+      { method: 'GET',
+       credentials: 'include' }
     );
     /*if (!res.ok) {
       return window.location.href = 'registerlogin.html';
     }*/
     const user = await res.json();
+    console.log(user);
 
     document.getElementById('user-name').textContent                = `${user.FirstName} ${user.Othername}`;
     document.getElementById('user-department').textContent          = user.DepartmentInChurch   || '—';
