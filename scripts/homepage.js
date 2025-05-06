@@ -65,14 +65,14 @@ async function loadUserData() {
     const user = await res.json();
     console.log(user);
 
-    document.getElementById('user-name').textContent                = `${user.FirstName} ${user.Othername}`;
-    document.getElementById('user-department').textContent          = user.DepartmentInChurch   || '—';
-    document.getElementById('user-phone').textContent               = user.PhoneNumber   || '—';
-    document.getElementById('user-email').textContent               = user.Email;
-    document.getElementById('user-address').textContent             = user.ResidentialAddress      || '—';
-    document.getElementById('user-school-department').textContent   = user.DepartmentInSchool || '—';
-    document.getElementById('user-firstname').textContent           = user.Username || '—';
-    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.FirstName}`;
+    document.getElementById('user-name').textContent                = `${user.firstName} ${user.otherNames}`;
+    document.getElementById('user-department').textContent          = user.departmentInChurch   || '—';
+    document.getElementById('user-phone').textContent               = user.phoneNumber  || '—';
+    document.getElementById('user-email').textContent               = user.email;
+    document.getElementById('user-address').textContent             = user.residentialAddress     || '—';
+    document.getElementById('user-school-department').textContent   = user.departmentInSchool || '—';
+    document.getElementById('user-firstname').textContent           = user.userName || '—';
+    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.userName}`;
   } catch (err) {
     console.error(err);
     /*window.location.href = 'registerlogin.html';*/
