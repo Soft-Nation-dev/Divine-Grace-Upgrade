@@ -10,7 +10,7 @@ header{
     height: 80px;
     padding-bottom: 15px;
     border-bottom: 2px solid rgb(246, 246, 248);
-    z-index: 100;
+    z-index: 1000;
     min-width: 0;
     padding: 10px;
 }
