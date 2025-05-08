@@ -35,6 +35,24 @@ function $(id) {
   return el;
 }
 
+
+function setButtonLoading(buttonEl, isLoading) {
+  const text = buttonEl.querySelector('.btn-text');
+  const spinner = buttonEl.querySelector('.spinner');
+  if (isLoading) {
+    buttonEl.disabled = true;
+    text.style.display = 'none';    
+    buttonEl.classList.add('loading'); 
+    spinner.classList.remove('spinner--hidden');
+  } else {
+    buttonEl.disabled = false;
+    buttonEl.classList.remove('loading')
+    spinner.classList.add('spinner--hidden');
+    text.style.display = '';                 // restore text display
+  }
+}
+
+
 // Input fields
 const firstnameInput       = $('register-firstname');
 const nameInput            = $('register-name');
@@ -51,6 +69,7 @@ const loginPasswordInput   = $('login-password');
 
 // ---- REGISTRATION HANDLER ----
 createAccountButton.addEventListener('click', async () => {
+  setButtonLoading(createAccountButton, true);
   const FirstName       = firstnameInput.value.trim();
   const Othername            = nameInput.value.trim();
   const Username            = userNameInput.value.trim();
@@ -63,14 +82,35 @@ createAccountButton.addEventListener('click', async () => {
   const ConfirmPassword = confirmPasswordInput.value;
 
   if (![ FirstName, Othername, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword ].every(v => v)) {
-    return alert('Please fill in all fields.');
+    alert('Please fill in all fields.');
+    setButtonLoading(createAccountButton, false);
+    return;
   }
   if (Password !== ConfirmPassword) {
-    return alert('Passwords do not match.');
+    alert('Passwords do not match.');
+    setButtonLoading(createAccountButton, false);
+    return;
   }
-  if (Password.length < 8) {
-    return alert('Password must be at least 8 characters long.');
+  if (Password.length < 5) {
+    alert('Password must be at least 5 characters long.');
+    setButtonLoading(createAccountButton, false);
+    return;
   }
+  if (!/^[a-zA-Z0-9]+$/.test(Username)) {
+    alert('Username can only contain letters and numbers.');
+    setButtonLoading(createAccountButton, false);
+    return;
+  }
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(Email)) {
+    alert('Please enter a valid email address.');
+    setButtonLoading(createAccountButton, false);
+    return;
+  }
+  if (!/^\d{10}$/.test(PhoneNumber)) {
+    alert('Phone number must be exactly 10 digits long.');
+    setButtonLoading(createAccountButton, false);
+    return;
+  }  
   
   try {
     const res = await fetch(
@@ -107,18 +147,27 @@ createAccountButton.addEventListener('click', async () => {
   } catch (err) {
     console.error(err);
     alert('Registration failed—please try again.');
+  } finally {
+    setButtonLoading(createAccountButton, false);
   }
 });
 
 // ---- LOGIN HANDLER ----
 loginButton.addEventListener('click', async () => {
+  setButtonLoading(loginButton, true);
   const email    = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
 
   if (!email || !password) {
-    return alert('Please enter both email and password.');
+    alert('Please enter both email and password.');
+    setButtonLoading(loginButton, false);
+    return;
   }
-
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    alert('Please enter a valid email address.');
+    setButtonLoading(loginButton, false);
+    return;
+  }  
   try {
     const res = await fetch(
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/login',
@@ -143,5 +192,7 @@ loginButton.addEventListener('click', async () => {
   } catch (err) {
     console.error('Login error:', err);
     alert('Login failed—please try again.');
+  } finally {
+    setButtonLoading(loginButton, false);
   }
 });

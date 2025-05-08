@@ -1,6 +1,4 @@
-// -----------------------------------
-// left‐pane fullscreen toggler
-// -----------------------------------
+
 function leftBodySectionDisplay() {
   const displayProfileButton = document.querySelector('.js-display-profile-button');
   const exitButton           = document.querySelector('.js-exit-button');
