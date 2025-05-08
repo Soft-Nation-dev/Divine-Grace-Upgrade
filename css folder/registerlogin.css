@@ -138,6 +138,12 @@ input{
     background-color: #012970;
     padding: 15px 12px;
     border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em; 
+    position: relative;
+    min-width: 120px; 
 }
 
 .button-div{

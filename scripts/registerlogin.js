@@ -1,3 +1,6 @@
+import { setButtonLoading } from './utils.js';
+import { toggleVisibility } from './utils.js';
+
 function reset() {
   document.querySelectorAll('.creatacc-div input').forEach(i => i.value = '');
 }
@@ -17,10 +20,6 @@ helloDiv.classList.add('visible');
 welcomeDiv.classList.add('hidden');
 welcomeBackSection.classList.add('hidden');
 
-function toggleVisibility(hide, show) {
-  hide.forEach(div => div.classList.replace('visible','hidden'));
-  show.forEach(div => div.classList.replace('hidden','visible'));
-}
 
 signIn.addEventListener('click', () => {
   toggleVisibility([createAccountSection, helloDiv], [welcomeBackSection, welcomeDiv]);
@@ -34,24 +33,6 @@ function $(id) {
   if (!el) console.error(`❌ Missing element with id="${id}"`);
   return el;
 }
-
-
-function setButtonLoading(buttonEl, isLoading) {
-  const text = buttonEl.querySelector('.btn-text');
-  const spinner = buttonEl.querySelector('.spinner');
-  if (isLoading) {
-    buttonEl.disabled = true;
-    text.style.display = 'none';    
-    buttonEl.classList.add('loading'); 
-    spinner.classList.remove('spinner--hidden');
-  } else {
-    buttonEl.disabled = false;
-    buttonEl.classList.remove('loading')
-    spinner.classList.add('spinner--hidden');
-    text.style.display = '';                 // restore text display
-  }
-}
-
 
 // Input fields
 const firstnameInput       = $('register-firstname');
@@ -71,7 +52,7 @@ const loginPasswordInput   = $('login-password');
 createAccountButton.addEventListener('click', async () => {
   setButtonLoading(createAccountButton, true);
   const FirstName       = firstnameInput.value.trim();
-  const Othername            = nameInput.value.trim();
+  const Othernames            = nameInput.value.trim();
   const Username            = userNameInput.value.trim();
   const DepartmentInChurch     = deptChurchInput.value.trim();
   const DepartmentInSchool= deptSchoolInput.value.trim();
@@ -81,7 +62,7 @@ createAccountButton.addEventListener('click', async () => {
   const Password        = passwordInput.value;
   const ConfirmPassword = confirmPasswordInput.value;
 
-  if (![ FirstName, Othername, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword ].every(v => v)) {
+  if (![ FirstName, Othernames, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword ].every(v => v)) {
     alert('Please fill in all fields.');
     setButtonLoading(createAccountButton, false);
     return;
@@ -106,8 +87,8 @@ createAccountButton.addEventListener('click', async () => {
     setButtonLoading(createAccountButton, false);
     return;
   }
-  if (!/^\d{10}$/.test(PhoneNumber)) {
-    alert('Phone number must be exactly 10 digits long.');
+  if (!/^\d{11}$/.test(PhoneNumber)) {
+    alert('Phone number must be exactly 11 digits long.');
     setButtonLoading(createAccountButton, false);
     return;
   }  
@@ -121,7 +102,7 @@ createAccountButton.addEventListener('click', async () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           FirstName,
-          Othername,
+          Othernames,
           Username,
           DepartmentInChurch,
           DepartmentInSchool,
@@ -145,7 +126,7 @@ createAccountButton.addEventListener('click', async () => {
       alert(data.message);
     }
   } catch (err) {
-    console.error(err);
+    console.error(err);df
     alert('Registration failed—please try again.');
   } finally {
     setButtonLoading(createAccountButton, false);
@@ -184,7 +165,7 @@ loginButton.addEventListener('click', async () => {
     if (res.ok) {
       // Simplified success message—no firstname lookup here
       alert('Login successful! Redirecting you to the dashboard…');
-      window.location.href = 'homepage.html';
+      window.location.href = '/Divine-Grace-Upgrade/home';
     } else {
       // Show the server-side error message
       alert(data.message || 'Login failed');
