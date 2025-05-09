@@ -45,18 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const spinner      = overlay.querySelector('.success-spinner');
         const checkmark    = overlay.querySelector('.success-checkmark');
       
-        // 1) Show overlay and spinner
         overlay.classList.remove('hiddenn');
         spinner.classList.remove('hiddenn');
         checkmark.classList.add('hiddenn');
       
-        // 2) After 1 second, swap to checkmark
         setTimeout(() => {
           spinner.classList.add('hiddenn');
           checkmark.classList.remove('hiddenn');
         }, 1000);
       
-        // 3) After another 2 seconds, redirect back to dashboard
         setTimeout(() => {
           window.location.replace('/Divine-Grace-Upgrade/prayerequest')
         }, 3000);

@@ -59,7 +59,6 @@
     margin-right: 5px;
   }
   
-  /* fullscreen overlay */
 .success-overlay {
     position: fixed; top:0; left:0;
     top: 0;
@@ -72,18 +71,15 @@
     z-index: 5;
   }
   
-  /* hidden helper */
   .hiddenn {
     display: none !important;
   }
-  
-  /* container for animation + text */
+
   .success-message {
     text-align: center;
     color: #fff;
   }
   
-  /* spinner animation */
   .success-spinner {
     width: 3rem;
     height: 3rem;
