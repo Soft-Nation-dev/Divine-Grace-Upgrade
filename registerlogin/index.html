@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIVINE GRACE UNEC</title>
-    <link rel="stylesheet" href="css folder/divinegracemain.css">
-    <link rel="stylesheet" href="css folder/divinegraceheader.css">
-    <link rel="stylesheet" href="css folder/registerlogin.css">
-    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracemain.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegraceheader.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/registerlogin.css">
+    <link rel="icon" href="/Divine-Grace-Upgrade/images/logo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
 </head>
@@ -24,13 +24,17 @@
                
                 <div class="button-div">
                 <a href="">Forgot your password?</a>
-                <button class="signin-h js-login-button">Log In</button>
+                <button class="signin-h js-login-button">
+                    <span class="btn-text">Log In</span>
+                    <span class="spinner spinner--hidden"></span>
+                </button>
                 </div>
             </div>
             <div class="first creatacc-div">
                 <h2 class="creatacc-h">Creat Account</h2>
                 <input class="input" id="register-firstname" type="text" placeholder="First Name" required>
                 <input class="input" id="register-name" type="text" placeholder="Other names" required>
+                <input class="input" id="register-username" type="text" placeholder="User Name" required>
                 <input class="input" id="department-in-church" type="text" placeholder="Department in church" required>
                 <input class="input" id="department-in-school" type="text" placeholder="Department in school" required>
                 <input class="input" id="residential-address" type="text" placeholder="residential address" required>
@@ -40,7 +44,10 @@
                 <input class="input" id="register-confirm-password" type="password" placeholder="Confirm password" required>
             
                <div class="button-div">
-                  <button type="button" class="js-create-account-button">Creat Account</button>
+                  <button type="button" class="js-create-account-button"> 
+                    <span class="btn-text">Create Account</span>
+                    <span class="spinner spinner--hidden"></span>
+                </button>
                </div>
             </div>
         </div>
@@ -66,21 +73,21 @@
 
     <footer>
         <div class="footer-logo">
-            <img class="logo-imgg" src="images/logo.png" alt="">
+            <img class="logo-imgg" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
             <span class="digunecc">
                 DIGUNEC
             </span>
         </div>
         <div class="social-div">
-            <img src="images/facebook-logo-2428.png" alt="">
-            <img src="images/instagram-logo-8869.png" alt="">
-            <img src="images/twitter-x-blue-logo-round-20859.png" alt="">
+            <img src="/Divine-Grace-Upgrade/images/facebook-logo-2428.png" alt="">
+            <img src="/Divine-Grace-Upgrade/images/instagram-logo-8869.png" alt="">
+            <img src="/Divine-Grace-Upgrade/images/twitter-x-blue-logo-round-20859.png" alt="">
         </div>
         <div class="copyright-div">
             <p class="copyright">&copy;copyright <b>DIGUNEC</b>&#46; All right reserved</p>
             <p class="design"><i>Designed by Soft Nation</i></p>
         </div>
     </footer>
-    <script type="module" src="scripts/registerlogin.js"></script>
+    <script type="module" src="/Divine-Grace-Upgrade/scripts/registerlogin.js"></script>
 </body>
 </html>
