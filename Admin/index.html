@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN</title>
+    <link rel="icon" href="/Divine-Grace-Upgrade/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/homepageheader.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/admin.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/homepagebody.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracegeneral.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracemain.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-contents" id="header">
+      <div class="right-section">
+        <button class="hambuger-button js-hambuger-button">
+          <img class="hambuger js-hambuger" src="/Divine-Grace-Upgrade/images/hamburger-menu.svg" alt="Hamburger Menu">
+        </button>
+        <div class="logo-div">
+          <img id="logo-img" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
+          <span id="digunec-logo">Divine Grace Unec</span>
+        </div>
+        <div id="divider"></div>
+        <div id="dashboard">Admin</div>
+      </div>
+      <div class="left-section">
+        <button>
+          <img id="notification" src="/Divine-Grace-Upgrade/images/notifications.svg" alt="">
+        </button>
+        <img id="profile-image" src="/Divine-Grace-Upgrade/images/th-2238308759" alt="">
+      </div>
+    </header>
+   <div>
+    <nav class="nav-menu hidden" id="nav-menue">
+        <div class="logo-nav">
+            <div class="logo-div">
+                <img id="logo-img" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
+                <span id="digunec-logo">Divine Grace Unec</span>
+              </div>
+              <button class="exit-butt js-exit-butt">
+                <img src="/Divine-Grace-Upgrade/images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Exit">
+              </button>
+        </div>
+        <nav class="nav">
+            <li><a href="/Divine-Grace-Upgrade/home">Dashboard</a></li>
+            <li><a href="/Divine-Grace-Upgrade/prayerequest">Submit a Prayer Request</a></li>
+            <li><a href="/Divine-Grace-Upgrade/Connect with us/">Connect with Us</a></li>
+            <li><a href="/Divine-Grace-Upgrade/Messages">Messages</a></li>
+            <li class="menu-item1"><a href="/Divine-Grace-Upgrade/Admin/">Admin</a></li>
+            <li><a href="/Divine-Grace-Upgrade/lstsregistrationpage/">Register for LSTS</a><li>
+            <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+          </nav>
+      </nav>
+   </div>
+
+    <div class="main-content" id="main">
+        <main class="admin-main">
+            <h1 class="admin-title">Admin Dashboard</h1>
+            <p id="loading-text">Loading...</p>
+        
+            <section class="admin-section">
+              <h2>Prayer Requests</h2>
+              <div id="prayer-requests" class="admin-grid"></div>
+            </section>
+        
+            <section class="admin-section">
+              <h2>LSTS Registrations</h2>
+              <div id="lsts-registrations" class="admin-grid"></div>
+            </section>
+          </main>
+      
+        
+    </div>
+
+    <script type="module" src="/Divine-Grace-Upgrade/scripts/admin.js"></script>
+</body>
+</html>
+

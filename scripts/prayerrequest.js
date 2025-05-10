@@ -1,8 +1,7 @@
-import { renderHeader } from "./utils.js";
-import { wireLogout } from "./utils.js";
-
+import { renderHeader, wireLogout, PreventBackButton } from "./utils.js";
 renderHeader();
 wireLogout();
+PreventBackButton();
 
 document.addEventListener('DOMContentLoaded', () => {
   const submitButton = document.querySelector('.submit-button');

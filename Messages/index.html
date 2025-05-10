@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESSAGESe</title>
+    <link rel="icon" href="/Divine-Grace-Upgrade/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/homepageheader.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/messages.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/homepagebody.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracegeneral.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracemain.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-contents" id="header">
+      <div class="right-section">
+        <button class="hambuger-button js-hambuger-button">
+          <img class="hambuger js-hambuger" src="/Divine-Grace-Upgrade/images/hamburger-menu.svg" alt="Hamburger Menu">
+        </button>
+        <div class="logo-div">
+          <img id="logo-img" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
+          <span id="digunec-logo">Divine Grace Unec</span>
+        </div>
+        <div id="divider"></div>
+        <div id="dashboard">Messages</div>
+      </div>
+      <div class="left-section">
+        <button>
+          <img id="notification" src="/Divine-Grace-Upgrade/images/notifications.svg" alt="">
+        </button>
+        <img id="profile-image" src="/Divine-Grace-Upgrade/images/th-2238308759" alt="">
+      </div>
+    </header>
+   <div>
+    <nav class="nav-menu hidden" id="nav-menue">
+        <div class="logo-nav">
+            <div class="logo-div">
+                <img id="logo-img" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
+                <span id="digunec-logo">Divine Grace Unec</span>
+              </div>
+              <button class="exit-butt js-exit-butt">
+                <img src="/Divine-Grace-Upgrade/images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Exit">
+              </button>
+        </div>
+        <nav class="nav">
+            <li><a href="/Divine-Grace-Upgrade/home">Dashboard</a></li>
+            <li><a href="/Divine-Grace-Upgrade/prayerequest">Submit a Prayer Request</a></li>
+            <li><a href="/Divine-Grace-Upgrade/Connect with us/">Connect with Us</a></li>
+            <li class="menu-item1"><a href="/Divine-Grace-Upgrade/Messages">Messages</a></li>
+            <li><a href="/Divine-Grace-Upgrade/lstsregistrationpage/">Register for LSTS</a><li>
+              <li>
+                <button class="Admin-button" onclick="window.location.href = '/Divine-Grace-Upgrade/Verification-Page';">Admin</button>
+            </li>
+            
+
+            <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+          </nav>
+      </nav>
+   </div>
+
+    <div class="main-content" id="main">
+      <section class="messages-section"> 
+        <div class="latest-messages-container">
+          <div >
+            <h2>Latest Messages</h2>
+          </div>
+          <div class="latest-messages" id="latest-messages"></div>
+        </div>
+
+        <div class="category-buttons">
+          <button class="category-btn" data-target="sunday-messages">Sunday Service Messages</button>
+          <button class="category-btn" data-target="midweek-messages">Midweek Service Messages</button>
+          <button class="category-btn" data-target="lsts-messages">LSTS Messages</button>
+        </div>
+      
+       <div class="message-categories">
+        <div id="sunday-messages" class="message-category" style="display: none;"></div>
+        <div id="midweek-messages" class="message-category" style="display: none;"></div>
+        <div id="lsts-messages" class="message-category" style="display: none;"></div>
+       </div>
+
+      </section>
+      
+        
+    </div>
+
+    <script type="module" src="/Divine-Grace-Upgrade/scripts/messages.js"></script>
+</body>
+</html>
+
