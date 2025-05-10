@@ -14,7 +14,6 @@ const welcomeDiv           = document.querySelector('.welcomeback-div');
 const loginButton          = document.querySelector('.js-login-button');
 const createAccountButton  = document.querySelector('.js-create-account-button');
 
-// Initial visibility setup
 createAccountSection.classList.add('visible');
 helloDiv.classList.add('visible');
 welcomeDiv.classList.add('hidden');
@@ -72,8 +71,8 @@ createAccountButton.addEventListener('click', async () => {
     setButtonLoading(createAccountButton, false);
     return;
   }
-  if (Password.length < 5) {
-    alert('Password must be at least 5 characters long.');
+  if (Password.length < 6) {
+    alert('Password must be at least 6 characters long.');
     setButtonLoading(createAccountButton, false);
     return;
   }
@@ -133,7 +132,7 @@ createAccountButton.addEventListener('click', async () => {
   }
 });
 
-// ---- LOGIN HANDLER ----
+
 loginButton.addEventListener('click', async () => {
   setButtonLoading(loginButton, true);
   const email    = document.getElementById('login-email').value.trim();
@@ -163,11 +162,9 @@ loginButton.addEventListener('click', async () => {
     const data = await res.json();
 
     if (res.ok) {
-      // Simplified success message—no firstname lookup here
       alert('Login successful! Redirecting you to the dashboard…');
       window.location.href = '/Divine-Grace-Upgrade/home';
     } else {
-      // Show the server-side error message
       alert(data.message || 'Login failed');
     }
   } catch (err) {

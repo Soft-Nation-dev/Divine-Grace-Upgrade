@@ -10,7 +10,7 @@ export function setButtonLoading(buttonEl, isLoading) {
       buttonEl.disabled = false;
       buttonEl.classList.remove('loading')
       spinner.classList.add('spinner--hidden');
-      text.style.display = '';                 // restore text display
+      text.style.display = '';                 
     }
   }
   
@@ -64,4 +64,14 @@ export function toggleVisibility(hide, show) {
       }
     });
   }
+  
+
+  export function PreventBackButton() {
+window.history.pushState({}, "", location.href);
+window.onpopstate = () => {
+  window.location.href = "/Divine-Grace-Upgrade/home"; // Always go back to dashboard
+};
+
+  }
+
   

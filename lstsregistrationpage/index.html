@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSTS REGISTRATION PAGE</title>
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/lsts.css">
+    <link rel="icon" href="/Divine-Grace-Upgrade/images/logo.png" type="image/png">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/homepageheader.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/homepagebody.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracegeneral.css">
+    <link rel="stylesheet" href="/Divine-Grace-Upgrade/css folder/divinegracemain.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    
+    <header class="main-contents" id="header">
+        <div class="right-section">
+          <button class="hambuger-button js-hambuger-button">
+            <img class="hambuger js-hambuger" src="/Divine-Grace-Upgrade/images/hamburger-menu.svg" alt="Hamburger Menu">
+          </button>
+          <div class="logo-div">
+            <img id="logo-img" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
+            <span id="digunec-logo">Divine Grace Unec</span>
+          </div>
+          <div id="divider"></div>
+          <div id="dashboard">LSTS Registration</div>
+        </div>
+        <div class="left-section">
+          <button>
+            <img id="notification" src="/Divine-Grace-Upgrade/images/notifications.svg" alt="">
+          </button>
+          <img id="profile-image" src="/Divine-Grace-Upgrade/images/th-2238308759" alt="">
+        </div>
+      </header>
+     <div>
+      <nav class="nav-menu hidden">
+          <div class="logo-nav">
+              <div class="logo-div">
+                  <img id="logo-img" src="/Divine-Grace-Upgrade/images/logo.png" alt="">
+                  <span id="digunec-logo">Divine Grace Unec</span>
+                </div>
+                <button class="exit-butt js-exit-butt">
+                  <img src="/Divine-Grace-Upgrade/images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Exit">
+                </button>
+          </div>
+          <nav class="nav">
+            <li><a href="/Divine-Grace-Upgrade/home">Dashboard</a></li>
+            <li><a href="/Divine-Grace-Upgrade/prayerequest">Submit a Prayer Request</a></li>
+            <li><a href="/Divine-Grace-Upgrade/Connect with us/">Connect with Us</a></li>
+            <li><a href="/Divine-Grace-Upgrade/Messages">Messages</a></li>
+            <li><a href="/Divine-Grace-Upgrade/lstsregistrationpage">Register for LSTS</a><li>
+              <li class="menu-item1">
+                <li>
+                  <button class="Admin-button" onclick="window.location.href = '/Divine-Grace-Upgrade/Verification-Page';">Admin</button>
+              </li>
+              
+            <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+          </nav>
+        </nav>
+     </div>
+     <section class="main-content">
+    <div id="lstsh1">
+        <h1>LSTS Registration Form</h1>
+    </div>
+    <form id="membershipForm">
+      <label for="surname">Surname</label>
+      <input type="text" id="register-firstname" name="surname" required>
+    
+      <label for="otherNames">Other Names</label>
+      <input type="text" id="otherNames" name="otherNames" required>
+    
+      <label for="phoneNumber">Phone Number</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]+" title="Enter a valid phone number">
+    
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    
+      <label for="residentialAddress">Residential Address</label>
+      <textarea id="residentialAddress" name="residentialAddress" rows="3" required></textarea>
+    
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender" required>
+        <option value="" disabled selected>Select your gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+    
+      <label for="department">Department in the Church</label>
+      <select id="department" name="department" required>
+        <option value="" disabled selected>Select a department</option>
+        <option value="Technical">Technical</option>
+        <option value="Choir">Choir</option>
+        <option value="Ushering">Ushering</option>
+        <option value="Youth">Youth</option>
+        <option value="Children">Children</option>
+        <option value="Others">Others</option>
+      </select>
+    
+      <label for="position">Position in the Church</label>
+      <select id="position" name="position" required>
+        <option value="" disabled selected>Select a position</option>
+        <option value="Pastor">Pastor</option>
+        <option value="Leader">Leader</option>
+        <option value="Worker">Worker</option>
+        <option value="Member">Member</option>
+      </select>
+    
+      <label for="studentStatus">Are you a student?</label>
+      <select id="studentStatus" name="studentStatus" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    
+      <div id="schoolDetails" style="display: none;">
+        <label for="schoolDepartment">Department in School</label>
+        <input type="text" id="schoolDepartment" name="schoolDepartment">
+    
+        <label for="level">Level</label>
+        <select id="level" name="level">
+          <option value="" disabled selected>Select your level</option>
+          <option value="100">100 Level</option>
+          <option value="200">200 Level</option>
+          <option value="300">300 Level</option>
+          <option value="400">400 Level</option>
+          <option value="500">500 Level</option>
+          <option value="600">600 Level</option>
+        </select>
+      </div>
+    
+      <button class="submit-button" type="submit">Submit</button>
+    </form>
+</section>
+<script type="module" src="/Divine-Grace-Upgrade/scripts/lsts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
