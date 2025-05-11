@@ -26,7 +26,6 @@ async function isAdmin() {
 document.addEventListener("DOMContentLoaded", async () => {
   const show = await isAdmin();
   const messageContainer = document.getElementById("message-container");
-  const laod = document.querySelector("load");
   if (show) {
     messageContainer.textContent = "Welcome, Admin! You are being redirected to the Admin Dashboard...";
     messageContainer.style.backgroundColor = "green";
@@ -39,7 +38,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   } else {
   
   messageContainer.textContent = "You are not an admin. Redirecting you to the Dashboard...";
-  laod.textContent = "You are not an admin. Redirecting you to the Dashboard...";
   messageContainer.style.backgroundColor = "red"; 
   messageContainer.classList.remove("hiddens"); 
 
