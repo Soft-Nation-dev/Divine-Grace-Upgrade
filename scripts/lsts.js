@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function generateReceipt(data) {
     const receiptElement = document.getElementById("receipt");
   
-    // Fill the receipt fields
+    // Fill in receipt fields
     document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
     document.getElementById("r-phone").textContent = data.PhoneNumber;
     document.getElementById("r-email").textContent = data.Email;
@@ -115,25 +115,64 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("student-info").style.display = "none";
     }
   
-    // Temporarily show it for rendering
+    // Show the receipt temporarily for rendering
     receiptElement.style.display = "block";
   
-    html2pdf()
-  .from(receiptElement)
-  .set({
-    margin: [10, 10, 10, 10],
-    filename: "LSTS_Receipt.pdf",
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] } // Add this line
-  })
-  .save()
-  .then(() => {
-    receiptElement.style.display = "none";
-  });
+    const downloadMessage = document.createElement("div");
+    downloadMessage.textContent = "Your receipt is being downloaded...";
+    downloadMessage.style.cssText = `
+      position: fixed;
+      bottom: 170px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      z-index: 9999;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    `;
+    document.body.appendChild(downloadMessage);
+  
+    // Remove message after 4 seconds
+    setTimeout(() => {
+      downloadMessage.remove();
+    }, 4000);
+  
 
+    // Define PDF options
+    const pdfOptions = {
+      margin: [10, 10, 10, 10], // top, left, bottom, right in mm
+      filename: "LSTS_Receipt.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        scrollY: 0
+      },
+      jsPDF: {
+        unit: "mm",
+        format: [140, 216], // Custom format close to half-letter size (better for short receipts)
+        orientation: "portrait"
+      },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+  
+    html2pdf()
+      .from(receiptElement)
+      .set(pdfOptions)
+      .save()
+      .then(() => {
+        // Hide again after generation
+        receiptElement.style.display = "none";
+      })
+      .catch((err) => {
+        console.error("PDF generation failed:", err);
+        receiptElement.style.display = "none";
+      });
   }
+  
   
   
 });
