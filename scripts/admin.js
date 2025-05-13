@@ -1,70 +1,163 @@
 import { renderHeader, wireLogout, PreventBackButton } from "./utils.js";
 
 renderHeader();
-wireLogout();   
+wireLogout();
 PreventBackButton();
 
+function showLoader(message) {
+  const loader = document.getElementById("admin-loader");
+  const statusText = document.getElementById("loader-text");
+  const icon = document.getElementById("loader-icon");
 
-const prayerContainer = document.getElementById("prayer-requests");
-const lstsContainer = document.getElementById("lsts-registrations");
-const loadingText = document.getElementById("loading-text");
-
-const prayerEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers";
-const lstsEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM";
-
-async function fetchAndDisplayPrayers() {
-  try {
-    const res = await fetch(prayerEndpoint, { credentials: "include" });
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error("Unexpected response");
-
-    data.forEach(req => {
-      const card = document.createElement("div");
-      card.className = "admin-card";
-      card.innerHTML = `
-        <p><strong>Message:</strong> ${req.prayerRequest || ""}</p>
-        <p><strong>Submitted At:</strong> ${new Date(req.submittedAt).toLocaleString()}</p>
-      `;
-      prayerContainer.appendChild(card);
-    });
-  } catch (err) {
-    console.error("Failed to fetch prayer requests:", err);
-    prayerContainer.innerHTML = "<p class='error'>Could not load prayer requests.</p>";
-  }
+  statusText.textContent = message;
+  icon.innerHTML = "";
+  loader.style.display = "flex";
 }
 
-async function fetchAndDisplayLSTS() {
-  try {
-    const res = await fetch(lstsEndpoint, { credentials: "include" });
-    const data = await res.json();
-    if (!Array.isArray(data)) throw new Error("Unexpected response");
+function updateLoader(status, success) {
+  const icon = document.getElementById("loader-icon");
+  icon.innerHTML = success
+    ? '<div class="loader-check">✔</div>'
+    : '<div class="loader-error">✖</div>';
+  document.getElementById("loader-text").textContent = status;
+}
 
-    data.forEach(person => {
-      const card = document.createElement("div");
-      card.className = "admin-card";
-      card.innerHTML = `
-        <p><strong>Surname:</strong> ${person.surname}</p>
-        <p><strong>Other Names:</strong> ${person.otherNames}</p>
-        <p><strong>Phone:</strong> ${person.phoneNumber}</p>
-        <p><strong>Email:</strong> ${person.email}</p>
-        <p><strong>Residential Address:</strong> ${person.residentialAddress}</p>
-        <p><strong>Department in Church:</strong> ${person.departmentInChurch}</p>
-        <p><strong>Position:</strong> ${person.positionInChurch}</p>
-        <p><strong>Gender:</strong> ${person.gender}</p>
-        <p><strong>Is Student:</strong> ${person.isStudent}</p>
-        ${person.isStudent === "Yes" ? `<p><strong>Dept. in School:</strong> ${person.departmentInSchool}</p><p><strong>Level:</strong> ${person.level}</p>` : ""}
-        <p><strong>Submitted At:</strong> ${new Date(person.submittedAt).toLocaleString()}</p>
-      `;
-      lstsContainer.appendChild(card);
-    });
-  } catch (err) {
-    console.error("Failed to fetch LSTS registrations:", err);
-    lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
+function hideLoader() {
+  document.getElementById("admin-loader").style.display = "none";
+}
+
+async function isAdmin() {
+  const res = await fetch(
+    "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/isAadmin",
+    {
+      method: "GET",
+      credentials: "include",
+    }
+  );
+
+  if (!res.ok) {
+    console.error("Admin check failed:", res.status);
+    return false;
   }
+
+  return await res.json();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  loadingText.textContent = "Loading prayer requests and LSTS registrations...";
-  await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
-  loadingText.style.display = "none";
+  const messageContainer = document.getElementById("message-container");
+  const mainContent = document.getElementById("main");
+
+  showLoader("Checking admin access...");
+
+  const isAdminUser = await isAdmin();
+
+  setTimeout(async () => {
+    if (!isAdminUser) {
+      updateLoader("You are not an admin", false);
+      setTimeout(() => {
+        window.location.href = "/Divine-Grace-Upgrade/home";
+      }, 2000);
+      return;
+    }
+
+    updateLoader("Access granted", true);
+
+    setTimeout(() => {
+      hideLoader();
+      mainContent.style.display = "block";
+    }, 1500);
+
+    const prayerContainer = document.getElementById("prayer-requests");
+    const lstsContainer = document.getElementById("lsts-registrations");
+    const loadingText = document.getElementById("loading-text");
+
+    const prayerEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers";
+    const lstsEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM";
+
+    async function fetchAndDisplayPrayers() {
+      try {
+        const res = await fetch(prayerEndpoint, { credentials: "include" });
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error("Unexpected response");
+
+        data.forEach(req => {
+          const card = document.createElement("div");
+          card.className = "admin-card";
+          card.innerHTML = `
+            <p><strong>Message:</strong> ${req.prayerRequest || ""}</p>
+            <p><strong>Submitted At:</strong> ${new Date(req.submittedAt).toLocaleString()}</p>
+          `;
+          prayerContainer.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Failed to fetch prayer requests:", err);
+        prayerContainer.innerHTML = "<p class='error'>Could not load prayer requests.</p>";
+      }
+    }
+
+    async function fetchAndDisplayLSTS() {
+      try {
+        const res = await fetch(lstsEndpoint, { credentials: "include" });
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error("Unexpected response");
+    
+        data.forEach(person => {
+          const {
+            surname = "",
+            otherNames = "",
+            phoneNumber = "",
+            email = "",
+            residentialAddress = "",
+            departmentInChurch = "",
+            positionInChurch = "",
+            gender = "",
+            student = "",
+            departmentInSchool = "",
+            level = "",
+            submittedAt = ""
+          } = person;
+    
+          // Format the submitted date
+          let submittedAtFormatted = "N/A";
+          const parsedDate = new Date(submittedAt);
+          if (!isNaN(parsedDate)) {
+            submittedAtFormatted = parsedDate.toLocaleString();
+          }
+    
+          const card = document.createElement("div");
+          card.className = "admin-card";
+          card.innerHTML = `
+            <p><strong>Surname:</strong> ${surname}</p>
+            <p><strong>Other Names:</strong> ${otherNames}</p>
+            <p><strong>Phone:</strong> ${phoneNumber}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Residential Address:</strong> ${residentialAddress}</p>
+            <p><strong>Department in Church:</strong> ${departmentInChurch}</p>
+            <p><strong>Position:</strong> ${positionInChurch}</p>
+            <p><strong>Gender:</strong> ${gender}</p>
+            <p><strong>Is Student:</strong> ${student}</p>
+            ${
+              student.toLowerCase() === "yes"
+                ? `<p><strong>Dept. in School:</strong> ${departmentInSchool}</p>
+                   <p><strong>Level:</strong> ${level}</p>`
+                : ""
+            }
+            
+            <p><strong>Submitted At:</strong> ${submittedAtFormatted}</p>
+          `;
+          lstsContainer.appendChild(card);
+    
+          console.log("Rendering LSTS Registration:", person);
+        });
+      } catch (err) {
+        console.error("Failed to fetch LSTS registrations:", err);
+        lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
+      }
+    }
+    
+
+    loadingText.textContent = "Loading prayer requests and LSTS registrations...";
+    await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
+    loadingText.style.display = "none";
+  }, 3000);
 });

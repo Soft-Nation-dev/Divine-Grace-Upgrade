@@ -51,21 +51,25 @@
             <li><a href="/Divine-Grace-Upgrade/prayerequest">Submit a Prayer Request</a></li>
             <li><a href="/Divine-Grace-Upgrade/Connect with us">Connect with Us</a></li>
             <li><a href="/Divine-Grace-Upgrade/Messages">Messages</a></li>
+            <li><a href="/Divine-Grace-Upgrade/lstsregistrationpage/">Register for LSTS</a><li>
             <li class="menu-item1">
               <button class="Admin-button" onclick="window.location.href = '/Divine-Grace-Upgrade/Verification-Page';">Admin</button>
-          </li>
-          
-            <li><a href="/Divine-Grace-Upgrade/lstsregistrationpage/">Register for LSTS</a><li>
+            </li>
             <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
           </nav>
       </nav>
    </div>
-
+   <div id="admin-loader" style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+    <div class="circle-loader"></div>
+    <div id="loader-icon" style="font-size: 32px; margin-top: 10px;"></div>
+    <p id="loader-text" style="margin-top: 10px; font-size: 16px;">Checking admin access...</p>
+  </div>
+  
     <div class="main-content" id="main">
         <main class="admin-main">
-
-
-            <h1 class="admin-title">Admin Dashboard</h1>
+          <div id="message-container" class="hidden" style="padding: 10px; color: white; text-align: center;">
+            <h1 class="admin-title">Welcome to admin dashboard</h1>
+          </div>
             <p id="loading-text">Loading...</p>
         
             <section class="admin-section">
