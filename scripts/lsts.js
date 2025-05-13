@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("r-pos").textContent = data.PositionInChurch;
     document.getElementById("r-date").textContent = data.SubmittedAt;
   
-    if (data.IsStudent === "Yes") {
+    if (data.Student === "Yes") {
       document.getElementById("student-info").style.display = "block";
       document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
       document.getElementById("r-level").textContent = data.Level;
