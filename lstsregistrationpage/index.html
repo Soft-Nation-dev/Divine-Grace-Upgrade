@@ -52,12 +52,8 @@
             <li><a href="/Divine-Grace-Upgrade/prayerequest">Submit a Prayer Request</a></li>
             <li><a href="/Divine-Grace-Upgrade/Connect with us/">Connect with Us</a></li>
             <li><a href="/Divine-Grace-Upgrade/Messages">Messages</a></li>
-            <li><a href="/Divine-Grace-Upgrade/lstsregistrationpage">Register for LSTS</a><li>
-              <li class="menu-item1">
-                <li>
-                  <button class="Admin-button" onclick="window.location.href = '/Divine-Grace-Upgrade/Verification-Page';">Admin</button>
-              </li>
-              
+            <li class="menu-item2"><a href="/Divine-Grace-Upgrade/lstsregistrationpage">Register for LSTS</a><li>
+            <li><a href="/Divine-Grace-Upgrade/Administrator">Admin</a></li>
             <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
           </nav>
         </nav>
@@ -136,6 +132,47 @@
       <button class="submit-button" type="submit">Submit</button>
     </form>
 </section>
+<div id="animation-container" style="display:none;"></div>
+
+<!-- LSTS Receipt Template -->
+<div id="receipt" class="receipt-container" style="display:none;">
+  <div class="receipt-header">
+    <img src="/Divine-Grace-Upgrade/images/logo.png" alt="Logo" class="receipt-logo img" />
+    <h2 class="church-name">Divine Grace UNEC</h2>
+  </div>
+
+  <hr class="receipt-divider" />
+  <div class="ticket-title">
+    <h3 class="receipt-title">LSTS Registration Ticket</h3>
+  </div>
+
+  <div class="align">
+    <div class="receipt-body">
+      <p><span class="label">Name:</span> <span class="value" id="r-name"></span></p>
+      <p><span class="label">Phone:</span> <span class="value" id="r-phone"></span></p>
+      <p><span class="label">Email:</span> <span class="value" id="r-email"></span></p>
+      <p><span class="label">Address:</span> <span class="value" id="r-address"></span></p>
+      <p><span class="label">Gender:</span> <span class="value" id="r-gender"></span></p>
+      <p><span class="label">Department:</span> <span class="value" id="r-dept"></span></p>
+      <p><span class="label">Position:</span> <span class="value" id="r-pos"></span></p>
+      
+      <div id="student-info" class="student-section">
+        <p><span class="label">School Dept:</span> <span class="value" id="r-school-dept"></span></p>
+        <p><span class="label">Level:</span> <span class="value" id="r-level"></span></p>
+      </div>
+  
+      <p><span class="label">Submitted:</span> <span class="value" id="r-date"></span></p>
+    </div>
+  </div>
+  <hr class="receipt-divider" />
+
+  <div class="ticket-title">
+    <h2 class="receipt-tit">ADMITS ONE ONLY</h2>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script type="module" src="/Divine-Grace-Upgrade/scripts/lsts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>

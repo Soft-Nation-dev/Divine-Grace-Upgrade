@@ -10,6 +10,7 @@ body {
     font-family: "Agu Display", serif;
     
 }
+
 form {
     background-color: #fff;
     font-family: Arial, sans-serif;
@@ -51,5 +52,184 @@ input, textarea, select {
     padding: 10px;
     border-radius: 5px;
     margin-right: 5px;
+  }
+  
+  #statusMessage {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, top 0.5s ease;
+  }
+  
+  #statusMessage.show {
+    opacity: 1;
+    pointer-events: auto;
+    top: 50px;
+  }
+  
+  .status-icon {
+    font-size: 28px;
+  }
+  
+  #statusMessage.success .status-icon {
+    color: green;
+  }
+  
+  #statusMessage.error .status-icon {
+    color: red;
+  }
+  
+  #animation-container {
+    position: fixed;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.97);
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #animation-container .overlay {
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .status-icon {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+  
+  #animation-container button {
+    margin-top: 20px;
+    padding: 10px 18px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+
+  .receipt-container {
+    width: 98%;
+    /* text-align: center; */
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for content */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensures background stays behind content */
+  }
+  
+  /* Background overlay using a pseudo-element */
+  .receipt-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/Divine-Grace-Upgrade/images/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1; /* Transparency level */
+    z-index: 0;
+  }
+  
+  /* Ensure content is above the overlay */
+  .receipt-container * {
+    position: relative;
+    z-index: 1;
+  }
+.ticket-title{
+    text-align: center;
+}
+
+.align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .receipt-header {
+    text-align: center;
+    display: flex;
+    padding: 20px;
+    border-bottom: 2px solid rgb(246, 246, 248);
+    justify-content: center;
+    background-color: #c0cdf8;
+  }
+  
+  .receipt-logo {
+    height: auto;
+    margin-bottom: 10px;
+    height: 30px;
+    position: relative;
+    top: -4px;
+    margin-right: 6px;
+  }
+  
+  .church-name {
+    margin: 0;
+    font-size: 20px;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+  }
+  
+  .receipt-title {
+    margin: 0;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .receipt-divider {
+    border: 0;
+    border-top: 1px dashed #999;
+  }
+  
+  .receipt-body {
+    font-size: 15px;
+    padding: 20px;
+  }
+  
+  .label {
+    font-weight: bold;
+    display: inline-block;
+    width: 140px;
+  }
+  
+  .value {
+    font-style: normal;
+  }
+  
+  .student-section {
+    margin-top: 10px;
   }
   

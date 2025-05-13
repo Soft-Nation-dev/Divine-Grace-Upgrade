@@ -55,16 +55,25 @@ footer{
   .three-d-text {
     animation: bounce3d 2s infinite ease-in-out;
   }
+
+  .connect-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 100px;
+  }
   
-  @media (max-width:800px){
-    .connect-a, .connect-b{
-        flex-direction: column;
-        align-items: center;
-    }
-    .connect-section{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+  .connect-wrapper > div {
+    flex: 0 0 calc(50% - 100px); 
+    display: flex;
+    justify-content: center;
+  }
+ 
+  @media (max-width: 800px) {
+    .connect-wrapper > div {
+      flex: 0 0 100%;
     }
   }
+  
+  

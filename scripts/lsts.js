@@ -1,43 +1,24 @@
-// /scripts/lsts.js
 import { renderHeader, wireLogout, PreventBackButton } from "./utils.js";
-
 renderHeader();
 wireLogout();
 PreventBackButton();
 
-const studentStatus = document.getElementById("studentStatus");
-const schoolDetails = document.getElementById("schoolDetails");
-
-studentStatus.addEventListener("change", () => {
-  if (studentStatus.value === "Yes") {
-    schoolDetails.style.display = "block";
-    document.getElementById("schoolDepartment").required = true;
-    document.getElementById("level").required = true;
-  } else {
-    schoolDetails.style.display = "none";
-    document.getElementById("schoolDepartment").required = false;
-    document.getElementById("level").required = false;
-  }
-});
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("membershipForm");
   const submitBtn = form.querySelector(".submit-button");
-
   const studentStatusField = form.querySelector("#studentStatus");
   const schoolFieldsWrapper = document.querySelector("#schoolDetails");
+  const animationContainer = document.getElementById("animation-container");
 
-  // Toggle school fields visibility
   studentStatusField.addEventListener("change", () => {
-    if (studentStatusField.value === "Yes") {
-      schoolFieldsWrapper.style.display = "block";
-    } else {
-      schoolFieldsWrapper.style.display = "none";
-    }
+    schoolFieldsWrapper.style.display = studentStatusField.value === "Yes" ? "block" : "none";
   });
+
+
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
+  
     const payload = {
       Surname: form.querySelector("#register-firstname").value.trim(),
       OtherNames: form.querySelector("#otherNames").value.trim(),
@@ -47,23 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
       DepartmentInChurch: form.querySelector("#department").value,
       PositionInChurch: form.querySelector("#position").value,
       Gender: form.querySelector("#gender").value,
-      IsStudent: studentStatusField.value,
-      DepartmentInSchool: studentStatusField.value === "Yes"
-        ? form.querySelector("#schoolDepartment").value.trim()
-        : null,
-      Level: studentStatusField.value === "Yes"
-        ? form.querySelector("#level").value
-        : null,
-      SubmittedAt: new Date().toISOString()
-    };
+      Student: studentStatusField.value || "",
 
-    if (Object.values(payload).some(v => v === "" || v === null)) {
-      return alert("Please fill out every required field.");
-    }
+      ...(studentStatusField.value === "Yes" && {
+        DepartmentInSchool: form.querySelector("#schoolDepartment").value.trim(),
+        Level: form.querySelector("#level").value
+      }),
+//       
+      SubmittedAt: new Date().toISOString().split(".")[0]
+    };
+    
+    console.log("Submitting payload:", payload);
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting…";
-
+  
     try {
       const res = await fetch(
         "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/LSTSFORM",
@@ -71,26 +50,90 @@ document.addEventListener("DOMContentLoaded", () => {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload)  // wrap in `dto`
         }
       );
-
+  
       const data = await res.json().catch(() => ({}));
-
+      console.log("API response:", data);
       if (res.ok) {
-        alert(data.message || "Form submitted successfully.");
+        showAnimation("success", data.message || "Form submitted successfully.", payload);
         form.reset();
-        schoolFieldsWrapper.style.display = "none"; // hide conditional fields after reset
+        schoolFieldsWrapper.style.display = "none";
       } else {
-        alert(data.message || "Submission failed.");
+        console.error("API response:", data);
+        showAnimation("error", data.message || "Submission failed.");
       }
-
+  
     } catch (err) {
       console.error("LSTS form error:", err);
-      alert("Network error—please try again.");
+      showAnimation("Network error—please try again.");
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Submit";
     }
   });
+
+  function showAnimation(status, message, formData = null) {
+    animationContainer.innerHTML = `
+      <div class="overlay">
+        <img src="/Divine-Grace-Upgrade/images/${status === "success" ? "checkmark" : "error-mark"}.png" class="status-icon" />
+        <h2>${message}</h2>
+        ${status === "success" ? `<button id="download-btn">Download Receipt</button>` : ""}
+        <button id="close-btn">Close</button>
+      </div>
+    `;
+    animationContainer.style.display = "flex";
+
+    document.getElementById("close-btn").onclick = () => {
+      animationContainer.style.display = "none";
+    };
+
+    if (status === "success" && formData) {
+      document.getElementById("download-btn").onclick = () => generateReceipt(formData);
+    }
+  }
+
+  function generateReceipt(data) {
+    const receiptElement = document.getElementById("receipt");
+  
+    // Fill the receipt fields
+    document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
+    document.getElementById("r-phone").textContent = data.PhoneNumber;
+    document.getElementById("r-email").textContent = data.Email;
+    document.getElementById("r-address").textContent = data.ResidentialAddress;
+    document.getElementById("r-gender").textContent = data.Gender;
+    document.getElementById("r-dept").textContent = data.DepartmentInChurch;
+    document.getElementById("r-pos").textContent = data.PositionInChurch;
+    document.getElementById("r-date").textContent = data.SubmittedAt;
+  
+    if (data.Student === "Yes") {
+      document.getElementById("student-info").style.display = "block";
+      document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
+      document.getElementById("r-level").textContent = data.Level;
+    } else {
+      document.getElementById("student-info").style.display = "none";
+    }
+  
+    // Temporarily show it for rendering
+    receiptElement.style.display = "block";
+  
+    html2pdf()
+  .from(receiptElement)
+  .set({
+    margin: [10, 10, 10, 10],
+    filename: "LSTS_Receipt.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] } // Add this line
+  })
+  .save()
+  .then(() => {
+    receiptElement.style.display = "none";
+  });
+
+  }
+  
+  
 });
