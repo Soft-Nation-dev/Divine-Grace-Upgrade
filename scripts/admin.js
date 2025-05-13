@@ -46,6 +46,7 @@ async function isAdmin() {
 function setupTabSwitching() {
   const prayerSection = document.getElementById("prayer-section");
   const lstsSection = document.getElementById("lsts-section");
+  const messageSection = document.getElementById("message-section");
 
   const showPrayersBtn = document.getElementById("show-prayers-btn");
   const showLstsBtn = document.getElementById("show-lsts-btn");
@@ -54,6 +55,7 @@ function setupTabSwitching() {
   // Hide all sections initially
   prayerSection.style.display = "none";
   lstsSection.style.display = "none";
+  messageSection.style.display = "none";
 
   showPrayersBtn.addEventListener("click", () => {
     prayerSection.style.display = "block";
@@ -65,9 +67,13 @@ function setupTabSwitching() {
     lstsSection.style.display = "block";
   });
 
-  showMessagesBtn.addEventListener("click", () => {
-    window.location.href = "/Divine-Grace-Upgrade/Messages";
-  });
+
+showMessagesBtn.addEventListener("click", () => {
+  prayerSection.style.display = "none";
+  lstsSection.style.display = "none";
+  messageSection.style.display = "block";
+});
+
 }
 
 
@@ -182,4 +188,75 @@ document.addEventListener("DOMContentLoaded", async () => {
     await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
     setupTabSwitching();
   }, 3000);
+
+
+  document.getElementById("upload-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById("title").value.trim();
+  const category = document.getElementById("category").value;
+  const date = document.getElementById("date").value;
+  const fileInput = document.getElementById("file");
+  const file = fileInput.files[0];
+  const submitBtn = document.getElementById("submit-btn");
+  const statusDiv = document.getElementById("upload-status");
+
+  if (!title || !category || !date || !file) {
+    alert("Please fill all fields and select a file.");
+    return;
+  }
+
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = `<span class="loader-circle"></span> Submitting...`;
+  statusDiv.textContent = "";
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("category", category);
+  formData.append("date", date);
+  formData.append("file", file);
+
+  try {
+    const res = await fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage", {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+    });
+
+    if (!res.ok) throw new Error("Upload failed");
+
+    const result = await res.json();
+    console.log("Success:", result);
+    statusDiv.textContent = "✅ Upload successful!";
+    statusDiv.className = "status-success";
+
+    // Clear form
+    document.getElementById("upload-form").reset();
+  } catch (err) {
+    console.error("Error:", err);
+    statusDiv.textContent = "❌ Upload failed!";
+    statusDiv.className = "status-error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Upload Message";
+  }
+});
+
+const statusDiv = document.getElementById("upload-status");
+const inputs = document.querySelectorAll("#upload-form input, #upload-form select");
+
+inputs.forEach(input => {
+  input.addEventListener("input", () => {
+    statusDiv.textContent = "";
+    statusDiv.className = "status-text";
+  });
+
+  input.addEventListener("change", () => {
+    statusDiv.textContent = "";
+    statusDiv.className = "status-text";
+  });
+});
+
+  
 });

@@ -118,3 +118,100 @@
 .admin-tab-btn:hover {
   background-color: #153e78;
 }
+
+#message-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#message-section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+#upload-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #444;
+}
+
+#upload-form input[type="text"],
+#upload-form input[type="date"],
+#upload-form select,
+#upload-form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+
+#upload-form input[type="file"] {
+  padding: 6px;
+  background-color: #fff;
+}
+
+#upload-form button[type="submit"] {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#upload-form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#upload-status {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+}
+
+/* Loader animation inside button */
+.loader-circle {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Status messages */
+.status-text {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.status-success {
+  color: green;
+}
+
+.status-error {
+  color: red;
+}

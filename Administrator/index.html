@@ -88,11 +88,35 @@
               <div id="lsts-registrations" class="admin-grid"></div>
             </section>
             
-            <section id="messages-section" class="admin-section" style="display: none;">
-              <h2>Uploaded Messages</h2>
-              <div id="uploaded-messages" class="admin-grid">
-                <p>Coming soon...</p> <!-- Replace with real content when ready -->
+            <section id="messages-section" class="admin-section hidden">
+              <div id="message-section" class="hidden">
+                <h2>Upload Message</h2>
+                <!-- HTML -->
+<form id="upload-form" enctype="multipart/form-data">
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" required>
+
+  <label for="category">Category:</label>
+  <select id="category" name="category" required>
+    <option value="Sunday">Sunday</option>
+    <option value="Midweek">Midweek</option>
+    <option value="Friday">Friday</option>
+  </select>
+
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required>
+
+  <label for="file">Audio File:</label>
+  <input type="file" id="file" name="audioFile" accept="audio/*" required>
+
+  <button type="submit" id="submit-btn">Upload Message</button>
+  <div id="upload-status" class="status-text"></div>
+  
+</form>
+
+                <div id="upload-status"></div>
               </div>
+              
             </section>
             
           </main>
