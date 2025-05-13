@@ -43,6 +43,34 @@ async function isAdmin() {
   return await res.json();
 }
 
+function setupTabSwitching() {
+  const prayerSection = document.getElementById("prayer-section");
+  const lstsSection = document.getElementById("lsts-section");
+
+  const showPrayersBtn = document.getElementById("show-prayers-btn");
+  const showLstsBtn = document.getElementById("show-lsts-btn");
+  const showMessagesBtn = document.getElementById("show-messages-btn");
+
+  // Hide all sections initially
+  prayerSection.style.display = "none";
+  lstsSection.style.display = "none";
+
+  showPrayersBtn.addEventListener("click", () => {
+    prayerSection.style.display = "block";
+    lstsSection.style.display = "none";
+  });
+
+  showLstsBtn.addEventListener("click", () => {
+    prayerSection.style.display = "none";
+    lstsSection.style.display = "block";
+  });
+
+  showMessagesBtn.addEventListener("click", () => {
+    window.location.href = "/Divine-Grace-Upgrade/Messages";
+  });
+}
+
+
 document.addEventListener("DOMContentLoaded", async () => {
   const messageContainer = document.getElementById("message-container");
   const mainContent = document.getElementById("main");
@@ -65,11 +93,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => {
       hideLoader();
       mainContent.style.display = "block";
+      messageContainer.classList.remove("hidden");
     }, 1500);
 
     const prayerContainer = document.getElementById("prayer-requests");
     const lstsContainer = document.getElementById("lsts-registrations");
-    const loadingText = document.getElementById("loading-text");
 
     const prayerEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers";
     const lstsEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM";
@@ -100,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const res = await fetch(lstsEndpoint, { credentials: "include" });
         const data = await res.json();
         if (!Array.isArray(data)) throw new Error("Unexpected response");
-    
+
         data.forEach(person => {
           const {
             surname = "",
@@ -116,14 +144,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             level = "",
             submittedAt = ""
           } = person;
-    
-          // Format the submitted date
+
           let submittedAtFormatted = "N/A";
           const parsedDate = new Date(submittedAt);
           if (!isNaN(parsedDate)) {
             submittedAtFormatted = parsedDate.toLocaleString();
           }
-    
+
           const card = document.createElement("div");
           card.className = "admin-card";
           card.innerHTML = `
@@ -142,22 +169,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                    <p><strong>Level:</strong> ${level}</p>`
                 : ""
             }
-            
             <p><strong>Submitted At:</strong> ${submittedAtFormatted}</p>
           `;
           lstsContainer.appendChild(card);
-    
-          console.log("Rendering LSTS Registration:", person);
         });
       } catch (err) {
         console.error("Failed to fetch LSTS registrations:", err);
         lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
       }
     }
-    
 
-    loadingText.textContent = "Loading prayer requests and LSTS registrations...";
     await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
-    loadingText.style.display = "none";
+    setupTabSwitching();
   }, 3000);
 });

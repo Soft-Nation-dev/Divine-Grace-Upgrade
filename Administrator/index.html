@@ -66,21 +66,35 @@
   </div>
   
     <div class="main-content" id="main">
+      
+
+
         <main class="admin-main">
           <div id="message-container" class="hidden" style="padding: 10px; color: white; text-align: center;">
             <h1 class="admin-title">Welcome to admin dashboard</h1>
           </div>
-            <p id="loading-text">Loading...</p>
-        
-            <section class="admin-section">
+          <div class="admin-button-group">
+            <button class="admin-tab-btn" id="show-prayers-btn">Prayer Requests</button>
+            <button class="admin-tab-btn" id="show-lsts-btn">LSTS Registrations</button>
+            <button class="admin-tab-btn" id="show-messages-btn">Upload Messages</button>
+          </div>
+            <section id="prayer-section" class="admin-section">
               <h2>Prayer Requests</h2>
               <div id="prayer-requests" class="admin-grid"></div>
             </section>
-        
-            <section class="admin-section">
+            
+            <section id="lsts-section" class="admin-section" style="display: none;">
               <h2>LSTS Registrations</h2>
               <div id="lsts-registrations" class="admin-grid"></div>
             </section>
+            
+            <section id="messages-section" class="admin-section" style="display: none;">
+              <h2>Uploaded Messages</h2>
+              <div id="uploaded-messages" class="admin-grid">
+                <p>Coming soon...</p> <!-- Replace with real content when ready -->
+              </div>
+            </section>
+            
           </main>
       
         
