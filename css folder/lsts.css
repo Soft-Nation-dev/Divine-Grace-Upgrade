@@ -128,7 +128,16 @@ input, textarea, select {
     to { opacity: 1; transform: scale(1); }
   }
   
-
+  #receipt {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+    text-wrap: nowrap;
+  }
+  
   .receipt-container {
     width: 98%;
     height: 100%;
