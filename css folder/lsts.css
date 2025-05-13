@@ -131,6 +131,7 @@ input, textarea, select {
 
   .receipt-container {
     width: 98%;
+    height: 100%;
     /* text-align: center; */
     position: relative;
     background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for content */
@@ -171,6 +172,7 @@ input, textarea, select {
 .align{
     display: flex;
     justify-content: center;
+    height: 100%;
     align-items: center;
     flex-direction: column;
   }
@@ -216,6 +218,7 @@ input, textarea, select {
   
   .receipt-body {
     font-size: 15px;
+    height: 100%;
     padding: 20px;
   }
   
