@@ -1,4 +1,4 @@
-import { renderHeader, wireLogout, PreventBackButton } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, makeAdmin } from "./utils.js";
 
 renderHeader();
 wireLogout();
@@ -78,6 +78,8 @@ showMessagesBtn.addEventListener("click", () => {
 
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+
   const messageContainer = document.getElementById("message-container");
   const mainContent = document.getElementById("main");
 
@@ -257,6 +259,6 @@ inputs.forEach(input => {
     statusDiv.className = "status-text";
   });
 });
-
+makeAdmin();
   
 });

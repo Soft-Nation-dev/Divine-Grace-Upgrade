@@ -74,4 +74,40 @@ window.onpopstate = () => {
 
   }
 
+  export function makeAdmin() {
+    document.getElementById("assign-admin-btn").addEventListener("click", () => {
+      const email = prompt("Enter email to assign admin rights:");
+      if (!email) return;
   
+      fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/assign-admin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include", // Include cookies for auth
+        body: JSON.stringify({ email })
+      })
+        .then(response => {
+          if (response.status === 401 || response.redirected) {
+            alert("You are not authorized. Please log in first.");
+            window.location.href = "/login.html"; // Replace with your actual login page path
+            return;
+          }
+  
+          if (response.ok) {
+            alert("Admin privileges granted successfully.");
+          } else {
+            response.text().then(text => {
+              alert("Failed to assign admin: " + text);
+            });
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("An error occurred while assigning admin.");
+        });
+    });
+  }
+  
+  
+ 
