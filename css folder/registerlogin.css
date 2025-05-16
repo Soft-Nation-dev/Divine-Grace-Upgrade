@@ -245,3 +245,12 @@ input{
         transform: translateY(-20px);
     }
 }
+
+#register-message,
+#login-message {
+  color: #d93025;         /* Bright red color */
+  font-size: 14px;      /* Slightly larger font size */
+  font-weight: 600;       /* Semi-bold */
+  margin-top: 8px;        /* Some spacing above */
+  line-height: 1.4;       /* Better readability */
+}

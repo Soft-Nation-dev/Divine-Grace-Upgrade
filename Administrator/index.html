@@ -105,13 +105,13 @@
 
   <label for="date">Date:</label>
   <input type="date" id="date" name="date" required>
+  <!-- Add this to your HTML -->
+<input type="file" id="audioFileInput" accept="audio/*" />
+<audio id="audioPreview" controls style="display: none;"></audio>
+<progress id="uploadProgress" value="0" max="100" style="width: 100%; display: none;"></progress>
+<div id="statusDiv"></div>
+<button id="submitBtn">Upload</button>
 
-  <label for="file">Audio File:</label>
-  <input type="file" id="file" name="audioFile" accept="audio/*" required>
-
-  <button type="submit" id="submit-btn">Upload Message</button>
-  <div id="upload-status" class="status-text"></div>
-  
 </form>
 
                 <div id="upload-status"></div>
@@ -126,32 +126,6 @@
       
         
     </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const adminLoader = document.getElementById("admin-loader");
-        const mainContent = document.getElementById("main");
-        const assignAdminBtn = document.getElementById("assign-admin-btn");
-    
-        // Initially hide all main content and assign button
-        mainContent.style.display = "none";
-        assignAdminBtn.style.display = "none";
-    
-        // Simulate admin verification (replace this with real check if needed)
-        const isAdmin = true; // Change to false to simulate denial
-    
-        setTimeout(() => {
-          if (isAdmin) {
-            adminLoader.style.display = "none";
-            mainContent.style.display = "block";
-            assignAdminBtn.style.display = "block";
-          } else {
-            document.getElementById("loader-text").innerText = "Access Denied. You are not an admin.";
-            document.querySelector(".circle-loader").style.display = "none";
-          }
-        }, 1500); // simulate delay
-      });
-    </script>
   
    <script type="module" src="/Divine-Grace-Upgrade/scripts/admin.js"></script>
 </body>
