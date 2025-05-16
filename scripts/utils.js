@@ -108,6 +108,33 @@ window.onpopstate = () => {
         });
     });
   }
+  export function redirect() {
+    fetch('/api/secure-data', {
+      credentials: 'include'
+    })
+      .then(res => {
+        if (!res.ok) {
+          console.warn(`Secure check failed. Status: ${res.status}`);
   
+          // Only redirect if the user is truly not logged in
+          if (res.status === 405) {
+            // Maybe show a message or fallback screen instead of immediate redirect
+            setTimeout(() => {
+              window.location.href = "/Divine-Grace-Upgrade/registerlogin";
+            }, 1000);
+          }
   
- 
+          // Prevent trying to parse bad JSON
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+  
+        return res.json();
+      })
+      .then(data => {
+        console.log("Secure data response:", data);
+      })
+      .catch(err => {
+        console.error("Redirect error:", err.message);
+      });
+  }
+  

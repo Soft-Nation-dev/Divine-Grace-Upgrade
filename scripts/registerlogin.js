@@ -1,8 +1,9 @@
-import { setButtonLoading } from './utils.js';
-import { toggleVisibility } from './utils.js';
+import { setButtonLoading, toggleVisibility } from './utils.js';
 
 function reset() {
   document.querySelectorAll('.creatacc-div input').forEach(i => i.value = '');
+  hideMessage('register-message');
+  hideMessage('login-message');
 }
 
 const signIn   = document.querySelector('.js-signinbut');
@@ -19,18 +20,43 @@ helloDiv.classList.add('visible');
 welcomeDiv.classList.add('hidden');
 welcomeBackSection.classList.add('hidden');
 
-
 signIn.addEventListener('click', () => {
   toggleVisibility([createAccountSection, helloDiv], [welcomeBackSection, welcomeDiv]);
+  hideMessage('register-message');
+  hideMessage('login-message');
 });
 signUp.addEventListener('click', () => {
   toggleVisibility([welcomeBackSection, welcomeDiv], [createAccountSection, helloDiv]);
+  hideMessage('register-message');
+  hideMessage('login-message');
 });
 
 function $(id) {
   const el = document.getElementById(id);
   if (!el) console.error(`❌ Missing element with id="${id}"`);
   return el;
+}
+
+function showMessage(id, message) {
+  const el = $(id);
+  if (el) {
+    el.textContent = message;
+    el.style.display = 'block';
+  }
+}
+
+function hideMessage(id) {
+  const el = $(id);
+  if (el) {
+    el.textContent = '';
+    el.style.display = 'none';
+  }
+}
+
+function clearMessageOnInput(inputEl, messageId) {
+  if (inputEl) {
+    inputEl.addEventListener('input', () => hideMessage(messageId));
+  }
 }
 
 // Input fields
@@ -47,51 +73,71 @@ const confirmPasswordInput = $('register-confirm-password');
 const loginEmailInput      = $('login-email');
 const loginPasswordInput   = $('login-password');
 
+// Attach input listeners to clear errors on typing
+[
+  firstnameInput,
+  nameInput,
+  userNameInput,
+  deptChurchInput,
+  deptSchoolInput,
+  addressInput,
+  emailInput,
+  phoneInput,
+  passwordInput,
+  confirmPasswordInput
+].forEach(input => clearMessageOnInput(input, 'register-message'));
+
+[loginEmailInput, loginPasswordInput].forEach(input =>
+  clearMessageOnInput(input, 'login-message')
+);
+
 // ---- REGISTRATION HANDLER ----
 createAccountButton.addEventListener('click', async () => {
+  hideMessage('register-message');
   setButtonLoading(createAccountButton, true);
+
   const FirstName       = firstnameInput.value.trim();
-  const Othernames            = nameInput.value.trim();
-  const Username            = userNameInput.value.trim();
-  const DepartmentInChurch     = deptChurchInput.value.trim();
+  const Othernames      = nameInput.value.trim();
+  const Username        = userNameInput.value.trim();
+  const DepartmentInChurch = deptChurchInput.value.trim();
   const DepartmentInSchool= deptSchoolInput.value.trim();
-  const ResidentialAddress         = addressInput.value.trim();
+  const ResidentialAddress= addressInput.value.trim();
   const Email           = emailInput.value.trim();
-  const PhoneNumber           = phoneInput.value.trim();
+  const PhoneNumber     = phoneInput.value.trim();
   const Password        = passwordInput.value;
   const ConfirmPassword = confirmPasswordInput.value;
 
-  if (![ FirstName, Othernames, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword ].every(v => v)) {
-    alert('Please fill in all fields.');
+  if (![FirstName, Othernames, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword].every(v => v)) {
+    showMessage('register-message', 'Please fill in all fields.');
     setButtonLoading(createAccountButton, false);
     return;
   }
   if (Password !== ConfirmPassword) {
-    alert('Passwords do not match.');
+    showMessage('register-message', 'Passwords do not match.');
     setButtonLoading(createAccountButton, false);
     return;
   }
   if (Password.length < 6) {
-    alert('Password must be at least 6 characters long.');
+    showMessage('register-message', 'Password must be at least 6 characters long.');
     setButtonLoading(createAccountButton, false);
     return;
   }
   if (!/^[a-zA-Z0-9]+$/.test(Username)) {
-    alert('Username can only contain letters and numbers.');
+    showMessage('register-message', 'Username can only contain letters and numbers.');
     setButtonLoading(createAccountButton, false);
     return;
   }
   if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(Email)) {
-    alert('Please enter a valid email address.');
+    showMessage('register-message', 'Please enter a valid email address.');
     setButtonLoading(createAccountButton, false);
     return;
   }
   if (!/^\d{11}$/.test(PhoneNumber)) {
-    alert('Phone number must be exactly 11 digits long.');
+    showMessage('register-message', 'Phone number must be exactly 11 digits long.');
     setButtonLoading(createAccountButton, false);
     return;
-  }  
-  
+  }
+
   try {
     const res = await fetch(
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/register',
@@ -115,39 +161,41 @@ createAccountButton.addEventListener('click', async () => {
     );
     const data = await res.json();
     if (res.ok) {
-      alert(data.message);
+      showMessage('register-message', data.message);
       toggleVisibility(
         [createAccountSection, helloDiv],
         [welcomeBackSection, welcomeDiv]
       );
       reset();
     } else {
-      alert(data.message);
+      showMessage('register-message', data.message);
     }
   } catch (err) {
-    console.error(err);df
-    alert('Registration failed—please try again.');
+    console.error(err);
+    showMessage('register-message', 'Registration failed—please try again.');
   } finally {
     setButtonLoading(createAccountButton, false);
   }
 });
 
-
+// ---- LOGIN HANDLER ----
 loginButton.addEventListener('click', async () => {
+  hideMessage('login-message');
   setButtonLoading(loginButton, true);
-  const email    = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value;
+
+  const email    = loginEmailInput.value.trim();
+  const password = loginPasswordInput.value;
 
   if (!email || !password) {
-    alert('Please enter both email and password.');
+    showMessage('login-message', 'Please enter both email and password.');
     setButtonLoading(loginButton, false);
     return;
   }
   if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-    alert('Please enter a valid email address.');
+    showMessage('login-message', 'Please enter a valid email address.');
     setButtonLoading(loginButton, false);
     return;
-  }  
+  }
   try {
     const res = await fetch(
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/login',
@@ -162,14 +210,13 @@ loginButton.addEventListener('click', async () => {
     const data = await res.json();
 
     if (res.ok) {
-      alert('Login successful! Redirecting you to the dashboard…');
       window.location.href = '/Divine-Grace-Upgrade/home';
     } else {
-      alert(data.message || 'Login failed');
+      showMessage('login-message', data.message || 'Login failed');
     }
   } catch (err) {
     console.error('Login error:', err);
-    alert('Login failed—please try again.');
+    showMessage('login-message', 'Login failed—please try again.');
   } finally {
     setButtonLoading(loginButton, false);
   }

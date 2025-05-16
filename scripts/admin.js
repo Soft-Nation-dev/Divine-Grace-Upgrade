@@ -60,28 +60,26 @@ function setupTabSwitching() {
   showPrayersBtn.addEventListener("click", () => {
     prayerSection.style.display = "block";
     lstsSection.style.display = "none";
+    messageSection.style.display = "none";
   });
 
   showLstsBtn.addEventListener("click", () => {
     prayerSection.style.display = "none";
     lstsSection.style.display = "block";
+    messageSection.style.display = "none";
   });
 
-
-showMessagesBtn.addEventListener("click", () => {
-  prayerSection.style.display = "none";
-  lstsSection.style.display = "none";
-  messageSection.style.display = "block";
-});
-
+  showMessagesBtn.addEventListener("click", () => {
+    prayerSection.style.display = "none";
+    lstsSection.style.display = "none";
+    messageSection.style.display = "block";
+  });
 }
 
-
 document.addEventListener("DOMContentLoaded", async () => {
-
-
   const messageContainer = document.getElementById("message-container");
   const mainContent = document.getElementById("main");
+  const uploadForm = document.getElementById("upload-form");
 
   showLoader("Checking admin access...");
 
@@ -191,74 +189,62 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupTabSwitching();
   }, 3000);
 
+  // Upload form handler
+  uploadForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  document.getElementById("upload-form").addEventListener("submit", async (e) => {
-  e.preventDefault();
+    const title = document.getElementById("title").value.trim();
+    const category = document.getElementById("category").value;
+    const date = document.getElementById("date").value;
+    const fileInput = document.getElementById("file");
+    const file = document.getElementById("audioFileInput").files[0];
+    const statusDiv = document.getElementById("upload-status");
 
-  const title = document.getElementById("title").value.trim();
-  const category = document.getElementById("category").value;
-  const date = document.getElementById("date").value;
-  const fileInput = document.getElementById("file");
-  const file = fileInput.files[0];
-  const submitBtn = document.getElementById("submit-btn");
-  const statusDiv = document.getElementById("upload-status");
+    if (!title || !category || !date || !file) {
+      statusDiv.textContent = "❌ Please fill all fields and select a file.";
+      statusDiv.className = "status-error";
+      return;
+    }
 
-  if (!title || !category || !date || !file) {
-    alert("Please fill all fields and select a file.");
-    return;
-  }
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("category", category);
+    formData.append("date", date);
+    formData.append("file", file);
 
-  // Show loading state
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = `<span class="loader-circle"></span> Submitting...`;
-  statusDiv.textContent = "";
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage", true);
+    xhr.withCredentials = true;
 
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("category", category);
-  formData.append("date", date);
-  formData.append("file", file);
+    xhr.upload.onprogress = function (event) {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        statusDiv.textContent = `🔄 Uploading: ${percent}%`;
+        statusDiv.className = "status-uploading";
+      }
+    };
 
-  try {
-    const res = await fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage", {
-      method: "POST",
-      body: formData,
-      credentials: "include",
-    });
+    xhr.onload = function () {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        const result = JSON.parse(xhr.responseText);
+        console.log("Success:", result);
+        statusDiv.textContent = "✅ Upload successful!";
+        statusDiv.className = "status-success";
+      } else {
+        console.error("Upload failed:", xhr.statusText);
+        statusDiv.textContent = "❌ Upload failed.";
+        statusDiv.className = "status-error";
+      }
+    };
 
-    if (!res.ok) throw new Error("Upload failed");
+    xhr.onerror = function () {
+      console.error("Network error during upload.");
+      statusDiv.textContent = "❌ Upload failed.";
+      statusDiv.className = "status-error";
+    };
 
-    const result = await res.json();
-    console.log("Success:", result);
-    statusDiv.textContent = "✅ Upload successful!";
-    statusDiv.className = "status-success";
-
-    // Clear form
-    document.getElementById("upload-form").reset();
-  } catch (err) {
-    console.error("Error:", err);
-    statusDiv.textContent = "❌ Upload failed!";
-    statusDiv.className = "status-error";
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = "Upload Message";
-  }
-});
-
-const statusDiv = document.getElementById("upload-status");
-const inputs = document.querySelectorAll("#upload-form input, #upload-form select");
-
-inputs.forEach(input => {
-  input.addEventListener("input", () => {
-    statusDiv.textContent = "";
-    statusDiv.className = "status-text";
+    xhr.send(formData);
   });
 
-  input.addEventListener("change", () => {
-    statusDiv.textContent = "";
-    statusDiv.className = "status-text";
-  });
-});
-makeAdmin();
-  
+  makeAdmin();
 });

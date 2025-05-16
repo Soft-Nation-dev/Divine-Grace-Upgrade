@@ -18,6 +18,7 @@ export async function loadUserData() {
       document.getElementById('welcome-message').textContent          = `Welcome back, ${user.userName}`;
     } catch (err) {
       console.error(err);
-      alert('Failed to load user data. Please try again later.');
+      // alert('Failed to load user data. Please try again later.');
+      window.location.replace('/Divine-Grace-Upgrade/registerlogin');
     }
   }

@@ -19,19 +19,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
       document.querySelectorAll("audio").forEach(audio => {
         audio.pause();
-        audio.currentTime = 0; // Reset to beginning
+        audio.currentTime = 0;
       });
 
       // Toggle visibility
       const allMessageDivs = document.querySelectorAll(".message-category");
+      let show = true;
+
       allMessageDivs.forEach(div => {
-        div.style.display = div.id === targetId
-          ? (div.style.display === "block" ? "none" : "block")
-          : "none";
+        if (div.id === targetId) {
+          show = div.style.display !== "block";
+          div.style.display = show ? "block" : "none";
+        } else {
+          div.style.display = "none";
+        }
       });
 
-      // If already loaded, don't fetch again
-      if (categoryDiv.getAttribute("data-loaded") === "true") return;
+      const alreadyLoaded = categoryDiv.getAttribute("data-loaded") === "true";
+
+      if (alreadyLoaded) {
+        if (show) {
+          setTimeout(() => {
+            categoryDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 100);
+        }
+        return;
+      }
 
       const categoryName = categories[targetId];
       const endpoint = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage?category=${categoryName}`;
@@ -72,20 +85,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
             categoryDiv.appendChild(card);
 
-            // Add download button functionality
+            // Download button
             const downloadBtn = card.querySelector(".download-btn");
             downloadBtn.addEventListener("click", () => {
               const link = document.createElement("a");
               link.href = audioUrl;
-              link.download = msg.title;  // Download with the message title
+              link.download = msg.title;
               link.click();
             });
 
+            // Add to latest messages
             const latestMessagesContainer = document.getElementById("latest-messages");
-            const latestCard = card.cloneNode(true); // Clone the message card
+            const latestCard = card.cloneNode(true);
             latestMessagesContainer.appendChild(latestCard);
 
-            // Pause other audios when one starts playing
+            // Ensure only one audio plays at a time
             const newAudio = card.querySelector("audio");
             newAudio.addEventListener("play", () => {
               document.querySelectorAll("audio").forEach(audio => {
@@ -99,6 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         categoryDiv.setAttribute("data-loaded", "true");
 
+        // ✅ Now scroll into view after everything is loaded
+        if (show) {
+          setTimeout(() => {
+            categoryDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 100);
+        }
+
       } catch (err) {
         categoryDiv.innerHTML = "<p class='error'>Failed to load messages.</p>";
         console.error("Error fetching messages:", err);
@@ -106,26 +127,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ✅ Load latest messages on initial page load
+  // ✅ Load latest messages on page load
   loadLatestMessages();
 
-  // ✅ Add Search/Filter functionality by message title
+  // ✅ Filter messages by title
   const searchInput = document.getElementById("search-input");
-  searchInput.addEventListener("input", function() {
-    const query = searchInput.value.toLowerCase();
-    const allMessages = document.querySelectorAll(".message-card");
-    allMessages.forEach(card => {
-      const title = card.querySelector("p strong").nextElementSibling.textContent.toLowerCase();
-      if (title.includes(query)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  });
+ 
 });
 
-// ✅ New: Load and display latest 20 messages from all categories
+// ✅ Load and display latest 20 messages across all categories
 async function loadLatestMessages() {
   const categories = ["Sunday", "Midweek", "Friday"];
   let allMessages = [];
@@ -141,13 +151,10 @@ async function loadLatestMessages() {
       allMessages.push(...messages);
     }
 
-    // Sort newest first
     allMessages.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    // Take top 20
     const latestMessages = allMessages.slice(0, 20);
     const container = document.getElementById("latest-messages");
-    container.innerHTML = ""; // Clear first
+    container.innerHTML = "";
 
     latestMessages.forEach(msg => {
       if (!msg.filePath) return;
@@ -162,14 +169,14 @@ async function loadLatestMessages() {
         <audio controls src="${audioUrl}"></audio>
         <button class="download-btn">Download</button>
       `;
+
       container.appendChild(card);
 
-      // Add download button functionality
       const downloadBtn = card.querySelector(".download-btn");
       downloadBtn.addEventListener("click", () => {
         const link = document.createElement("a");
         link.href = audioUrl;
-        link.download = msg.title;  // Download with the message title
+        link.download = msg.title;
         link.click();
       });
 
