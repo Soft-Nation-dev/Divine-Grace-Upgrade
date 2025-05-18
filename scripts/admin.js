@@ -1,7 +1,8 @@
-import { renderHeader, wireLogout, PreventBackButton, makeAdmin } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, makeAdmin, checkSession } from "./utils.js";
 
 renderHeader();
 wireLogout();
+checkSession();
 PreventBackButton();
 
 function showLoader(message) {
@@ -52,7 +53,6 @@ function setupTabSwitching() {
   const showLstsBtn = document.getElementById("show-lsts-btn");
   const showMessagesBtn = document.getElementById("show-messages-btn");
 
-  // Hide all sections initially
   prayerSection.style.display = "none";
   lstsSection.style.display = "none";
   messageSection.style.display = "none";
@@ -99,7 +99,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     setTimeout(() => {
       hideLoader();
       mainContent.style.display = "block";
-      messageContainer.classList.remove("hidden");
     }, 1500);
 
     const prayerContainer = document.getElementById("prayer-requests");
@@ -112,12 +111,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const res = await fetch(prayerEndpoint, { credentials: "include" });
         const data = await res.json();
+        console.log("Prayer Requests:", data);
         if (!Array.isArray(data)) throw new Error("Unexpected response");
 
         data.forEach(req => {
           const card = document.createElement("div");
           card.className = "admin-card";
           card.innerHTML = `
+            <p><strong>Name:</strong> ${req.firstName} ${req.otherNames}</p>
             <p><strong>Message:</strong> ${req.prayerRequest || ""}</p>
             <p><strong>Submitted At:</strong> ${new Date(req.submittedAt).toLocaleString()}</p>
           `;
@@ -133,6 +134,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const res = await fetch(lstsEndpoint, { credentials: "include" });
         const data = await res.json();
+        console.log("LSTS Data:", data);
         if (!Array.isArray(data)) throw new Error("Unexpected response");
 
         data.forEach(person => {
@@ -187,9 +189,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
     setupTabSwitching();
+
+    // PDF download logic
+    function downloadSectionAsPDF(sectionId, filename) {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+
+      const options = {
+        margin: 10,
+        filename: `${filename}_${new Date().toISOString().replace(/[:.]/g, '-')}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().from(section).set(options).save();
+    }
+
+    document.getElementById("download-prayers-btn").addEventListener("click", () => {
+      downloadSectionAsPDF("prayer-requests", "Prayer_Requests");
+    });
+
+    document.getElementById("download-lsts-btn").addEventListener("click", () => {
+      downloadSectionAsPDF("lsts-registrations", "LSTS_Registrations");
+    });
   }, 3000);
 
-  // Upload form handler
   uploadForm.addEventListener("submit", (e) => {
     e.preventDefault();
 

@@ -75,12 +75,12 @@ input{
 }
 
 .first, .second{
-    height: 100%;
+    height: 100%;  
+    font-family: "Agu Display", serif;
     width: 100%;
     text-align: center;
 }
 .first{
- background-color: white;
  display: flex;
  flex-direction: column;
  align-items: center;
@@ -104,11 +104,12 @@ input{
 
 .input{
     margin-bottom: 30px;
-    width: 350px;
+    width: 400px;
+    background-color: white;
     height: 40px;
     border: none;
     font-size: 15px;
-    background-color: rgb(236, 236, 236);
+    /* background-color: rgb(236, 236, 236); */
     border-radius: 5px;
 }
  input::placeholder{
@@ -172,6 +173,8 @@ input{
     border: 1px solid white;
 }
 
+
+
 .spinner {
     display: inline-block;
     width: 1em;
@@ -202,7 +205,15 @@ input{
     opacity: 0; /* if you want to hide text as well */
   }
   
-
+  #register-message,
+  #login-message {
+    color: #d93025;         /* Bright red color */
+    font-size: 14px;      /* Slightly larger font size */
+    font-weight: 600;       /* Semi-bold */
+    margin-top: 8px;        /* Some spacing above */
+    line-height: 1.4;       /* Better readability */
+  }
+  
 
 
 
@@ -225,8 +236,12 @@ input{
         width: 100%;
 
     }
+.input{
+    width: 94%;
+}
+
     .first-div {
-        margin-top: 90px;
+        margin-top: 120px;
         
 
         
@@ -244,13 +259,4 @@ input{
     .hidden {
         transform: translateY(-20px);
     }
-}
-
-#register-message,
-#login-message {
-  color: #d93025;         /* Bright red color */
-  font-size: 14px;      /* Slightly larger font size */
-  font-weight: 600;       /* Semi-bold */
-  margin-top: 8px;        /* Some spacing above */
-  line-height: 1.4;       /* Better readability */
 }

@@ -236,3 +236,37 @@
 #assign-admin-btn:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
+
+#submitt[type="submit"] {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submitt[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.download-btn {
+  background-color: #007bff; /* Bootstrap blue */
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+}
