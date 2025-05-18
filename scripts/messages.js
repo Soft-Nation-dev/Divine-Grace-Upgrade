@@ -1,6 +1,7 @@
-import { renderHeader, wireLogout, PreventBackButton } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, checkSession } from "./utils.js";
 
 renderHeader(); 
+checkSession();
 wireLogout();
 PreventBackButton();
 

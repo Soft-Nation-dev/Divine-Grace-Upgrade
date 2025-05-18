@@ -65,7 +65,7 @@
     <p id="loader-text" style="margin-top: 10px; font-size: 16px;">Checking admin access...</p>
   </div>
   
-    <div class="main-content" id="main">
+    <div class="main-content" id="main" style="display: none;">
       
 
 
@@ -80,15 +80,17 @@
           </div>
             <section id="prayer-section" class="admin-section">
               <h2>Prayer Requests</h2>
+              <button id="download-prayers-btn"  class="download-btn">Download Prayer Requests PDF</button>
               <div id="prayer-requests" class="admin-grid"></div>
             </section>
             
             <section id="lsts-section" class="admin-section" style="display: none;">
               <h2>LSTS Registrations</h2>
+              <button id="download-lsts-btn"  class="download-btn">Download LSTS Registrations PDF</button>
               <div id="lsts-registrations" class="admin-grid"></div>
             </section>
             
-            <section id="messages-section" class="admin-section hidden">
+            <section id="messages-section" class="admin-section">
               <div id="message-section" class="hidden">
                 <h2>Upload Message</h2>
                 <!-- HTML -->
@@ -126,6 +128,8 @@
       
         
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
   
    <script type="module" src="/Divine-Grace-Upgrade/scripts/admin.js"></script>
 </body>

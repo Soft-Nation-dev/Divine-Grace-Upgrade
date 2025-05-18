@@ -51,7 +51,7 @@ header{
     background: white;
     transform: translateX(-100%);
     transition: transform 1s ease;
-    z-index: 1000;
+    z-index: 1500;
   }
   .nav-menu.visible {
     transform: translateX(0);

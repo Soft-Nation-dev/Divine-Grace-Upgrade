@@ -1,5 +1,6 @@
-import { renderHeader, wireLogout, PreventBackButton } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, checkSession } from "./utils.js";
 renderHeader();
+checkSession();
 wireLogout();
 PreventBackButton();
 
@@ -94,85 +95,87 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function generateReceipt(data) {
-    const receiptElement = document.getElementById("receipt");
-  
-    // Fill in receipt fields
-    document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
-    document.getElementById("r-phone").textContent = data.PhoneNumber;
-    document.getElementById("r-email").textContent = data.Email;
-    document.getElementById("r-address").textContent = data.ResidentialAddress;
-    document.getElementById("r-gender").textContent = data.Gender;
-    document.getElementById("r-dept").textContent = data.DepartmentInChurch;
-    document.getElementById("r-pos").textContent = data.PositionInChurch;
-    document.getElementById("r-date").textContent = data.SubmittedAt;
-  
-    if (data.Student === "Yes") {
-      document.getElementById("student-info").style.display = "block";
-      document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
-      document.getElementById("r-level").textContent = data.Level;
-    } else {
-      document.getElementById("student-info").style.display = "none";
-    }
-  
-    // Show the receipt temporarily for rendering
-    receiptElement.style.display = "block";
-  
-    const downloadMessage = document.createElement("div");
-    downloadMessage.textContent = "Your receipt is being downloaded...";
-    downloadMessage.style.cssText = `
-      position: fixed;
-      bottom: 170px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      z-index: 9999;
-      font-size: 14px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    `;
-    document.body.appendChild(downloadMessage);
-  
-    // Remove message after 4 seconds
-    setTimeout(() => {
-      downloadMessage.remove();
-    }, 4000);
-  
+function generateReceipt(data) {
+  const receiptElement = document.getElementById("receipt");
 
-    // Define PDF options
-    const pdfOptions = {
-      margin: [10, 10, 10, 10], // top, left, bottom, right in mm
-      filename: "LSTS_Receipt.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        scrollY: 0
-      },
-      jsPDF: {
-        unit: "mm",
-        format: [140, 216], // Custom format close to half-letter size (better for short receipts)
-        orientation: "portrait"
-      },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    };
-  
-    html2pdf()
-      .from(receiptElement)
-      .set(pdfOptions)
-      .save()
-      .then(() => {
-        // Hide again after generation
-        receiptElement.style.display = "none";
-      })
-      .catch((err) => {
-        console.error("PDF generation failed:", err);
-        receiptElement.style.display = "none";
-      });
+  // Fill in receipt fields
+  document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
+  document.getElementById("r-phone").textContent = data.PhoneNumber;
+  document.getElementById("r-email").textContent = data.Email;
+  document.getElementById("r-address").textContent = data.ResidentialAddress;
+  document.getElementById("r-gender").textContent = data.Gender;
+  document.getElementById("r-dept").textContent = data.DepartmentInChurch;
+  document.getElementById("r-pos").textContent = data.PositionInChurch;
+  document.getElementById("r-date").textContent = data.SubmittedAt;
+
+  if (data.Student === "Yes") {
+    document.getElementById("student-info").style.display = "block";
+    document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
+    document.getElementById("r-level").textContent = data.Level;
+  } else {
+    document.getElementById("student-info").style.display = "none";
   }
-  
+
+  // Show the receipt temporarily for rendering
+  receiptElement.style.display = "block";
+
+  // Show download message
+  const downloadMessage = document.createElement("div");
+  downloadMessage.textContent = "Your receipt is being downloaded...";
+  downloadMessage.style.cssText = `
+    position: fixed;
+    bottom: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    z-index: 9999;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  `;
+  document.body.appendChild(downloadMessage);
+  setTimeout(() => downloadMessage.remove(), 4000);
+
+  // Generate safe dynamic filename
+  const now = new Date();
+  const timestamp = now.toISOString().replace(/[:.]/g, "-");
+  const safeName = `${data.Surname}_${data.OtherNames}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
+  const fileName = `LSTS_Receipt_${safeName}_${timestamp}.pdf`;
+
+  // PDF options
+  const pdfOptions = {
+    margin: [10, 10, 10, 10],
+    filename: fileName,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0
+    },
+    jsPDF: {
+      unit: "mm",
+      format: [140, 216], // Adjusted for shorter receipts
+      orientation: "portrait"
+    },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+
+  // Generate and save PDF
+  html2pdf()
+    .from(receiptElement)
+    .set(pdfOptions)
+    .save()
+    .then(() => {
+      receiptElement.style.display = "none";
+    })
+    .catch((err) => {
+      console.error("PDF generation failed:", err);
+      receiptElement.style.display = "none";
+    });
+}
+
   
   
 });

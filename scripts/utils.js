@@ -54,10 +54,9 @@ export function toggleVisibility(hide, show) {
           { method: 'POST', credentials: 'include' }
         );
         if (res.ok) {
-          alert('Logged out successfully');
           window.location.href = '/Divine-Grace-Upgrade/registerlogin';
-        } else {
-          alert('Logout failed');
+        } else { 
+          window.location.href = '/Divine-Grace-Upgrade/registerlogin';
         }
       } catch {
         alert('Logout error—please try again.');
@@ -136,5 +135,28 @@ window.onpopstate = () => {
       .catch(err => {
         console.error("Redirect error:", err.message);
       });
+  }
+
+
+  export async function checkSession (redirectUrl = '/Divine-Grace-Upgrade/registerlogin', delay = 3000) {
+    try {
+      const res = await fetch(
+        'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check',
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
+  
+      const data = await res.json();
+  
+      if (!res.ok || !data.isAuthenticated) {
+          window.location.href = redirectUrl;
+        }
+      } 
+     catch (err) {
+      console.error('Session check failed:', err);
+        window.location.href = redirectUrl;
+    }
   }
   
