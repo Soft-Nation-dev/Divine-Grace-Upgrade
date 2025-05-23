@@ -1,3 +1,4 @@
+
 export function setButtonLoading(buttonEl, isLoading) {
     const text = buttonEl.querySelector('.btn-text');
     const spinner = buttonEl.querySelector('.spinner');
@@ -138,7 +139,7 @@ window.onpopstate = () => {
   }
 
 
-  export async function checkSession (redirectUrl = '/Divine-Grace-Upgrade/registerlogin', delay = 3000) {
+  export async function checkSession (redirectUrl = '/Divine-Grace-Upgrade/registerlogin', delay = 1000) {
     try {
       const res = await fetch(
         'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check',
@@ -160,3 +161,145 @@ window.onpopstate = () => {
     }
   }
   
+export function loadProfilePicture() {
+  const uploadButton = document.getElementById('upload-profile-button');
+  const fileInput = document.getElementById('profile-picture-input');
+  const uploadMessage = document.getElementById('upload-message');
+  const userProfileImage = document.getElementById('user-profile-image');
+  const userProfileImage1 = document.getElementById('profile-image');
+  const fileNameSpan = document.getElementById('selected-file-name');
+  const backendBaseUrl = 'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net';
+  const defaultProfilePic = '/Divine-Grace-Upgrade/images/th-2238308759'; // your default image path
+
+  let messageTimeoutId = null;
+
+  // Fetch profile picture on page load
+  async function fetchProfilePicture() {
+    try {
+      const res = await fetch(`${backendBaseUrl}/api/users/profile-picture`, {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.imageUrl) {
+          const fullUrl = backendBaseUrl + data.imageUrl + '?t=' + new Date().getTime();
+          userProfileImage.src = fullUrl;
+          userProfileImage1.src = fullUrl;
+          return;
+        }
+      }
+      // fallback to default if no profile pic or error
+      userProfileImage.src = defaultProfilePic;
+      userProfileImage1.src = defaultProfilePic;
+    } catch (err) {
+      console.error('Error fetching profile picture:', err);
+      userProfileImage.src = defaultProfilePic;
+      userProfileImage1.src = defaultProfilePic;
+    }
+  }
+
+  fetchProfilePicture(); // call on load
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      uploadButton.style.display = 'inline-block';
+      fileNameSpan.textContent = fileInput.files[0].name;
+    } else {
+      uploadButton.style.display = 'none';
+      fileNameSpan.textContent = '';
+    }
+    hideUploadMessage();
+  });
+
+  function showUploadMessage(msg, isError = true) {
+    uploadMessage.style.color = isError ? 'red' : 'green';
+    uploadMessage.textContent = msg;
+    uploadMessage.style.display = 'block';
+
+    if (messageTimeoutId) clearTimeout(messageTimeoutId);
+    messageTimeoutId = setTimeout(() => {
+      hideUploadMessage();
+    }, 4000); // hide after 4 seconds
+  }
+
+  function hideUploadMessage() {
+    uploadMessage.textContent = '';
+    uploadMessage.style.display = 'none';
+    if (messageTimeoutId) {
+      clearTimeout(messageTimeoutId);
+      messageTimeoutId = null;
+    }
+  }
+
+  function setButtonLoading(button, isLoading) {
+    if (isLoading) {
+      button.disabled = true;
+      button.textContent = 'Uploading...';
+      button.style.opacity = '0.6';
+      button.style.cursor = 'not-allowed';
+    } else {
+      button.disabled = false;
+      button.textContent = 'Upload Profile Picture';
+      button.style.opacity = '1';
+      button.style.cursor = 'pointer';
+    }
+  }
+
+  uploadButton.addEventListener('click', async () => {
+    hideUploadMessage();
+
+    if (!fileInput.files || fileInput.files.length === 0) {
+      showUploadMessage('Please select a file to upload.');
+      return;
+    }
+
+    const file = fileInput.files[0];
+
+    if (!file.type.startsWith('image/')) {
+      showUploadMessage('Please select a valid image file.');
+      return;
+    }
+
+    setButtonLoading(uploadButton, true);
+
+    const formData = new FormData();
+    formData.append('profilePicture', file);
+
+    try {
+      const res = await fetch(
+        `${backendBaseUrl}/api/users/upload-profile-picture`,
+        {
+          method: 'POST',
+          body: formData,
+          credentials: 'include',
+        }
+      );
+
+      if (res.ok) {
+        const data = await res.json();
+        showUploadMessage('Profile picture uploaded successfully!', false);
+
+        if (data.imageUrl) {
+          const fullUrl = backendBaseUrl + data.imageUrl + '?t=' + new Date().getTime();
+          userProfileImage.src = fullUrl;
+          userProfileImage1.src = fullUrl;
+        }
+
+        fileInput.value = '';
+        uploadButton.style.display = 'none';
+        fileNameSpan.textContent = '';
+      } else if (res.status === 401) {
+        showUploadMessage('Unauthorized. Please log in again.');
+      } else {
+        const errorData = await res.json();
+        showUploadMessage(errorData.message || 'Upload failed.');
+      }
+    } catch (err) {
+      console.error('Upload error:', err);
+      showUploadMessage('Upload failed. Please try again.');
+    } finally {
+      setButtonLoading(uploadButton, false);
+    }
+  });
+}
+

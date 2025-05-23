@@ -223,6 +223,42 @@
     transform: scale(1.05);
 }
 
+.custom-upload-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #b6cbe1; 
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.custom-upload-button:hover {
+  background-color: #b8c8d9;
+}
+#upload-profile-button {
+  background-color: #007bff;      /* Bootstrap-like blue */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+#upload-profile-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+#upload-profile-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 
 

@@ -71,6 +71,16 @@
                           <div>
                             <img class="profile-imageH" id="user-profile-image" src="/Divine-Grace-Upgrade/images/th-2238308759" alt="">
                           </div>
+                             <input type="file" id="profile-picture-input" accept="image/*" style="display:none" />
+  <label for="profile-picture-input" class="custom-upload-button" style="cursor: pointer; color: #007bff; text-decoration: underline; margin-left: 10px;">
+    Choose Image
+  </label>
+
+  <button id="upload-profile-button" style="display:none; margin-left: 10px;">Upload Profile Picture</button>
+
+  <span id="selected-file-name" style="margin-left: 10px; font-style: italic;"></span>
+
+  <p id="upload-message" style="color: red; display: none; margin-top: 10px;"></p>
                           <p class="profile-name" id="user-name"></p>
                           <p class="department">Department in the church: <span class="department-span" id="user-department"></span></p>
                         </div>
