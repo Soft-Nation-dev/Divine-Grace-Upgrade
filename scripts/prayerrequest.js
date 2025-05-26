@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
       
         setTimeout(() => {
-          window.location.replace('/Divine-Grace-Upgrade/prayerequest')
+          window.location.replace('../prayerequest')
         }, 3000);
       
       } else {

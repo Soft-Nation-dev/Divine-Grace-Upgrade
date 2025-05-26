@@ -55,9 +55,9 @@ export function toggleVisibility(hide, show) {
           { method: 'POST', credentials: 'include' }
         );
         if (res.ok) {
-          window.location.href = '/Divine-Grace-Upgrade/registerlogin';
+          window.location.href = '../registerlogin';
         } else { 
-          window.location.href = '/Divine-Grace-Upgrade/registerlogin';
+          window.location.href = '../registerlogin';
         }
       } catch {
         alert('Logout error—please try again.');
@@ -69,7 +69,7 @@ export function toggleVisibility(hide, show) {
   export function PreventBackButton() {
 window.history.pushState({}, "", location.href);
 window.onpopstate = () => {
-  window.location.href = "/Divine-Grace-Upgrade/home"; // Always go back to dashboard
+  window.location.href = "../home"; // Always go back to dashboard
 };
 
   }
@@ -120,7 +120,7 @@ window.onpopstate = () => {
           if (res.status === 405) {
             // Maybe show a message or fallback screen instead of immediate redirect
             setTimeout(() => {
-              window.location.href = "/Divine-Grace-Upgrade/registerlogin";
+              window.location.href = "../registerlogin";
             }, 1000);
           }
   
@@ -139,7 +139,7 @@ window.onpopstate = () => {
   }
 
 
-  export async function checkSession (redirectUrl = '/Divine-Grace-Upgrade/registerlogin', delay = 1000) {
+  export async function checkSession (redirectUrl = '../registerlogin', delay = 1000) {
     try {
       const res = await fetch(
         'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check',
@@ -169,7 +169,7 @@ export function loadProfilePicture() {
   const userProfileImage1 = document.getElementById('profile-image');
   const fileNameSpan = document.getElementById('selected-file-name');
   const backendBaseUrl = 'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net';
-  const defaultProfilePic = '/Divine-Grace-Upgrade/images/th-2238308759'; // your default image path
+  const defaultProfilePic = '../images/th-2238308759'; // your default image path
 
   let messageTimeoutId = null;
 

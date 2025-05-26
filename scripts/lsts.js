@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showAnimation(status, message, formData = null) {
     animationContainer.innerHTML = `
       <div class="overlay">
-        <img src="/Divine-Grace-Upgrade/images/${status === "success" ? "checkmark" : "error-mark"}.png" class="status-icon" />
+        <img src="../images/${status === "success" ? "checkmark" : "error-mark"}.png" class="status-icon" />
         <h2>${message}</h2>
         ${status === "success" ? `<button id="download-btn">Download Receipt</button>` : ""}
         <button id="close-btn">Close</button>

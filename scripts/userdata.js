@@ -19,6 +19,6 @@ export async function loadUserData() {
     } catch (err) {
       console.error(err);
       // alert('Failed to load user data. Please try again later.');
-      window.location.replace('/Divine-Grace-Upgrade/registerlogin');
+      window.location.replace('../registerlogin');
     }
   }

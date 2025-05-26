@@ -59,7 +59,7 @@ PreventBackButton();
         btn.style.cursor = "pointer";
   
         btn.innerHTML = `
-          <img class="img" src="/Divine-Grace-Upgrade/images/trans_whatsapp-removebg-preview.png" alt="">
+          <img class="img" src="../images/trans_whatsapp-removebg-preview.png" alt="">
           <h1 class="three-d-text">${dept.name}</h1>
         `;
   

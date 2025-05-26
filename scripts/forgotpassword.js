@@ -91,7 +91,7 @@ function resetPassword(email, token) {
     })
     .then(() => {
       alert("Password reset successfully. Redirecting to login...");
-      window.location.href = "/Divine-Grace-Upgrade/registerlogin";
+      window.location.href = "../registerlogin";
     })
     .catch(err => {
       alert(err.message || "Reset failed.");

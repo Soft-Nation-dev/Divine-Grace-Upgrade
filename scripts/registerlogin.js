@@ -210,7 +210,7 @@ loginButton.addEventListener('click', async () => {
     const data = await res.json();
 
     if (res.ok) {
-      window.location.href = '/Divine-Grace-Upgrade/home';
+      window.location.href = '../home';
     } else {
       showMessage('login-message', data.message || 'Login failed');
     }

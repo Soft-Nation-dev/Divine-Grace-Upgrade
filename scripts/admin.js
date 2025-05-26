@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!isAdminUser) {
       updateLoader("You are not an admin", false);
       setTimeout(() => {
-        window.location.href = "/Divine-Grace-Upgrade/home";
+        window.location.href = "../home";
       }, 2000);
       return;
     }

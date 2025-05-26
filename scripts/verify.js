@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     messageContainer.classList.remove("hiddens");
 
     setTimeout(() => {
-      window.location.href = '/Divine-Grace-Upgrade/Administrator'; 
+      window.location.href = '../Administrator'; 
     }, 2000); 
 
   } else {
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   
   setTimeout(() => {
-    window.location.href = '/Divine-Grace-Upgrade/home'; 
+    window.location.href = '../home'; 
   }, 2000); 
 };
 });
