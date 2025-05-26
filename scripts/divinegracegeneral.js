@@ -1,3 +1,3 @@
 document.querySelector('.js-login-button').addEventListener('click', ()=>{
-    window.location.href = 'registerlogin';
+    window.location.href = 'registerlogin/';
 });
