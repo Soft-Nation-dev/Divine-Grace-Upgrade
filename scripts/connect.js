@@ -30,12 +30,12 @@ PreventBackButton();
       mainContent.innerHTML = "";
 
       const departments = [
-        { name: "Choir", phone: "08141787294" },
+        { name: "Choir", phone: "08134928221" },
         { name: "Technical", phone: "08141787294" },
-        { name: "Follow-up", phone: "08141787294" },
-        { name: "Sanctuary and Decoration", phone: "08141787294" },
-        { name: "Prayer Department", phone: "08141787294" },
-        { name: "Evangelism Department", phone: "08141787294" }
+        { name: "Follow-up", phone: "07039902772" },
+        { name: "Sanctuary and Decoration", phone: "07018485729" },
+        { name: "Prayer Department", phone: "08126640203" },
+        { name: "Evangelism Department", phone: "09073155030" }
       ];
   
       const container = document.createElement("div");
