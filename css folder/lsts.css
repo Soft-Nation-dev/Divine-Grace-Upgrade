@@ -188,6 +188,7 @@ input, textarea, select {
 
   .stamp{
     height: 7px;
+    font-size: 12px;
   }
 
   .receipt-header {
