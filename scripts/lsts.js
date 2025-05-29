@@ -1,8 +1,29 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture} from "./utils.js";
 renderHeader();
 checkSession();
 wireLogout();
 PreventBackButton();
+loadProfilePicture();
+
+// LSTS Registration cutoff logic
+const now = new Date();
+const today = now.getDay(); // Sunday = 0, Monday = 1, ..., Friday = 5
+const hours = now.getHours();
+const minutes = now.getMinutes();
+
+const isAfterFridayNoon =
+  (today === 5 && (hours > 12 || (hours === 12 && minutes >= 0))) || // After 12pm on Friday
+  today > 5; // Saturday
+
+if (isAfterFridayNoon) {
+  document.querySelector(".main-content").innerHTML = `
+    <div style="text-align: center; padding: 40px; margin-top: 100px;">
+      <h2 style="font-size: 2rem; color: #b71c1c;">LSTS Registration is currently closed.</h2>
+      <p style="font-size: 1.2rem;">Please check back later. Registration is open until Friday 12:00 PM each week.</p>
+    </div>
+  `;
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("membershipForm");

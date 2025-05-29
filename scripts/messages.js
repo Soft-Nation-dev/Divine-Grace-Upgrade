@@ -1,9 +1,10 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture } from "./utils.js";
 
 renderHeader(); 
 checkSession();
 wireLogout();
 PreventBackButton();
+loadProfilePicture();
 
 document.addEventListener("DOMContentLoaded", () => {
   const categoryButtons = document.querySelectorAll(".category-btn");

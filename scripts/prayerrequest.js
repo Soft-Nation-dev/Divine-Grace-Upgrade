@@ -1,8 +1,9 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture } from "./utils.js";
 renderHeader();
 wireLogout();
 checkSession();
 PreventBackButton();
+loadProfilePicture();
 
 document.addEventListener('DOMContentLoaded', () => {
   const submitButton = document.querySelector('.submit-button');

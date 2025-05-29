@@ -1,10 +1,11 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture } from "./utils.js";
 
 
 renderHeader();
 checkSession();
 wireLogout();
 PreventBackButton();
+loadProfilePicture();
 
   document.getElementById("email-btn").addEventListener("click", function () {
     window.location.href = "mailto:ifeanyieee8105@gmail.com";

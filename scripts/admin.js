@@ -1,8 +1,9 @@
-import { renderHeader, wireLogout, PreventBackButton, makeAdmin, checkSession } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, makeAdmin, checkSession, loadProfilePicture } from "./utils.js";
 
 renderHeader();
 wireLogout();
 checkSession();
+loadProfilePicture();
 PreventBackButton();
 
 function showLoader(message) {
