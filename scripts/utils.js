@@ -169,7 +169,7 @@ export function loadProfilePicture() {
   const userProfileImage1 = document.getElementById('profile-image');
   const fileNameSpan = document.getElementById('selected-file-name');
   const backendBaseUrl = 'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net';
-  const defaultProfilePic = '/Divine-Grace-Upgrade/images/th-2238308759';
+  const defaultProfilePic = '../images/th-2238308759';
   let messageTimeoutId = null;
 
   function updateProfileImage(imageUrl) {
