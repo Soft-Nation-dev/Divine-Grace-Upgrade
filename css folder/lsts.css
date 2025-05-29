@@ -186,6 +186,10 @@ input, textarea, select {
     flex-direction: column;
   }
 
+  .stamp{
+    height: 7px;
+  }
+
   .receipt-header {
     text-align: center;
     display: flex;
