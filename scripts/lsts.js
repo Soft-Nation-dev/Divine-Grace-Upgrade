@@ -7,7 +7,7 @@ loadProfilePicture();
 
 // LSTS Registration cutoff logic
 const now = new Date();
-const today = now.getDay(); // Sunday = 0, Monday = 1, ..., Friday = 5
+const today = now.getDay(); 
 const hours = now.getHours();
 const minutes = now.getMinutes();
 
@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
       SubmittedAt: new Date().toISOString().split(".")[0]
     };
     
-    console.log("Submitting payload:", payload);
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting…";
@@ -76,8 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       );
   
-      const data = await res.json().catch(() => ({}));
-      console.log("API response:", data);
+      const data = await res.json().catch(() => ({}));;
       if (res.ok) {
         showAnimation("success", data.message || "Form submitted successfully.", payload);
         form.reset();
