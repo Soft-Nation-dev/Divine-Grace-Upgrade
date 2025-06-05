@@ -153,27 +153,29 @@ input, textarea, select {
     overflow: hidden; /* Ensures background stays behind content */
   }
   
-  /* Background overlay using a pseudo-element */
-  .receipt-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('/Divine-Grace-Upgrade/images/logo.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.1; /* Transparency level */
-    z-index: 0;
-  }
-  
-  /* Ensure content is above the overlay */
-  .receipt-container * {
-    position: relative;
-    z-index: 1;
-  }
+  .receipt-container {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.receipt-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.receipt-container > *:not(.receipt-bg) {
+  position: relative;
+  z-index: 1;
+}
+
 .ticket-title{
     text-align: center;
 }

@@ -1,4 +1,11 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture} from "./utils.js";
+import {
+  renderHeader,
+  wireLogout,
+  PreventBackButton,
+  checkSession,
+  loadProfilePicture,
+} from "./utils.js";
+
 renderHeader();
 checkSession();
 wireLogout();
@@ -7,13 +14,12 @@ loadProfilePicture();
 
 // LSTS Registration cutoff logic
 const now = new Date();
-const today = now.getDay(); 
+const today = now.getDay();
 const hours = now.getHours();
 const minutes = now.getMinutes();
 
 const isAfterFridayNoon =
-  (today === 5 && (hours > 12 || (hours === 12 && minutes >= 0))) || // After 12pm on Friday
-  today > 5; // Saturday
+  (today === 5 && (hours > 12 || (hours === 12 && minutes >= 0))) || today > 5;
 
 if (isAfterFridayNoon) {
   document.querySelector(".main-content").innerHTML = `
@@ -24,7 +30,6 @@ if (isAfterFridayNoon) {
   `;
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("membershipForm");
   const submitBtn = form.querySelector(".submit-button");
@@ -33,14 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const animationContainer = document.getElementById("animation-container");
 
   studentStatusField.addEventListener("change", () => {
-    schoolFieldsWrapper.style.display = studentStatusField.value === "Yes" ? "block" : "none";
+    schoolFieldsWrapper.style.display =
+      studentStatusField.value === "Yes" ? "block" : "none";
   });
-
-
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-  
+
     const payload = {
       Surname: form.querySelector("#register-firstname").value.trim(),
       OtherNames: form.querySelector("#otherNames").value.trim(),
@@ -51,43 +55,50 @@ document.addEventListener("DOMContentLoaded", () => {
       PositionInChurch: form.querySelector("#position").value,
       Gender: form.querySelector("#gender").value,
       Student: studentStatusField.value || "",
-
       ...(studentStatusField.value === "Yes" && {
         DepartmentInSchool: form.querySelector("#schoolDepartment").value.trim(),
-        Level: form.querySelector("#level").value
+        Level: form.querySelector("#level").value,
       }),
-//       
-      SubmittedAt: new Date().toISOString().split(".")[0]
+      SubmittedAt: new Date().toISOString().split(".")[0],
     };
-    
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting…";
-  
+
     try {
+      const fetchStart = performance.now();
       const res = await fetch(
         "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/LSTSFORM",
         {
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)  // wrap in `dto`
+          body: JSON.stringify(payload),
         }
       );
-  
-      const data = await res.json().catch(() => ({}));;
+      const fetchEnd = performance.now();
+      console.log("Fetch took", (fetchEnd - fetchStart).toFixed(2), "ms");
+
+      const data = await res.json().catch(() => ({}));
+
+      const animStart = performance.now();
       if (res.ok) {
-        showAnimation("success", data.message || "Form submitted successfully.", payload);
+        showAnimation(
+          "success",
+          data.message || "Form submitted successfully.",
+          payload
+        );
         form.reset();
         schoolFieldsWrapper.style.display = "none";
       } else {
         console.error("API response:", data);
         showAnimation("error", data.message || "Submission failed.");
       }
-  
+      const animEnd = performance.now();
+      console.log(`Animation triggered in ${(animEnd - animStart).toFixed(2)}ms`);
     } catch (err) {
       console.error("LSTS form error:", err);
-      showAnimation("Network error—please try again.");
+      showAnimation("error", "Network error—please try again.");
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Submit";
@@ -110,91 +121,94 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (status === "success" && formData) {
-      document.getElementById("download-btn").onclick = () => generateReceipt(formData);
+      document.getElementById("download-btn").onclick = () =>
+        generateReceipt(formData);
     }
   }
 
-function generateReceipt(data) {
-  const receiptElement = document.getElementById("receipt");
+  function generateReceipt(data) {
+    
+    const receiptElement = document.getElementById("receipt");
 
-  // Fill in receipt fields
-  document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
-  document.getElementById("r-phone").textContent = data.PhoneNumber;
-  document.getElementById("r-email").textContent = data.Email;
-  document.getElementById("r-address").textContent = data.ResidentialAddress;
-  document.getElementById("r-gender").textContent = data.Gender;
-  document.getElementById("r-dept").textContent = data.DepartmentInChurch;
-  document.getElementById("r-pos").textContent = data.PositionInChurch;
-  document.getElementById("r-date").textContent = data.SubmittedAt;
+    document.getElementById("r-name").textContent =
+      `${data.Surname} ${data.OtherNames}`;
+    document.getElementById("r-phone").textContent = data.PhoneNumber;
+    document.getElementById("r-email").textContent = data.Email;
+    document.getElementById("r-address").textContent = data.ResidentialAddress;
+    document.getElementById("r-gender").textContent = data.Gender;
+    document.getElementById("r-dept").textContent = data.DepartmentInChurch;
+    document.getElementById("r-pos").textContent = data.PositionInChurch;
+    document.getElementById("r-date").textContent = data.SubmittedAt;
 
-  if (data.Student === "Yes") {
-    document.getElementById("student-info").style.display = "block";
-    document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
-    document.getElementById("r-level").textContent = data.Level;
-  } else {
-    document.getElementById("student-info").style.display = "none";
+    if (data.Student === "Yes") {
+      document.getElementById("student-info").style.display = "block";
+      document.getElementById("r-school-dept").textContent =
+        data.DepartmentInSchool;
+      document.getElementById("r-level").textContent = data.Level;
+    } else {
+      document.getElementById("student-info").style.display = "none";
+    }
+
+    receiptElement.style.display = "block";
+    receiptElement.style.visibility = "visible";
+    receiptElement.scrollIntoView();
+
+    const spinner = document.createElement("div");
+    spinner.textContent = "Generating your receipt...";
+    spinner.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 10px;
+      z-index: 9999;
+    `;
+    document.body.appendChild(spinner);
+
+    const now = new Date();
+    const timestamp = now.toISOString().replace(/[:.]/g, "-");
+    const safeName = `${data.Surname}_${data.OtherNames}`
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "_");
+    const fileName = `LSTS_Receipt_${safeName}_${timestamp}.pdf`;
+
+    setTimeout(() => {
+      const pdfStart = performance.now();
+
+      html2pdf()
+        .from(receiptElement)
+        .set({
+          margin: [10, 10, 10, 10],
+          filename: fileName,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: {
+            scale: 2,
+            allowTaint: false,
+            scrollY: 0,
+          },
+          jsPDF: {
+            unit: "mm",
+            format: [140, 216],
+            orientation: "portrait",
+          },
+          pagebreak: { mode: ["avoid-all", "css", "legacy"] },
+        })
+        .save()
+        .then(() => {
+          receiptElement.style.display = "none";
+          spinner.remove();
+          console.log("PDF time:", (performance.now() - pdfStart).toFixed(2), "ms");
+        })
+        .catch((err) => {
+          console.error("PDF generation failed:", err);
+          receiptElement.style.display = "none";
+          spinner.remove();
+          alert("There was a problem generating your receipt.");
+        });
+    }, 100);
   }
-
-  // Show the receipt temporarily for rendering
-  receiptElement.style.display = "block";
-
-  // Show download message
-  const downloadMessage = document.createElement("div");
-  downloadMessage.textContent = "Your receipt is being downloaded...";
-  downloadMessage.style.cssText = `
-    position: fixed;
-    bottom: 170px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    z-index: 9999;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  `;
-  document.body.appendChild(downloadMessage);
-  setTimeout(() => downloadMessage.remove(), 4000);
-
-  // Generate safe dynamic filename
-  const now = new Date();
-  const timestamp = now.toISOString().replace(/[:.]/g, "-");
-  const safeName = `${data.Surname}_${data.OtherNames}`.replace(/[^\w\s-]/g, "").replace(/\s+/g, "_");
-  const fileName = `LSTS_Receipt_${safeName}_${timestamp}.pdf`;
-
-  // PDF options
-  const pdfOptions = {
-    margin: [10, 10, 10, 10],
-    filename: fileName,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      scrollY: 0
-    },
-    jsPDF: {
-      unit: "mm",
-      format: [140, 216], // Adjusted for shorter receipts
-      orientation: "portrait"
-    },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-  };
-
-  // Generate and save PDF
-  html2pdf()
-    .from(receiptElement)
-    .set(pdfOptions)
-    .save()
-    .then(() => {
-      receiptElement.style.display = "none";
-    })
-    .catch((err) => {
-      console.error("PDF generation failed:", err);
-      receiptElement.style.display = "none";
-    });
-}
-
-  
-  
 });
