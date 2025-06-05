@@ -69,7 +69,6 @@ export function returnHome() {
   const homeButton = document.querySelector(".home-button");
 
   homeButton.addEventListener("click", async () => {
-    console.log('clicked');
     
     try {
       const res = await fetch(
