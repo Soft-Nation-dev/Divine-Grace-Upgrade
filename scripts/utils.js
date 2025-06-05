@@ -65,6 +65,28 @@ export function toggleVisibility(hide, show) {
     });
   }
   
+export function returnHome() {
+  const homeButton = document.querySelector(".home-button");
+
+  homeButton.addEventListener("click", async () => {
+    console.log('clicked');
+    
+    try {
+      const res = await fetch(
+        'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/logout',
+        { method: 'POST', credentials: 'include' }
+      );
+      
+      // You can force cache clear by redirecting to login directly
+      window.location.href = '../index.html';
+    } catch {
+      alert('Logout error—please try again.');
+    }
+  });
+}
+
+
+
 
   export function PreventBackButton() {
 window.history.pushState({}, "", location.href);
@@ -186,7 +208,6 @@ export function loadProfilePicture() {
 
       if (res.ok) {
         const data = await res.json();
-        console.log('Fetched profile picture:', data);
         if (data.imageUrl) {
           updateProfileImage(data.imageUrl);
           return;
@@ -279,7 +300,6 @@ export function loadProfilePicture() {
 
         if (res.ok) {
           const data = await res.json();
-          console.log('Profile picture uploaded:', data);
           showUploadMessage('Profile picture uploaded successfully!', false);
 
           if (data.imageUrl) updateProfileImage(data.imageUrl);
@@ -334,3 +354,13 @@ export function addReceiptBackground() {
 }
 
 
+export function preventBackCacheReload() {
+  window.addEventListener('pageshow', function (event) {
+    const navigationEntries = performance.getEntriesByType("navigation");
+    const navType = navigationEntries.length > 0 ? navigationEntries[0].type : null;
+
+    if (event.persisted || navType === 'back_forward') {
+      window.location.reload();
+    }
+  });
+}

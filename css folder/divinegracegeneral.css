@@ -13,6 +13,7 @@ img:hover{
 button{
     cursor: pointer;
     transition-duration: 0.5s;
+    padding: 0;
 }
 
 button:hover{

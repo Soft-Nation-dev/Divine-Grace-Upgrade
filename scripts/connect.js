@@ -1,9 +1,10 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture } from "./utils.js";
-
+import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture, returnHome, preventBackCacheReload } from "./utils.js";
 
 renderHeader();
 checkSession();
+preventBackCacheReload();
 wireLogout();
+returnHome();
 PreventBackButton();
 loadProfilePicture();
 

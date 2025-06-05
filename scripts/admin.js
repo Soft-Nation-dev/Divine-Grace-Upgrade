@@ -1,9 +1,12 @@
-import { renderHeader, wireLogout, PreventBackButton, makeAdmin, checkSession, loadProfilePicture } from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, makeAdmin, checkSession, loadProfilePicture, returnHome, preventBackCacheReload } from "./utils.js";
+
 
 renderHeader();
 wireLogout();
 checkSession();
 loadProfilePicture();
+preventBackCacheReload();
+returnHome();
 PreventBackButton();
 
 function showLoader(message) {
@@ -112,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const res = await fetch(prayerEndpoint, { credentials: "include" });
         const data = await res.json();
-        console.log("Prayer Requests:", data);
+
         if (!Array.isArray(data)) throw new Error("Unexpected response");
 
         data.forEach(req => {
@@ -135,7 +138,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         const res = await fetch(lstsEndpoint, { credentials: "include" });
         const data = await res.json();
-        console.log("LSTS Data:", data);
         if (!Array.isArray(data)) throw new Error("Unexpected response");
 
         data.forEach(person => {
@@ -252,8 +254,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
-        const result = JSON.parse(xhr.responseText);
-        console.log("Success:", result);
         statusDiv.textContent = "✅ Upload successful!";
         statusDiv.className = "status-success";
       } else {

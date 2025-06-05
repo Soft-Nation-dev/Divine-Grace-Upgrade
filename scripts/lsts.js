@@ -5,10 +5,14 @@ import {
   checkSession,
   loadProfilePicture,
   addReceiptBackground,
+  returnHome,
+  preventBackCacheReload
 } from "./utils.js";
 
 renderHeader();
 checkSession();
+preventBackCacheReload();
+returnHome();
 wireLogout();
 PreventBackButton();
 loadProfilePicture();
@@ -77,8 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(payload),
         }
       );
-      const fetchEnd = performance.now();
-      console.log("Fetch took", (fetchEnd - fetchStart).toFixed(2), "ms");
 
       const data = await res.json().catch(() => ({}));
 
@@ -95,8 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("API response:", data);
         showAnimation("error", data.message || "Submission failed.");
       }
-      const animEnd = performance.now();
-      console.log(`Animation triggered in ${(animEnd - animStart).toFixed(2)}ms`);
     } catch (err) {
       console.error("LSTS form error:", err);
       showAnimation("error", "Network error—please try again.");
@@ -181,7 +181,6 @@ addReceiptBackground();
     const fileName = `LSTS_Receipt_${safeName}_${timestamp}.pdf`;
 
     setTimeout(() => {
-      const pdfStart = performance.now();
 
       html2pdf()
         .from(receiptElement)
@@ -205,7 +204,7 @@ addReceiptBackground();
         .then(() => {
           receiptElement.style.display = "none";
           spinner.remove();
-          console.log("PDF time:", (performance.now() - pdfStart).toFixed(2), "ms");
+
         })
         .catch((err) => {
           console.error("PDF generation failed:", err);
