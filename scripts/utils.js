@@ -312,7 +312,7 @@ export function addReceiptBackground() {
 
   // Create new background image
   const bgImg = document.createElement("img");
-  bgImg.src = "../images/logo.jpg"; // or Base64 string if needed
+  bgImg.src = "../images/logo-removebg-preview.png"; // or Base64 string if needed
   bgImg.className = "receipt-bg";
 
   // Apply the required styles manually
