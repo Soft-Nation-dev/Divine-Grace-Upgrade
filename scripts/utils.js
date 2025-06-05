@@ -303,5 +303,34 @@ export function loadProfilePicture() {
   }
 }
 
+export function addReceiptBackground() {
+  const receipt = document.getElementById("receipt");
+
+  // Remove previous background if it exists
+  const existingBg = document.querySelector(".receipt-bg");
+  if (existingBg) existingBg.remove();
+
+  // Create new background image
+  const bgImg = document.createElement("img");
+  bgImg.src = "../images/logo.jpg"; // or Base64 string if needed
+  bgImg.className = "receipt-bg";
+
+  // Apply the required styles manually
+  Object.assign(bgImg.style, {
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    opacity: "0.1",
+    objectFit: "contain",
+    zIndex: "0",
+    pointerEvents: "none",
+  });
+
+  // Insert background into receipt container
+  receipt.style.position = "relative"; // Ensure parent is positioned
+  receipt.insertBefore(bgImg, receipt.firstChild);
+}
 
 

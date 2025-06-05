@@ -4,6 +4,7 @@ import {
   PreventBackButton,
   checkSession,
   loadProfilePicture,
+  addReceiptBackground,
 } from "./utils.js";
 
 renderHeader();
@@ -168,6 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
       z-index: 9999;
     `;
     document.body.appendChild(spinner);
+
+addReceiptBackground();
+
 
     const now = new Date();
     const timestamp = now.toISOString().replace(/[:.]/g, "-");
