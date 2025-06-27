@@ -270,3 +270,13 @@
 .download-btn:hover {
   background-color: #0056b3;
 }
+
+#submitBtn{
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

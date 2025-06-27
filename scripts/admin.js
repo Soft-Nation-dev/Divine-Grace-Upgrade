@@ -224,7 +224,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const title = document.getElementById("title").value.trim();
     const category = document.getElementById("category").value;
     const date = document.getElementById("date").value;
-    const fileInput = document.getElementById("file");
     const file = document.getElementById("audioFileInput").files[0];
     const statusDiv = document.getElementById("upload-status");
 
