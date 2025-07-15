@@ -76,6 +76,7 @@ export function returnHome() {
       
       // You can force cache clear by redirecting to login directly
       window.location.href = '../index.html';
+      sessionStorage.removeItem("popupDismissed");
     } catch {
       alert('Logout error—please try again.');
     }
@@ -137,10 +138,9 @@ window.onpopstate = () => {
   
           // Only redirect if the user is truly not logged in
           if (res.status === 405) {
+            sessionStorage.removeItem("popupDismissed");
             // Maybe show a message or fallback screen instead of immediate redirect
-            setTimeout(() => {
               window.location.href = "../registerlogin";
-            }, 1000);
           }
   
           // Prevent trying to parse bad JSON
@@ -172,6 +172,7 @@ window.onpopstate = () => {
   
       if (!res.ok || !data.isAuthenticated) {
           window.location.href = redirectUrl;
+          sessionStorage.removeItem("popupDismissed");
         }
       } 
      catch (err) {
