@@ -54,11 +54,9 @@ export function toggleVisibility(hide, show) {
           'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/logout',
           { method: 'POST', credentials: 'include' }
         );
-        if (res.ok) {
           window.location.href = '../registerlogin';
-        } else { 
-          window.location.href = '../registerlogin';
-        }
+           sessionStorage.removeItem("popupDismissed"); //remove popup dismissal state
+       
       } catch {
         alert('Logout error—please try again.');
       }
@@ -363,3 +361,45 @@ export function preventBackCacheReload() {
     }
   });
 }
+
+
+export function showPopup() {
+  const popup = document.getElementById("popup-invite");
+  const closeButton = document.getElementById("closePopUp");
+
+  if (popup && !sessionStorage.getItem("popupDismissed")) {
+    popup.style.display = "flex";
+     sessionStorage.setItem("popupDismissed", "true");
+
+    if (closeButton) {
+      // Attach click handler only once
+      closeButton.addEventListener("click", closePopup, { once: true });
+    }
+  }
+}
+
+export function closePopup() {
+  const popup = document.getElementById("popup-invite");
+  const closeButton = document.getElementById("closePopUp");
+
+  if (popup) {
+    // Disable the button and give feedback
+    if (closeButton) {
+      closeButton.disabled = true;
+      closeButton.textContent = "Closing...";
+      closeButton.style.cursor = "not-allowed";
+      closeButton.style.opacity = "0.6";
+    }
+
+    // Trigger fade-out animation
+    popup.classList.add("fade-out");
+
+    // Hide after animation completes
+    popup.addEventListener("animationend", () => {
+      popup.style.display = "none";
+      popup.classList.remove("fade-out");
+    }, { once: true });
+     sessionStorage.setItem("popupDismissed", "true");
+  }
+}
+

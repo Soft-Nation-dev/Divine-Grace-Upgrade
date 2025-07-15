@@ -73,15 +73,15 @@
                             <img class="profile-imageH" id="user-profile-image" src="../images/th-2238308759" alt="">
                           </div>
                              <input type="file" id="profile-picture-input" accept="image/*" style="display:none" />
-  <label for="profile-picture-input" class="custom-upload-button" style="cursor: pointer; color: #007bff; text-decoration: underline; margin-left: 10px;">
-    Choose Image
-  </label>
+                                <label for="profile-picture-input" class="custom-upload-button" style="cursor: pointer; color: #007bff; text-decoration: underline; margin-left: 10px;">
+                                  Choose Image
+                                </label>
 
-  <button id="upload-profile-button" style="display:none; margin-left: 10px;">Upload Profile Picture</button>
+                                <button id="upload-profile-button" style="display:none; margin-left: 10px;">Upload Profile Picture</button>
 
-  <span id="selected-file-name" style="margin-left: 10px; font-style: italic;"></span>
+                                <span id="selected-file-name" style="margin-left: 10px; font-style: italic;"></span>
 
-  <p id="upload-message" style="color: red; display: none; margin-top: 10px;"></p>
+                                <p id="upload-message" style="color: red; display: none; margin-top: 10px;"></p>
                           <p class="profile-name" id="user-name"></p>
                           <p class="department">Department in the church: <span class="department-span" id="user-department"></span></p>
                         </div>
@@ -113,15 +113,36 @@
                           <a href="https://wa.me/8141787294"><button class="contact-button">Click to connect</button></a>
                         </div>
                       </div>
-                      <div class="annoucement-div">
+                      <!-- <div class="annoucement-div">
                         <div>
                           <p class="p">ANNOUNCEMENT</p>
                         </div>
                         <div id="annoucement-image">
                           <img class="annoucement-img" src="../images/annocement_image-removebg-preview.png" alt="">
                           <p class="annoucement-p">Announcements and updates will appear here</p>
+
                         </div>
-                      </div>
+                      </div> -->
+                      <div class="annoucement-div">
+  <p class="p">ANNOUNCEMENT</p>
+
+  <div class="announcement-scroll-wrapper">
+    <div class="announcement-scroll-content">
+      <img src="../images/apostolic-invasion-banner.jpg" alt="Apostolic Invasion Banner" class="popup-banner1" />
+
+      <p class="announcement-highlight">
+        <span class="announcement-header">🔥 <b>Divine Alert!</b> 🔥</span><br>
+        The heavens are set to kiss the earth at <b>UNEC Apostolic Inversion</b> — two extraordinary days of power, glory, and divine invasion!<br><br>
+        🗓️ <b>August 15th & 16th</b><br>
+        📍 <b>UNEC Main Hall</b><br>
+        🎙️ Ministering: <b>Pastor Oluchi Japhat Aniagu</b><br><br>
+        Come hungry, come expectant, come transformed. <br>
+        <span class="announcement-callout"><b>This is not another program — it's an appointment with destiny!</b></span>
+      </p>
+    </div>
+  </div>
+</div>
+
                     </section>
                   </section>
                   <footer>
@@ -143,16 +164,25 @@
               </div>
         </section>
 
-        <section id="connect-content" class="content-section hidden">
-          <h2>Connect with Us</h2>
-    
-        </section>
+        <!-- UNEC Apostolic Inversion Pop-Up -->
+<div id="popup-invite" class="popup-container">
+  <div class="popup-content animate-popup">
+    <img src="../images/apostolic-invasion-banner.jpg" alt="Apostolic Invasion Banner" class="popup-banner" />
+    <h2>🔥 UNEC APOSTOLIC INVERSION 🔥</h2>
+    <p>
+      Something supernatural is about to invade UNEC!<br><br>
+      Join us for a powerful two-day encounter with the Holy Spirit featuring our father in the Lord, 
+      <strong>Pastor Oluchi Japhat Aniagu</strong>.
+    </p>
 
-        <section id="registerlst-content" class="content-section hidden">
-          <h2>Register for LSTS</h2>
-        
-        </section>
-        
+    <p class="event-details">
+      🗓️ August 15th & 16th <br>
+      📍 UNEC Main Hall
+    </p>
+
+    <button id="closePopUp" class="popup-close-btn">Close</button>
+  </div>
+</div>    
     </div>
 
     <script type="module" src="../scripts/homepage.js"></script>
