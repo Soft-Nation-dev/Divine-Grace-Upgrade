@@ -181,7 +181,7 @@ button:hover{
 
 .announcement-scroll-content {
   display: inline-block;
-  animation: scroll-vertical 20s linear infinite;
+  animation: scroll-vertical 25s linear infinite;
 }
 
 @keyframes scroll-vertical {
