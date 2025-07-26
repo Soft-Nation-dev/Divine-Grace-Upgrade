@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAYER REQUEST</title>
+    <link rel="icon" href="../images/mlogo.png" type="image/png">
+    <link rel="stylesheet" href="../css folder/homepageheader.css">
+    <link rel="stylesheet" href="../css folder/invites.css  ">
+    <link rel="stylesheet" href="../css folder/divinegracegeneral.css">
+    <link rel="stylesheet" href="../css folder/divinegraceheader.css">
+    <link rel="stylesheet" href="../css folder/divinegracemain.css">
+    <link rel="stylesheet" href="../css folder/homepagebody.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="main-contents" id="header">
+        <div class="right-section">
+            <button class="hambuger-button js-hambuger-button">
+                <img class="hambuger js-hambuger" src="../images/hamburger-menu.svg" alt="Hamburger Menu">
+            </button>
+            <div class="logo-div">
+                <img id="logo-img" src="../images/mlogo.png" alt="">
+                <span id="digunec-logo">Divine Grace Unec</span>
+            </div>
+            <div id="divider"></div>
+            <div id="dashboard">Record of invites</div>
+        </div>
+        <div class="left-section">
+            <button>
+                <img id="notification" src="../images/notifications.svg" alt="">
+            </button>
+            <img id="profile-image" alt="">
+        </div>
+    </header>
+    <div>
+        <nav class="nav-menu hidden">
+            <div class="logo-nav">
+                <div class="logo-div">
+                    <img id="logo-img" src="../images/mlogo.png" alt="">
+                    <span id="digunec-logo">Divine Grace Unec</span>
+                </div>
+                <button class="exit-butt js-exit-butt">
+                    <img src="../images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Exit">
+                </button>
+            </div>
+            <nav class="nav">
+                <li><a href="../home">Dashboard</a></li>
+                <li><a href="../prayerequest">Submit a Prayer Request</a></li>
+                <li><a href="../Connect with us/">Connect with Us</a></li>
+                <li><a href="../Messages">Messages</a></li>
+                <li><a href="../lstsregistrationpage">Register for LSTS</a> <li>
+                <li class="menu-item2"><a href="../My Record Of invites/">My records of invitation</a> <li>
+                <li><a href="../Administrator">Admin</a></li>
+                <li><button class="home-button">Home</button></li>
+                <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
+            </nav>
+        </nav>
+    </div>
+    <section class="main-content">
+    <div>
+        <h2>Record Of Invites</h2>
+        
+        <div class="invites-list" id="invites-list">
+            <div class="invites-box" id="invites-box">
+        
+            </div>
+        </div>
+        
+        
+        <button class="add-invite-btn" id="add-invite-btn">Add New Invite</button>
+        
+        <!-- Form for New Invite -->
+        <div class="invite-form-div hidden" id="invite-form">
+            <div class="invite-form">
+                <h3>Add New Invite</h3>
+                <input type="text" placeholder="Full Name" id="invite-name" required>
+                <input type="tel" placeholder="Phone Number" id="invite-phone" required>
+                <button class="submit-invite-btn" id="submit-invite-btn">Submit</button>
+                <button class="cancel-invite-btn" id="cancel-invite-btn">Cancel</button>
+            </div>
+        </div>
+        <section class="hiddenn">
+            <div id="success-overlay" class="success-overlay hiddenn">
+                <div class="success-message">
+                    <div class="success-spinner"></div>
+                    <div class="success-checkmark hiddenn">
+                        ✔️
+                    </div>
+                    <h2>Record Of Invitation<br>Submitted Successfully!</h2>
+                </div>
+            </div>
+        
+        </section>
+    </div>
+    </section>
+
+    <script type="module" src="../scripts/invites.js"></script>
+</body>
+
+</html>

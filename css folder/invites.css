@@ -1,0 +1,244 @@
+.main-content{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.menu-item2 {
+    background-color: #eceef1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.invites-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.invites-box {
+    display: flex;
+    justify-content: center ;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 12px;
+    background: #f9f9ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.invite-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.invite-card:hover {
+    transform: scale(1.02);
+}
+
+.loading-msg,
+.empty-msg,
+.error-msg {
+    font-size: 1.2rem;
+    color: #666;
+    padding: 40px;
+}
+
+.add-invite-btn {
+    background-color: #5f3dc4;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-invite-btn:hover {
+    background-color: #4c2bb8;
+}
+
+.invite-form-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.invite-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    gap: 12px;
+    max-width: 300px;
+}
+
+.invite-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.submit-invite-btn {
+    background-color: #00875a;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.hiddenn {
+    display: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.cancel-invite-btn {
+    background-color: #ccc;
+    color: #333;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-invite-btn:hover {
+    background-color: #bbb;
+}
+
+/* Overlay covers whole screen with blur effect */
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 15, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* When active, make it visible */
+.success-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Message box */
+.success-message {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    transform: scale(0.8);
+    animation: popUp 0.4s ease forwards;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Spinner (while waiting) */
+.success-spinner {
+    border: 4px solid #e0e0e0;
+    border-top: 4px solid #5f3dc4;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 20px;
+    animation: spin 1s linear infinite;
+}
+
+/* Checkmark after success */
+.success-checkmark {
+    font-size: 40px;
+    color: #28a745;
+    animation: popCheck 0.5s ease forwards;
+    margin-bottom: 10px;
+    display: none;
+}
+
+/* Show checkmark */
+.success-checkmark.show {
+    display: block;
+}
+
+/* Text */
+.success-message h2 {
+    font-size: 20px;
+    color: #333;
+}
+
+/* Animations */
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes popCheck {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.user-section {
+    margin-top: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.invite-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.admin-card {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 12px;
+    width: 200px;
+    background-color: #f9f9f9;
+}

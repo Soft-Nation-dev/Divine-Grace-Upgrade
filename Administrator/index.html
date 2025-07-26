@@ -52,6 +52,7 @@
             <li><a href="../Connect with us">Connect with Us</a></li>
             <li><a href="../Messages">Messages</a></li>
             <li><a href="../lstsregistrationpage/">Register for LSTS</a><li>
+            <li><a href="../My Record Of invites/">My records of invitation</a><li>
             <li class="menu-item1"><a href="../Administrator">Admin</a></li>
             <li><button class="home-button">Home</button></li>
             <li><button class="signout-button js-sign-out-button">Sign Out</button></li>
@@ -73,9 +74,10 @@
             <h1 class="admin-title">Welcome to admin dashboard</h1>
           </div>
           <div class="admin-button-group">
-            <button class="admin-tab-btn" id="show-prayers-btn">Prayer Requests</button>
-            <button class="admin-tab-btn" id="show-lsts-btn">LSTS Registrations</button>
+            <button class="admin-tab-btn" id="show-prayers-btn">Prayers</button>
+            <button class="admin-tab-btn" id="show-lsts-btn">LSTS</button>
             <button class="admin-tab-btn" id="show-messages-btn">Upload Messages</button>
+            <button class="admin-tab-btn" id="show-invites-btn">Invites</button>
           </div>
             <section id="prayer-section" class="admin-section">
               <h2>Prayer Requests</h2>
@@ -88,6 +90,11 @@
               <button id="download-lsts-btn"  class="download-btn">Download LSTS Registrations PDF For This Week</button>
               <div id="lsts-registrations" class="admin-grid"></div>
               <button class="download-btn">See And Dowload All LSTS Registrations</button>
+            </section>
+            <section id="invites-section" class="admin-section" style="display: none;">
+              <h2>Invitation Records</h2>
+              <button id="download-invites-btn" class="download-btn">Download Invites PDF</button>
+              <div id="invites-container" class="admin-grid"></div>
             </section>
             
             <section id="messages-section" class="admin-section">
@@ -113,6 +120,7 @@
   <button id="submitBtn">Upload</button>
 
 </form>
+
 
                 <div id="upload-status"></div>
               </div>

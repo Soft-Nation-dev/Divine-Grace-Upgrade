@@ -52,10 +52,12 @@ function setupTabSwitching() {
   const prayerSection = document.getElementById("prayer-section");
   const lstsSection = document.getElementById("lsts-section");
   const messageSection = document.getElementById("message-section");
+  const invitesSection = document.getElementById("invites-section");
 
   const showPrayersBtn = document.getElementById("show-prayers-btn");
   const showLstsBtn = document.getElementById("show-lsts-btn");
   const showMessagesBtn = document.getElementById("show-messages-btn");
+  const showInvitesBtn = document.getElementById("show-invites-btn");
 
   prayerSection.style.display = "none";
   lstsSection.style.display = "none";
@@ -78,12 +80,20 @@ function setupTabSwitching() {
     lstsSection.style.display = "none";
     messageSection.style.display = "block";
   });
+  showInvitesBtn.addEventListener("click", () => {
+  prayerSection.style.display = "none";
+  lstsSection.style.display = "none";
+  messageSection.style.display = "none";
+  invitesSection.style.display = "block";
+});
+
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   const messageContainer = document.getElementById("message-container");
   const mainContent = document.getElementById("main");
   const uploadForm = document.getElementById("upload-form");
+  const invitesContainer = document.getElementById("invites-container");
 
   showLoader("Checking admin access...");
 
@@ -108,6 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const prayerContainer = document.getElementById("prayer-requests");
     const lstsContainer = document.getElementById("lsts-registrations");
 
+
+    const invitesEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/get-invitations";
     const prayerEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers";
     const lstsEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM";
 
@@ -189,9 +201,59 @@ document.addEventListener("DOMContentLoaded", async () => {
         lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
       }
     }
+    
+async function fetchAndDisplayInvites() {
+  try {
+    const res = await fetch(invitesEndpoint, { credentials: "include" });
+    const data = await res.json();
+
+    if (!Array.isArray(data)) throw new Error("Unexpected response format");
+    console.log("Fetched invites:", data);
+
+    invitesContainer.innerHTML = ""; // Clear previous content
+
+    data.forEach(user => {
+      const userHeader = document.createElement("div");
+      userHeader.className = "user-section";
+      userHeader.innerHTML = `
+        <h3>${user.fullName}</h3>
+        <p><strong>Email:</strong> ${user.email}</p>
+      `;
+      invitesContainer.appendChild(userHeader);
+
+      if (Array.isArray(user.invitations) && user.invitations.length > 0) {
+        const invitesWrapper = document.createElement("div");
+        invitesWrapper.className = "invite-grid";
+
+        user.invitations.forEach(invite => {
+          const card = document.createElement("div");
+          card.className = "admin-card";
+          card.innerHTML = `
+            <p><strong>Name:</strong> ${invite.invitedName || "N/A"}</p>
+            <p><strong>Phone:</strong> ${invite.invitedPhoneNumber || "N/A"}</p>
+            <p><strong>Created:</strong> ${new Date(invite.createdAt).toLocaleString()}</p>
+          `;
+          invitesWrapper.appendChild(card);
+        });
+
+        invitesContainer.appendChild(invitesWrapper);
+      } else {
+        invitesContainer.innerHTML += "<p>No invitations yet.</p>";
+      }
+    });
+
+  } catch (err) {
+    console.error("Failed to fetch invites:", err);
+    invitesContainer.innerHTML = "<p class='error'>Could not load invitation records.</p>";
+  }
+}
+
+
+
+
 
     await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
-    setupTabSwitching();
+    setupTabSwitching(), fetchAndDisplayInvites();
 
     // PDF download logic
     function downloadSectionAsPDF(sectionId, filename) {
