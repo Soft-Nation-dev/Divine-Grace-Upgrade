@@ -208,7 +208,6 @@ async function fetchAndDisplayInvites() {
     const data = await res.json();
 
     if (!Array.isArray(data)) throw new Error("Unexpected response format");
-    console.log("Fetched invites:", data);
 
     invitesContainer.innerHTML = ""; // Clear previous content
 
@@ -278,12 +277,12 @@ async function fetchAndDisplayInvites() {
     document.getElementById("download-lsts-btn").addEventListener("click", () => {
       downloadSectionAsPDF("lsts-registrations", "LSTS_Registrations");
     });
-  });
 
-  document.getElementById("download-invites-btn").addEventListener("click", () => {
+      document.getElementById("download-invites-btn").addEventListener("click", () => {
   downloadSectionAsPDF("invites-container", "Invitations");
 });
 
+  });
   uploadForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
