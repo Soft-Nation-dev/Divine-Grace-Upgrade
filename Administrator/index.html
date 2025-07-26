@@ -91,40 +91,43 @@
               <div id="lsts-registrations" class="admin-grid"></div>
               <button class="download-btn">See And Dowload All LSTS Registrations</button>
             </section>
-            <section id="invites-section" class="admin-section" style="display: none;">
-              <h2>Invitation Records</h2>
-              <button id="download-invites-btn" class="download-btn">Download Invites PDF</button>
-              <div id="invites-container" class="admin-grid"></div>
-            </section>
+            
             
             <section id="messages-section" class="admin-section">
               <div id="message-section" class="hidden">
                 <h2>Upload Message</h2>
-                <!-- HTML -->
-<form id="upload-form" enctype="multipart/form-data">
-  <label for="title">Title:</label>
-  <input type="text" id="title" name="title" required>
+                                      <!-- HTML -->
+                      <form id="upload-form" enctype="multipart/form-data">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
 
-  <label for="category">Category:</label>
-  <select id="category" name="category" required>
-    <option value="Sunday">Sunday Service</option>
-    <option value="Midweek">Midweek Service</option>
-    <option value="Friday">Friday Service</option>
-  </select>
-  <label for="date">Date:</label>
-  <input type="date" id="date" name="date" required>
-  <input type="file" id="audioFileInput" accept="audio/*" />
-  <audio id="audioPreview" controls style="display: none;"></audio>
-  <progress id="uploadProgress" value="0" max="100" style="width: 100%; display: none;"></progress>
-  <div id="statusDiv"></div>
-  <button id="submitBtn">Upload</button>
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" required>
+                          <option value="Sunday">Sunday Service</option>
+                          <option value="Midweek">Midweek Service</option>
+                          <option value="Friday">Friday Service</option>
+                        </select>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                        <input type="file" id="audioFileInput" accept="audio/*" />
+                        <audio id="audioPreview" controls style="display: none;"></audio>
+                        <progress id="uploadProgress" value="0" max="100" style="width: 100%; display: none;"></progress>
+                        <div id="statusDiv"></div>
+                        <button id="submitBtn">Upload</button>
 
-</form>
+                      </form>
 
 
                 <div id="upload-status"></div>
               </div>
               
+            </section>
+
+
+            <section id="invites-section" class="admin-section" style="display: none;">
+              <h2>Invitation Records</h2>
+              <button id="download-invites-btn" class="download-btn">Download Invites PDF</button>
+              <div id="invites-container" class="admin-grid"></div>
             </section>
             <button id="assign-admin-btn" title="Assign Admin Email">
               ✉️

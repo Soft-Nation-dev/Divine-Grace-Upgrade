@@ -278,7 +278,11 @@ async function fetchAndDisplayInvites() {
     document.getElementById("download-lsts-btn").addEventListener("click", () => {
       downloadSectionAsPDF("lsts-registrations", "LSTS_Registrations");
     });
-  }, 3000);
+  });
+
+  document.getElementById("download-invites-btn").addEventListener("click", () => {
+  downloadSectionAsPDF("invites-container", "Invitations");
+});
 
   uploadForm.addEventListener("submit", (e) => {
     e.preventDefault();
