@@ -25,7 +25,7 @@ async function loadInvitations() {
       }
     );
 
-      const data = await res.json().catch(() => []);
+    const data = await res.json().catch(() => []);
 
     if (!res.ok) {
       throw new Error(data.message || "Unable to fetch invitations");
@@ -38,13 +38,10 @@ async function loadInvitations() {
       return;
     }
 
-    data
-  .filter(invite => invite.invitedName && invite.invitedPhoneNumber)
-  .forEach((invite) => {
+    data.filter(invite => invite.invitedName && invite.invitedPhoneNumber).forEach((invite) => {
     const card = document.createElement("div");
     card.className = "invite-card";
     card.innerHTML = `
-      <h2>${fullName}</h2>
       <h3>${invite.invitedName}</h3>
       <p><strong>Phone:</strong> ${invite.invitedPhoneNumber}</p>
     `;
