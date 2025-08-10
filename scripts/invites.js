@@ -71,7 +71,6 @@ document.getElementById("cancel-invite-btn").addEventListener("click", () => {
   document.getElementById("invites-box").style.display = "flex";
   document.getElementById("add-invite-btn").style.display = "inline-block";
 
-  // Optional: Clear form
   document.getElementById("invite-name").value = '';
   document.getElementById("invite-phone").value = '';
 });

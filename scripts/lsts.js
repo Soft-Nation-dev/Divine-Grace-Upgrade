@@ -17,23 +17,23 @@ wireLogout();
 PreventBackButton();
 loadProfilePicture();
 
-// // LSTS Registration cutoff logic
-// const now = new Date();
-// const today = now.getDay();
-// const hours = now.getHours();
-// const minutes = now.getMinutes();
 
-// const isAfterFridayNoon =
-//   (today === 5 && (hours > 12 || (hours === 12 && minutes >= 0))) || today > 5;
+const now = new Date();
+const today = now.getDay();
+const hours = now.getHours();
+const minutes = now.getMinutes();
 
-// if (isAfterFridayNoon) {
-//   document.querySelector(".main-content").innerHTML = `
-//     <div style="text-align: center; padding: 40px; margin-top: 100px;">
-//       <h2 style="font-size: 2rem; color: #b71c1c;">LSTS Registration is currently closed.</h2>
-//       <p style="font-size: 1.2rem;">Please check back later. Registration is open until Friday 12:00 PM each week.</p>
-//     </div>
-//   `;
-// }
+const isAfterFridayNoon =
+  (today === 5 && (hours > 12 || (hours === 12 && minutes >= 0))) || today > 5;
+
+if (isAfterFridayNoon) {
+  document.querySelector(".main-content").innerHTML = `
+    <div style="text-align: center; padding: 40px; margin-top: 100px;">
+      <h2 style="font-size: 2rem; color: #b71c1c;">LSTS Registration is currently closed.</h2>
+      <p style="font-size: 1.2rem;">Please check back later. Registration is open until Friday 12:00 PM each week.</p>
+    </div>
+  `;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("membershipForm");

@@ -54,7 +54,6 @@ loadProfilePicture();
         marginTop: "100px",
       });
   
-      // Create a button for each department
       departments.forEach(dept => {
         const btn = document.createElement("button");
         btn.className = "whatsapp";

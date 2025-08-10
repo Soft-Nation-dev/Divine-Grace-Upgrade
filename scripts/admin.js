@@ -212,7 +212,7 @@ async function fetchAndDisplayInvites() {
 
     if (!Array.isArray(data)) throw new Error("Unexpected response format");
 
-    invitesContainer.innerHTML = ""; // Clear previous content
+    invitesContainer.innerHTML = ""; 
 
     data.forEach(user => {
       const userHeader = document.createElement("div");
@@ -258,8 +258,7 @@ async function fetchAndDisplayInvites() {
 
     await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
     setupTabSwitching(), fetchAndDisplayInvites();
-
-    // PDF download logic
+    
     function downloadSectionAsPDF(sectionId, filename) {
       const section = document.getElementById(sectionId);
       if (!section) return;

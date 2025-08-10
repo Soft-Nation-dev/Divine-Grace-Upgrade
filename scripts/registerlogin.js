@@ -59,7 +59,7 @@ function clearMessageOnInput(inputEl, messageId) {
   }
 }
 
-// Input fields
+
 const firstnameInput       = $('register-firstname');
 const nameInput            = $('register-name');
 const userNameInput        = $('register-username');
@@ -73,7 +73,6 @@ const confirmPasswordInput = $('register-confirm-password');
 const loginEmailInput      = $('login-email');
 const loginPasswordInput   = $('login-password');
 
-// Attach input listeners to clear errors on typing
 [
   firstnameInput,
   nameInput,
@@ -91,7 +90,6 @@ const loginPasswordInput   = $('login-password');
   clearMessageOnInput(input, 'login-message')
 );
 
-// ---- REGISTRATION HANDLER ----
 createAccountButton.addEventListener('click', async () => {
   hideMessage('register-message');
   setButtonLoading(createAccountButton, true);
@@ -178,7 +176,6 @@ createAccountButton.addEventListener('click', async () => {
   }
 });
 
-// ---- LOGIN HANDLER ----
 loginButton.addEventListener('click', async () => {
   hideMessage('login-message');
   setButtonLoading(loginButton, true);

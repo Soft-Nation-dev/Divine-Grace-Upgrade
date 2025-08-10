@@ -29,13 +29,11 @@ export function toggleVisibility(hide, show) {
   
     if (!hamburgerButton || !navMenu) return;
   
-    // open/close via hamburger
     hamburgerButton.addEventListener('click', () => {
       navMenu.classList.toggle('visible');
       mainContent.classList.toggle('blurred', navMenu.classList.contains('visible'));
     });
   
-    // close via exit icon
     if (exitNavButton) {
       exitNavButton.addEventListener('click', () => {
         navMenu.classList.remove('visible');
@@ -55,7 +53,7 @@ export function toggleVisibility(hide, show) {
           { method: 'POST', credentials: 'include' }
         );
           window.location.href = '../registerlogin';
-           sessionStorage.removeItem("popupDismissed"); //remove popup dismissal state
+           sessionStorage.removeItem("popupDismissed");
        
       } catch {
         alert('Logout error—please try again.');
@@ -74,7 +72,6 @@ export function returnHome() {
         { method: 'POST', credentials: 'include' }
       );
       
-      // You can force cache clear by redirecting to login directly
       window.location.href = '../index.html';
       sessionStorage.removeItem("popupDismissed");
     } catch {
@@ -89,7 +86,7 @@ export function returnHome() {
   export function PreventBackButton() {
 window.history.pushState({}, "", location.href);
 window.onpopstate = () => {
-  window.location.href = "../home"; // Always go back to dashboard
+  window.location.href = "../home"; 
 };
 
   }
@@ -104,13 +101,13 @@ window.onpopstate = () => {
         headers: {
           "Content-Type": "application/json"
         },
-        credentials: "include", // Include cookies for auth
+        credentials: "include",
         body: JSON.stringify({ email })
       })
         .then(response => {
           if (response.status === 401 || response.redirected) {
             alert("You are not authorized. Please log in first.");
-            window.location.href = "/login.html"; // Replace with your actual login page path
+            window.location.href = "/login.html"; 
             return;
           }
   
@@ -135,15 +132,11 @@ window.onpopstate = () => {
       .then(res => {
         if (!res.ok) {
           console.warn(`Secure check failed. Status: ${res.status}`);
-  
-          // Only redirect if the user is truly not logged in
           if (res.status === 405) {
             sessionStorage.removeItem("popupDismissed");
-            // Maybe show a message or fallback screen instead of immediate redirect
               window.location.href = "../registerlogin";
           }
-  
-          // Prevent trying to parse bad JSON
+
           throw new Error(`HTTP error! status: ${res.status}`);
         }
   
@@ -221,7 +214,7 @@ export function loadProfilePicture() {
     }
   }
 
-  fetchProfilePicture(); // always try to load picture on page load
+  fetchProfilePicture(); 
 
   if (fileInput && uploadButton && uploadMessage && fileNameSpan) {
     fileInput.addEventListener('change', () => {
@@ -323,17 +316,13 @@ export function loadProfilePicture() {
 
 export function addReceiptBackground() {
   const receipt = document.getElementById("receipt");
-
-  // Remove previous background if it exists
   const existingBg = document.querySelector(".receipt-bg");
   if (existingBg) existingBg.remove();
 
-  // Create new background image
   const bgImg = document.createElement("img");
-  bgImg.src = "../images/mlogo.png"; // or Base64 string if needed
+  bgImg.src = "../images/mlogo.png"; 
   bgImg.className = "receipt-bg";
 
-  // Apply the required styles manually
   Object.assign(bgImg.style, {
     position: "absolute",
     top: "0",
@@ -346,8 +335,7 @@ export function addReceiptBackground() {
     pointerEvents: "none",
   });
 
-  // Insert background into receipt container
-  receipt.style.position = "relative"; // Ensure parent is positioned
+  receipt.style.position = "relative"; 
   receipt.insertBefore(bgImg, receipt.firstChild);
 }
 
@@ -373,7 +361,6 @@ export function showPopup() {
      sessionStorage.setItem("popupDismissed", "true");
 
     if (closeButton) {
-      // Attach click handler only once
       closeButton.addEventListener("click", closePopup, { once: true });
     }
   }
@@ -384,7 +371,6 @@ export function closePopup() {
   const closeButton = document.getElementById("closePopUp");
 
   if (popup) {
-    // Disable the button and give feedback
     if (closeButton) {
       closeButton.disabled = true;
       closeButton.textContent = "Closing...";
@@ -392,10 +378,8 @@ export function closePopup() {
       closeButton.style.opacity = "0.6";
     }
 
-    // Trigger fade-out animation
     popup.classList.add("fade-out");
-
-    // Hide after animation completes
+    
     popup.addEventListener("animationend", () => {
       popup.style.display = "none";
       popup.classList.remove("fade-out");
