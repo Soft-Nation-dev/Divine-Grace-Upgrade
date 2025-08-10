@@ -94,11 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
         form.reset();
         schoolFieldsWrapper.style.display = "none";
       } else {
-        console.error("API response:", data);
         showAnimation("error", data.message || "Submission failed.");
       }
     } catch (err) {
-      console.error("LSTS form error:", err);
       showAnimation("error", "Network error—please try again.");
     } finally {
       submitBtn.disabled = false;
@@ -207,7 +205,6 @@ addReceiptBackground();
 
         })
         .catch((err) => {
-          console.error("PDF generation failed:", err);
           receiptElement.style.display = "none";
           spinner.remove();
           alert("There was a problem generating your receipt.");

@@ -116,8 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         categoryDiv.setAttribute("data-loaded", "true");
-
-        // ✅ Now scroll into view after everything is loaded
         if (show) {
           setTimeout(() => {
             categoryDiv.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -126,20 +124,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } catch (err) {
         categoryDiv.innerHTML = "<p class='error'>Failed to load messages.</p>";
-        console.error("Error fetching messages:", err);
       }
     });
   });
 
-  // ✅ Load latest messages on page load
   loadLatestMessages();
 
-  // ✅ Filter messages by title
   const searchInput = document.getElementById("search-input");
  
 });
 
-// ✅ Load and display latest 20 messages across all categories
 async function loadLatestMessages() {
   const categories = ["Sunday", "Midweek", "Friday"];
   let allMessages = [];

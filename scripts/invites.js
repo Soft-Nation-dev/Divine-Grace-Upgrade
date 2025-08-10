@@ -18,7 +18,7 @@ async function loadInvitations() {
       "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/my-invitations",
       {
         method: "GET",
-        credentials: "include", // ✅ essential for cookie/session-based auth
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -26,14 +26,11 @@ async function loadInvitations() {
     );
 
       const data = await res.json().catch(() => []);
-      console.log("Fetched invitations:", data);
 
     if (!res.ok) {
-      console.error("Server response:", data);
       throw new Error(data.message || "Unable to fetch invitations");
     }
 
-    // Clear previous content
     container.innerHTML = "";
 
     if (data.length === 0) {
@@ -47,6 +44,7 @@ async function loadInvitations() {
     const card = document.createElement("div");
     card.className = "invite-card";
     card.innerHTML = `
+      <h2>${fullName}</h2>
       <h3>${invite.invitedName}</h3>
       <p><strong>Phone:</strong> ${invite.invitedPhoneNumber}</p>
     `;
@@ -54,12 +52,10 @@ async function loadInvitations() {
   });
 
   } catch (error) {
-    console.error("Error loading invitations:", error);
     container.innerHTML = `<p class="error-msg">Failed to load invitations. Please try again later.</p>`;
   }
 }
 
-// Call this function when page loads
 document.addEventListener("DOMContentLoaded", loadInvitations);
 
 
@@ -97,25 +93,22 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
     return;
   }
 
-  // Change button text & disable it
   submitButton.textContent = "Submitting...";
-  submitButton.style.backgroundColor = "#444"; // Slightly darker
+  submitButton.style.backgroundColor = "#444"; 
   submitButton.disabled = true;
 
   try {
     const response = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/invitation', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // if session or cookie auth is needed
-        body: JSON.stringify({ InvitedName, InvitedPhoneNumber }),
+      credentials: 'include', 
+        
     });
 
-      console.log("Sending data:", { InvitedName, InvitedPhoneNumber });
     if (!response.ok) {
       throw new Error(`Failed with status: ${response.status}`);
     }
 
-    // Show success animation only if response was OK
     const overlay = document.getElementById("success-overlay");
     const spinner = overlay.querySelector(".success-spinner");
     const checkmark = overlay.querySelector(".success-checkmark");
@@ -132,16 +125,13 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
       spinner.style.display = "block";
       checkmark.classList.remove("show");
 
-      // Reset form
       nameInput.value = "";
       phoneInput.value = "";
 
-      // Hide form and show invite box again
       document.getElementById("invite-form").classList.add("hiddenn");
       document.getElementById("invites-box").style.display = "flex";
       document.getElementById("add-invite-btn").style.display = "inline-block";
 
-      // Reset button
       submitButton.textContent = "Submit";
       submitButton.style.backgroundColor = "";
         submitButton.disabled = false;
@@ -150,9 +140,7 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
 
   } catch (error) {
     alert("Submission failed. Please try again.");
-    console.error("Submission error:", error);
 
-    // Reset button even if failed
     submitButton.textContent = "Submit";
     submitButton.style.backgroundColor = "";
     submitButton.disabled = false;

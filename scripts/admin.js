@@ -41,7 +41,6 @@ async function isAdmin() {
   );
 
   if (!res.ok) {
-    console.error("Admin check failed:", res.status);
     return false;
   }
 
@@ -62,16 +61,20 @@ function setupTabSwitching() {
   prayerSection.style.display = "none";
   lstsSection.style.display = "none";
   messageSection.style.display = "none";
+  invitesSection.style.display = "none";
 
   showPrayersBtn.addEventListener("click", () => {
     prayerSection.style.display = "block";
     lstsSection.style.display = "none";
     messageSection.style.display = "none";
+    invitesSection.style.display = "none";
+
   });
 
   showLstsBtn.addEventListener("click", () => {
     prayerSection.style.display = "none";
     lstsSection.style.display = "block";
+    invitesSection.style.display = "none";
     messageSection.style.display = "none";
   });
 
@@ -79,6 +82,8 @@ function setupTabSwitching() {
     prayerSection.style.display = "none";
     lstsSection.style.display = "none";
     messageSection.style.display = "block";
+    invitesSection.style.display = "none";
+
   });
   showInvitesBtn.addEventListener("click", () => {
   prayerSection.style.display = "none";
@@ -141,7 +146,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           prayerContainer.appendChild(card);
         });
       } catch (err) {
-        console.error("Failed to fetch prayer requests:", err);
         prayerContainer.innerHTML = "<p class='error'>Could not load prayer requests.</p>";
       }
     }
@@ -197,7 +201,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           lstsContainer.appendChild(card);
         });
       } catch (err) {
-        console.error("Failed to fetch LSTS registrations:", err);
         lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
       }
     }
@@ -228,9 +231,12 @@ async function fetchAndDisplayInvites() {
           const card = document.createElement("div");
           card.className = "admin-card";
           card.innerHTML = `
+
+          <div>
+            <p><strong>Number:</strong> ${invite.number}</p>
+          </div>
             <p><strong>Name:</strong> ${invite.invitedName || "N/A"}</p>
             <p><strong>Phone:</strong> ${invite.invitedPhoneNumber || "N/A"}</p>
-            <p><strong>Created:</strong> ${new Date(invite.createdAt).toLocaleString()}</p>
           `;
           invitesWrapper.appendChild(card);
         });
@@ -242,7 +248,6 @@ async function fetchAndDisplayInvites() {
     });
 
   } catch (err) {
-    console.error("Failed to fetch invites:", err);
     invitesContainer.innerHTML = "<p class='error'>Could not load invitation records.</p>";
   }
 }
@@ -321,14 +326,12 @@ async function fetchAndDisplayInvites() {
         statusDiv.textContent = "✅ Upload successful!";
         statusDiv.className = "status-success";
       } else {
-        console.error("Upload failed:", xhr.statusText);
         statusDiv.textContent = "❌ Upload failed.";
         statusDiv.className = "status-error";
       }
     };
 
     xhr.onerror = function () {
-      console.error("Network error during upload.");
       statusDiv.textContent = "❌ Upload failed.";
       statusDiv.className = "status-error";
     };
