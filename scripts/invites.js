@@ -94,10 +94,17 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
   submitButton.disabled = true;
 
   try {
+
+    const payload = {
+    invitedName: InvitedName,
+    invitedPhoneNumber: InvitedPhoneNumber,
+  };
+
     const response = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/invitation', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include', 
+      body: JSON.stringify(payload),
         
     });
 
