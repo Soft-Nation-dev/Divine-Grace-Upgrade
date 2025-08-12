@@ -15,7 +15,6 @@ export async function loadUserData() {
 
     const user = await res.json();
 
-    // Fill in UI
     document.getElementById('user-name').textContent                = `${user.firstName} ${user.otherNames}`;
     document.getElementById('user-department').textContent          = user.departmentInChurch   || '—';
     document.getElementById('user-phone').textContent               = user.phoneNumber  || '—';
@@ -26,6 +25,5 @@ export async function loadUserData() {
     document.getElementById('welcome-message').textContent          = `Welcome back, ${user.userName}`;
   } catch (err) {
     console.error("Network or unexpected error:", err);
-    // Optionally show an error on the UI instead of redirecting
   }
 }
