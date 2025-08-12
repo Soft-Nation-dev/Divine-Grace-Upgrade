@@ -2,7 +2,6 @@ import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfileP
 
 
 
-
 renderHeader();
 wireLogout();
 checkSession();
@@ -13,7 +12,19 @@ loadProfilePicture();
 
 document.addEventListener('DOMContentLoaded', () => {
   const submitButton = document.querySelector('.submit-button');
-  const textarea     = document.querySelector('.big-textarea');
+  const textarea = document.querySelector('.big-textarea');
+  
+
+const overlay = document.getElementById('success-overlay');
+if (overlay) {
+  overlay.classList.add('hiddenn');
+
+  const spinner = overlay.querySelector('.success-spinner');
+  const checkmark = overlay.querySelector('.success-checkmark');
+  spinner?.classList.add('hiddenn');
+  checkmark?.classList.add('hiddenn');
+}
+
 
   submitButton.addEventListener('click', async () => {
     const message = textarea.value.trim();

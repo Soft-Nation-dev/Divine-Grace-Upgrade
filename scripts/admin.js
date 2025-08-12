@@ -218,7 +218,7 @@ async function fetchAndDisplayInvites() {
       const userHeader = document.createElement("div");
       userHeader.className = "user-section";
       userHeader.innerHTML = `
-        <h3>${user.fullName}</h3>
+        <p>${user.fullName}</p>
         <p><strong>Email:</strong> ${user.email}</p>
       `;
       invitesContainer.appendChild(userHeader);
@@ -232,14 +232,15 @@ async function fetchAndDisplayInvites() {
           card.className = "admin-card";
           card.innerHTML = `
 
-          <div>
             <p><strong>Number:</strong> ${invite.number}</p>
-          </div>
             <p><strong>Name:</strong> ${invite.invitedName || "N/A"}</p>
             <p><strong>Phone:</strong> ${invite.invitedPhoneNumber || "N/A"}</p>
           `;
           invitesWrapper.appendChild(card);
         });
+
+
+
 
         invitesContainer.appendChild(invitesWrapper);
       } else {

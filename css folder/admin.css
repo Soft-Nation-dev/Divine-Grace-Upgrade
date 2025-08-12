@@ -19,8 +19,10 @@
   }
   
   .admin-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 20px;
   }
   
@@ -29,6 +31,7 @@
     border-left: 6px solid #4a90e2;
     padding: 16px 20px;
     border-radius: 8px;
+    /* width: 500px; */
     overflow-wrap: break-word;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   }
@@ -185,7 +188,6 @@
   text-align: center;
 }
 
-/* Loader animation inside button */
 .loader-circle {
   display: inline-block;
   width: 14px;
@@ -202,7 +204,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* Status messages */
 .status-text {
   margin-top: 10px;
   font-weight: bold;

@@ -118,7 +118,6 @@
     background-color: #bbb;
 }
 
-/* Overlay covers whole screen with blur effect */
 .success-overlay {
     position: fixed;
     top: 0;
@@ -136,13 +135,10 @@
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
-/* When active, make it visible */
 .success-overlay.show {
     opacity: 1;
     visibility: visible;
 }
-
-/* Message box */
 .success-message {
     background: #ffffff;
     padding: 30px;
@@ -156,7 +152,6 @@
     font-family: 'Nunito Sans', sans-serif;
 }
 
-/* Spinner (while waiting) */
 .success-spinner {
     border: 4px solid #e0e0e0;
     border-top: 4px solid #5f3dc4;
@@ -167,7 +162,6 @@
     animation: spin 1s linear infinite;
 }
 
-/* Checkmark after success */
 .success-checkmark {
     font-size: 40px;
     color: #28a745;
@@ -176,18 +170,15 @@
     display: none;
 }
 
-/* Show checkmark */
 .success-checkmark.show {
     display: block;
 }
 
-/* Text */
 .success-message h2 {
     font-size: 20px;
     color: #333;
 }
 
-/* Animations */
 @keyframes popUp {
     from {
         transform: scale(0.8);
