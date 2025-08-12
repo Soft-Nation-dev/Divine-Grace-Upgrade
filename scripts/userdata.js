@@ -7,11 +7,11 @@ export async function loadUserData() {
 
     console.log("Profile response status:", res.status);
 
-    if (res.status === 401 || res.status === 403) {
-      console.warn("Not authenticated, redirecting...");
-      window.location.replace('../registerlogin');
-      return;
-    }
+    // if (res.status === 401 || res.status === 403) {
+    //   console.warn("Not authenticated, redirecting...");
+    //   window.location.replace('../registerlogin');
+    //   return;
+    // }
 
     const user = await res.json();
 
