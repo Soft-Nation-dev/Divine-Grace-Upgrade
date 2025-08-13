@@ -59,7 +59,6 @@ function clearMessageOnInput(inputEl, messageId) {
   }
 }
 
-
 const firstnameInput       = $('register-firstname');
 const nameInput            = $('register-name');
 const userNameInput        = $('register-username');
@@ -141,7 +140,6 @@ createAccountButton.addEventListener('click', async () => {
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/register',
       {
         method: 'POST',
-        credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           FirstName,
@@ -193,20 +191,23 @@ loginButton.addEventListener('click', async () => {
     setButtonLoading(loginButton, false);
     return;
   }
+
   try {
     const res = await fetch(
       'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/login',
       {
-        method:      'POST',
-        credentials: 'include',
-        headers:     { 'Content-Type': 'application/json' },
-        body:        JSON.stringify({ email, password })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       }
     );
 
     const data = await res.json();
+    console.log('Login response:', data);
 
-    if (res.ok) {
+    if (res.ok && data.token) {
+      console.log('Login successful:', data.token);
+      sessionStorage.setItem('authToken', data.token); // <-- updated here
       window.location.href = '../home';
     } else {
       showMessage('login-message', data.message || 'Login failed');
@@ -218,3 +219,4 @@ loginButton.addEventListener('click', async () => {
     setButtonLoading(loginButton, false);
   }
 });
+

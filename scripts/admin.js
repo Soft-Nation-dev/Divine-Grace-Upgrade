@@ -1,5 +1,14 @@
-import { renderHeader, wireLogout, PreventBackButton, makeAdmin, checkSession, loadProfilePicture, returnHome, preventBackCacheReload } from "./utils.js";
-
+import {
+  renderHeader,
+  wireLogout,
+  PreventBackButton,
+  makeAdmin,
+  checkSession,
+  loadProfilePicture,
+  returnHome,
+  preventBackCacheReload,
+  authHeaders
+} from "./utils.js";
 
 renderHeader();
 wireLogout();
@@ -36,62 +45,29 @@ async function isAdmin() {
     "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/isAadmin",
     {
       method: "GET",
-      credentials: "include",
+      headers: authHeaders()
     }
   );
 
-  if (!res.ok) {
-    return false;
-  }
-
-  return await res.json();
+  return res.ok ? await res.json() : false;
 }
 
 function setupTabSwitching() {
-  const prayerSection = document.getElementById("prayer-section");
-  const lstsSection = document.getElementById("lsts-section");
-  const messageSection = document.getElementById("message-section");
-  const invitesSection = document.getElementById("invites-section");
+  const sections = {
+    "prayer-section": "show-prayers-btn",
+    "lsts-section": "show-lsts-btn",
+    "message-section": "show-messages-btn",
+    "invites-section": "show-invites-btn"
+  };
 
-  const showPrayersBtn = document.getElementById("show-prayers-btn");
-  const showLstsBtn = document.getElementById("show-lsts-btn");
-  const showMessagesBtn = document.getElementById("show-messages-btn");
-  const showInvitesBtn = document.getElementById("show-invites-btn");
-
-  prayerSection.style.display = "none";
-  lstsSection.style.display = "none";
-  messageSection.style.display = "none";
-  invitesSection.style.display = "none";
-
-  showPrayersBtn.addEventListener("click", () => {
-    prayerSection.style.display = "block";
-    lstsSection.style.display = "none";
-    messageSection.style.display = "none";
-    invitesSection.style.display = "none";
-
-  });
-
-  showLstsBtn.addEventListener("click", () => {
-    prayerSection.style.display = "none";
-    lstsSection.style.display = "block";
-    invitesSection.style.display = "none";
-    messageSection.style.display = "none";
-  });
-
-  showMessagesBtn.addEventListener("click", () => {
-    prayerSection.style.display = "none";
-    lstsSection.style.display = "none";
-    messageSection.style.display = "block";
-    invitesSection.style.display = "none";
-
-  });
-  showInvitesBtn.addEventListener("click", () => {
-  prayerSection.style.display = "none";
-  lstsSection.style.display = "none";
-  messageSection.style.display = "none";
-  invitesSection.style.display = "block";
-});
-
+  for (const [sectionId, buttonId] of Object.entries(sections)) {
+    document.getElementById(buttonId).addEventListener("click", () => {
+      for (const sid of Object.keys(sections)) {
+        document.getElementById(sid).style.display = "none";
+      }
+      document.getElementById(sectionId).style.display = "block";
+    });
+  }
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -101,20 +77,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const invitesContainer = document.getElementById("invites-container");
 
   showLoader("Checking admin access...");
-
   const isAdminUser = await isAdmin();
 
   setTimeout(async () => {
     if (!isAdminUser) {
       updateLoader("You are not an admin", false);
-      setTimeout(() => {
-        window.location.href = "../home";
-      }, 2000);
+      setTimeout(() => window.location.href = "../home", 2000);
       return;
     }
 
     updateLoader("Access granted", true);
-
     setTimeout(() => {
       hideLoader();
       mainContent.style.display = "block";
@@ -123,16 +95,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const prayerContainer = document.getElementById("prayer-requests");
     const lstsContainer = document.getElementById("lsts-registrations");
 
-
-    const invitesEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/get-invitations";
-    const prayerEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers";
-    const lstsEndpoint = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM";
+    const endpoints = {
+      invites: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/get-invitations",
+      prayers: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers",
+      lsts: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM"
+    };
 
     async function fetchAndDisplayPrayers() {
       try {
-        const res = await fetch(prayerEndpoint, { credentials: "include" });
+        const res = await fetch(endpoints.prayers, { headers: authHeaders() });
         const data = await res.json();
-
         if (!Array.isArray(data)) throw new Error("Unexpected response");
 
         data.forEach(req => {
@@ -145,134 +117,103 @@ document.addEventListener("DOMContentLoaded", async () => {
           `;
           prayerContainer.appendChild(card);
         });
-      } catch (err) {
+      } catch {
         prayerContainer.innerHTML = "<p class='error'>Could not load prayer requests.</p>";
       }
     }
 
     async function fetchAndDisplayLSTS() {
       try {
-        const res = await fetch(lstsEndpoint, { credentials: "include" });
+        const res = await fetch(endpoints.lsts, { headers: authHeaders() });
         const data = await res.json();
         if (!Array.isArray(data)) throw new Error("Unexpected response");
 
         data.forEach(person => {
-          const {
-            surname = "",
-            otherNames = "",
-            phoneNumber = "",
-            email = "",
-            residentialAddress = "",
-            departmentInChurch = "",
-            positionInChurch = "",
-            gender = "",
-            student = "",
-            departmentInSchool = "",
-            level = "",
-            submittedAt = ""
-          } = person;
-
-          let submittedAtFormatted = "N/A";
-          const parsedDate = new Date(submittedAt);
-          if (!isNaN(parsedDate)) {
-            submittedAtFormatted = parsedDate.toLocaleString();
-          }
-
           const card = document.createElement("div");
           card.className = "admin-card";
           card.innerHTML = `
-            <p><strong>Surname:</strong> ${surname}</p>
-            <p><strong>Other Names:</strong> ${otherNames}</p>
-            <p><strong>Phone:</strong> ${phoneNumber}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Residential Address:</strong> ${residentialAddress}</p>
-            <p><strong>Department in Church:</strong> ${departmentInChurch}</p>
-            <p><strong>Position:</strong> ${positionInChurch}</p>
-            <p><strong>Gender:</strong> ${gender}</p>
-            <p><strong>Is Student:</strong> ${student}</p>
-            ${
-              student.toLowerCase() === "yes"
-                ? `<p><strong>Dept. in School:</strong> ${departmentInSchool}</p>
-                   <p><strong>Level:</strong> ${level}</p>`
-                : ""
+            <p><strong>Surname:</strong> ${person.surname}</p>
+            <p><strong>Other Names:</strong> ${person.otherNames}</p>
+            <p><strong>Phone:</strong> ${person.phoneNumber}</p>
+            <p><strong>Email:</strong> ${person.email}</p>
+            <p><strong>Residential Address:</strong> ${person.residentialAddress}</p>
+            <p><strong>Department in Church:</strong> ${person.departmentInChurch}</p>
+            <p><strong>Position:</strong> ${person.positionInChurch}</p>
+            <p><strong>Gender:</strong> ${person.gender}</p>
+            <p><strong>Is Student:</strong> ${person.student}</p>
+            ${person.student?.toLowerCase() === "yes" ? `
+              <p><strong>Dept. in School:</strong> ${person.departmentInSchool}</p>
+              <p><strong>Level:</strong> ${person.level}</p>` : ""
             }
-            <p><strong>Submitted At:</strong> ${submittedAtFormatted}</p>
+            <p><strong>Submitted At:</strong> ${new Date(person.submittedAt).toLocaleString()}</p>
           `;
           lstsContainer.appendChild(card);
         });
-      } catch (err) {
+      } catch {
         lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
       }
     }
-    
-async function fetchAndDisplayInvites() {
-  try {
-    const res = await fetch(invitesEndpoint, { credentials: "include" });
-    const data = await res.json();
 
-    if (!Array.isArray(data)) throw new Error("Unexpected response format");
+    async function fetchAndDisplayInvites() {
+      try {
+        const res = await fetch(endpoints.invites, { headers: authHeaders() });
+        const data = await res.json();
+        if (!Array.isArray(data)) throw new Error("Unexpected response");
 
-    invitesContainer.innerHTML = ""; 
-
-    data.forEach(user => {
-      const userHeader = document.createElement("div");
-      userHeader.className = "user-section";
-      userHeader.innerHTML = `
-        <p>${user.fullName}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
-      `;
-      invitesContainer.appendChild(userHeader);
-
-      if (Array.isArray(user.invitations) && user.invitations.length > 0) {
-        const invitesWrapper = document.createElement("div");
-        invitesWrapper.className = "invite-grid";
-
-        user.invitations.forEach(invite => {
-          const card = document.createElement("div");
-          card.className = "admin-card";
-          card.innerHTML = `
-
-            <p><strong>Number:</strong> ${invite.number}</p>
-            <p><strong>Name:</strong> ${invite.invitedName || "N/A"}</p>
-            <p><strong>Phone:</strong> ${invite.invitedPhoneNumber || "N/A"}</p>
+        invitesContainer.innerHTML = "";
+        data.forEach(user => {
+          const userHeader = document.createElement("div");
+          userHeader.className = "user-section";
+          userHeader.innerHTML = `
+            <p>${user.fullName}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
           `;
-          invitesWrapper.appendChild(card);
+          invitesContainer.appendChild(userHeader);
+
+          if (Array.isArray(user.invitations) && user.invitations.length > 0) {
+            const invitesWrapper = document.createElement("div");
+            invitesWrapper.className = "invite-grid";
+
+            user.invitations.forEach(invite => {
+              const card = document.createElement("div");
+              card.className = "admin-card";
+              card.innerHTML = `
+                <p><strong>Number:</strong> ${invite.number}</p>
+                <p><strong>Name:</strong> ${invite.invitedName || "N/A"}</p>
+                <p><strong>Phone:</strong> ${invite.invitedPhoneNumber || "N/A"}</p>
+              `;
+              invitesWrapper.appendChild(card);
+            });
+
+            invitesContainer.appendChild(invitesWrapper);
+          } else {
+            invitesContainer.innerHTML += "<p>No invitations yet.</p>";
+          }
         });
-
-
-
-
-        invitesContainer.appendChild(invitesWrapper);
-      } else {
-        invitesContainer.innerHTML += "<p>No invitations yet.</p>";
+      } catch {
+        invitesContainer.innerHTML = "<p class='error'>Could not load invitation records.</p>";
       }
-    });
+    }
 
-  } catch (err) {
-    invitesContainer.innerHTML = "<p class='error'>Could not load invitation records.</p>";
-  }
-}
-
-
-
-
-
-    await Promise.all([fetchAndDisplayPrayers(), fetchAndDisplayLSTS()]);
-    setupTabSwitching(), fetchAndDisplayInvites();
+    await Promise.all([
+      fetchAndDisplayPrayers(),
+      fetchAndDisplayLSTS(),
+      fetchAndDisplayInvites()
+    ]);
     
+    setupTabSwitching();
+
     function downloadSectionAsPDF(sectionId, filename) {
       const section = document.getElementById(sectionId);
       if (!section) return;
 
-      const options = {
+      html2pdf().from(section).set({
         margin: 10,
         filename: `${filename}_${new Date().toISOString().replace(/[:.]/g, '-')}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      html2pdf().from(section).set(options).save();
+      }).save();
     }
 
     document.getElementById("download-prayers-btn").addEventListener("click", () => {
@@ -283,11 +224,12 @@ async function fetchAndDisplayInvites() {
       downloadSectionAsPDF("lsts-registrations", "LSTS_Registrations");
     });
 
-      document.getElementById("download-invites-btn").addEventListener("click", () => {
-  downloadSectionAsPDF("invites-container", "Invitations");
-});
+    document.getElementById("download-invites-btn").addEventListener("click", () => {
+      downloadSectionAsPDF("invites-container", "Invitations");
+    });
 
-  });
+  }, 1000);
+
   uploadForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -311,7 +253,7 @@ async function fetchAndDisplayInvites() {
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage", true);
-    xhr.withCredentials = true;
+    xhr.setRequestHeader("Authorization", `Bearer ${sessionStorage.getItem("authToken")}`);
 
     xhr.upload.onprogress = function (event) {
       if (event.lengthComputable) {
@@ -322,13 +264,12 @@ async function fetchAndDisplayInvites() {
     };
 
     xhr.onload = function () {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        statusDiv.textContent = "✅ Upload successful!";
-        statusDiv.className = "status-success";
-      } else {
-        statusDiv.textContent = "❌ Upload failed.";
-        statusDiv.className = "status-error";
-      }
+      statusDiv.textContent = xhr.status >= 200 && xhr.status < 300
+        ? "✅ Upload successful!"
+        : "❌ Upload failed.";
+      statusDiv.className = xhr.status >= 200 && xhr.status < 300
+        ? "status-success"
+        : "status-error";
     };
 
     xhr.onerror = function () {

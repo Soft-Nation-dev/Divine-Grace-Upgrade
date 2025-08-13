@@ -1,14 +1,24 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture, returnHome, preventBackCacheReload } from "./utils.js";
+import {
+  renderHeader,
+  wireLogout,
+  PreventBackButton,
+  checkSession,
+  loadProfilePicture,
+  returnHome,
+  preventBackCacheReload,
+  authHeaders
+} from "./utils.js";
 
-
-renderHeader(); 
+renderHeader();
 wireLogout();
-checkSession(); 
+checkSession();
 preventBackCacheReload();
 returnHome();
 PreventBackButton();
 loadProfilePicture();
+
 document.getElementById("invite-form").classList.add("hiddenn");
+
 async function loadInvitations() {
   const container = document.getElementById("invites-box");
   container.innerHTML = `<p class="loading-msg">Loading invitations...</p>`;
@@ -18,10 +28,7 @@ async function loadInvitations() {
       "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/my-invitations",
       {
         method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: authHeaders()
       }
     );
 
@@ -38,15 +45,17 @@ async function loadInvitations() {
       return;
     }
 
-    data.filter(invite => invite.invitedName && invite.invitedPhoneNumber).forEach((invite) => {
-    const card = document.createElement("div");
-    card.className = "invite-card";
-    card.innerHTML = `
-      <h3>${invite.invitedName}</h3>
-      <p><strong>Phone:</strong> ${invite.invitedPhoneNumber}</p>
-    `;
-    container.appendChild(card);
-  });
+    data
+      .filter(invite => invite.invitedName && invite.invitedPhoneNumber)
+      .forEach((invite) => {
+        const card = document.createElement("div");
+        card.className = "invite-card";
+        card.innerHTML = `
+          <h3>${invite.invitedName}</h3>
+          <p><strong>Phone:</strong> ${invite.invitedPhoneNumber}</p>
+        `;
+        container.appendChild(card);
+      });
 
   } catch (error) {
     container.innerHTML = `<p class="error-msg">Failed to load invitations. Please try again later.</p>`;
@@ -54,11 +63,6 @@ async function loadInvitations() {
 }
 
 document.addEventListener("DOMContentLoaded", loadInvitations);
-
-
-
-
-
 
 document.getElementById("add-invite-btn").addEventListener("click", () => {
   document.getElementById("invites-box").style.display = "none";
@@ -75,8 +79,6 @@ document.getElementById("cancel-invite-btn").addEventListener("click", () => {
   document.getElementById("invite-phone").value = '';
 });
 
-
-
 document.getElementById("submit-invite-btn").addEventListener("click", async () => {
   const nameInput = document.getElementById("invite-name");
   const phoneInput = document.getElementById("invite-phone");
@@ -90,23 +92,23 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
   }
 
   submitButton.textContent = "Submitting...";
-  submitButton.style.backgroundColor = "#444"; 
+  submitButton.style.backgroundColor = "#444";
   submitButton.disabled = true;
 
   try {
-
     const payload = {
-    invitedName: InvitedName,
-    invitedPhoneNumber: InvitedPhoneNumber,
-  };
+      invitedName: InvitedName,
+      invitedPhoneNumber: InvitedPhoneNumber
+    };
 
-    const response = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/invitation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', 
-      body: JSON.stringify(payload),
-        
-    });
+    const response = await fetch(
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/invitation',
+      {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify(payload)
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed with status: ${response.status}`);
@@ -137,8 +139,9 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
 
       submitButton.textContent = "Submit";
       submitButton.style.backgroundColor = "";
-        submitButton.disabled = false;
-        loadInvitations()
+      submitButton.disabled = false;
+
+      loadInvitations();
     }, 4000);
 
   } catch (error) {
@@ -149,4 +152,3 @@ document.getElementById("submit-invite-btn").addEventListener("click", async () 
     submitButton.disabled = false;
   }
 });
-

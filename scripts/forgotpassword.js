@@ -1,3 +1,5 @@
+import { authHeaders } from './utils.js';
+
 const API_BASE = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -82,7 +84,10 @@ function resetPassword(email, token) {
 
   fetch(`${API_BASE}/reset-password`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...authHeaders(), // Use auth headers from utils
+    },
     body: JSON.stringify({ email, token, newPassword })
   })
     .then(res => {

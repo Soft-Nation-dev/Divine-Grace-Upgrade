@@ -1,4 +1,11 @@
-
+ export function authHeaders(extraHeaders = {}) {
+  const token = sessionStorage.getItem("authToken");
+  return {
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    ...extraHeaders,
+  };
+}
 
 export function setButtonLoading(buttonEl, isLoading) {
   const text = buttonEl.querySelector('.btn-text');
@@ -46,34 +53,20 @@ export function wireLogout() {
   const signOutButton = document.querySelector('.js-sign-out-button');
   if (!signOutButton) return;
 
-  signOutButton.addEventListener('click', async () => {
-    try {
-      await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
-      sessionStorage.removeItem("popupDismissed");
-      window.location.href = '../registerlogin';
-    } catch {
-      alert('Logout error—please try again.');
-    }
+  signOutButton.addEventListener('click', () => {
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("popupDismissed");
+    window.location.href = '../registerlogin';
   });
 }
 
 export function returnHome() {
   const homeButton = document.querySelector(".home-button");
 
-  homeButton.addEventListener("click", async () => {
-    try {
-      await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include'
-      });
-      sessionStorage.removeItem("popupDismissed");
-      window.location.href = '../index.html';
-    } catch {
-      alert('Logout error—please try again.');
-    }
+  homeButton.addEventListener("click", () => {
+    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("popupDismissed");
+    window.location.href = '../index.html';
   });
 }
 
@@ -91,14 +84,13 @@ export function makeAdmin() {
 
     fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/assign-admin", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
+      headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ email })
     })
       .then(response => {
-        if (response.status === 401 || response.redirected) {
-          alert("You are not authorized. Please log in first.");
-          window.location.href = "/login.html";
+        if (response.status === 401) {
+          alert("You are not authorized. Please log in.");
+          window.location.href = "/registerlogin";
           return;
         }
         if (response.ok) {
@@ -115,14 +107,14 @@ export function makeAdmin() {
 }
 
 export function redirect() {
-  fetch('/api/secure-data', { credentials: 'include' })
+  fetch('/api/secure-data', {
+    headers: authHeaders()
+  })
     .then(res => {
       if (!res.ok) {
-        console.warn(`Secure check failed. Status: ${res.status}`);
-        if (res.status === 405) {
-          sessionStorage.removeItem("popupDismissed");
-          window.location.href = "../registerlogin";
-        }
+        sessionStorage.removeItem("popupDismissed");
+        sessionStorage.removeItem("authToken");
+        window.location.href = "../registerlogin";
         throw new Error(`HTTP error! status: ${res.status}`);
       }
       return res.json();
@@ -131,20 +123,22 @@ export function redirect() {
     .catch(err => console.error("Redirect error:", err.message));
 }
 
-export async function checkSession(redirectUrl = '../registerlogin', delay = 1000) {
+export async function checkSession(redirectUrl = '../registerlogin') {
   try {
     const res = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check', {
       method: 'GET',
-      credentials: 'include',
+      headers: authHeaders()
     });
 
     const data = await res.json();
     if (!res.ok || !data.isAuthenticated) {
       sessionStorage.removeItem("popupDismissed");
+      sessionStorage.removeItem("authToken");
       window.location.href = redirectUrl;
     }
   } catch (err) {
     console.error('Session check failed:', err);
+    sessionStorage.removeItem("authToken");
     window.location.href = redirectUrl;
   }
 }
@@ -169,7 +163,7 @@ export function loadProfilePicture() {
   async function fetchProfilePicture() {
     try {
       const res = await fetch(`${backendBaseUrl}/api/users/profile-picture`, {
-        credentials: 'include',
+        headers: authHeaders()
       });
 
       if (res.ok) {
@@ -236,7 +230,7 @@ export function loadProfilePicture() {
         const res = await fetch(`${backendBaseUrl}/api/users/upload-profile-picture`, {
           method: 'POST',
           body: formData,
-          credentials: 'include',
+          headers: authHeaders(),
         });
 
         if (res.ok) {

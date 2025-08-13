@@ -6,7 +6,8 @@ import {
   loadProfilePicture,
   addReceiptBackground,
   returnHome,
-  preventBackCacheReload
+  preventBackCacheReload,
+  authHeaders
 } from "./utils.js";
 
 renderHeader();
@@ -16,7 +17,6 @@ returnHome();
 wireLogout();
 PreventBackButton();
 loadProfilePicture();
-
 
 const now = new Date();
 const today = now.getDay();
@@ -71,26 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.textContent = "Submitting…";
 
     try {
-      const fetchStart = performance.now();
       const res = await fetch(
         "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/LSTSFORM",
         {
           method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
+          headers: authHeaders(),
           body: JSON.stringify(payload),
         }
       );
 
       const data = await res.json().catch(() => ({}));
 
-      const animStart = performance.now();
       if (res.ok) {
-        showAnimation(
-          "success",
-          data.message || "Form submitted successfully.",
-          payload
-        );
+        showAnimation("success", data.message || "Form submitted successfully.", payload);
         form.reset();
         schoolFieldsWrapper.style.display = "none";
       } else {
@@ -126,11 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function generateReceipt(data) {
-    
     const receiptElement = document.getElementById("receipt");
 
-    document.getElementById("r-name").textContent =
-      `${data.Surname} ${data.OtherNames}`;
+    document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
     document.getElementById("r-phone").textContent = data.PhoneNumber;
     document.getElementById("r-email").textContent = data.Email;
     document.getElementById("r-address").textContent = data.ResidentialAddress;
@@ -141,8 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (data.Student === "Yes") {
       document.getElementById("student-info").style.display = "block";
-      document.getElementById("r-school-dept").textContent =
-        data.DepartmentInSchool;
+      document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
       document.getElementById("r-level").textContent = data.Level;
     } else {
       document.getElementById("student-info").style.display = "none";
@@ -168,8 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.body.appendChild(spinner);
 
-addReceiptBackground();
-
+    addReceiptBackground();
 
     const now = new Date();
     const timestamp = now.toISOString().replace(/[:.]/g, "-");
@@ -179,7 +168,6 @@ addReceiptBackground();
     const fileName = `LSTS_Receipt_${safeName}_${timestamp}.pdf`;
 
     setTimeout(() => {
-
       html2pdf()
         .from(receiptElement)
         .set({
@@ -202,7 +190,6 @@ addReceiptBackground();
         .then(() => {
           receiptElement.style.display = "none";
           spinner.remove();
-
         })
         .catch((err) => {
           receiptElement.style.display = "none";

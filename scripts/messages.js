@@ -1,6 +1,15 @@
-import { renderHeader, wireLogout, PreventBackButton, checkSession, loadProfilePicture, returnHome, preventBackCacheReload } from "./utils.js";
+import {
+  renderHeader,
+  wireLogout,
+  PreventBackButton,
+  checkSession,
+  loadProfilePicture,
+  returnHome,
+  preventBackCacheReload,
+  authHeaders
+} from "./utils.js";
 
-renderHeader(); 
+renderHeader();
 checkSession();
 returnHome();
 wireLogout();
@@ -26,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         audio.currentTime = 0;
       });
 
-      // Toggle visibility
       const allMessageDivs = document.querySelectorAll(".message-category");
       let show = true;
 
@@ -56,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const res = await fetch(endpoint, {
           method: "GET",
-          credentials: "include",
+          headers: authHeaders(),
         });
 
         if (!res.ok) {
@@ -70,10 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
           categoryDiv.innerHTML = "<p>No messages available.</p>";
         } else {
           messages.forEach(msg => {
-            if (!msg.filePath) {
-              console.warn("Missing filePath for message:", msg);
-              return;
-            }
+            if (!msg.filePath) return;
 
             const audioUrl = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/${msg.filePath}`;
 
@@ -89,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             categoryDiv.appendChild(card);
 
-            // Download button
             const downloadBtn = card.querySelector(".download-btn");
             downloadBtn.addEventListener("click", () => {
               const link = document.createElement("a");
@@ -98,12 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
               link.click();
             });
 
-            // Add to latest messages
             const latestMessagesContainer = document.getElementById("latest-messages");
             const latestCard = card.cloneNode(true);
             latestMessagesContainer.appendChild(latestCard);
 
-            // Ensure only one audio plays at a time
             const newAudio = card.querySelector("audio");
             newAudio.addEventListener("play", () => {
               document.querySelectorAll("audio").forEach(audio => {
@@ -129,9 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   loadLatestMessages();
-
-  const searchInput = document.getElementById("search-input");
- 
 });
 
 async function loadLatestMessages() {
@@ -141,7 +140,10 @@ async function loadLatestMessages() {
   try {
     for (const category of categories) {
       const endpoint = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage?category=${category}`;
-      const res = await fetch(endpoint, { method: "GET", credentials: "include" });
+      const res = await fetch(endpoint, {
+        method: "GET",
+        headers: authHeaders(),
+      });
       if (!res.ok) continue;
 
       const text = await res.text();

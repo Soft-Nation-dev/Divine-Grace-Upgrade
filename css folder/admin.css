@@ -19,10 +19,8 @@
   }
   
   .admin-grid {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
   }
   
@@ -31,7 +29,6 @@
     border-left: 6px solid #4a90e2;
     padding: 16px 20px;
     border-radius: 8px;
-    /* width: 500px; */
     overflow-wrap: break-word;
     box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   }
@@ -187,6 +184,7 @@
   color: #333;
   text-align: center;
 }
+
 
 .loader-circle {
   display: inline-block;
