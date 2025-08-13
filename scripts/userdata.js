@@ -18,10 +18,7 @@ export async function loadUserData() {
       }
     );
 
-    console.log("Profile response status:", res.status);
-
     const user = await res.json();
-    console.log("User data loaded:", user);
 
     document.getElementById('user-name').textContent                = `${user.firstName} ${user.otherNames}`;
     document.getElementById('user-department').textContent          = user.departmentInChurch   || '—';
