@@ -292,19 +292,6 @@ export function preventBackCacheReload() {
   });
 }
 
-export function showPopup() {
-  const popup = document.getElementById("popup-invite");
-  const closeButton = document.getElementById("closePopUp");
-
-  if (popup && !sessionStorage.getItem("popupDismissed")) {
-    popup.style.display = "flex";
-    sessionStorage.setItem("popupDismissed", "true");
-
-    if (closeButton) {
-      closeButton.addEventListener("click", closePopup, { once: true });
-    }
-  }
-}
 
 export function closePopup() {
   const popup = document.getElementById("popup-invite");

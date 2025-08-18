@@ -1,4 +1,4 @@
-import { renderHeader, wireLogout, PreventBackButton, showPopup, loadProfilePicture, returnHome, preventBackCacheReload, checkSession} from "./utils.js";
+import { renderHeader, wireLogout, PreventBackButton, loadProfilePicture, returnHome, preventBackCacheReload, checkSession} from "./utils.js";
 import { loadUserData } from "./userdata.js";
  
 function leftBodySectionDisplay() {
@@ -38,5 +38,4 @@ window.addEventListener('DOMContentLoaded', () => {
   wireLogout();
   PreventBackButton();
   loadProfilePicture();
-  showPopup();
 });
