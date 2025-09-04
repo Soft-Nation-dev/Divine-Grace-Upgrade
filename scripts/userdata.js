@@ -19,6 +19,7 @@ export async function loadUserData() {
     );
 
     const user = await res.json();
+    console.log("Fetched user data:", user);
 
     document.getElementById('user-name').textContent                = `${user.firstName} ${user.otherNames}`;
     document.getElementById('user-department').textContent          = user.departmentInChurch   || '—';
@@ -26,8 +27,8 @@ export async function loadUserData() {
     document.getElementById('user-email').textContent               = user.email;
     document.getElementById('user-address').textContent             = user.residentialAddress     || '—';
     document.getElementById('user-school-department').textContent   = user.departmentInSchool || '—';
-    document.getElementById('user-firstname').textContent           = user.userName || '—';
-    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.userName}`;
+    document.getElementById('user-firstname').textContent           = user.username || '—';
+    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.username}`;
     
   } catch (err) {
     console.error("Network or unexpected error:", err);

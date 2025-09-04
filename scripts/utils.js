@@ -124,25 +124,33 @@ export function redirect() {
 }
 
 export async function checkSession(redirectUrl = '../registerlogin') {
-  // try {
-  //   const res = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check', {
-  //     method: 'GET',
-  //     headers: authHeaders()
-  //   });
+  try {
+    const res = await fetch(
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Auth/session',
+      {
+        method: 'GET',
+        headers: authHeaders()
+      }
+    );
 
-  //   const data = await res.json();
-  //   if (!res.ok || !data.isAuthenticated) {
-  //     sessionStorage.removeItem("popupDismissed");
-  //     sessionStorage.removeItem("authToken");
-  //     // window.location.href = redirectUrl;
-  //   }
-  // } catch (err) {
-  //   console.error('Session check failed:', err);
-  //   sessionStorage.removeItem("authToken");
-  //   // window.location.href = redirectUrl;
-  // }
-  console.log("Session check skipped for now.");
+    const data = await res.json();
+
+    if (res.ok && data.isAuthenticated) {
+      return true;
+    } else {
+      sessionStorage.removeItem("popupDismissed");
+      sessionStorage.removeItem("authToken");
+      window.location.href = redirectUrl;
+      return false;
+    }
+  } catch (err) {
+    console.error('Session check failed:', err);
+    sessionStorage.removeItem("authToken");
+    window.location.href = redirectUrl;
+    return false;
+  }
 }
+
 
 export function loadProfilePicture() {
   const uploadButton = document.getElementById('upload-profile-button');
