@@ -1,6 +1,6 @@
 import { authHeaders } from './utils.js';
 
-const API_BASE = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth";
+const API_BASE = "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Auth";
 
 document.addEventListener('DOMContentLoaded', () => {
   const sendResetCodeBtn = document.getElementById('sendResetCode');

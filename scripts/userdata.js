@@ -1,6 +1,6 @@
 export async function loadUserData() {
   try {
-    const token = sessionStorage.getItem("authToken"); // ✅ Fix: retrieve the token
+    const token = sessionStorage.getItem("authToken");
 
     if (!token) {
       console.warn("No token found in sessionStorage");
@@ -8,7 +8,7 @@ export async function loadUserData() {
     }
 
     const res = await fetch(
-      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/profile',
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Profile/profile',
       {
         method: 'GET',
         headers: {

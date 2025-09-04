@@ -42,7 +42,7 @@ function hideLoader() {
 
 async function isAdmin() {
   const res = await fetch(
-    "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/isAadmin",
+    "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/isAadmin",
     {
       method: "GET",
       headers: authHeaders()
@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const endpoints = {
       invites: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/get-invitations",
-      prayers: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/GetPrayers",
-      lsts: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/USERLSTSFORM"
+      prayers: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/PrayerRequest/GetPrayers",
+      lsts: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/LstsForm/USERLSTSFORM"
     };
 
     async function fetchAndDisplayPrayers() {

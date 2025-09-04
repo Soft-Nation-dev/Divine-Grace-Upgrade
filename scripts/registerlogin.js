@@ -137,7 +137,7 @@ createAccountButton.addEventListener('click', async () => {
 
   try {
     const res = await fetch(
-      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/register',
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Auth/register',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -194,7 +194,7 @@ loginButton.addEventListener('click', async () => {
 
   try {
     const res = await fetch(
-      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/login',
+      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Auth/login',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -206,8 +206,7 @@ loginButton.addEventListener('click', async () => {
     console.log('Login response:', data);
 
     if (res.ok && data.token) {
-      console.log('Login successful:', data.token);
-      sessionStorage.setItem('authToken', data.token); // <-- updated here
+      sessionStorage.setItem('authToken', data.token); 
       window.location.href = '../home';
     } else {
       showMessage('login-message', data.message || 'Login failed');

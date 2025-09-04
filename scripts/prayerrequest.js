@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const response = await fetch(
-        'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/PrayerRequests',
+        'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/PrayerRequest/PrayerRequests',
         {
           method: 'POST',
           headers: authHeaders({ 'Content-Type': 'application/json' }), // ✅ Use helper

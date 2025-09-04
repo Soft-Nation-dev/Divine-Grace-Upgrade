@@ -82,7 +82,7 @@ export function makeAdmin() {
     const email = prompt("Enter email to assign admin rights:");
     if (!email) return;
 
-    fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/assign-admin", {
+    fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/assign-admin", {
       method: "POST",
       headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ email })
@@ -124,23 +124,24 @@ export function redirect() {
 }
 
 export async function checkSession(redirectUrl = '../registerlogin') {
-  try {
-    const res = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check', {
-      method: 'GET',
-      headers: authHeaders()
-    });
+  // try {
+  //   const res = await fetch('https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/check', {
+  //     method: 'GET',
+  //     headers: authHeaders()
+  //   });
 
-    const data = await res.json();
-    if (!res.ok || !data.isAuthenticated) {
-      sessionStorage.removeItem("popupDismissed");
-      sessionStorage.removeItem("authToken");
-      window.location.href = redirectUrl;
-    }
-  } catch (err) {
-    console.error('Session check failed:', err);
-    sessionStorage.removeItem("authToken");
-    window.location.href = redirectUrl;
-  }
+  //   const data = await res.json();
+  //   if (!res.ok || !data.isAuthenticated) {
+  //     sessionStorage.removeItem("popupDismissed");
+  //     sessionStorage.removeItem("authToken");
+  //     // window.location.href = redirectUrl;
+  //   }
+  // } catch (err) {
+  //   console.error('Session check failed:', err);
+  //   sessionStorage.removeItem("authToken");
+  //   // window.location.href = redirectUrl;
+  // }
+  console.log("Session check skipped for now.");
 }
 
 export function loadProfilePicture() {
@@ -162,7 +163,7 @@ export function loadProfilePicture() {
 
   async function fetchProfilePicture() {
     try {
-      const res = await fetch(`${backendBaseUrl}/api/users/profile-picture`, {
+      const res = await fetch(`${backendBaseUrl}/api/Users/profile-picture`, {
         headers: authHeaders()
       });
 
@@ -227,7 +228,7 @@ export function loadProfilePicture() {
       formData.append('profilePicture', file);
 
       try {
-        const res = await fetch(`${backendBaseUrl}/api/users/upload-profile-picture`, {
+        const res = await fetch(`${backendBaseUrl}/api/Users/upload-profile-picture`, {
           method: 'POST',
           body: formData,
           headers: authHeaders(),

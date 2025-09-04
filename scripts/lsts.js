@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(
-        "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/auth/LSTSFORM",
+        "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/LstsForm/LSTSFORM",
         {
           method: "POST",
           headers: authHeaders(),

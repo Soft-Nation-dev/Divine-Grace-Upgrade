@@ -140,7 +140,7 @@ header{
 }
 #digunec-logo{
 
-    font-size:15px;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 1px;
     position: relative;
@@ -178,7 +178,7 @@ header{
   
 
 @media screen and (max-width: 546px){
-    #header{
+    .header{
         padding: 8px;
         height: 80px;
         width: 100%;
