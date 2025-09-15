@@ -114,11 +114,11 @@ createAccountButton.addEventListener('click', async () => {
     setButtonLoading(createAccountButton, false);
     return;
   }
-  if (Password.length < 6) {
-    showMessage('register-message', 'Password must be at least 6 characters long.');
-    setButtonLoading(createAccountButton, false);
-    return;
-  }
+  // if (Password.length < 6) {
+  //   showMessage('register-message', 'Password must be at least 6 characters long.');
+  //   setButtonLoading(createAccountButton, false);
+  //   return;
+  // }
   if (!/^[a-zA-Z0-9]+$/.test(Username)) {
     showMessage('register-message', 'Username can only contain letters and numbers.');
     setButtonLoading(createAccountButton, false);
@@ -137,7 +137,7 @@ createAccountButton.addEventListener('click', async () => {
 
   try {
     const res = await fetch(
-      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Auth/register',
+      'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/Auth/register',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

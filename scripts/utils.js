@@ -82,7 +82,7 @@ export function makeAdmin() {
     const email = prompt("Enter email to assign admin rights:");
     if (!email) return;
 
-    fetch("https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/assign-admin", {
+    fetch("https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/assign-admin", {
       method: "POST",
       headers: authHeaders({ "Content-Type": "application/json" }),
       body: JSON.stringify({ email })
@@ -159,7 +159,7 @@ export function loadProfilePicture() {
   const userProfileImage = document.getElementById('user-profile-image');
   const userProfileImage1 = document.getElementById('profile-image');
   const fileNameSpan = document.getElementById('selected-file-name');
-  const backendBaseUrl = 'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net';
+  const backendBaseUrl = 'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net';
   const defaultProfilePic = '../images/th-2238308759';
   let messageTimeoutId = null;
 

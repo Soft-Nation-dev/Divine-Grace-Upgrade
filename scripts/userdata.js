@@ -8,7 +8,7 @@ export async function loadUserData() {
     }
 
     const res = await fetch(
-      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Profile/profile',
+      'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/Profile/profile',
       {
         method: 'GET',
         headers: {

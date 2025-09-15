@@ -42,7 +42,7 @@ function hideLoader() {
 
 async function isAdmin() {
   const res = await fetch(
-    "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/isAadmin",
+    "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/isAdmin",
     {
       method: "GET",
       headers: authHeaders()
@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const endpoints = {
       invites: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/get-invitations",
-      prayers: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/PrayerRequest/GetPrayers",
-      lsts: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/LstsForm/USERLSTSFORM"
+      prayers: "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/PrayerRequest/GetPrayers",
+      lsts: "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/LstsForm/USERLSTSFORM"
     };
 
     async function fetchAndDisplayPrayers() {
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     formData.append("file", file);
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage", true);
+    xhr.open("POST", "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/AudioMessage", true);
     xhr.setRequestHeader("Authorization", `Bearer ${sessionStorage.getItem("authToken")}`);
 
     xhr.upload.onprogress = function (event) {

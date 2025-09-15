@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const categoryName = categories[targetId];
-      const endpoint = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage?category=${categoryName}`;
+      const endpoint = `https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/AudioMessage?category=${optionalCategory}`;
 
       try {
         const res = await fetch(endpoint, {
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
           messages.forEach(msg => {
             if (!msg.filePath) return;
 
-            const audioUrl = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/${msg.filePath}`;
+            const audioUrl = `https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/${msg.filePath}`;
 
             const card = document.createElement("div");
             card.className = "message-card";
@@ -139,7 +139,7 @@ async function loadLatestMessages() {
 
   try {
     for (const category of categories) {
-      const endpoint = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/AudioMessage?category=${category}`;
+      const endpoint = `https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/AudioMessage?category=${category}`;
       const res = await fetch(endpoint, {
         method: "GET",
         headers: authHeaders(),
@@ -159,7 +159,7 @@ async function loadLatestMessages() {
     latestMessages.forEach(msg => {
       if (!msg.filePath) return;
 
-      const audioUrl = `https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/${msg.filePath}`;
+      const audioUrl = `https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/${msg.filePath}`;
       const card = document.createElement("div");
       card.className = "message-card";
       card.innerHTML = `
