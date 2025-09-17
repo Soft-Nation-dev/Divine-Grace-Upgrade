@@ -42,7 +42,7 @@ function hideLoader() {
 
 async function isAdmin() {
   const res = await fetch(
-    "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/isAdmin",
+    "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/isAadmin",
     {
       method: "GET",
       headers: authHeaders()

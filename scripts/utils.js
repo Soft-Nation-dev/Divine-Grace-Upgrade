@@ -126,7 +126,7 @@ export function redirect() {
 export async function checkSession(redirectUrl = '../registerlogin') {
   try {
     const res = await fetch(
-      'https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Auth/session',
+      'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/Auth/session',
       {
         method: 'GET',
         headers: authHeaders()
