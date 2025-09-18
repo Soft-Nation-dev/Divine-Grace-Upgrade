@@ -114,8 +114,8 @@ createAccountButton.addEventListener('click', async () => {
     setButtonLoading(createAccountButton, false);
     return;
   }
-  if (Password.length < 4) {
-    showMessage('register-message', 'Password must be at least 4 characters long.');
+  if (Password.length < 6) {
+    showMessage('register-message', 'Password must be at least 6 characters long.');
     setButtonLoading(createAccountButton, false);
     return;
   }

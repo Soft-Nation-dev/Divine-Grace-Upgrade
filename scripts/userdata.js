@@ -28,7 +28,7 @@ export async function loadUserData() {
     document.getElementById('user-address').textContent             = user.residentialAddress     || '—';
     document.getElementById('user-school-department').textContent   = user.departmentInSchool || '—';
     // document.getElementById('user-firstname').textContent           = user.username || '—';
-    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.username}`;
+    document.getElementById('welcome-message').textContent          = `Welcome back, ${user.otherNames}`;
     
   } catch (err) {
     console.error("Network or unexpected error:", err);
