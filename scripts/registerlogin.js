@@ -164,7 +164,7 @@ createAccountButton.addEventListener('click', async () => {
         data = { message: text };
       }
     if (res.ok && data.success !== false) {
-      showMessage('register-message', data.message);
+      showMessage('register-message', data.error);
       setTimeout(() => {
         toggleVisibility(
         [createAccountSection, helloDiv],
@@ -173,7 +173,7 @@ createAccountButton.addEventListener('click', async () => {
       reset();
       }, 2000);
     } else {
-      showMessage('register-message', data.message,  'Registration failed');
+      showMessage('register-message', data.error,  'Registration failed');
     }
   } catch (err) {
     console.error(err);
@@ -218,7 +218,7 @@ loginButton.addEventListener('click', async () => {
       sessionStorage.setItem('authToken', data.token); 
       window.location.href = '../home';
     } else {
-      showMessage('login-message', data.message || 'Login failed');
+      showMessage('login-message', data.error || 'Login failed');
     }
   } catch (err) {
     console.error('Login error:', err);
