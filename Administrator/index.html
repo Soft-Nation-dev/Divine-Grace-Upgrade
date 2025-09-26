@@ -74,24 +74,37 @@
             <h1 class="admin-title">Welcome to admin dashboard</h1>
           </div>
           <div class="admin-button-group">
-            <button class="admin-tab-btn" id="show-prayers-btn">Prayers</button>
             <button class="admin-tab-btn" id="show-lsts-btn">LSTS</button>
+            <button class="admin-tab-btn" id="show-prayers-btn">Prayers</button>
             <button class="admin-tab-btn" id="show-messages-btn">Upload Messages</button>
             <button class="admin-tab-btn" id="show-invites-btn">Invites</button>
           </div>
-            <section id="prayer-section" class="admin-section">
-              <h2>Prayer Requests</h2>
-              <button id="download-prayers-btn"  class="download-btn">Download Prayer Requests PDF</button>
-              <div id="prayer-requests" class="admin-grid"></div>
-            </section>
             
-            <section id="lsts-section" class="admin-section" style="display: none;">
+            <section id="lsts-section" class="admin-section">
               <h2>LSTS Registrations</h2>
               <button id="download-lsts-btn"  class="download-btn">Download LSTS Registrations PDF For This Week</button>
               <div id="lsts-registrations" class="admin-grid"></div>
-              <button class="download-btn">See And Dowload All LSTS Registrations</button>
+              <button id="download-lsts-all-btn" class="download-btn">See All LSTS Registrations</button>
+
+              <!-- <div id="lsts-registrations-all" class="admin-grid" style="display: none;"></div> -->
             </section>
-            
+        <section id="prayer-section" class="admin-section" style="display: none;">
+          <h2>Prayer Requests</h2>
+          <button id="download-prayers-btn" class="download-btn">Download Prayer Requests PDF</button>
+          <div id="prayer-requests" class="admin-grid"></div>
+        </section>
+
+
+            <section id="lsts-all-preview" class="admin-section" style="display: none;">
+              <h2>All LSTS Registrations</h2>
+              <div id="lsts-registrations-all" class="admin-grid"></div>
+              <button id="download-lsts-all-pdf" class="download-btn">
+                Download All LSTS Registrations PDF
+              </button>
+              <button id="close-lsts-all-btn" class="download-btn">
+                Close All Lsts Registration Tab
+              </button>
+            </section>
             
             <section id="messages-section" class="admin-section">
               <div id="message-section" style="display: none;">

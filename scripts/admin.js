@@ -54,8 +54,8 @@ async function isAdmin() {
 
 function setupTabSwitching() {
   const sections = {
-    "prayer-section": "show-prayers-btn",
     "lsts-section": "show-lsts-btn",
+    "prayer-section": "show-prayers-btn",
     "message-section": "show-messages-btn",
     "invites-section": "show-invites-btn"
   };
@@ -100,7 +100,48 @@ document.addEventListener("DOMContentLoaded", async () => {
       prayers: "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/PrayerRequest/GetPrayers",
       lsts: "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/LstsForm/USERLSTSFORM"
     };
-
+    
+    async function fetchAndDisplayLSTS() {
+   try {
+     const res = await fetch(endpoints.lsts, { headers: authHeaders() });
+     const data = await res.json();
+     if (!Array.isArray(data)) throw new Error("Unexpected response");
+ 
+ 
+     const now = new Date();
+ 
+     
+     const dayOfWeek = now.getDay(); 
+     const monday = new Date(now);
+     monday.setDate(now.getDate() - ((dayOfWeek + 6) % 7)); 
+     monday.setHours(0, 0, 0, 0);
+ 
+     const friday = new Date(monday);
+     friday.setDate(monday.getDate() + 4);
+     friday.setHours(23, 59, 59, 999);
+ 
+     const thisWeeksData = data.filter(person => {
+       const submitted = new Date(person.submittedAt);
+       return submitted >= monday && submitted <= friday;
+     });
+ 
+     lstsContainer.innerHTML = ""; 
+     const allContainer = document.getElementById("lsts-registrations-all");
+     allContainer.innerHTML = "";
+ 
+     if (thisWeeksData.length === 0) {
+       lstsContainer.innerHTML = "<p class='error'>No LSTS registration for this week.</p>";
+     }  else {
+       renderLSTSList(thisWeeksData, lstsContainer);
+     }
+ 
+     renderLSTSList(data, allContainer);
+     
+     } catch {
+     lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
+       document.getElementById("lsts-registrations-all").innerHTML = "";
+   }
+ }
     async function fetchAndDisplayPrayers() {
       try {
         const res = await fetch(endpoints.prayers, { headers: authHeaders() });
@@ -122,37 +163,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
-    async function fetchAndDisplayLSTS() {
-      try {
-        const res = await fetch(endpoints.lsts, { headers: authHeaders() });
-        const data = await res.json();
-        if (!Array.isArray(data)) throw new Error("Unexpected response");
 
-        data.forEach(person => {
-          const card = document.createElement("div");
-          card.className = "admin-card";
-          card.innerHTML = `
-            <p><strong>Surname:</strong> ${person.surname}</p>
-            <p><strong>Other Names:</strong> ${person.otherNames}</p>
-            <p><strong>Phone:</strong> ${person.phoneNumber}</p>
-            <p><strong>Email:</strong> ${person.email}</p>
-            <p><strong>Residential Address:</strong> ${person.residentialAddress}</p>
-            <p><strong>Department in Church:</strong> ${person.departmentInChurch}</p>
-            <p><strong>Position:</strong> ${person.positionInChurch}</p>
-            <p><strong>Gender:</strong> ${person.gender}</p>
-            <p><strong>Is Student:</strong> ${person.student}</p>
-            ${person.student?.toLowerCase() === "yes" ? `
-              <p><strong>Dept. in School:</strong> ${person.departmentInSchool}</p>
-              <p><strong>Level:</strong> ${person.level}</p>` : ""
-            }
-            <p><strong>Submitted At:</strong> ${new Date(person.submittedAt).toLocaleString()}</p>
-          `;
-          lstsContainer.appendChild(card);
-        });
-      } catch {
-        lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
+function renderLSTSList(list, container) {
+  list.forEach(person => {
+    const card = document.createElement("div");
+    card.className = "admin-card";
+    card.innerHTML = `
+      <p><strong>Surname:</strong> ${person.surname}</p>
+      <p><strong>Other Names:</strong> ${person.otherNames}</p>
+      <p><strong>Phone:</strong> ${person.phoneNumber}</p>
+      <p><strong>Email:</strong> ${person.email}</p>
+      <p><strong>Residential Address:</strong> ${person.residentialAddress}</p>
+      <p><strong>Department in Church:</strong> ${person.departmentInChurch}</p>
+      <p><strong>Position:</strong> ${person.positionInChurch}</p>
+      <p><strong>Gender:</strong> ${person.gender}</p>
+      <p><strong>Is Student:</strong> ${person.student}</p>
+      ${person.student?.toLowerCase() === "yes" ? `
+        <p><strong>Dept. in School:</strong> ${person.departmentInSchool}</p>
+        <p><strong>Level:</strong> ${person.level}</p>` : ""
       }
-    }
+      <p><strong>Submitted At:</strong> ${new Date(person.submittedAt).toLocaleString()}</p>
+    `;
+    container.appendChild(card);
+  });
+}
+
 
     async function fetchAndDisplayInvites() {
       try {
@@ -220,9 +255,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       downloadSectionAsPDF("prayer-requests", "Prayer_Requests");
     });
 
-    document.getElementById("download-lsts-btn").addEventListener("click", () => {
-      downloadSectionAsPDF("lsts-registrations", "LSTS_Registrations");
-    });
+   document.getElementById("download-lsts-btn").addEventListener("click", () => downloadSectionAsPDF("lsts-registrations", "LSTS_This_Week"));
+
+  document.getElementById("download-lsts-all-btn").addEventListener("click", () => {
+  document.getElementById("lsts-all-preview").style.display = "block";
+  // window.scrollTo({ left: 0, behavior: "smooth" });
+});
+
+    document.getElementById("close-lsts-all-btn").addEventListener("click", () => {
+  document.getElementById("lsts-all-preview").style.display = "none";
+});
+
 
     document.getElementById("download-invites-btn").addEventListener("click", () => {
       downloadSectionAsPDF("invites-container", "Invitations");
