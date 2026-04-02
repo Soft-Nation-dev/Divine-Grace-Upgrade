@@ -1,0 +1,261 @@
+
+body {
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+#lstsh1{
+    margin-top: 100px;
+    text-align: center;
+    font-family: "Agu Display", serif;
+    
+}
+
+form {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    margin: auto;
+    width: 90%;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.submit-button {
+
+    background-color: rgb(22, 22, 65);
+    color: bisque;
+    border: none;
+    padding: 10px 20px;
+    font-family: "Agu Display", serif;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+}
+.submit-button:hover {
+    background-color: #152536;
+}
+.menu-item2 {
+    background-color: #c4d1df;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+  #statusMessage {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, top 0.5s ease;
+  }
+  
+  #statusMessage.show {
+    opacity: 1;
+    pointer-events: auto;
+    top: 50px;
+  }
+  
+  .status-icon {
+    font-size: 28px;
+  }
+  
+  #statusMessage.success .status-icon {
+    color: green;
+  }
+  
+  #statusMessage.error .status-icon {
+    color: red;
+  }
+  
+  #animation-container {
+    position: fixed;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.97);
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #animation-container .overlay {
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .status-icon {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+  
+  #animation-container button {
+    margin-top: 20px;
+    padding: 10px 18px;
+    background: #222;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  #receipt {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+    line-height: 1.6;
+    text-wrap: nowrap;
+  }
+  
+  .receipt-container {
+    width: 98%;
+    height: 100%;
+    /* text-align: center; */
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for content */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensures background stays behind content */
+  }
+  
+  .receipt-container {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.receipt-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  object-fit: contain;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.receipt-container > *:not(.receipt-bg) {
+  position: relative;
+  z-index: 1;
+}
+
+.ticket-title{
+    text-align: center;
+}
+
+.align{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .stamp{
+    height: 7px;
+    font-size: 12px;
+  }
+
+  .receipt-header {
+    text-align: center;
+    display: flex;
+    padding: 20px;
+    border-bottom: 2px solid rgb(246, 246, 248);
+    justify-content: center;
+    background-color: #c0cdf8;
+  }
+  
+  .receipt-logo {
+    height: auto;
+    margin-bottom: 10px;
+    height: 30px;
+    position: relative;
+    top: 0px;
+    margin-right: 6px;
+  }
+  
+  .church-name {
+    margin: 0;
+    font-size: 20px;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+  }
+  
+  .receipt-title {
+    margin: 0;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .receipt-divider {
+    border: 0;
+    border-top: 1px dashed #999;
+  }
+  
+  .receipt-body {
+    font-size: 15px;
+    height: 100%;
+    padding: 20px;
+  }
+  
+  .label {
+    font-weight: bold;
+    display: inline-block;
+    width: 140px;
+  }
+  
+  .value {
+    font-style: normal;
+  }
+  
+  .student-section {
+    margin-top: 10px;
+  }
+  select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg fill='black' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 12px;
+    }

@@ -1,0 +1,230 @@
+body{
+    background-color: rgb(250, 247, 241);
+}
+header{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #d8dff5;
+    height: 80px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgb(246, 246, 248);
+    z-index: 1000;
+    min-width: 0;
+    padding: 10px;
+}
+#header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(212, 212, 212);
+    box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
+    -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
+}
+
+.right-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.blurred {
+    filter: blur(20px); 
+    pointer-events: none;
+    user-select: none;
+  }
+.transparent {
+    display: none;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 350px; height: 100vh;
+    background: white;
+    transform: translateX(-100%);
+    transition: transform 1s ease;
+    z-index: 1500;
+  }
+  .nav-menu.visible {
+    transform: translateX(0);
+  }
+  
+  .logo-nav{
+    margin-top: 10px;
+    padding: 5px;
+    border-bottom: 1px solid rgb(212, 212, 212);
+    box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
+    -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
+    
+  }
+  .js-exit-butt {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    height: 18px;
+    border: none;
+    cursor: pointer;
+    z-index: 1010; 
+  }
+  .js-exit-butt img{
+    height: 100%;
+  }
+ li button, li a{
+    color: #052b6b;
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  li{
+    list-style: none;
+    margin-bottom: 25px;
+  }
+  .nav{
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+
+
+#divider {
+    width: 2px; 
+    background-color: grey; 
+    height: 30px; 
+    margin-right: 20px;
+    margin-left: 70px;
+
+  }
+
+.hambuger{
+    height: 25px;
+    /* margin-right: 80px; */
+    
+}
+.hambuger-button{
+    background-color: transparent;
+    cursor: pointer;
+    width: 40px;
+    border: 1px solid rgb(206, 205, 205);
+    margin-right: 50px;
+    /* border: none; */
+}
+
+.menu-item1 {
+    background-color: #c4d1df;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+ .connect{
+    background-color: #c4d1df;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+ } 
+.logo-div{
+    position: relative;
+}
+#logo-img{
+    height: 25px;
+    margin-right: 6px;
+}
+#digunec-logo{
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative;
+    top: -6px;
+    color: #012970;
+    font-family: "Nunito", sans-serif;
+}
+#dashboard{
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: gray;
+    font-family: "Nunito", sans-serif;
+}
+#notification{
+    height: 20px;
+}
+
+.left-section button{
+    border-radius: 50%;
+    border: none;
+    padding: 8px;
+}
+
+#profile-image{
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+/* Hide sections by default */
+.content-section.hidden {
+    display: none;
+  }
+  
+
+@media screen and (max-width: 546px){
+    .header{
+        padding: 8px;
+        height: 80px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 558px){
+    .hambuger{
+        height: 27px;
+    }
+    .hambuger-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 38px;
+        margin-right: 10px;
+    }
+    #logo-img{
+        height: 20px;
+    }
+    #digunec-logo{
+        font-size: 15px;
+        position: relative;
+        top: -4px;
+    }
+    #notification{
+        height: 15px;
+    }
+    #profile-image{
+        height: 40px;
+    }
+ #right-body-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+ #main-body-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ #Welcome-div{
+    width: 100%;
+ }
+}

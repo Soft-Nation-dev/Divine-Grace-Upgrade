@@ -1,0 +1,325 @@
+.left-body-section{
+    position: absolute;
+    left: 0;
+    width: 550px;
+    top: 110px;
+    bottom: 0;
+    background-color: rgb(247, 245, 245);
+    padding-right: 20px;
+    transition: width 0.3s ease;
+}
+@keyframes popIn {
+    0%   { transform: scale(0.7); opacity: 0; }
+    60%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .left-body-section.fullscreen {
+    animation: popIn 1s ease forwards;
+    transition: none;
+  }
+  
+
+#right-body-section{
+    margin-left: 570px;
+}
+
+#right-body-section h2{
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-size: 50px;
+    font-family: "Agu Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.card-div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+
+
+.prayer-request-div, .contact-div{
+    padding: 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #dcdfe9;
+    flex: 1;
+    color: black;
+    margin: 10px;
+}
+
+.prayer-request-button, .contact-button{
+    padding: 13px 25px;
+    font-size: 14px;
+    background-color: #c0cdf8;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+}
+
+.prayer-request-button:hover, .contact-button:hover {
+    background-color:  #9193d1;;
+}
+
+.fade-out {
+    animation: fadeOut 1.5s backwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.annoucement-img{
+    width: 50%;
+}
+.annoucement-div{
+    margin-top: 80px;
+    text-align: center;
+    margin-bottom: 60px;
+    background-color: #fff8e1;
+    border: 2px solid #ffa000;
+    border-radius: 12px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 350px; /* fixed height to enable scroll */
+    position: relative;
+    
+}
+#annoucement-image{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.annoucement-div, .p{
+    box-shadow: -3px 7px 12px -3px rgba(14, 14, 14, 0.1);
+    -webkit-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.15);
+    -moz-box-shadow: -3px 7px 12px -3px rgba(0,0,0,0.3);
+}
+
+.p{
+    border-bottom: 1px solid grey;
+    padding: 10px;
+    margin-top: 3px;
+    font-size: 13px;
+    font-family: "Agu Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+   
+}
+
+.annoucement-p{
+    width: 80%;
+    font-size: 10px;
+    text-align: center;
+}
+.main-left-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-imageH-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile-imageH{
+    height: 130px;
+    margin-top: 50px;
+    border-radius: 50%;
+}
+
+.profile-name{
+    font-size: 23px;
+    font-weight: bolder;
+    margin-top: 15px;
+    margin-bottom: 0;
+    text-align: center;
+    font-family: "Nunito", sans-serif;
+}
+
+.department{
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: gray;
+}
+.department-span{
+    font-weight: 500;
+    color: black;
+}
+
+.update-profile-button, .display-profile-button{
+    margin-top: 40px;
+    font-family:  "Nunito", sans-serif;
+    border: none;
+    padding: 13px 50px;
+    border-radius: 7px;
+    font-size: 18px;
+}
+.update-profile-button:hover, .display-profile-button:hover{
+    background-color: rgb(122, 122, 122);
+    color: white;
+}
+
+.details-div{
+    border-top: 3px solid grey;
+    margin-top: 50px;
+    width: 100%;
+    margin-left: 20px;
+  ;
+}
+
+.details-div p{
+    text-align: center;
+    line-height: 30px;
+}
+
+
+.update-profile-button{
+    margin-top: 30px;
+}
+
+.display-profile-button{
+    display: none;
+    z-index: 100;
+}
+
+.exit-button{
+    position: absolute;
+    height: 28px;
+    display: none;
+    top: 20px;
+    right: 20px;
+    background-color: #ebebeb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.exit-button img{
+    height: 100%;
+    width: 100%;
+}
+
+.exit-button:hover {
+    background-color: #b8b8b8;
+    transform: scale(1.05);
+}
+
+.custom-upload-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #b6cbe1; 
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.custom-upload-button:hover {
+  background-color: #b8c8d9;
+}
+#upload-profile-button {
+  background-color: #007bff;      /* Bootstrap-like blue */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+#upload-profile-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+#upload-profile-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    .left-body-section {
+     visibility: hidden;
+     opacity: 0;
+     display: none;
+     transition: all 3s ease-in-out;
+    }
+    .left-body-section.fullscreen {
+        visibility: visible;
+        opacity: 1;
+        display: block;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(247, 245, 245); /* Adjust if needed */
+        z-index: 1000; /* Ensure it appears on top of other elements */
+        overflow-y: auto; /* For scrolling if content exceeds screen height */
+    }
+    
+
+    .display-profile-button{
+        display: block;
+        cursor: pointer;
+        font-size: 15px;
+
+    }
+    .display-profile-button-div{
+        margin-bottom: 50px;
+        margin-left: 10px;
+    }
+    #right-body-section{
+        margin-left: 0;
+        width: 100vw;
+    }
+    .main-body-section{
+        width: 100vw
+    }
+
+}
+@media screen and (max-width: 600px){
+    #divider{
+        display: none;
+        visibility: hidden;
+    }
+    #dashboard{
+        display: none;
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width: 550px){
+   .card-div{
+    flex-direction: column;
+   }
+
+}
