@@ -215,7 +215,6 @@ loginButton.addEventListener('click', async () => {
     );
 
     const data = await res.json();
-    console.log('Login response:', data);
 
     if (res.ok && data.token) {
       sessionStorage.setItem('authToken', data.token); 
