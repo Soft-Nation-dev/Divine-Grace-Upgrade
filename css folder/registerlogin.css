@@ -274,6 +274,10 @@ input{
 }
 
 @media(max-width:768px){
+    *, *::before, *::after{
+        box-sizing: border-box;
+    }
+
     body{
         background:
             linear-gradient(145deg, rgba(1, 41, 112, 0.76), rgba(65, 84, 241, 0.36)),
@@ -284,10 +288,11 @@ input{
         min-height: calc(100vh - 120px);
         align-items: flex-start;
         padding: 20px 12px;
+        margin-top:  80px;
     }
 
     .gen-div{
-        width: 100%;
+        width: calc(100vw - 24px);
         max-width: 430px;
         min-height: 0;
         height: auto;
@@ -301,6 +306,7 @@ input{
         padding: 14px 10px 20px;
         overflow: hidden;
         isolation: isolate;
+        box-sizing: border-box;
     }
 
     .gen-div::before{
@@ -456,6 +462,11 @@ input{
     .first{
         padding: 12px 12px 4px;
         margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     .signin-h,
@@ -466,11 +477,14 @@ input{
         padding-bottom: 0;
         font-size: 28px;
         line-height: 1.05;
+        text-align: center;
+        width: 100%;
+        max-width: 360px;
     }
 
     .input{
         width: 100%;
-        max-width: 360px;
+        max-width: 100%;
         height: 46px;
         border-radius: 10px;
         border: 1px solid rgba(255, 255, 255, 0.4);
@@ -478,7 +492,11 @@ input{
         box-sizing: border-box;
         margin-bottom: 14px;
         font-size: 14px;
-        padding-left: 10px;
+        min-width: 0;
+        /* padding-left: 10px; */
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
 
     input::placeholder{
@@ -488,6 +506,9 @@ input{
     .button-div{
         width: 100%;
         margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .button-div a{
@@ -499,12 +520,15 @@ input{
 
     .button-div button{
         width: 100%;
-        max-width: 360px;
+        max-width: 100%;
         min-height: 46px;
         border-radius: 12px;
         font-size: 15px;
         font-weight: 700;
         background: linear-gradient(135deg, #012970, #4154f1);
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
     }
 
     #register-message,
@@ -515,7 +539,7 @@ input{
         border-radius: 8px;
         margin-bottom: 10px;
         width: 100%;
-        max-width: 360px;
+        max-width: 100%;
         box-sizing: border-box;
     }
 

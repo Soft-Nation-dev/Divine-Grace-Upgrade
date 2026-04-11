@@ -267,14 +267,15 @@ input, textarea, select {
 
     body {
       padding: 16px;
-      background: linear-gradient(135deg, rgba(1, 41, 112, 0.78), rgba(65, 84, 241, 0.4));
+      /* background: linear-gradient(135deg, rgba(1, 41, 112, 0.78), rgba(65, 84, 241, 0.4)); */
       min-height: 100vh;
+      color: black;
     }
 
     #lstsh1 {
-      margin-top: 20px;
+      margin-top: 80px;
       margin-bottom: 14px;
-      color: #ffffff;
+      /* color: #ffffff; */
     }
 
     #lstsh1 h1 {
@@ -298,7 +299,7 @@ input, textarea, select {
     label {
       margin-bottom: 6px;
       font-size: 13px;
-      color: #ffffff;
+      /* color: #ffffff; */
       font-weight: 600;
     }
 

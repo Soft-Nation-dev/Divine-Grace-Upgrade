@@ -162,7 +162,7 @@
     font-family: "Nunito", sans-serif;
     font-weight: 600;
     font-size: 12px;
-    color: gray;
+    /* color: gray; */
 }
 .department-span{
     font-weight: 500;
@@ -271,7 +271,7 @@
     }
 
     .dashboard-wrapper {
-        background: linear-gradient(135deg, rgba(1, 41, 112, 0.7), rgba(65, 84, 241, 0.35));
+        /* background: linear-gradient(135deg, rgba(1, 41, 112, 0.7), rgba(65, 84, 241, 0.35)); */
         min-height: calc(100vh - 80px);
         padding: 16px;
         width: 100%;
@@ -314,12 +314,56 @@
     }
 
     .left-body-section.fullscreen {
-        position: static;
-        width: 100%;
-        height: auto;
+        /* make the profile overlay truly fullscreen on narrow devices */
+        position: fixed;
+        top: 500px;
+        left: 0;
+        width: 100vw;
+        /* height: 100vh; */
+        /* padding: 20px 16px; */
         background: rgba(255, 255, 255, 0.12);
-        z-index: 100;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: 1200;
         overflow-y: auto;
+        display: block;
+        border-radius: 0;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    .left-body-section.fullscreen .main-left-div {
+        max-width: 760px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    /* show a prominent circular close button inside the fullscreen overlay */
+    .left-body-section.fullscreen .exit-button {
+        display: block;
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        height: 44px;
+        width: 44px;
+        padding: 8px;
+        background: rgba(255,255,255,0.95);
+        border-radius: 50%;
+        border: none;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+        z-index: 1300;
+        cursor: pointer;
+    }
+
+    .left-body-section.fullscreen .exit-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: none;
+    }
+
+    /* ensure body doesn't show double scroll when overlay is active */
+    body.overlay-open {
+        overflow: hidden;
     }
 
     .main-left-div {
@@ -340,7 +384,7 @@
     .profile-name {
         font-size: 18px;
         margin-top: 10px;
-        color: #ffffff;
+        /* color: #ffffff; */
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
@@ -350,12 +394,12 @@
     }
 
     .department {
-        color: rgba(255, 255, 255, 0.85);
-        font-size: 10px;
+        /* color: rgba(255, 255, 255, 0.85); */
+        font-size: 13px;
     }
 
     .department-span {
-        color: #ffffff;
+        /* color: #ffffff; */
         font-weight: 600;
     }
 
@@ -367,8 +411,8 @@
     }
 
     .details-div p {
-        font-size: 11px;
-        line-height: 16px;
+        font-size: 13px;
+        /* line-height: 20px; */
         margin: 6px 0;
     }
 
@@ -406,7 +450,7 @@
 
     #right-body-section {
         margin-left: 0;
-        wix-width: calc(100vw - 32px);
+        width: calc(100vw - 32px);
         margin-top: 0;
         display: flex;
         flex-direction: column;
@@ -415,10 +459,10 @@
 
     #right-body-section h2 {
         text-align: center;
-        margin-top: 12px;
+        /* margin-top: 12px; */
         margin-bottom: 16px;
-        font-size: 20px;
-        color: #ffffff;
+        font-size: 28px;
+        /* color: #ffffff; */
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
@@ -439,14 +483,14 @@
         border: 1px solid rgba(255, 255, 255, 0.28);
         border-radius: 14px;
         padding: 14px;
-        color: #ffffff;
+        /* color: #ffffff; */
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         width: 100%;
         max-width: calc(100vw - 32px);
     }
 
     .prayer-request-div p, .contact-div p {
-        font-size: 13px;
+        font-size: 15px;
         line-height: 1.4;
         margin-bottom: 10px;
     }
@@ -583,6 +627,10 @@
     .main-body-section{
         width: 100vw
     }
+
+    #right-body-section h2{
+            margin-top: 60px;
+        }
 }
 @media screen and (max-width: 600px){
     #divider{

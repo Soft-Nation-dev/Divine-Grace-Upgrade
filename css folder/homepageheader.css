@@ -246,6 +246,7 @@ header{
 
  #Welcome-div{
     width: 100%;
+    /* font-size: 400px; */
     margin-top: 55px;
  }
 }

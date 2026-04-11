@@ -14,9 +14,17 @@ function leftBodySectionDisplay() {
   const handleProfileOpen = () => {
     leftBodySection.classList.add('fullscreen');
     mainBodySection.classList.add('hidden');
+    // show the exit control and add overlay lock only on small screens
+    if (window.innerWidth <= 768) {
+      exitButton.style.display = 'block';
+      document.body.classList.add('overlay-open');
+    } else {
+      // hide close button on desktop per request
+      exitButton.style.display = 'none';
+    }
+
     if (window.innerWidth > 768) {
       document.body.appendChild(leftBodySection);
-      exitButton.style.display = 'block';
     }
   };
 
@@ -24,6 +32,7 @@ function leftBodySectionDisplay() {
     leftBodySection.classList.remove('fullscreen');
     mainBodySection.classList.remove('hidden');
     exitButton.style.display = 'none';
+    document.body.classList.remove('overlay-open');
     if (window.innerWidth > 768) {
       const mainSection = document.querySelector('.main-body-section');
       if (mainSection) {
