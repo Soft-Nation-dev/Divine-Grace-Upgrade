@@ -157,6 +157,18 @@ input{
     margin-bottom: 30px;
 }
 
+.mobile-auth-switch{
+    display: none;
+}
+
+.mobile-switch-btn{
+    border: none;
+}
+
+.mobile-card-brand{
+    display: none;
+}
+
 .second-card-section{
     border: 2px solid gray;
     display: flex;
@@ -258,5 +270,282 @@ input{
     }
     .hidden {
         transform: translateY(-20px);
+    }
+}
+
+@media(max-width:768px){
+    body{
+        background:
+            linear-gradient(145deg, rgba(1, 41, 112, 0.76), rgba(65, 84, 241, 0.36)),
+            url("../images/congregation.jpg") center/cover no-repeat fixed;
+    }
+
+    .card-div{
+        min-height: calc(100vh - 120px);
+        align-items: flex-start;
+        padding: 20px 12px;
+    }
+
+    .gen-div{
+        width: 100%;
+        max-width: 430px;
+        min-height: 0;
+        height: auto;
+        border-radius: 22px;
+        box-shadow: 0 18px 42px rgba(4, 10, 31, 0.42);
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        margin: 0 auto;
+        padding: 14px 10px 20px;
+        overflow: hidden;
+        isolation: isolate;
+    }
+
+    .gen-div::before{
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        top: -90px;
+        right: -50px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 68%);
+        pointer-events: none;
+        z-index: 0;
+        animation: cardGlow 6s ease-in-out infinite alternate;
+    }
+
+    .gen-div::after{
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        bottom: -80px;
+        left: -55px;
+        background: radial-gradient(circle, rgba(65, 84, 241, 0.42) 0%, rgba(65, 84, 241, 0) 72%);
+        pointer-events: none;
+        z-index: 0;
+        animation: cardGlow 7s ease-in-out infinite alternate-reverse;
+    }
+
+    .first-div,
+    .second-div{
+        position: relative;
+        height: auto;
+        display: block;
+        margin-top: 0;
+        z-index: 1;
+    }
+
+    .second-div{
+        display: none;
+    }
+
+    .mobile-auth-switch{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        max-width: 360px;
+        margin: 8px auto 16px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
+        padding: 6px;
+    }
+
+    .mobile-card-brand{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 8px auto 14px;
+        width: 100%;
+    }
+
+    .mobile-card-logo{
+        height: 44px;
+        width: 44px;
+        border-radius: 50%;
+        margin-bottom: 8px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    }
+
+    .mobile-card-title{
+        margin: 0;
+        font-size: 16px;
+        font-family: "Nunito Sans", sans-serif;
+        letter-spacing: 0.3px;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .mobile-card-subtitle{
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.85);
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+    }
+
+    .mobile-switch-btn{
+        position: relative;
+        padding: 11px 12px;
+        border-radius: 999px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    }
+
+    .mobile-switch-btn::after{
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 7px;
+        width: 56%;
+        height: 2px;
+        border-radius: 999px;
+        background: #012970;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .mobile-switch-btn.active{
+        background-color: rgba(255, 255, 255, 0.92);
+        color: #012970;
+    }
+
+    .mobile-switch-btn.active::after{
+        transform: translateX(-50%) scaleX(1);
+        opacity: 1;
+    }
+
+    .mobile-switch-btn:active{
+        transform: scale(0.98);
+    }
+
+    .first,
+    .second{
+        height: auto;
+        width: 100%;
+    }
+
+    .first-div > .first{
+        display: none;
+    }
+
+    .first-div > .first.visible{
+        display: flex;
+    }
+
+    .first-div > .first.hidden{
+        display: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .first{
+        padding: 12px 12px 4px;
+        margin-bottom: 0;
+    }
+
+    .signin-h,
+    .creatacc-h{
+        color: #ffffff;
+        text-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+        margin: 8px 0 18px;
+        padding-bottom: 0;
+        font-size: 28px;
+        line-height: 1.05;
+    }
+
+    .input{
+        width: 100%;
+        max-width: 360px;
+        height: 46px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.92);
+        box-sizing: border-box;
+        margin-bottom: 14px;
+        font-size: 14px;
+        padding-left: 10px;
+    }
+
+    input::placeholder{
+        padding-left: 2px;
+    }
+
+    .button-div{
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .button-div a{
+        color: #ffffff;
+        margin-bottom: 16px;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .button-div button{
+        width: 100%;
+        max-width: 360px;
+        min-height: 46px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #012970, #4154f1);
+    }
+
+    #register-message,
+    #login-message{
+        color: #ffffff;
+        background: rgba(217, 48, 37, 0.92);
+        padding: 8px 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 360px;
+        box-sizing: border-box;
+    }
+
+    .hidden {
+        transform: translateY(18px);
+    }
+
+    .visible{
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardGlow {
+    from {
+        transform: translateY(0) scale(1);
+        opacity: 0.72;
+    }
+    to {
+        transform: translateY(10px) scale(1.08);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .hidden,
+    .visible,
+    .mobile-switch-btn,
+    .gen-div::before,
+    .gen-div::after{
+        animation: none;
+        transition: none;
     }
 }

@@ -8,6 +8,8 @@ function reset() {
 
 const signIn   = document.querySelector('.js-signinbut');
 const signUp   = document.querySelector('.js-signupbut');
+const mobileSignInButton = document.querySelector('.js-mobile-signin');
+const mobileSignUpButton = document.querySelector('.js-mobile-signup');
 const createAccountSection = document.querySelector('.creatacc-div');
 const welcomeBackSection   = document.querySelector('.signin-div');
 const helloDiv             = document.querySelector('.hello-div');
@@ -20,16 +22,43 @@ helloDiv.classList.add('visible');
 welcomeDiv.classList.add('hidden');
 welcomeBackSection.classList.add('hidden');
 
-signIn.addEventListener('click', () => {
+function setMobileSwitchState(isSignUpActive) {
+  if (!mobileSignInButton || !mobileSignUpButton) return;
+  mobileSignUpButton.classList.toggle('active', isSignUpActive);
+  mobileSignInButton.classList.toggle('active', !isSignUpActive);
+}
+
+function showSignInState() {
   toggleVisibility([createAccountSection, helloDiv], [welcomeBackSection, welcomeDiv]);
   hideMessage('register-message');
   hideMessage('login-message');
-});
-signUp.addEventListener('click', () => {
+  setMobileSwitchState(false);
+}
+
+function showSignUpState() {
   toggleVisibility([welcomeBackSection, welcomeDiv], [createAccountSection, helloDiv]);
   hideMessage('register-message');
   hideMessage('login-message');
-});
+  setMobileSwitchState(true);
+}
+
+if (signIn) {
+  signIn.addEventListener('click', showSignInState);
+}
+
+if (signUp) {
+  signUp.addEventListener('click', showSignUpState);
+}
+
+if (mobileSignInButton) {
+  mobileSignInButton.addEventListener('click', showSignInState);
+}
+
+if (mobileSignUpButton) {
+  mobileSignUpButton.addEventListener('click', showSignUpState);
+}
+
+setMobileSwitchState(true);
 
 function $(id) {
   const el = document.getElementById(id);
@@ -168,10 +197,7 @@ createAccountButton.addEventListener('click', async () => {
     if (res.ok && data.success !== false) {
       showMessage('register-message', data.message || 'Account created successfully.');
       setTimeout(() => {
-        toggleVisibility(
-        [createAccountSection, helloDiv],
-        [welcomeBackSection, welcomeDiv]
-      );
+      showSignInState();
       reset();
       }, 2000);
     } else {
