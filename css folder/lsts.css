@@ -284,7 +284,7 @@ input, textarea, select {
     }
 
     #lstsh1 h1 {
-      font-size: 26px;
+      font-size: 30px;
       letter-spacing: 0.3px;
     }
 
@@ -303,7 +303,7 @@ input, textarea, select {
 
     label {
       margin-bottom: 6px;
-      font-size: 16px;
+      font-size: 18px;
       /* color: #ffffff; */
       font-weight: 600;
     }
@@ -312,7 +312,7 @@ input, textarea, select {
     textarea,
     select {
       width: 100%;
-      font-size: 16px;
+      font-size: 18px;
       padding: 12px;
       margin-bottom: 12px;
       border-radius: 8px;
@@ -348,7 +348,7 @@ input, textarea, select {
       padding: 14px 20px;
       border-radius: 10px;
       color: #ffffff;
-      font-size: 15px;
+      font-size: 18px;
       font-family: "Agu Display", serif;
       background: linear-gradient(135deg, #012970, #4154f1);
       box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
