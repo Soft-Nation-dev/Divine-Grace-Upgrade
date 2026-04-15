@@ -17,10 +17,19 @@ const welcomeDiv           = document.querySelector('.welcomeback-div');
 const loginButton          = document.querySelector('.js-login-button');
 const createAccountButton  = document.querySelector('.js-create-account-button');
 
-createAccountSection.classList.add('visible');
-helloDiv.classList.add('visible');
-welcomeDiv.classList.add('hidden');
-welcomeBackSection.classList.add('hidden');
+const isMobileView = window.matchMedia('(max-width: 768px)').matches;
+
+if (isMobileView) {
+  createAccountSection.classList.add('hidden');
+  helloDiv.classList.add('hidden');
+  welcomeDiv.classList.add('hidden');
+  welcomeBackSection.classList.add('visible');
+} else {
+  createAccountSection.classList.add('visible');
+  helloDiv.classList.add('visible');
+  welcomeDiv.classList.add('hidden');
+  welcomeBackSection.classList.add('hidden');
+}
 
 function setMobileSwitchState(isSignUpActive) {
   if (!mobileSignInButton || !mobileSignUpButton) return;
@@ -58,7 +67,7 @@ if (mobileSignUpButton) {
   mobileSignUpButton.addEventListener('click', showSignUpState);
 }
 
-setMobileSwitchState(true);
+setMobileSwitchState(!isMobileView);
 
 function $(id) {
   const el = document.getElementById(id);
