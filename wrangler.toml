@@ -1,0 +1,49 @@
+name = "divine-grace-upgrade-api"
+account_id = "2566c6e2a3e93ce72e192ed984bde7f0"
+main = "src/index.js"
+compatibility_date = "2026-04-08"
+compatibility_flags = ["nodejs_compat"]
+
+# KV Namespace bindings for branch-isolated data storage
+kv_namespaces = [
+	{ binding = "LSTS_KV_BRANCH", id = "726962df744c4569a9e9c6834b48b611", preview_id = "90d655ec51bc46ada5e8a63e0f2ba6fd" },
+	{ binding = "PRAYERS_KV_BRANCH", id = "a562f3b2828b43eaaf1c5b532e459ea7", preview_id = "35d9b6c106cb45b4921ad8b4f2554f26" },
+	{ binding = "SUMMIT_KV_BRANCH", id = "ad5d77f012864518a1025b933c6b0810", preview_id = "d0bc5d80daeb473f97f074e64a20472d" }
+]
+
+# R2 Bucket binding for branch-prefixed storage
+[[r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "divine-grace-storage"
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
+FRONTEND_URL = "https://www.divinegraceunec.com.ng"
+R2_PUBLIC_URL = "https://divine-grace-storage.xxxx.r2.cloudflarestorage.com"
+ADMIN_EMAILS = "ifeanyieeee8105@gmail.com,admin@divinegraceunn.com.ng,vivianukairo@gmail.com"
+SUPABASE_URL = "https://etwvbgecxqcfqtpxnpmi.supabase.co"
+
+[env.production]
+vars = { ENVIRONMENT = "production", FRONTEND_URL = "https://www.divinegraceunec.com.ng", R2_PUBLIC_URL = "https://divine-grace-storage.xxxx.r2.cloudflarestorage.com", ADMIN_EMAILS = "ifeanyieeee8105@gmail.com,admin@divinegraceunn.com.ng,vivianukairo@gmail.com", SUPABASE_URL = "https://etwvbgecxqcfqtpxnpmi.supabase.co" }
+kv_namespaces = [
+	{ binding = "LSTS_KV_BRANCH", id = "726962df744c4569a9e9c6834b48b611", preview_id = "90d655ec51bc46ada5e8a63e0f2ba6fd" },
+	{ binding = "PRAYERS_KV_BRANCH", id = "a562f3b2828b43eaaf1c5b532e459ea7", preview_id = "35d9b6c106cb45b4921ad8b4f2554f26" },
+	{ binding = "SUMMIT_KV_BRANCH", id = "ad5d77f012864518a1025b933c6b0810", preview_id = "d0bc5d80daeb473f97f074e64a20472d" }
+]
+
+[[env.production.r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "divine-grace-storage"
+
+[env.development]
+vars = { ENVIRONMENT = "development", FRONTEND_URL = "http://127.0.0.1:4173", ADMIN_EMAILS = "ifeanyieeee8105@gmail.com,admin@divinegraceunn.com.ng,vivianukairo@gmail.com", SUPABASE_URL = "https://etwvbgecxqcfqtpxnpmi.supabase.co" }
+kv_namespaces = [
+	{ binding = "LSTS_KV_BRANCH", id = "726962df744c4569a9e9c6834b48b611", preview_id = "90d655ec51bc46ada5e8a63e0f2ba6fd" },
+	{ binding = "PRAYERS_KV_BRANCH", id = "a562f3b2828b43eaaf1c5b532e459ea7", preview_id = "35d9b6c106cb45b4921ad8b4f2554f26" },
+	{ binding = "SUMMIT_KV_BRANCH", id = "ad5d77f012864518a1025b933c6b0810", preview_id = "d0bc5d80daeb473f97f074e64a20472d" }
+]
+
+[[env.development.r2_buckets]]
+binding = "R2_BUCKET"
+bucket_name = "divine-grace-storage"

@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="../config-api.js"></script>
 </head>
 <body>
     <header class="main-contents" id="header">
@@ -59,14 +60,14 @@
       </nav>
    </div>
 
-    <div class="main-content">
+    <div class="main-content" role="main">
         <section id="dashboard-content" class="content-section">
-            <div>
+            <div class="dashboard-wrapper">
                 <section>
                   <section class="main-body-section">
                     <section class="left-body-section">
-                      <button class="exit-button js-exit-button">
-                        <img src="../images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="">
+                      <button class="exit-button js-exit-button" title="Close profile" aria-label="Close profile details">
+                        <img src="../images/exit-button-png-close-close-button-exit-quit-x-icon-512.png" alt="Close">
                       </button>
                       <div class="main-left-div">
                         <div class="profile-imageH-div">
@@ -100,17 +101,24 @@
                     <section id="right-body-section">
                       <div id="Welcome-div">
                         <h2 id="welcome-message">Welcome back <span id="user-firstname"></span></h2>
+                        <p class="dashboard-intro">Stay connected, share a request, or reach the church leadership.</p>
                       </div>
                       <div class="display-profile-button-div">
                         <button class="display-profile-button js-display-profile-button">Show Profile Details</button>
                       </div>
                       <div class="card-div">
                         <div class="prayer-request-div">
-                          <p>Do you have any prayer request? Click the button below to submit a request</p>
+                          <span class="dashboard-card-label">Prayer support</span>
+                          <h3>Share a prayer request</h3>
+                          <p class="desktop-card-copy">Do you have any prayer request? Click the button below to submit a request</p>
+                          <p class="mobile-card-copy">Let the prayer team stand with you confidentially.</p>
                          <a href="../prayerequest/"> <button class="prayer-request-button">Submit a prayer request</button></a>
                         </div>
                         <div class="contact-div">
-                          <p>Do you need someone to talk to? Click the button below to connect with the leadership of the church</p>
+                          <span class="dashboard-card-label">Pastoral care</span>
+                          <h3>Speak with a leader</h3>
+                          <p class="desktop-card-copy">Do you need someone to talk to? Click the button below to connect with the leadership of the church</p>
+                          <p class="mobile-card-copy">Connect with the church leadership when you need support.</p>
                           <a href="https://wa.me/8141787294"><button class="contact-button">Click to connect</button></a>
                         </div>
                       </div>

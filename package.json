@@ -1,0 +1,35 @@
+{
+  "name": "divine-grace-upgrade-api",
+  "version": "1.0.0",
+  "description": "Divine Grace UNN - Branch Backend with Cloudflare Workers",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "wrangler deploy",
+    "dev": "wrangler dev",
+    "test": "node --test tests/*.test.mjs",
+    "test:auth:live": "node tests/auth-live-smoke.mjs",
+    "build:pages": "node tools/build-pages.mjs",
+    "deploy": "npm run build:pages && gh-pages -d site --dotfiles",
+    "deploy:pages": "npm run build:pages && gh-pages -d site --dotfiles",
+    "deploy:worker": "wrangler deploy --env production",
+    "deploy:staging": "wrangler deploy --env development"
+  },
+  "keywords": [
+    "divine-grace",
+    "cloudflare-workers",
+    "hono",
+    "supabase"
+  ],
+  "author": "Divine Grace UNN",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0",
+    "hono": "^4.0.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "wrangler": "^4.80.0"
+  }
+}

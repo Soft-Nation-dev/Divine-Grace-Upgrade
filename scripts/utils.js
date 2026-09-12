@@ -34,19 +34,55 @@ export function renderHeader() {
   const navMenu = document.querySelector('.nav-menu');
   const mainContent = document.querySelector('.main-content');
 
-  if (!hamburgerButton || !navMenu) return;
+  if (!hamburgerButton || !navMenu || navMenu.dataset.navigationReady === 'true') return;
+
+  navMenu.dataset.navigationReady = 'true';
+  if (!navMenu.id) navMenu.id = 'mobile-navigation';
+  hamburgerButton.setAttribute('aria-controls', navMenu.id);
+  hamburgerButton.setAttribute('aria-expanded', 'false');
+  hamburgerButton.setAttribute('aria-label', 'Open navigation menu');
+  navMenu.setAttribute('aria-label', 'Dashboard navigation');
+
+  const backdrop = document.createElement('button');
+  backdrop.type = 'button';
+  backdrop.className = 'nav-backdrop';
+  backdrop.setAttribute('aria-label', 'Close navigation menu');
+  document.body.appendChild(backdrop);
+
+  const setNavigationOpen = (isOpen) => {
+    navMenu.classList.toggle('visible', isOpen);
+    backdrop.classList.toggle('is-visible', isOpen);
+    document.body.classList.toggle('nav-open', isOpen);
+    mainContent?.classList.toggle('blurred', isOpen);
+    hamburgerButton.setAttribute('aria-expanded', String(isOpen));
+    hamburgerButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+
+    if (isOpen) {
+      exitNavButton?.focus();
+    } else if (document.activeElement === exitNavButton) {
+      hamburgerButton.focus();
+    }
+  };
 
   hamburgerButton.addEventListener('click', () => {
-    navMenu.classList.toggle('visible');
-    mainContent.classList.toggle('blurred', navMenu.classList.contains('visible'));
+    setNavigationOpen(!navMenu.classList.contains('visible'));
   });
 
   if (exitNavButton) {
     exitNavButton.addEventListener('click', () => {
-      navMenu.classList.remove('visible');
-      mainContent.classList.remove('blurred');
+      setNavigationOpen(false);
     });
   }
+
+  backdrop.addEventListener('click', () => setNavigationOpen(false));
+  navMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setNavigationOpen(false));
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && navMenu.classList.contains('visible')) {
+      setNavigationOpen(false);
+    }
+  });
 }
 
 export function wireLogout() {
@@ -82,10 +118,10 @@ export function makeAdmin() {
     const email = prompt("Enter email to assign admin rights:");
     if (!email) return;
 
-    fetch("https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/assign-admin", {
-      method: "POST",
-      headers: authHeaders({ "Content-Type": "application/json" }),
-      body: JSON.stringify({ email })
+    const backendBaseUrl = window._backendUrl || 'http://localhost:8787';
+    fetch(`${backendBaseUrl}/api/admin/check`, {
+      method: "GET",
+      headers: authHeaders()
     })
       .then(response => {
         if (response.status === 401) {
@@ -94,14 +130,14 @@ export function makeAdmin() {
           return;
         }
         if (response.ok) {
-          alert("Admin privileges granted successfully.");
+          alert("Admin privileges verified. Note: Use branch admin list to assign new admins.");
         } else {
-          response.text().then(text => alert("Failed to assign admin: " + text));
+          alert("You do not have admin access.");
         }
       })
       .catch(error => {
         console.error("Error:", error);
-        alert("An error occurred while assigning admin.");
+        alert("An error occurred while checking admin status.");
       });
   });
 }
@@ -125,17 +161,16 @@ export function redirect() {
 
 export async function checkSession(redirectUrl = '../registerlogin') {
   try {
+    const backendBaseUrl = window._backendUrl || 'http://localhost:8787';
     const res = await fetch(
-      'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/Auth/session',
+      `${backendBaseUrl}/api/auth/profile`,
       {
         method: 'GET',
         headers: authHeaders()
       }
     );
 
-    const data = await res.json();
-
-    if (res.ok && data.isAuthenticated) {
+    if (res.ok) {
       return true;
     } else {
       sessionStorage.removeItem("popupDismissed");
@@ -159,7 +194,8 @@ export function loadProfilePicture() {
   const userProfileImage = document.getElementById('user-profile-image');
   const userProfileImage1 = document.getElementById('profile-image');
   const fileNameSpan = document.getElementById('selected-file-name');
-  const backendBaseUrl = 'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net';
+  // Cloudflare Workers API
+  const backendBaseUrl = window._backendUrl || 'http://127.0.0.1:8787';
   const defaultProfilePic = '../images/th-2238308759';
   let messageTimeoutId = null;
 
@@ -171,13 +207,13 @@ export function loadProfilePicture() {
 
   async function fetchProfilePicture() {
     try {
-      const res = await fetch(`${backendBaseUrl}/api/Users/profile-picture`, {
+      const res = await fetch(`${backendBaseUrl}/api/auth/profile`, {
         headers: authHeaders()
       });
 
       if (res.ok) {
         const data = await res.json();
-        if (data.imageUrl) return updateProfileImage(data.imageUrl);
+        if (data.user && data.user.profile_image_url) return updateProfileImage(data.user.profile_image_url);
       }
       if (userProfileImage) userProfileImage.src = defaultProfilePic;
       if (userProfileImage1) userProfileImage1.src = defaultProfilePic;
@@ -236,8 +272,8 @@ export function loadProfilePicture() {
       formData.append('profilePicture', file);
 
       try {
-        const res = await fetch(`${backendBaseUrl}/api/Users/upload-profile-picture`, {
-          method: 'POST',
+        const res = await fetch(`${backendBaseUrl}/api/auth/profile`, {
+          method: 'PUT',
           body: formData,
           headers: authHeaders(),
         });

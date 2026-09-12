@@ -279,3 +279,313 @@
   cursor: pointer;
   border-radius: 5px;
 }
+
+/* Weekly LSTS operations view */
+#lsts-section {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px solid #e1e6ed;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 20px 52px rgba(24, 38, 57, 0.08);
+  color: #18253a;
+  text-align: left;
+}
+
+.lsts-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.admin-eyebrow {
+  margin: 0 0 7px;
+  color: #32644e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+#lsts-section h2 {
+  margin: 0;
+  color: #17243a;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+.admin-section-copy {
+  margin: 7px 0 0;
+  color: #6b7687;
+  font-size: 13px;
+}
+
+#lsts-section .download-btn {
+  min-height: 43px;
+  margin: 0;
+  padding: 11px 16px;
+  border-radius: 9px;
+  background: #17395f;
+  box-shadow: 0 8px 18px rgba(23, 57, 95, 0.16);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#lsts-section .download-btn:hover {
+  background: #102f52;
+}
+
+.lsts-summary {
+  display: grid;
+  margin: 26px 0 22px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.lsts-summary article {
+  padding: 17px 18px;
+  border: 1px solid #e4e8ee;
+  border-radius: 14px;
+  background: #f8f9fb;
+}
+
+.lsts-summary span {
+  display: block;
+  color: #17243a;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.lsts-summary p {
+  margin: 7px 0 0;
+  color: #778193;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.lsts-toolbar {
+  margin-bottom: 18px;
+}
+
+.lsts-toolbar label {
+  display: block;
+  margin-bottom: 7px;
+  color: #4e5b6e;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+#lsts-search {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 14px;
+  border: 1px solid #dfe4eb;
+  border-radius: 10px;
+  background: #fbfcfd;
+  color: #18253a;
+  font: 500 14px/1.3 "Nunito Sans", sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#lsts-search:focus {
+  outline: none;
+  border-color: #638675;
+  box-shadow: 0 0 0 4px rgba(50, 100, 78, 0.1);
+}
+
+.lsts-registration-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lsts-registration-card {
+  padding: 20px;
+  border: 1px solid #e2e7ed;
+  border-left: 3px solid #32644e;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(23, 37, 57, 0.05);
+}
+
+.lsts-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lsts-card-kicker {
+  margin: 0 0 4px !important;
+  color: #527260;
+  font-size: 9px !important;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.lsts-card-header h3 {
+  margin: 0;
+  color: #17243a;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.lsts-time {
+  max-width: 120px;
+  flex: 0 0 auto;
+  color: #828b9a;
+  font-size: 9px;
+  line-height: 1.45;
+  text-align: right;
+}
+
+.lsts-tags {
+  display: flex;
+  margin: 14px 0 17px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.lsts-tags span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #f0f3f6;
+  color: #566276;
+  font-size: 9px;
+  font-weight: 750;
+}
+
+.lsts-tags .is-student {
+  background: #eaf3ee;
+  color: #32644e;
+}
+
+.lsts-detail-list {
+  display: grid;
+  margin: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px 15px;
+}
+
+.lsts-detail-list div {
+  min-width: 0;
+}
+
+.lsts-detail-list .lsts-detail-wide {
+  grid-column: 1 / -1;
+}
+
+.lsts-detail-list dt {
+  margin-bottom: 3px;
+  color: #8a93a2;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lsts-detail-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #3f4b5e;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.lsts-detail-list a {
+  color: #244d76;
+  text-decoration: none;
+}
+
+.admin-empty-state {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 34px 20px;
+  border: 1px dashed #d7dde5;
+  border-radius: 14px;
+  background: #fafbfc;
+  color: #737e8f;
+  font-size: 13px;
+  text-align: center;
+}
+
+#lsts-section .secondary-download-btn {
+  display: block;
+  margin: 20px auto 0;
+  border: 1px solid #dce2e9;
+  background: #fff;
+  box-shadow: none;
+  color: #354358;
+}
+
+#lsts-section .secondary-download-btn:hover {
+  background: #f4f6f8;
+}
+
+@media (max-width: 760px) {
+  .admin-main {
+    padding: 14px;
+  }
+
+  #lsts-section {
+    margin-top: 18px;
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .lsts-section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  #lsts-section .download-btn {
+    width: 100%;
+  }
+
+  .lsts-summary {
+    margin: 21px 0 18px;
+    gap: 7px;
+  }
+
+  .lsts-summary article {
+    padding: 14px 10px;
+    text-align: center;
+  }
+
+  .lsts-summary span {
+    font-size: 23px;
+  }
+
+  .lsts-summary p {
+    font-size: 9px;
+  }
+
+  .lsts-registration-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lsts-registration-card {
+    padding: 17px;
+  }
+
+  .lsts-card-header {
+    flex-direction: column;
+  }
+
+  .lsts-time {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #lsts-search,
+  #lsts-section .download-btn {
+    transition: none;
+  }
+}

@@ -31,7 +31,7 @@ input, textarea, select {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 18px;
 }
 .submit-button {
 
@@ -41,7 +41,7 @@ input, textarea, select {
     padding: 10px 20px;
     font-family: "Agu Display", serif;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 4px;
 }
 .submit-button:hover {
@@ -132,7 +132,7 @@ input, textarea, select {
     width: 100%;
     max-width: 100%;
     padding: 20px;
-    font-size: 16px;
+    font-size: 18px;
     box-sizing: border-box;
     line-height: 1.6;
     text-wrap: nowrap;
@@ -259,3 +259,736 @@ input, textarea, select {
       background-position: right 10px center;
       background-size: 12px;
     }
+
+  .button-center{
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 16px;
+      /* background: linear-gradient(135deg, rgba(1, 41, 112, 0.78), rgba(65, 84, 241, 0.4)); */
+      min-height: 100vh;
+      color: black;
+    }
+
+    #lstsh1 {
+      margin-top: 85px;
+      margin-bottom: 14px;
+      /* color: #ffffff; */
+    }
+
+    #lstsh1 h1 {
+      font-size: 30px;
+      letter-spacing: 0.3px;
+    }
+
+    form {
+      width: 100%;
+      max-width: calc(100vw - 32px);
+      margin: 0 auto;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    label {
+      margin-bottom: 6px;
+      font-size: 18px;
+      /* color: #ffffff; */
+      font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      font-size: 18px;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.44);
+      background: rgba(255, 255, 255, 0.84);
+      color: #1f2a44;
+    }
+
+    textarea {
+      min-height: 92px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus,
+    .submit-button:focus {
+      outline: 2px solid #4154f1;
+      outline-offset: 2px;
+      border-color: rgba(65, 84, 241, 0.8);
+    }
+
+    #schoolDetails {
+      margin-bottom: 10px;
+      padding: 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .submit-button {
+      width: 100%;
+      min-height: 48px;
+      padding: 14px 20px;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 18px;
+      font-family: "Agu Display", serif;
+      background: linear-gradient(135deg, #012970, #4154f1);
+      box-shadow: 0 4px 12px rgba(65, 84, 241, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .submit-button:hover {
+      background: linear-gradient(135deg, #012970, #4154f1);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(65, 84, 241, 0.35);
+    }
+
+    #statusMessage {
+      width: calc(100vw - 32px);
+      max-width: 420px;
+      padding: 14px 16px;
+      font-size: 15px;
+    }
+
+    #animation-container {
+      padding: 16px;
+      background: rgba(1, 41, 112, 0.28);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    #animation-container .overlay {
+      width: 100%;
+      max-width: calc(100vw - 32px);
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
+      color: #ffffff;
+    }
+
+    #animation-container button {
+      min-height: 44px;
+      width: 100%;
+      max-width: 240px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #012970, #4154f1);
+    }
+
+    #receipt {
+      width: calc(100vw - 32px);
+      max-width: calc(100vw - 32px);
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 14px;
+      text-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    .receipt-container {
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    }
+
+    .receipt-header {
+      padding: 14px;
+    }
+
+    .church-name {
+      font-size: 18px;
+    }
+
+    .receipt-body {
+      font-size: 13px;
+      padding: 14px;
+    }
+
+    .label {
+      width: 120px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #lstsh1 h1 {
+      font-size: 19px;
+    }
+
+    form {
+      padding: 16px;
+    }
+
+    .church-name {
+      font-size: 16px;
+    }
+
+    .receipt-title {
+      font-size: 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .submit-button,
+    #statusMessage,
+    #animation-container .overlay {
+      transition: none;
+      animation: none;
+    }
+  }
+
+/* Guided LSTS registration experience */
+:root {
+  --lsts-ink: #17233a;
+  --lsts-muted: #687487;
+  --lsts-line: #dfe5ec;
+  --lsts-surface: #ffffff;
+  --lsts-navy: #17395f;
+  --lsts-green: #32644e;
+  --lsts-soft: #f3f5f7;
+}
+
+body {
+  min-height: 100vh;
+  padding: 0 20px 64px;
+  background: var(--lsts-soft);
+  color: var(--lsts-ink);
+}
+
+.main-content {
+  width: 100%;
+}
+
+#lstsh1 {
+  max-width: 720px;
+  margin: 128px auto 30px;
+  padding: 0 20px;
+  font-family: "Nunito Sans", sans-serif;
+  text-align: center;
+}
+
+.form-kicker {
+  margin: 0 0 10px;
+  color: var(--lsts-green);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+#lstsh1 h1 {
+  margin: 0;
+  color: var(--lsts-ink);
+  font-family: "Nunito Sans", sans-serif;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 750;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.form-intro {
+  max-width: 560px;
+  margin: 13px auto 0;
+  color: var(--lsts-muted);
+  font: 400 15px/1.65 "Open Sans", sans-serif;
+}
+
+#membershipForm {
+  width: min(92vw, 760px);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(31, 51, 77, 0.1);
+  border-radius: 22px;
+  background: var(--lsts-surface);
+  box-shadow: 0 24px 60px rgba(22, 38, 59, 0.1);
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.form-progress {
+  padding: 24px 30px 21px;
+  border-bottom: 1px solid #e8ecf1;
+  background: #f9fafb;
+}
+
+.progress-copy {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--lsts-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#step-count {
+  color: var(--lsts-green);
+}
+
+.progress-track {
+  width: 100%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e5e9ee;
+}
+
+#progress-fill {
+  display: block;
+  width: 33.333%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lsts-green);
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.step-list {
+  display: grid;
+  margin: 17px 0 0;
+  padding: 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.step-list li {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  gap: 8px;
+  color: #8b94a3;
+  font-size: 11px;
+  font-weight: 700;
+  list-style: none;
+  transition: color 0.25s ease;
+}
+
+.step-list li span {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #d9dfe7;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 10px;
+}
+
+.step-list li.is-active,
+.step-list li.is-complete {
+  color: var(--lsts-ink);
+}
+
+.step-list li.is-active span,
+.step-list li.is-complete span {
+  border-color: var(--lsts-green);
+  background: var(--lsts-green);
+  color: #fff;
+}
+
+.form-step {
+  min-height: 350px;
+  padding: 32px 34px 14px;
+  animation: lstsStepIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.form-step[data-direction="back"] {
+  animation-name: lstsStepBack;
+}
+
+.form-step[hidden],
+.step-button[hidden],
+.submit-button[hidden] {
+  display: none;
+}
+
+@keyframes lstsStepIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes lstsStepBack {
+  from { opacity: 0; transform: translateX(-18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.step-heading {
+  display: flex;
+  margin-bottom: 27px;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.step-heading > span {
+  display: grid;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 11px;
+  background: #eaf1ed;
+  color: var(--lsts-green);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.step-heading h2 {
+  margin: 0 0 4px;
+  color: var(--lsts-ink);
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.step-heading p {
+  margin: 0;
+  color: var(--lsts-muted);
+  font: 400 13px/1.5 "Open Sans", sans-serif;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.form-field-wide {
+  grid-column: 1 / -1;
+}
+
+#membershipForm label {
+  display: block;
+  margin: 0 0 7px;
+  color: #3f4c60;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+#membershipForm input,
+#membershipForm textarea,
+#membershipForm select {
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 12px 13px;
+  border: 1px solid var(--lsts-line);
+  border-radius: 10px;
+  background-color: #fbfcfd;
+  color: var(--lsts-ink);
+  font: 500 15px/1.35 "Nunito Sans", sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+#membershipForm textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+#membershipForm input::placeholder,
+#membershipForm textarea::placeholder {
+  color: #9aa3b0;
+}
+
+#membershipForm input:focus,
+#membershipForm textarea:focus,
+#membershipForm select:focus {
+  outline: none;
+  border-color: #668977;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(50, 100, 78, 0.1);
+}
+
+#membershipForm input.is-invalid,
+#membershipForm textarea.is-invalid,
+#membershipForm select.is-invalid {
+  border-color: #a94747;
+  box-shadow: 0 0 0 3px rgba(169, 71, 71, 0.09);
+}
+
+.school-details {
+  display: grid;
+  margin-top: 20px;
+  padding: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  border: 1px solid #dce7e1;
+  border-radius: 14px;
+  background: #f5f9f7;
+  animation: lstsReveal 0.32s ease both;
+}
+
+.school-details[hidden] {
+  display: none;
+}
+
+@keyframes lstsReveal {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-status {
+  min-height: 18px;
+  margin: 0;
+  padding: 0 34px;
+  color: #a13f3f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  padding: 20px 34px 28px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.step-button,
+#membershipForm .submit-button {
+  min-width: 126px;
+  min-height: 46px;
+  margin: 0;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 10px;
+  font: 750 13px/1 "Nunito Sans", sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.step-back {
+  margin-right: auto;
+  border: 1px solid var(--lsts-line);
+  background: #fff;
+  color: #465267;
+}
+
+.step-next,
+#membershipForm .submit-button {
+  background: var(--lsts-navy);
+  box-shadow: 0 9px 20px rgba(23, 57, 95, 0.18);
+  color: #fff;
+}
+
+.step-button:hover,
+#membershipForm .submit-button:hover {
+  transform: translateY(-1px);
+}
+
+.step-next:hover,
+#membershipForm .submit-button:hover {
+  background: #102f52;
+  box-shadow: 0 11px 24px rgba(23, 57, 95, 0.24);
+}
+
+#membershipForm .submit-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+  transform: none;
+}
+
+#animation-container {
+  background: rgba(12, 22, 36, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+#animation-container .overlay {
+  width: min(90vw, 410px);
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 28px 80px rgba(5, 12, 21, 0.3);
+  color: var(--lsts-ink);
+}
+
+#animation-container .overlay h2 {
+  margin: 0 0 18px;
+  font: 750 20px/1.35 "Nunito Sans", sans-serif;
+}
+
+#animation-container .status-icon {
+  width: 74px;
+  height: 74px;
+  object-fit: contain;
+}
+
+#animation-container button {
+  min-height: 44px;
+  margin: 6px 4px 0;
+  padding: 11px 17px;
+  border-radius: 9px;
+  background: var(--lsts-navy);
+  font: 700 13px/1 "Nunito Sans", sans-serif;
+}
+
+#animation-container #close-btn {
+  border: 1px solid var(--lsts-line);
+  background: #fff;
+  color: #465267;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0 14px 38px;
+  }
+
+  #lstsh1 {
+    margin: 104px auto 22px;
+    padding: 0 6px;
+    text-align: left;
+  }
+
+  .form-kicker {
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+
+  #lstsh1 h1 {
+    font-size: clamp(27px, 8.5vw, 35px);
+    letter-spacing: -0.04em;
+  }
+
+  .form-intro {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  #membershipForm {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 18px;
+  }
+
+  .form-progress {
+    padding: 19px 19px 17px;
+  }
+
+  .step-list {
+    margin-top: 14px;
+  }
+
+  .step-list li {
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .step-list li span {
+    width: 22px;
+    height: 22px;
+  }
+
+  .form-step {
+    min-height: 390px;
+    padding: 25px 19px 10px;
+  }
+
+  .step-heading {
+    margin-bottom: 22px;
+  }
+
+  .step-heading > span {
+    width: 36px;
+    height: 36px;
+  }
+
+  .step-heading h2 {
+    font-size: 18px;
+  }
+
+  .step-heading p {
+    font-size: 12px;
+  }
+
+  .form-grid,
+  .school-details {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .form-field-wide {
+    grid-column: auto;
+  }
+
+  #membershipForm label {
+    font-size: 12px;
+  }
+
+  #membershipForm input,
+  #membershipForm textarea,
+  #membershipForm select {
+    min-height: 50px;
+    padding: 13px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  .school-details {
+    margin-top: 17px;
+    padding: 15px;
+  }
+
+  .form-status {
+    padding: 0 19px;
+  }
+
+  .form-actions {
+    padding: 17px 19px 22px;
+  }
+
+  .step-button,
+  #membershipForm .submit-button {
+    min-width: 0;
+    min-height: 48px;
+    flex: 1;
+  }
+}
+
+@media (max-width: 380px) {
+  .step-list li {
+    font-size: 0;
+  }
+
+  .step-list li span {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #progress-fill,
+  .form-step,
+  .school-details,
+  .step-list li,
+  .step-button,
+  #membershipForm input,
+  #membershipForm textarea,
+  #membershipForm select,
+  #membershipForm .submit-button {
+    animation: none;
+    transition: none;
+  }
+}

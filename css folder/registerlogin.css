@@ -157,6 +157,28 @@ input{
     margin-bottom: 30px;
 }
 
+.mobile-auth-switch{
+    display: none;
+}
+
+.mobile-switch-btn{
+    border: none;
+}
+
+.mobile-card-brand{
+    display: none;
+}
+
+.registration-step{
+    display: contents;
+}
+
+.mobile-registration-progress,
+.mobile-step-message,
+.mobile-step-controls{
+    display: none;
+}
+
 .second-card-section{
     border: 2px solid gray;
     display: flex;
@@ -258,5 +280,713 @@ input{
     }
     .hidden {
         transform: translateY(-20px);
+    }
+}
+
+@media(max-width:768px){
+    *, *::before, *::after{
+        box-sizing: border-box;
+    }
+
+    body{
+        background:
+            linear-gradient(145deg, rgba(1, 41, 112, 0.76), rgba(65, 84, 241, 0.36)),
+            url("../images/congregation.jpg") center/cover no-repeat fixed;
+    }
+
+    .card-div{
+        min-height: calc(100vh - 120px);
+        align-items: flex-start;
+        padding: 20px 12px;
+        margin-top:  80px;
+    }
+
+    .gen-div{
+        width: calc(100vw - 24px);
+        max-width: 430px;
+        min-height: 0;
+        height: auto;
+        border-radius: 22px;
+        box-shadow: 0 18px 42px rgba(4, 10, 31, 0.42);
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        margin: 0 auto;
+        padding: 14px 10px 20px;
+        overflow: hidden;
+        isolation: isolate;
+        box-sizing: border-box;
+    }
+
+    .gen-div::before{
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        top: -90px;
+        right: -50px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 68%);
+        pointer-events: none;
+        z-index: 0;
+        animation: cardGlow 6s ease-in-out infinite alternate;
+    }
+
+    .gen-div::after{
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        bottom: -80px;
+        left: -55px;
+        background: radial-gradient(circle, rgba(65, 84, 241, 0.42) 0%, rgba(65, 84, 241, 0) 72%);
+        pointer-events: none;
+        z-index: 0;
+        animation: cardGlow 7s ease-in-out infinite alternate-reverse;
+    }
+
+    .first-div,
+    .second-div{
+        position: relative;
+        height: auto;
+        display: block;
+        margin-top: 0;
+        z-index: 1;
+    }
+
+    .second-div{
+        display: none;
+    }
+
+    .mobile-auth-switch{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+        max-width: 360px;
+        margin: 8px auto 16px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
+        padding: 6px;
+    }
+
+    .mobile-card-brand{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 8px auto 14px;
+        width: 100%;
+    }
+
+    .mobile-card-logo{
+        height: 44px;
+        width: 44px;
+        border-radius: 50%;
+        margin-bottom: 8px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+    }
+
+    .mobile-card-title{
+        margin: 0;
+        font-size: 16px;
+        font-family: "Nunito Sans", sans-serif;
+        letter-spacing: 0.3px;
+        font-weight: 800;
+        color: #ffffff;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .mobile-card-subtitle{
+        margin: 4px 0 0;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.85);
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+    }
+
+    .mobile-switch-btn{
+        position: relative;
+        padding: 11px 12px;
+        border-radius: 999px;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    }
+
+    .mobile-switch-btn::after{
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 7px;
+        width: 56%;
+        height: 2px;
+        border-radius: 999px;
+        background: #012970;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: center;
+        opacity: 0;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .mobile-switch-btn.active{
+        background-color: rgba(255, 255, 255, 0.92);
+        color: #012970;
+    }
+
+    .mobile-switch-btn.active::after{
+        transform: translateX(-50%) scaleX(1);
+        opacity: 1;
+    }
+
+    .mobile-switch-btn:active{
+        transform: scale(0.98);
+    }
+
+    .first,
+    .second{
+        height: auto;
+        width: 100%;
+    }
+
+    .first-div > .first{
+        display: none;
+    }
+
+    .first-div > .first.visible{
+        display: flex;
+    }
+
+    .first-div > .first.hidden{
+        display: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .first{
+        padding: 12px 12px 4px;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .signin-h,
+    .creatacc-h{
+        color: #ffffff;
+        text-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+        margin: 8px 0 18px;
+        padding-bottom: 0;
+        font-size: 28px;
+        line-height: 1.05;
+        text-align: center;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .input{
+        width: 100%;
+        max-width: 100%;
+        height: 46px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.92);
+        box-sizing: border-box;
+        margin-bottom: 14px;
+        font-size: 14px;
+        min-width: 0;
+        /* padding-left: 10px; */
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    input::placeholder{
+        padding-left: 2px;
+    }
+
+    .button-div{
+        width: 100%;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .button-div a{
+        color: #ffffff;
+        margin-bottom: 16px;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .button-div button{
+        width: 100%;
+        max-width: 100%;
+        min-height: 46px;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #012970, #4154f1);
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    #register-message,
+    #login-message{
+        color: #ffffff;
+        background: rgba(217, 48, 37, 0.92);
+        padding: 8px 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .hidden {
+        transform: translateY(18px);
+    }
+
+    .visible{
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardGlow {
+    from {
+        transform: translateY(0) scale(1);
+        opacity: 0.72;
+    }
+    to {
+        transform: translateY(10px) scale(1.08);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .hidden,
+    .visible,
+    .mobile-switch-btn,
+    .gen-div::before,
+    .gen-div::after{
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Screenshot-led mobile authentication treatment. Desktop rules above remain unchanged. */
+@media(max-width:768px){
+    *, *::before, *::after{
+        box-sizing: border-box;
+    }
+
+    html{
+        min-height: 100%;
+        background: #16241f;
+    }
+
+    body{
+        position: relative;
+        min-height: 100svh;
+        margin: 0;
+        overflow-x: hidden;
+        background: #16241f;
+        color: #ffffff;
+        font-family: "Open Sans", sans-serif;
+        isolation: isolate;
+    }
+
+    body::before,
+    body::after{
+        content: "";
+        position: fixed;
+        pointer-events: none;
+    }
+
+    body::before{
+        inset: -22px;
+        background: url("../images/congregation.jpg") center/cover no-repeat;
+        filter: blur(11px);
+        transform: scale(1.1);
+        opacity: 0.9;
+        z-index: -2;
+    }
+
+    body::after{
+        inset: 0;
+        background: linear-gradient(180deg, rgba(14, 29, 29, 0.44), rgba(8, 20, 14, 0.58));
+        z-index: -1;
+    }
+
+    .card-div{
+        min-height: 100svh;
+        align-items: center;
+        padding: max(34px, env(safe-area-inset-top)) 28px max(28px, env(safe-area-inset-bottom));
+        margin: 0;
+    }
+
+    .gen-div{
+        width: min(100%, 370px);
+        height: auto;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 0;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        isolation: auto;
+    }
+
+    .gen-div::before,
+    .gen-div::after{
+        display: none;
+    }
+
+    .first-div,
+    .second-div{
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .first-div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .second-div{
+        display: none;
+    }
+
+    .mobile-card-brand{
+        display: block;
+        width: 100%;
+        margin: 0 auto 22px;
+        text-align: center;
+    }
+
+    .mobile-card-title{
+        margin: 0 0 12px;
+        color: #ffffff;
+        font-family: "Nunito Sans", sans-serif;
+        font-size: clamp(40px, 12vw, 54px);
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -1.8px;
+        text-shadow: 0 3px 18px rgba(0, 0, 0, 0.42);
+    }
+
+    .mobile-card-subtitle{
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.65;
+        letter-spacing: 0;
+        text-transform: none;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
+    }
+
+    .first,
+    .second{
+        width: 100%;
+        height: auto;
+    }
+
+    .first-div > .first{
+        display: none;
+    }
+
+    .first-div > .first.visible{
+        display: flex;
+    }
+
+    .first-div > .first.hidden{
+        display: none;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .first{
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .signin-h{
+        display: none;
+    }
+
+    .creatacc-h{
+        display: none;
+    }
+
+    .registration-step{
+        display: none;
+        width: 100%;
+    }
+
+    .registration-step.active{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-registration-progress{
+        display: block;
+        width: 100%;
+        margin: 0 0 20px;
+        text-align: center;
+    }
+
+    .mobile-step-kicker{
+        margin: 0 0 5px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+    }
+
+    .mobile-step-title{
+        margin: 0 0 12px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .mobile-step-bars{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+        width: min(100%, 210px);
+        margin: 0 auto;
+    }
+
+    .mobile-step-bars span{
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.28);
+        transition: background-color 0.2s ease;
+    }
+
+    .mobile-step-bars span.active{
+        background: #36c873;
+    }
+
+    .mobile-step-message{
+        display: block;
+        min-height: 17px;
+        margin: 2px 0 8px;
+        color: #ffe0dd;
+        font-size: 11px;
+        line-height: 1.45;
+        text-align: center;
+    }
+
+    .mobile-step-controls{
+        display: flex;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .mobile-step-controls button{
+        min-height: 44px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-family: "Open Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .mobile-step-back{
+        flex: 0 0 38%;
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        background: rgba(9, 24, 21, 0.12);
+        color: #ffffff;
+    }
+
+    .mobile-step-next{
+        flex: 1;
+        border: 0;
+        background: #2fba68;
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(10, 61, 31, 0.26);
+    }
+
+    .mobile-step-controls.final-step .mobile-step-back{
+        flex: 1;
+    }
+
+    .mobile-step-controls button[hidden]{
+        display: none;
+    }
+
+    .input{
+        width: 100%;
+        height: 46px;
+        margin: 0 0 14px;
+        padding: 0 18px;
+        border: 1px solid rgba(255, 255, 255, 0.76);
+        border-radius: 999px;
+        outline: 0;
+        background: rgba(9, 24, 21, 0.14);
+        color: #ffffff;
+        font-size: 13px;
+        font-family: "Open Sans", sans-serif;
+        text-align: center;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.14);
+        transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input::placeholder{
+        padding: 0;
+        color: rgba(255, 255, 255, 0.9);
+        opacity: 1;
+    }
+
+    .input:focus{
+        border-color: #ffffff;
+        background: rgba(9, 24, 21, 0.28);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);
+    }
+
+    .button-div{
+        width: 100%;
+        margin: 0;
+    }
+
+    .button-div a{
+        display: none;
+    }
+
+    .button-div button{
+        display: flex;
+        width: 100%;
+        min-height: 46px;
+        margin: 0;
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: #2fba68;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 10px 24px rgba(10, 61, 31, 0.3);
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .button-div button:hover,
+    .button-div button:focus-visible{
+        background: #38c976;
+        transform: translateY(-1px);
+    }
+
+    .mobile-auth-switch{
+        display: flex;
+        grid-template-columns: none;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        max-width: none;
+        margin: 14px auto 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    .mobile-password-link,
+    .mobile-switch-btn,
+    .mobile-switch-btn.active{
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: inherit;
+        font-family: "Open Sans", sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        text-decoration: none;
+    }
+
+    .mobile-switch-btn::after{
+        display: none;
+    }
+
+    .mobile-link-divider{
+        width: 1px;
+        height: 15px;
+        background: rgba(255, 255, 255, 0.7);
+    }
+
+    .js-mobile-signin{
+        display: none;
+    }
+
+    .mobile-auth-switch.signup-active .mobile-password-link,
+    .mobile-auth-switch.signup-active .mobile-link-divider,
+    .mobile-auth-switch.signup-active .js-mobile-signup{
+        display: none;
+    }
+
+    .mobile-auth-switch.signup-active .js-mobile-signin{
+        display: inline-block;
+    }
+
+    #register-message,
+    #login-message{
+        width: 100%;
+        margin: 0 0 10px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: rgba(137, 25, 20, 0.82);
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+    body.signup-active .card-div{
+        align-items: center;
+    }
+
+    body.signup-active .mobile-card-title{
+        font-size: 36px;
+    }
+
+    body.signup-active .mobile-card-brand{
+        margin-bottom: 16px;
+    }
+
+    body.signup-active .mobile-card-subtitle{
+        display: none;
+    }
+
+    .hidden{
+        transform: translateY(14px);
+    }
+
+    .visible{
+        transform: translateY(0);
     }
 }

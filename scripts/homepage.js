@@ -7,20 +7,46 @@ function leftBodySectionDisplay() {
   const leftBodySection      = document.querySelector('.left-body-section');
   const mainBodySection      = document.querySelector('.main-body-section');
 
-  
-  displayProfileButton.addEventListener('click', () => {
+  if (!displayProfileButton || !exitButton || !leftBodySection || !mainBodySection) {
+    return;
+  }
+
+  const handleProfileOpen = () => {
     leftBodySection.classList.add('fullscreen');
     mainBodySection.classList.add('hidden');
-    document.body.appendChild(leftBodySection);
-    exitButton.style.display = 'block';
-  });
+    // show the exit control and add overlay lock only on small screens
+    if (window.innerWidth <= 768) {
+      exitButton.style.display = 'block';
+      document.body.classList.add('overlay-open');
+    } else {
+      // hide close button on desktop per request
+      exitButton.style.display = 'none';
+    }
 
-  exitButton.addEventListener('click', () => {
+    if (window.innerWidth > 768) {
+      document.body.appendChild(leftBodySection);
+    }
+  };
+
+  const handleProfileClose = () => {
     leftBodySection.classList.remove('fullscreen');
     mainBodySection.classList.remove('hidden');
     exitButton.style.display = 'none';
-    document.querySelector('.main-body-section')
-            .insertBefore(leftBodySection, document.querySelector('.main-body-section').firstChild);
+    document.body.classList.remove('overlay-open');
+    if (window.innerWidth > 768) {
+      const mainSection = document.querySelector('.main-body-section');
+      if (mainSection) {
+        mainSection.insertBefore(leftBodySection, mainSection.firstChild);
+      }
+    }
+  };
+
+  displayProfileButton.addEventListener('click', handleProfileOpen);
+  exitButton.addEventListener('click', handleProfileClose);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && leftBodySection.classList.contains('fullscreen')) {
+      handleProfileClose();
+    }
   });
 }
 

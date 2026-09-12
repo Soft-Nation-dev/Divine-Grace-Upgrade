@@ -6,14 +6,18 @@
      <link rel="stylesheet" href="../css folder/forgotpassword.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORGOT PASSWORD</title>
+    <script src="../config-api.js"></script>
 </head>
 <body>
      <section class="content">
     <div>
         <div id="form-container">
       <h2>Forgot Password</h2>
+      <p class="form-intro">Enter your account email and we will send you a secure reset link.</p>
       <input type="email" id="email" placeholder="Enter your email" required>
-      <buttonn id="sendResetCode">Send Reset Code</button>
+      <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      <button type="button" id="sendResetCode">Send Reset Link</button>
+      <a class="back-to-login" href="../registerlogin/">Back to login</a>
     </div>
     </div>
   </section>

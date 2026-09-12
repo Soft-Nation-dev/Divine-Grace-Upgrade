@@ -14,6 +14,8 @@ renderHeader();
 wireLogout();
 checkSession();
 loadProfilePicture();
+
+const backendBaseUrl = window._backendUrl || "http://127.0.0.1:8787";
 preventBackCacheReload();
 returnHome();
 PreventBackButton();
@@ -41,15 +43,17 @@ function hideLoader() {
 }
 
 async function isAdmin() {
-  const res = await fetch(
-    "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/isAadmin",
-    {
-      method: "GET",
-      headers: authHeaders()
-    }
-  );
+  const res = await fetch(`${backendBaseUrl}/api/admin/check`, {
+    method: "GET",
+    headers: authHeaders()
+  });
 
-  return res.ok ? await res.json() : false;
+  if (!res.ok) {
+    return false;
+  }
+
+  const data = await res.json().catch(() => ({}));
+  return data?.isAdmin === true;
 }
 
 function setupTabSwitching() {
@@ -77,7 +81,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const invitesContainer = document.getElementById("invites-container");
 
   showLoader("Checking admin access...");
-  const isAdminUser = await isAdmin();
+  let isAdminUser = false;
+  try {
+    isAdminUser = await isAdmin();
+  } catch (err) {
+    isAdminUser = false;
+  }
 
   setTimeout(async () => {
     if (!isAdminUser) {
@@ -94,67 +103,122 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const prayerContainer = document.getElementById("prayer-requests");
     const lstsContainer = document.getElementById("lsts-registrations");
+    const lstsSearch = document.getElementById("lsts-search");
+    const lstsWeekRange = document.getElementById("lsts-week-range");
+    const lstsWeekCount = document.getElementById("lsts-week-count");
+    const lstsStudentCount = document.getElementById("lsts-student-count");
+    const lstsDepartmentCount = document.getElementById("lsts-department-count");
+    let weeklyLstsData = [];
 
     const endpoints = {
-      invites: "https://divinegrace-debxaddqfaehdggg.southafricanorth-01.azurewebsites.net/api/Invitation/get-invitations",
-      prayers: "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/PrayerRequest/GetPrayers",
-      lsts: "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/LstsForm/USERLSTSFORM"
+      invites: null,
+      prayers: `${backendBaseUrl}/api/admin/prayers/all`,
+      lsts: `${backendBaseUrl}/api/admin/lsts/all`
     };
+
+    const normalizeLsts = (person) => ({
+      surname: person.surname || "",
+      otherNames: person.other_names || person.otherNames || "",
+      phoneNumber: person.phone_number || person.phoneNumber || "",
+      email: person.email || "",
+      residentialAddress: person.residential_address || person.residentialAddress || "",
+      departmentInChurch: person.department_in_church || person.departmentInChurch || "",
+      positionInChurch: person.position_in_church || person.positionInChurch || "",
+      gender: person.gender || "",
+      student: person.is_student === true ? "Yes" : "No",
+      departmentInSchool: person.department_in_school || person.departmentInSchool || "",
+      level: person.level || "",
+      submittedAt: person.submitted_at || person.submittedAt || null,
+    });
+
+    const normalizePrayer = (item) => ({
+      title: item.title || "Untitled",
+      description: item.description || "",
+      category: item.category || "General",
+      urgency: item.urgency || "Normal",
+      submittedAt: item.submitted_at || item.submittedAt || null,
+      email: item.user_email || item.email || "",
+    });
     
     async function fetchAndDisplayLSTS() {
-   try {
-     const res = await fetch(endpoints.lsts, { headers: authHeaders() });
-     const data = await res.json();
-     if (!Array.isArray(data)) throw new Error("Unexpected response");
- 
- 
-     const now = new Date();
- 
-     
-     const dayOfWeek = now.getDay(); 
-     const monday = new Date(now);
-     monday.setDate(now.getDate() - ((dayOfWeek + 6) % 7)); 
-     monday.setHours(0, 0, 0, 0);
- 
-     const friday = new Date(monday);
-     friday.setDate(monday.getDate() + 4);
-     friday.setHours(23, 59, 59, 999);
- 
-     const thisWeeksData = data.filter(person => {
-       const submitted = new Date(person.submittedAt);
-       return submitted >= monday && submitted <= friday;
-     });
- 
-     lstsContainer.innerHTML = ""; 
-     const allContainer = document.getElementById("lsts-registrations-all");
-     allContainer.innerHTML = "";
- 
-     if (thisWeeksData.length === 0) {
-       lstsContainer.innerHTML = "<p class='error'>No LSTS registration for this week.</p>";
-     }  else {
-       renderLSTSList(thisWeeksData, lstsContainer);
-     }
- 
-     renderLSTSList(data, allContainer);
-     
-     } catch {
-     lstsContainer.innerHTML = "<p class='error'>Could not load LSTS registrations.</p>";
-       document.getElementById("lsts-registrations-all").innerHTML = "";
-   }
- }
+      try {
+        const res = await fetch(endpoints.lsts, { headers: authHeaders() });
+        if (!res.ok) throw new Error(`LSTS request failed with ${res.status}`);
+
+        const data = await res.json();
+        const registrations = Array.isArray(data) ? data : data?.registrations;
+        if (!Array.isArray(registrations)) throw new Error("Unexpected response");
+
+        const now = new Date();
+        const dayOfWeek = now.getDay();
+        const monday = new Date(now);
+        monday.setDate(now.getDate() - ((dayOfWeek + 6) % 7));
+        monday.setHours(0, 0, 0, 0);
+
+        const friday = new Date(monday);
+        friday.setDate(monday.getDate() + 4);
+        friday.setHours(23, 59, 59, 999);
+
+        const dateFormat = new Intl.DateTimeFormat(undefined, {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        });
+        lstsWeekRange.textContent = `${dateFormat.format(monday)} – ${dateFormat.format(friday)}`;
+
+        const normalized = registrations
+          .map(normalizeLsts)
+          .sort((a, b) => new Date(b.submittedAt || 0) - new Date(a.submittedAt || 0));
+
+        weeklyLstsData = normalized.filter((person) => {
+          if (!person.submittedAt) return false;
+          const submitted = new Date(person.submittedAt);
+          return submitted >= monday && submitted <= friday;
+        });
+
+        const departments = new Set(
+          weeklyLstsData
+            .flatMap((person) => Array.isArray(person.departmentInChurch)
+              ? person.departmentInChurch
+              : [person.departmentInChurch])
+            .filter(Boolean)
+        );
+
+        lstsWeekCount.textContent = weeklyLstsData.length;
+        lstsStudentCount.textContent = weeklyLstsData.filter((person) => person.student === "Yes").length;
+        lstsDepartmentCount.textContent = departments.size;
+
+        renderLSTSList(weeklyLstsData, lstsContainer, "No registrations have been submitted this week.");
+        renderLSTSList(normalized, document.getElementById("lsts-registrations-all"), "No LSTS registrations found.");
+      } catch (error) {
+        console.error("Could not load LSTS registrations:", error);
+        lstsWeekRange.textContent = "Weekly records are temporarily unavailable";
+        lstsWeekCount.textContent = "—";
+        lstsStudentCount.textContent = "—";
+        lstsDepartmentCount.textContent = "—";
+        lstsContainer.innerHTML = "<p class='admin-empty-state error'>Could not load LSTS registrations.</p>";
+        document.getElementById("lsts-registrations-all").innerHTML = "";
+      }
+    }
     async function fetchAndDisplayPrayers() {
       try {
         const res = await fetch(endpoints.prayers, { headers: authHeaders() });
         const data = await res.json();
-        if (!Array.isArray(data)) throw new Error("Unexpected response");
+        const prayers = Array.isArray(data) ? data : data?.prayers;
+        if (!Array.isArray(prayers)) throw new Error("Unexpected response");
 
-        data.forEach(req => {
+        const normalized = prayers.map(normalizePrayer);
+
+        normalized.forEach(req => {
           const card = document.createElement("div");
           card.className = "admin-card";
           card.innerHTML = `
-            <p><strong>Name:</strong> ${req.firstName} ${req.otherNames}</p>
-            <p><strong>Message:</strong> ${req.prayerRequest || ""}</p>
-            <p><strong>Submitted At:</strong> ${new Date(req.submittedAt).toLocaleString()}</p>
+            <p><strong>Title:</strong> ${req.title}</p>
+            <p><strong>Message:</strong> ${req.description}</p>
+            <p><strong>Category:</strong> ${req.category}</p>
+            <p><strong>Urgency:</strong> ${req.urgency}</p>
+            <p><strong>Submitted By:</strong> ${req.email || "Unknown"}</p>
+            <p><strong>Submitted At:</strong> ${req.submittedAt ? new Date(req.submittedAt).toLocaleString() : "Unknown"}</p>
           `;
           prayerContainer.appendChild(card);
         });
@@ -164,32 +228,82 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-function renderLSTSList(list, container) {
-  list.forEach(person => {
-    const card = document.createElement("div");
-    card.className = "admin-card";
-    card.innerHTML = `
-      <p><strong>Surname:</strong> ${person.surname}</p>
-      <p><strong>Other Names:</strong> ${person.otherNames}</p>
-      <p><strong>Phone:</strong> ${person.phoneNumber}</p>
-      <p><strong>Email:</strong> ${person.email}</p>
-      <p><strong>Residential Address:</strong> ${person.residentialAddress}</p>
-      <p><strong>Department in Church:</strong> ${person.departmentInChurch}</p>
-      <p><strong>Position:</strong> ${person.positionInChurch}</p>
-      <p><strong>Gender:</strong> ${person.gender}</p>
-      <p><strong>Is Student:</strong> ${person.student}</p>
-      ${person.student?.toLowerCase() === "yes" ? `
-        <p><strong>Dept. in School:</strong> ${person.departmentInSchool}</p>
-        <p><strong>Level:</strong> ${person.level}</p>` : ""
+    const escapeHtml = (value) => String(value ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+    function renderLSTSList(list, container, emptyMessage = "No registrations found.") {
+      container.innerHTML = "";
+      if (!list.length) {
+        container.innerHTML = `<p class="admin-empty-state">${escapeHtml(emptyMessage)}</p>`;
+        return;
       }
-      <p><strong>Submitted At:</strong> ${new Date(person.submittedAt).toLocaleString()}</p>
-    `;
-    container.appendChild(card);
-  });
-}
+
+      list.forEach((person) => {
+        const card = document.createElement("article");
+        card.className = "admin-card lsts-registration-card";
+        const fullName = `${person.surname} ${person.otherNames}`.trim() || "Unnamed registrant";
+        const department = Array.isArray(person.departmentInChurch)
+          ? person.departmentInChurch.join(", ")
+          : person.departmentInChurch || "Not provided";
+        const submittedAt = person.submittedAt
+          ? new Date(person.submittedAt).toLocaleString([], { dateStyle: "medium", timeStyle: "short" })
+          : "Date unavailable";
+
+        card.innerHTML = `
+          <div class="lsts-card-header">
+            <div>
+              <p class="lsts-card-kicker">${escapeHtml(person.positionInChurch || "Registrant")}</p>
+              <h3>${escapeHtml(fullName)}</h3>
+            </div>
+            <span class="lsts-time">${escapeHtml(submittedAt)}</span>
+          </div>
+          <div class="lsts-tags">
+            <span>${escapeHtml(department)}</span>
+            <span>${escapeHtml(person.gender || "Gender not provided")}</span>
+            <span class="${person.student === "Yes" ? "is-student" : ""}">${person.student === "Yes" ? "Student" : "Non-student"}</span>
+          </div>
+          <dl class="lsts-detail-list">
+            <div><dt>Phone</dt><dd><a href="tel:${escapeHtml(person.phoneNumber)}">${escapeHtml(person.phoneNumber || "Not provided")}</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:${escapeHtml(person.email)}">${escapeHtml(person.email || "Not provided")}</a></dd></div>
+            <div class="lsts-detail-wide"><dt>Address</dt><dd>${escapeHtml(person.residentialAddress || "Not provided")}</dd></div>
+            ${person.student === "Yes" ? `
+              <div><dt>School department</dt><dd>${escapeHtml(person.departmentInSchool || "Not provided")}</dd></div>
+              <div><dt>Level</dt><dd>${escapeHtml(person.level ? `${person.level} Level` : "Not provided")}</dd></div>
+            ` : ""}
+          </dl>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    lstsSearch.addEventListener("input", () => {
+      const query = lstsSearch.value.trim().toLowerCase();
+      const filtered = !query
+        ? weeklyLstsData
+        : weeklyLstsData.filter((person) => [
+            person.surname,
+            person.otherNames,
+            person.email,
+            person.phoneNumber,
+            Array.isArray(person.departmentInChurch)
+              ? person.departmentInChurch.join(" ")
+              : person.departmentInChurch
+          ].join(" ").toLowerCase().includes(query));
+
+      renderLSTSList(filtered, lstsContainer, "No weekly registration matches your search.");
+    });
 
 
     async function fetchAndDisplayInvites() {
+      if (!endpoints.invites) {
+        invitesContainer.innerHTML = "<p class='error'>Invites admin endpoint is not configured in this branch backend yet.</p>";
+        return;
+      }
+
       try {
         const res = await fetch(endpoints.invites, { headers: authHeaders() });
         const data = await res.json();
@@ -295,7 +409,7 @@ function renderLSTSList(list, container) {
     formData.append("file", file);
 
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/AudioMessage", true);
+    xhr.open("POST", `${backendBaseUrl}/api/messages/upload`, true);
     xhr.setRequestHeader("Authorization", `Bearer ${sessionStorage.getItem("authToken")}`);
 
     xhr.upload.onprogress = function (event) {

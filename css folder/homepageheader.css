@@ -36,7 +36,7 @@ header{
     align-items: center;
 }
 .blurred {
-    filter: blur(20px); 
+    filter: none;
     pointer-events: none;
     user-select: none;
   }
@@ -44,17 +44,37 @@ header{
     display: none;
   }
 
-  .nav-menu {
+.nav-menu {
     position: fixed;
     top: 0; left: 0;
     width: 350px; height: 100vh;
     background: white;
     transform: translateX(-100%);
-    transition: transform 1s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1500;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
   }
   .nav-menu.visible {
     transform: translateX(0);
+  }
+
+  .nav-menu::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: -1;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .nav-menu.visible::before {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
   
   .logo-nav{
@@ -175,6 +195,10 @@ header{
 .content-section.hidden {
     display: none;
   }
+
+.nav-backdrop {
+    display: none;
+}
   
 
 @media screen and (max-width: 546px){
@@ -226,5 +250,356 @@ header{
 
  #Welcome-div{
     width: 100%;
+    /* font-size: 400px; */
+    margin-top: 55px;
  }
+}
+
+/* Refined mobile navigation. Desktop header and drawer are unchanged. */
+@media screen and (max-width: 768px) {
+    header,
+    #header {
+        height: 72px;
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(25, 42, 66, 0.08);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 8px 24px rgba(26, 39, 58, 0.06);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+
+    .right-section,
+    .left-section {
+        min-width: 0;
+    }
+
+    .hambuger-button {
+        display: grid;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        padding: 10px;
+        place-items: center;
+        border: 1px solid #e1e6ed;
+        border-radius: 11px;
+        background: #f8f9fb;
+    }
+
+    .hambuger {
+        width: 20px;
+        height: 20px;
+        opacity: 0.78;
+    }
+
+    #logo-img {
+        height: 24px;
+    }
+
+    #digunec-logo {
+        top: -6px;
+        color: #152a47;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+    }
+
+    #divider,
+    #dashboard,
+    .left-section button {
+        display: none;
+    }
+
+    #profile-image {
+        width: 38px;
+        height: 38px;
+        margin-left: 8px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 0 0 1px #dce2e9;
+    }
+
+    .nav-menu {
+        top: 0;
+        left: 0;
+        width: min(88vw, 340px);
+        height: 100dvh;
+        padding: 0 14px 22px;
+        overflow-y: auto;
+        border-radius: 0 22px 22px 0;
+        background: #111d2f;
+        box-shadow: 18px 0 50px rgba(7, 15, 27, 0.24);
+        color: #fff;
+        z-index: 1600;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-menu::before {
+        display: none;
+    }
+
+    .logo-nav {
+        display: flex;
+        min-height: 82px;
+        margin: 0;
+        padding: 20px 48px 16px 8px;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+    }
+
+    .nav-menu .logo-div #digunec-logo {
+        color: #fff;
+    }
+
+    .js-exit-butt {
+        top: 21px;
+        right: 18px;
+        display: grid;
+        width: 38px;
+        height: 38px;
+        padding: 11px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.07);
+    }
+
+    .js-exit-butt img {
+        width: 100%;
+        height: 100%;
+        filter: invert(1);
+        opacity: 0.82;
+    }
+
+    .nav {
+        margin: 20px 0 0;
+        padding: 0;
+    }
+
+    .nav li {
+        margin: 3px 0;
+        list-style: none;
+    }
+
+    .nav li a,
+    .nav li button {
+        display: flex;
+        width: 100%;
+        min-height: 46px;
+        padding: 12px 14px;
+        align-items: center;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: #c9d2df;
+        font: 600 14px/1.35 "Nunito Sans", sans-serif;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    .nav li a::before,
+    .nav li button::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        margin-right: 12px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: #637086;
+    }
+
+    .nav li[class^="menu-item"],
+    .nav li[class*=" menu-item"] {
+        margin: 3px 0;
+        padding: 0;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.09);
+    }
+
+    .nav li[class^="menu-item"] a,
+    .nav li[class*=" menu-item"] a {
+        color: #fff;
+    }
+
+    .nav li[class^="menu-item"] a::before,
+    .nav li[class*=" menu-item"] a::before {
+        background: #7fc49f;
+        box-shadow: 0 0 0 4px rgba(127, 196, 159, 0.12);
+    }
+
+    .nav .home-button {
+        margin-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 0;
+    }
+
+    .nav .signout-button {
+        color: #f1b6b6;
+    }
+
+    .nav-backdrop {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1550;
+        border: 0;
+        background: rgba(8, 15, 26, 0.55);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .nav-backdrop.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    body.nav-open {
+        overflow: hidden;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-menu,
+    .nav-backdrop {
+        transition: none;
+    }
+}
+
+/* Keep the same refined drawer experience on larger screens. */
+@media screen and (min-width: 769px) {
+    .nav-menu {
+        width: min(88vw, 340px);
+        height: 100dvh;
+        padding: 0 14px 22px;
+        overflow-y: auto;
+        border-radius: 0 22px 22px 0;
+        background: #111d2f;
+        box-shadow: 18px 0 50px rgba(7, 15, 27, 0.24);
+        color: #fff;
+        z-index: 1600;
+        transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-menu::before {
+        display: none;
+    }
+
+    .logo-nav {
+        display: flex;
+        min-height: 82px;
+        margin: 0;
+        padding: 20px 48px 16px 8px;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+    }
+
+    .nav-menu .logo-div #digunec-logo {
+        color: #fff;
+    }
+
+    .js-exit-butt {
+        top: 21px;
+        right: 18px;
+        display: grid;
+        width: 38px;
+        height: 38px;
+        padding: 11px;
+        place-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.07);
+    }
+
+    .js-exit-butt img {
+        width: 100%;
+        height: 100%;
+        filter: invert(1);
+        opacity: 0.82;
+    }
+
+    .nav {
+        margin: 20px 0 0;
+        padding: 0;
+    }
+
+    .nav li {
+        margin: 3px 0;
+    }
+
+    .nav li a,
+    .nav li button {
+        display: flex;
+        width: 100%;
+        min-height: 46px;
+        padding: 12px 14px;
+        align-items: center;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: #c9d2df;
+        font: 600 14px/1.35 "Nunito Sans", sans-serif;
+        text-align: left;
+    }
+
+    .nav li a::before,
+    .nav li button::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        margin-right: 12px;
+        flex: 0 0 auto;
+        border-radius: 50%;
+        background: #637086;
+    }
+
+    .nav li[class^="menu-item"],
+    .nav li[class*=" menu-item"] {
+        margin: 3px 0;
+        padding: 0;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.09);
+    }
+
+    .nav li[class^="menu-item"] a,
+    .nav li[class*=" menu-item"] a {
+        color: #fff;
+    }
+
+    .nav li[class^="menu-item"] a::before,
+    .nav li[class*=" menu-item"] a::before {
+        background: #7fc49f;
+        box-shadow: 0 0 0 4px rgba(127, 196, 159, 0.12);
+    }
+
+    .nav .home-button {
+        margin-top: 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 0;
+    }
+
+    .nav .signout-button {
+        color: #f1b6b6;
+    }
+
+    .nav-backdrop {
+        position: fixed;
+        inset: 0;
+        display: block;
+        z-index: 1550;
+        border: 0;
+        background: rgba(8, 15, 26, 0.55);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .nav-backdrop.is-visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    body.nav-open {
+        overflow: hidden;
+    }
 }

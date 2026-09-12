@@ -8,28 +8,159 @@ function reset() {
 
 const signIn   = document.querySelector('.js-signinbut');
 const signUp   = document.querySelector('.js-signupbut');
+const mobileSignInButton = document.querySelector('.js-mobile-signin');
+const mobileSignUpButton = document.querySelector('.js-mobile-signup');
+const mobileAuthSwitch = document.querySelector('.mobile-auth-switch');
+const mobileCardTitle = document.querySelector('.mobile-card-title');
 const createAccountSection = document.querySelector('.creatacc-div');
 const welcomeBackSection   = document.querySelector('.signin-div');
 const helloDiv             = document.querySelector('.hello-div');
 const welcomeDiv           = document.querySelector('.welcomeback-div');
 const loginButton          = document.querySelector('.js-login-button');
 const createAccountButton  = document.querySelector('.js-create-account-button');
+const registrationSteps    = [...document.querySelectorAll('[data-registration-step]')];
+const mobileStepBack       = document.querySelector('.js-mobile-step-back');
+const mobileStepNext       = document.querySelector('.js-mobile-step-next');
+const mobileStepKicker     = document.querySelector('.js-mobile-step-kicker');
+const mobileStepTitle      = document.querySelector('.js-mobile-step-title');
+const mobileStepProgress   = document.querySelector('.mobile-step-bars');
+const mobileStepMessage    = document.getElementById('mobile-step-message');
 
-createAccountSection.classList.add('visible');
-helloDiv.classList.add('visible');
-welcomeDiv.classList.add('hidden');
-welcomeBackSection.classList.add('hidden');
+const isMobileView = window.matchMedia('(max-width: 768px)').matches;
+const registrationStepTitles = ['Your details', 'Church & school', 'Contact & security'];
+let currentRegistrationStep = 1;
 
-signIn.addEventListener('click', () => {
+function clearMobileStepMessage() {
+  if (mobileStepMessage) mobileStepMessage.textContent = '';
+}
+
+function setRegistrationStep(stepNumber) {
+  currentRegistrationStep = Math.min(Math.max(stepNumber, 1), registrationSteps.length);
+
+  registrationSteps.forEach((step, index) => {
+    step.classList.toggle('active', index + 1 === currentRegistrationStep);
+  });
+
+  mobileStepProgress?.querySelectorAll('span').forEach((bar, index) => {
+    bar.classList.toggle('active', index < currentRegistrationStep);
+  });
+
+  if (mobileStepKicker) {
+    mobileStepKicker.textContent = `Step ${currentRegistrationStep} of ${registrationSteps.length}`;
+  }
+  if (mobileStepTitle) {
+    mobileStepTitle.textContent = registrationStepTitles[currentRegistrationStep - 1];
+  }
+  if (mobileStepProgress) {
+    mobileStepProgress.setAttribute('aria-valuenow', String(currentRegistrationStep));
+  }
+
+  mobileStepBack?.toggleAttribute('hidden', currentRegistrationStep === 1);
+  mobileStepNext?.toggleAttribute('hidden', currentRegistrationStep === registrationSteps.length);
+  mobileStepBack?.parentElement?.classList.toggle('final-step', currentRegistrationStep === registrationSteps.length);
+  clearMobileStepMessage();
+}
+
+function validateCurrentRegistrationStep() {
+  const currentStep = registrationSteps[currentRegistrationStep - 1];
+  const inputs = currentStep ? [...currentStep.querySelectorAll('input')] : [];
+
+  if (inputs.some(input => !input.value.trim())) {
+    if (mobileStepMessage) mobileStepMessage.textContent = 'Please complete every field before continuing.';
+    return false;
+  }
+
+  if (currentRegistrationStep === 1) {
+    const username = document.getElementById('register-username').value.trim();
+    if (!/^[a-zA-Z0-9]+$/.test(username)) {
+      if (mobileStepMessage) mobileStepMessage.textContent = 'Your username can only contain letters and numbers.';
+      return false;
+    }
+  }
+
+  return true;
+}
+
+if (isMobileView) {
+  createAccountSection.classList.add('hidden');
+  helloDiv.classList.add('hidden');
+  welcomeDiv.classList.add('hidden');
+  welcomeBackSection.classList.add('visible');
+} else {
+  createAccountSection.classList.add('visible');
+  helloDiv.classList.add('visible');
+  welcomeDiv.classList.add('hidden');
+  welcomeBackSection.classList.add('hidden');
+}
+
+function setMobileSwitchState(isSignUpActive) {
+  if (!mobileSignInButton || !mobileSignUpButton) return;
+  mobileSignUpButton.classList.toggle('active', isSignUpActive);
+  mobileSignInButton.classList.toggle('active', !isSignUpActive);
+  mobileAuthSwitch?.classList.toggle('signup-active', isSignUpActive);
+  document.body.classList.toggle('signup-active', isSignUpActive);
+  if (isMobileView && mobileCardTitle) {
+    mobileCardTitle.textContent = isSignUpActive ? 'Create Account' : 'Welcome';
+  }
+}
+
+function showSignInState() {
   toggleVisibility([createAccountSection, helloDiv], [welcomeBackSection, welcomeDiv]);
   hideMessage('register-message');
   hideMessage('login-message');
-});
-signUp.addEventListener('click', () => {
+  clearMobileStepMessage();
+  setMobileSwitchState(false);
+}
+
+function showSignUpState() {
   toggleVisibility([welcomeBackSection, welcomeDiv], [createAccountSection, helloDiv]);
   hideMessage('register-message');
   hideMessage('login-message');
+  setRegistrationStep(1);
+  setMobileSwitchState(true);
+}
+
+if (signIn) {
+  signIn.addEventListener('click', showSignInState);
+}
+
+if (signUp) {
+  signUp.addEventListener('click', showSignUpState);
+}
+
+if (mobileSignInButton) {
+  mobileSignInButton.addEventListener('click', showSignInState);
+}
+
+if (mobileSignUpButton) {
+  mobileSignUpButton.addEventListener('click', showSignUpState);
+}
+
+mobileStepNext?.addEventListener('click', () => {
+  if (validateCurrentRegistrationStep()) {
+    setRegistrationStep(currentRegistrationStep + 1);
+  }
 });
+
+mobileStepBack?.addEventListener('click', () => {
+  setRegistrationStep(currentRegistrationStep - 1);
+});
+
+registrationSteps.forEach(step => {
+  step.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', clearMobileStepMessage);
+  });
+});
+
+setRegistrationStep(1);
+
+const registerModeRequested = new URLSearchParams(window.location.search).get('mode') === 'register';
+
+if (isMobileView && registerModeRequested) {
+  showSignUpState();
+} else {
+  setMobileSwitchState(!isMobileView);
+}
 
 function $(id) {
   const el = document.getElementById(id);
@@ -72,6 +203,11 @@ const confirmPasswordInput = $('register-confirm-password');
 const loginEmailInput      = $('login-email');
 const loginPasswordInput   = $('login-password');
 
+if (isMobileView) {
+  loginEmailInput.placeholder = 'Email Address';
+  loginButton.querySelector('.btn-text').textContent = 'Login';
+}
+
 [
   firstnameInput,
   nameInput,
@@ -104,7 +240,7 @@ createAccountButton.addEventListener('click', async () => {
   const Password        = passwordInput.value;
   const ConfirmPassword = confirmPasswordInput.value;
 
-  if (![FirstName, Othernames, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword].every(v => v)) {
+  if (![FirstName, Othernames, Username, DepartmentInChurch, DepartmentInSchool, ResidentialAddress, Email, PhoneNumber, Password, ConfirmPassword].every(v => v)) {
     showMessage('register-message', 'Please fill in all fields.');
     setButtonLoading(createAccountButton, false);
     return;
@@ -114,7 +250,7 @@ createAccountButton.addEventListener('click', async () => {
     setButtonLoading(createAccountButton, false);
     return;
   }
-  if (Password.length < 4) {
+  if (Password.length < 6) {
     showMessage('register-message', 'Password must be at least 6 characters long.');
     setButtonLoading(createAccountButton, false);
     return;
@@ -136,22 +272,24 @@ createAccountButton.addEventListener('click', async () => {
   }
 
   try {
+    const backendBaseUrl = window._backendUrl || 'http://localhost:8787';
     const res = await fetch(
-      'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/Auth/register',
+      `${backendBaseUrl}/api/auth/signup`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          FirstName,
-          Othernames,
-          Username,
-          DepartmentInChurch,
-          DepartmentInSchool,
-          ResidentialAddress,
-          Email,
-          PhoneNumber,
-          Password,
-          ConfirmPassword
+          username: Username,
+          firstName: FirstName,
+          otherNames: Othernames,
+          title: '',
+          fullName: FirstName + ' ' + Othernames,
+          email: Email,
+          password: Password,
+          phoneNumber: PhoneNumber,
+          residentialAddress: ResidentialAddress,
+          departmentInChurch: DepartmentInChurch,
+          departmentInSchool: DepartmentInSchool
         })
       }
     );
@@ -164,16 +302,13 @@ createAccountButton.addEventListener('click', async () => {
         data = { message: text };
       }
     if (res.ok && data.success !== false) {
-      showMessage('register-message', data.error);
+      showMessage('register-message', data.message || 'Account created successfully.');
       setTimeout(() => {
-        toggleVisibility(
-        [createAccountSection, helloDiv],
-        [welcomeBackSection, welcomeDiv]
-      );
+      showSignInState();
       reset();
       }, 2000);
     } else {
-      showMessage('register-message', data.error,  'Registration failed');
+      showMessage('register-message', data.error || data.message || 'Registration failed');
     }
   } catch (err) {
     console.error(err);
@@ -202,17 +337,17 @@ loginButton.addEventListener('click', async () => {
   }
 
   try {
+    const backendBaseUrl = window._backendUrl || 'http://localhost:8787';
     const res = await fetch(
-      'https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/Auth/login',
+      `${backendBaseUrl}/api/auth/login`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({  Email: email,Password: password })
+        body: JSON.stringify({ email: email, password: password })
       }
     );
 
     const data = await res.json();
-    console.log('Login response:', data);
 
     if (res.ok && data.token) {
       sessionStorage.setItem('authToken', data.token); 

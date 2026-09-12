@@ -10,11 +10,16 @@
     <link rel="icon" href="../images/mlogo.png" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="../config-api.js"></script>
 </head>
 <body>
     <section class="card-div">
     <div class="gen-div js-gendiv">
         <div class="first-div js-create-account-section">
+            <div class="mobile-card-brand">
+                <p class="mobile-card-title">Welcome</p>
+                <p class="mobile-card-subtitle">Sign in to continue your journey with<br>Divine Grace UNEC.</p>
+            </div>
            
             <div class="first signin-div">
                 <h2 class="signin-h">Sign In</h2>
@@ -34,26 +39,50 @@
             </div>
             <div class="first creatacc-div">
                 <h2 class="creatacc-h">Creat Account</h2>
-                <input class="input" id="register-firstname" type="text" placeholder="First Name" required>
-                <input class="input" id="register-name" type="text" placeholder="Other names" required>
-                <input class="input" id="register-username" type="text" placeholder="User Name" required>
-                <input class="input" id="department-in-church" type="text" placeholder="Department in church" required>
-                <input class="input" id="department-in-school" type="text" placeholder="Department in school" required>
-                <input class="input" id="residential-address" type="text" placeholder="residential address" required>
-                <input class="input" id="register-email" type="email" placeholder="Email" required>
-                <input class="input" id="register-phone" type="tel" placeholder="Phone number" required>
-                <input class="input" id="register-password" type="password" placeholder="Password" required>
-                <input class="input" id="register-confirm-password" type="password" placeholder="Confirm password" required>
-            
-               <div class="button-div">
-                <div id="register-message" class="error-message" style="display:none;"></div>
-                  <button type="button" class="js-create-account-button"> 
+                <div class="mobile-registration-progress">
+                    <p class="mobile-step-kicker js-mobile-step-kicker">Step 1 of 3</p>
+                    <h3 class="mobile-step-title js-mobile-step-title">Your details</h3>
+                    <div class="mobile-step-bars" role="progressbar" aria-label="Account creation progress" aria-valuemin="1" aria-valuemax="3" aria-valuenow="1">
+                        <span class="active"></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="registration-step active" data-registration-step="1">
+                    <input class="input" id="register-firstname" type="text" placeholder="First Name" required>
+                    <input class="input" id="register-name" type="text" placeholder="Other names" required>
+                    <input class="input" id="register-username" type="text" placeholder="User Name" required>
+                </div>
+                <div class="registration-step" data-registration-step="2">
+                    <input class="input" id="department-in-church" type="text" placeholder="Department in church" required>
+                    <input class="input" id="department-in-school" type="text" placeholder="Department in school" required>
+                    <input class="input" id="residential-address" type="text" placeholder="Residential address" required>
+                </div>
+                <div class="registration-step" data-registration-step="3">
+                    <input class="input" id="register-email" type="email" placeholder="Email" required>
+                    <input class="input" id="register-phone" type="tel" placeholder="Phone number" required>
+                    <input class="input" id="register-password" type="password" placeholder="Password" required>
+                    <input class="input" id="register-confirm-password" type="password" placeholder="Confirm password" required>
+
+                    <div class="button-div">
+                    <div id="register-message" class="error-message" style="display:none;"></div>
+                    <button type="button" class="js-create-account-button">
         
 
-                    <span class="btn-text">Create Account</span>
-                    <span class="spinner spinner--hidden"></span>
-                </button>
-               </div>
+                        <span class="btn-text">Create Account</span>
+                        <span class="spinner spinner--hidden"></span>
+                    </button>
+                    </div>
+                </div>
+                <div id="mobile-step-message" class="mobile-step-message" aria-live="polite"></div>
+                <div class="mobile-step-controls">
+                    <button type="button" class="mobile-step-back js-mobile-step-back">Back</button>
+                    <button type="button" class="mobile-step-next js-mobile-step-next">Continue</button>
+                </div>
+            </div>
+            <div class="mobile-auth-switch" aria-label="Account options">
+                <a class="mobile-password-link" href="../forgot Password/">Password</a>
+                <span class="mobile-link-divider" aria-hidden="true"></span>
+                <button type="button" class="mobile-switch-btn js-mobile-signup">Register</button>
+                <button type="button" class="mobile-switch-btn js-mobile-signin">Log in</button>
             </div>
         </div>
         <div class="second-div js-welcome-back-section">
@@ -75,7 +104,7 @@
     </section>
 
 
-
+<!--
     <footer>
         <div class="footer-logo">
             <img class="logo-imgg" src="../images/mlogo.png" alt="">
@@ -92,7 +121,7 @@
             <p class="copyright">&copy;copyright <b>DIGUNEC</b>&#46; All right reserved</p>
             <p class="design"><i>Designed by Soft Nation ft Smart</i></p>
         </div>
-    </footer>
+    </footer> -->
     <script type="module" src="../scripts/registerlogin.js"></script>
 </body>
 </html>

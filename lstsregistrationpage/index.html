@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LSTS REGISTRATION PAGE</title>
-    <link rel="stylesheet" href="../css folder/lsts.css">
     <link rel="icon" href="../images/mlogo.png" type="image/png">
     <link rel="stylesheet" href="../css folder/homepageheader.css">
     <link rel="stylesheet" href="../css folder/homepagebody.css">
     <link rel="stylesheet" href="../css folder/divinegracegeneral.css">
     <link rel="stylesheet" href="../css folder/divinegracemain.css">
+    <link rel="stylesheet" href="../css folder/lsts.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Agu+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Open+Sans&display=swap" rel="stylesheet">
+    <script src="../config-api.js"></script>
 </head>
 <body>
 
@@ -62,80 +63,138 @@
      </div>
      <section class="main-content">
     <div id="lstsh1">
-        <h1>LSTS Registration Form</h1>
+        <p class="form-kicker">Leadership and Stewardship Training Service</p>
+        <h1>Complete your LSTS registration</h1>
+        <p class="form-intro">A short, guided registration. Your progress is kept as you move between steps.</p>
     </div>
-    <form id="membershipForm">
-      <label for="surname">Surname</label>
-      <input type="text" id="register-firstname" name="surname" required>
-    
-      <label for="otherNames">Other Names</label>
-      <input type="text" id="otherNames" name="otherNames" required>
-    
-      <label for="phoneNumber">Phone Number</label>
-      <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]+" title="Enter a valid phone number">
-    
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-    
-      <label for="residentialAddress">Residential Address</label>
-      <textarea id="residentialAddress" name="residentialAddress" rows="3" required></textarea>
-    
-      <label for="gender">Gender</label>
-      <select id="gender" name="gender" required>
-        <option value="" disabled selected>Select your gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-
-    
-      <label for="department">Department in the Church</label>
-      <select id="department" name="department" required>
-        <option value="" disabled selected>Select a department</option>
-        <option value="Technical department">Technical</option>
-        <option value="Choir/Instrumentalist department">Choir/Instrumentalist</option>
-        <option value="Ushering department">Ushering</option>
-        <option value="Medical department">Medical Team</option>
-        <option value="Follow-Up department">Follow up</option>
-        <option value="Media department">Media</option>
-        <option value="Prayer Department">Prayer</option>
-        <option value="Sanctuary Department">Sanctuary</option>
-        <option value="Academic Department">Academic</option>
-      </select>
-    
-      <label for="position">Position in the Church</label>
-      <select id="position" name="position" required>
-        <option value="" disabled selected>Select a position</option>
-        <option value="Pastor">Pastor</option>
-        <option value="Leader">Leader</option>
-        <option value="Worker">Worker</option>
-        <option value="Minister">Minister</option>
-        <option value="Member">Member</option>
-      </select>
-    
-      <label for="studentStatus">Are you a student?</label>
-      <select id="studentStatus" name="studentStatus" required>
-        <option value="" disabled selected>Select an option</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-    
-      <div id="schoolDetails" style="display: none;">
-        <label for="schoolDepartment">Department in School</label>
-        <input type="text" id="schoolDepartment" name="schoolDepartment">
-    
-        <label for="level">Level</label>
-        <select id="level" name="level">
-          <option value="" disabled selected>Select your level</option>
-          <option value="100">100 Level</option>
-          <option value="200">200 Level</option>
-          <option value="300">300 Level</option>
-          <option value="400">400 Level</option>
-          <option value="500">500 Level</option>
-          <option value="600">600 Level</option>
-        </select>
+    <form id="membershipForm" novalidate>
+      <div class="form-progress" aria-label="Registration progress">
+        <div class="progress-copy">
+          <span id="step-count">Step 1 of 3</span>
+          <span id="step-name">Personal details</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div>
+        <ol class="step-list">
+          <li class="is-active" data-step-indicator="0"><span>1</span>Personal</li>
+          <li data-step-indicator="1"><span>2</span>Contact</li>
+          <li data-step-indicator="2"><span>3</span>Church</li>
+        </ol>
       </div>
-    
-      <button class="submit-button" type="submit">Submit</button>
+
+      <div class="form-step is-active" data-form-step="0">
+        <div class="step-heading">
+          <span>01</span>
+          <div><h2>Tell us about yourself</h2><p>Start with the details we will use to identify your application.</p></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="register-firstname">Surname</label>
+            <input type="text" id="register-firstname" name="surname" autocomplete="family-name" placeholder="Enter your surname" required>
+          </div>
+          <div class="form-field">
+            <label for="otherNames">Other names</label>
+            <input type="text" id="otherNames" name="otherNames" autocomplete="given-name" placeholder="Enter your other names" required>
+          </div>
+          <div class="form-field form-field-wide">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+              <option value="" disabled selected>Select your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-step" data-form-step="1" hidden>
+        <div class="step-heading">
+          <span>02</span>
+          <div><h2>How can we reach you?</h2><p>Use contact details you check regularly.</p></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="phoneNumber">Phone number</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" autocomplete="tel" inputmode="tel" placeholder="e.g. 0801 234 5678" required pattern="[0-9 +()-]{7,}" title="Enter a valid phone number">
+          </div>
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          </div>
+          <div class="form-field form-field-wide">
+            <label for="residentialAddress">Residential address</label>
+            <textarea id="residentialAddress" name="residentialAddress" rows="3" autocomplete="street-address" placeholder="Enter your current address" required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-step" data-form-step="2" hidden>
+        <div class="step-heading">
+          <span>03</span>
+          <div><h2>Your church and school details</h2><p>One final step, then you can review your registration and submit.</p></div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="department">Department in the church</label>
+            <select id="department" name="department" required>
+              <option value="" disabled selected>Select a department</option>
+              <option value="Technical department">Technical</option>
+              <option value="Choir/Instrumentalist department">Choir/Instrumentalist</option>
+              <option value="Ushering department">Ushering</option>
+              <option value="Medical department">Medical Team</option>
+              <option value="Follow-Up department">Follow up</option>
+              <option value="Media department">Media</option>
+              <option value="Prayer Department">Prayer</option>
+              <option value="Sanctuary Department">Sanctuary</option>
+              <option value="Academic Department">Academic</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="position">Position in the church</label>
+            <select id="position" name="position" required>
+              <option value="" disabled selected>Select a position</option>
+              <option value="Pastor">Pastor</option>
+              <option value="Leader">Leader</option>
+              <option value="Worker">Worker</option>
+              <option value="Minister">Minister</option>
+              <option value="Member">Member</option>
+            </select>
+          </div>
+          <div class="form-field form-field-wide">
+            <label for="studentStatus">Are you currently a student?</label>
+            <select id="studentStatus" name="studentStatus" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="schoolDetails" class="school-details" hidden>
+          <div class="form-field">
+            <label for="schoolDepartment">Department in school</label>
+            <input type="text" id="schoolDepartment" name="schoolDepartment" placeholder="Enter your course or department">
+          </div>
+          <div class="form-field">
+            <label for="level">Level</label>
+            <select id="level" name="level">
+              <option value="" disabled selected>Select your level</option>
+              <option value="100">100 Level</option>
+              <option value="200">200 Level</option>
+              <option value="300">300 Level</option>
+              <option value="400">400 Level</option>
+              <option value="500">500 Level</option>
+              <option value="600">600 Level</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      <div class="form-actions">
+        <button class="step-button step-back" id="step-back" type="button" hidden>Back</button>
+        <button class="step-button step-next" id="step-next" type="button">Continue</button>
+        <button class="submit-button" type="submit" hidden>Submit registration</button>
+      </div>
     </form>
 </section>
 <div id="animation-container" style="display:none;"></div>

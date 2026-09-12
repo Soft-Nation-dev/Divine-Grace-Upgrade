@@ -10,14 +10,6 @@ import {
   authHeaders
 } from "./utils.js";
 
-renderHeader();
-checkSession();
-preventBackCacheReload();
-returnHome();
-wireLogout();
-PreventBackButton();
-loadProfilePicture();
-
 const now = new Date();
 const today = now.getDay();
 const hours = now.getHours();
@@ -36,43 +28,168 @@ if (isAfterFridayNoon) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const runSafely = (fn, label) => {
+    try {
+      fn();
+    } catch (err) {
+      console.error(`${label} failed:`, err);
+    }
+  };
+
+  runSafely(renderHeader, "renderHeader");
+  runSafely(checkSession, "checkSession");
+  runSafely(preventBackCacheReload, "preventBackCacheReload");
+  runSafely(returnHome, "returnHome");
+  runSafely(wireLogout, "wireLogout");
+  runSafely(PreventBackButton, "PreventBackButton");
+  runSafely(loadProfilePicture, "loadProfilePicture");
+
   const form = document.getElementById("membershipForm");
+  if (!form) {
+    return;
+  }
+
   const submitBtn = form.querySelector(".submit-button");
+  const stepPanels = [...form.querySelectorAll("[data-form-step]")];
+  const stepIndicators = [...form.querySelectorAll("[data-step-indicator]")];
+  const nextBtn = form.querySelector("#step-next");
+  const backBtn = form.querySelector("#step-back");
+  const stepCount = form.querySelector("#step-count");
+  const stepName = form.querySelector("#step-name");
+  const progressFill = form.querySelector("#progress-fill");
+  const formStatus = form.querySelector("#form-status");
   const studentStatusField = form.querySelector("#studentStatus");
   const schoolFieldsWrapper = document.querySelector("#schoolDetails");
+  const schoolDepartmentField = form.querySelector("#schoolDepartment");
+  const levelField = form.querySelector("#level");
   const animationContainer = document.getElementById("animation-container");
+  const stepNames = ["Personal details", "Contact details", "Church & school"];
+  let currentStep = 0;
 
-  studentStatusField.addEventListener("change", () => {
-    schoolFieldsWrapper.style.display =
-      studentStatusField.value === "Yes" ? "block" : "none";
+  const showStep = (stepIndex, direction = "forward", shouldFocus = true) => {
+    currentStep = Math.max(0, Math.min(stepIndex, stepPanels.length - 1));
+
+    stepPanels.forEach((panel, index) => {
+      const isCurrent = index === currentStep;
+      panel.hidden = !isCurrent;
+      panel.classList.toggle("is-active", isCurrent);
+      if (isCurrent) panel.dataset.direction = direction;
+    });
+
+    stepIndicators.forEach((indicator, index) => {
+      indicator.classList.toggle("is-active", index === currentStep);
+      indicator.classList.toggle("is-complete", index < currentStep);
+      if (index === currentStep) {
+        indicator.setAttribute("aria-current", "step");
+      } else {
+        indicator.removeAttribute("aria-current");
+      }
+    });
+
+    stepCount.textContent = `Step ${currentStep + 1} of ${stepPanels.length}`;
+    stepName.textContent = stepNames[currentStep];
+    progressFill.style.width = `${((currentStep + 1) / stepPanels.length) * 100}%`;
+    backBtn.hidden = currentStep === 0;
+    nextBtn.hidden = currentStep === stepPanels.length - 1;
+    submitBtn.hidden = currentStep !== stepPanels.length - 1;
+    formStatus.textContent = "";
+
+    if (shouldFocus) {
+      const heading = stepPanels[currentStep].querySelector("h2");
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+      }
+      form.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const validateStep = (stepIndex) => {
+    const fields = [...stepPanels[stepIndex].querySelectorAll("input, select, textarea")]
+      .filter((field) => !field.disabled && !field.closest("[hidden]"));
+    const firstInvalid = fields.find((field) => !field.checkValidity());
+
+    fields.forEach((field) => field.classList.toggle("is-invalid", !field.checkValidity()));
+    if (!firstInvalid) {
+      formStatus.textContent = "";
+      return true;
+    }
+
+    formStatus.textContent = "Please complete the highlighted field before continuing.";
+    firstInvalid.reportValidity();
+    return false;
+  };
+
+  nextBtn.addEventListener("click", () => {
+    if (validateStep(currentStep)) showStep(currentStep + 1, "forward");
   });
+
+  backBtn.addEventListener("click", () => showStep(currentStep - 1, "back"));
+
+  form.querySelectorAll("input, select, textarea").forEach((field) => {
+    const clearFieldError = () => {
+      if (field.checkValidity()) field.classList.remove("is-invalid");
+      if (!form.querySelector(".is-invalid")) formStatus.textContent = "";
+    };
+    field.addEventListener("input", clearFieldError);
+    field.addEventListener("change", clearFieldError);
+  });
+
+  const syncStudentFields = () => {
+    const isStudent = studentStatusField.value === "Yes";
+    schoolFieldsWrapper.hidden = !isStudent;
+    schoolDepartmentField.required = isStudent;
+    levelField.required = isStudent;
+
+    if (!isStudent) {
+      schoolDepartmentField.classList.remove("is-invalid");
+      levelField.classList.remove("is-invalid");
+    }
+  };
+
+  studentStatusField.addEventListener("change", syncStudentFields);
+  syncStudentFields();
+
+  showStep(0, "forward", false);
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const invalidField = [...form.querySelectorAll("input, select, textarea")]
+      .find((field) => !field.disabled && !field.closest("[hidden]") && !field.checkValidity());
+    if (invalidField) {
+      const invalidStep = Number(invalidField.closest("[data-form-step]")?.dataset.formStep || currentStep);
+      showStep(invalidStep, invalidStep < currentStep ? "back" : "forward", false);
+      invalidField.classList.add("is-invalid");
+      formStatus.textContent = "Please complete the highlighted field before submitting.";
+      invalidField.reportValidity();
+      return;
+    }
+
     const payload = {
-      Surname: form.querySelector("#register-firstname").value.trim(),
-      OtherNames: form.querySelector("#otherNames").value.trim(),
-      PhoneNumber: form.querySelector("#phoneNumber").value.trim(),
-      Email: form.querySelector("#email").value.trim(),
-      ResidentialAddress: form.querySelector("#residentialAddress").value.trim(),
-      DepartmentInChurch: form.querySelector("#department").value,
-      PositionInChurch: form.querySelector("#position").value,
-      Gender: form.querySelector("#gender").value,
+      surname: form.querySelector("#register-firstname").value.trim(),
+      otherNames: form.querySelector("#otherNames").value.trim(),
+      phoneNumber: form.querySelector("#phoneNumber").value.trim(),
+      email: form.querySelector("#email").value.trim(),
+      residentialAddress: form.querySelector("#residentialAddress").value.trim(),
+      departmentInChurch: form.querySelector("#department").value,
+      positionInChurch: form.querySelector("#position").value,
+      gender: form.querySelector("#gender").value,
       Student: studentStatusField.value || "",
       ...(studentStatusField.value === "Yes" && {
-        DepartmentInSchool: form.querySelector("#schoolDepartment").value.trim(),
-        Level: form.querySelector("#level").value,
+        departmentInSchool: form.querySelector("#schoolDepartment").value.trim(),
+        level: form.querySelector("#level").value,
       }),
-      SubmittedAt: new Date().toISOString().split(".")[0],
+      submittedAt: new Date().toISOString().split(".")[0],
     };
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting…";
 
     try {
+      const backendBaseUrl = window._backendUrl || 'http://localhost:8787';
       const res = await fetch(
-        "https://dgunec-gddwdkd0hbe9dxe2.southafricanorth-01.azurewebsites.net/api/LstsForm/LSTSFORM",
+        `${backendBaseUrl}/api/lsts`,
         {
           method: "POST",
           headers: authHeaders(),
@@ -84,16 +201,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (res.ok) {
         showAnimation("success", data.message || "Form submitted successfully.", payload);
-        form.reset();
-        schoolFieldsWrapper.style.display = "none";
       } else {
-        showAnimation("error", data.message || "Submission failed.");
+        showAnimation("error", data.error || data.message || "Submission failed.");
       }
     } catch (err) {
       showAnimation("error", "Network error—please try again.");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = "Submit";
+      submitBtn.textContent = "Submit registration";
     }
   });
 
@@ -120,20 +235,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function generateReceipt(data) {
     const receiptElement = document.getElementById("receipt");
+    if (!receiptElement) {
+      alert("Receipt template not found.");
+      return;
+    }
 
-    document.getElementById("r-name").textContent = `${data.Surname} ${data.OtherNames}`;
-    document.getElementById("r-phone").textContent = data.PhoneNumber;
-    document.getElementById("r-email").textContent = data.Email;
-    document.getElementById("r-address").textContent = data.ResidentialAddress;
-    document.getElementById("r-gender").textContent = data.Gender;
-    document.getElementById("r-dept").textContent = data.DepartmentInChurch;
-    document.getElementById("r-pos").textContent = data.PositionInChurch;
-    document.getElementById("r-date").textContent = data.SubmittedAt;
+    if (typeof html2pdf === "undefined") {
+      alert("Receipt generator is not loaded. Please refresh and try again.");
+      return;
+    }
+
+    document.getElementById("r-name").textContent = `${data.surname} ${data.otherNames}`;
+    document.getElementById("r-phone").textContent = data.phoneNumber;
+    document.getElementById("r-email").textContent = data.email;
+    document.getElementById("r-address").textContent = data.residentialAddress;
+    document.getElementById("r-gender").textContent = data.gender;
+    document.getElementById("r-dept").textContent = data.departmentInChurch;
+    document.getElementById("r-pos").textContent = data.positionInChurch;
+    document.getElementById("r-date").textContent = data.submittedAt;
 
     if (data.Student === "Yes") {
       document.getElementById("student-info").style.display = "block";
-      document.getElementById("r-school-dept").textContent = data.DepartmentInSchool;
-      document.getElementById("r-level").textContent = data.Level;
+      document.getElementById("r-school-dept").textContent = data.departmentInSchool;
+      document.getElementById("r-level").textContent = data.level;
     } else {
       document.getElementById("student-info").style.display = "none";
     }
@@ -162,7 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const now = new Date();
     const timestamp = now.toISOString().replace(/[:.]/g, "-");
-    const safeName = `${data.Surname}_${data.OtherNames}`
+    const safeName = `${data.surname}_${data.otherNames}`
       .replace(/[^\w\s-]/g, "")
       .replace(/\s+/g, "_");
     const fileName = `LSTS_Receipt_${safeName}_${timestamp}.pdf`;
@@ -189,6 +313,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .save()
         .then(() => {
           receiptElement.style.display = "none";
+          animationContainer.style.display = "none";
+          form.reset();
+          syncStudentFields();
+          showStep(0, "forward", false);
           spinner.remove();
         })
         .catch((err) => {
