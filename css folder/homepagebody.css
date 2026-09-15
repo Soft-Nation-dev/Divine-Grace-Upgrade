@@ -953,3 +953,20 @@
         transition: none;
     }
 }
+
+/* Keep every piece of dashboard content centred without changing the shared nav. */
+.home-dashboard-page .main-content,
+.home-dashboard-page .main-content * {
+    text-align: center;
+}
+
+.home-dashboard-page .dashboard-intro,
+.home-dashboard-page .prayer-request-div p,
+.home-dashboard-page .contact-div p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-dashboard-page .display-profile-button-div {
+    justify-content: center;
+}
